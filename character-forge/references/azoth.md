@@ -21,6 +21,11 @@ Use the full character record and Blackwall's `integrated_design`.
 - Keep all non-prompt explanation in Chinese.
 - Use `英文提示词`, `中文提示词`, and `提示词说明` as user-facing labels.
 - Prefer visible details over abstract stats.
+- Always include the fixed body standard in the prompt unless the user explicitly overrides it: very tall, extremely broad shoulders, thick neck, wide chest, powerful torso, narrow but solid waist, large muscular arms, strong forearms, thick thighs, oversized hands, compact head relative to body, stable imposing stance.
+- Always describe the inner base layer as fitted and stretched over the torso, visibly wrapping huge pectorals and large blocky abdominal muscles with clean stylized contour lines, unless the user explicitly overrides this.
+- Make clear that the chest and abdominal lines come from oversized muscle masses pressing through the fitted clothing, not from ordinary cloth folds, wrinkles, or fabric bunching.
+- Always specify a single full-body character standing alone on a pure white background.
+- Avoid character sheet wording: no multiple characters, no multiple poses, no front-side-back turnaround, no panel layout, no split view, no callout boxes, no background scene unless the user explicitly asks.
 - Keep daily-life occupation readable.
 - Include clean stylized animation character design.
 - Avoid forbidden directions even if earlier modules accidentally imply them.

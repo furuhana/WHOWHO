@@ -1,0 +1,4 @@
+interface:
+  display_name: "黑商"
+  short_description: "视觉参考轻洗稿，生成可调取库存"
+  default_prompt: "Use $black-market to turn provided visual references into lightly rewritten styling or expression inventory."

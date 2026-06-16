@@ -14,6 +14,19 @@ Use any user-provided constraints first. If absent, default to:
 
 The user likes muscular and strongly built characters. Do not treat muscularity itself as a flaw or forbidden direction.
 
+## Fixed Body Standard
+
+Unless the user explicitly overrides it, lock all generated male characters to this body standard for style consistency:
+
+- Height impression: very tall, imposing, about 7.5 to 8 heads tall in stylized animation proportions.
+- Build: extremely broad shoulders, thick neck, wide chest, powerful torso, narrow but solid waist, and heavy limbs.
+- Musculature: clearly muscular and heroic, with large arms, strong forearms, thick thighs, and a visible chest-and-ab structure when clothing allows it.
+- Proportion language: oversized upper body and hands, stable stance, compact head relative to body, strong trapezius and deltoid silhouette.
+- Body archetype references: use the shared physique language of Daemon Goro, Rugal Bernstein, Ryu, Zangief, Yashiro Nanakase, All Might, Rikido Sato, Endeavor, Reinhardt, Mauga, Elfman, and Alex Louis Armstrong as broad inspiration for scale, mass, heroic anatomy, and exaggerated animation readability. Do not copy any specific costume, face, hairstyle, symbol, or identity from those characters.
+- Muscle shape language: the torso should feel built from very large simple anatomical masses: oversized pectorals, thick serratus/oblique side planes, stacked blocky abdominal muscles, heavy deltoids, and powerful trapezius forms.
+- Outfit independence: clothing may change by job, but it must sit on this same tall, heavily built body type.
+- Avoid changing the body into a slim, average, lanky, small, or lightly athletic figure.
+
 ## Required Output
 
 Fill these fields:

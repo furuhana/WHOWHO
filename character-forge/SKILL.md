@@ -70,6 +70,19 @@ Use this format:
 - 原因：...
 ```
 
+## Black-Market Stock
+
+When the user provides a `黑商货单` or explicitly asks to use `@黑商` inventory, treat it as optional external stock rather than part of the required module pipeline.
+
+Read only `正式入库` items from black-market stock. Use only each item's `名称`, `描述`, and `标签`. Never read or reconstruct `现场验货`, `常规描述`, raw reference-image analysis, makeup, facial features, complexion, or face-centered aesthetic judgments.
+
+Use styling stock only in San Zhai or Tony when it matches their domain:
+
+- San Zhai may use clothing, footwear, accessories, props, materials, colors, layering, or outfit relationships.
+- Tony may use hairstyle stock only.
+
+Use expression stock only during Azoth prompt synthesis, and keep it separate from face shape, features, or grooming.
+
 ## Output
 
 Return these sections for each completed character:

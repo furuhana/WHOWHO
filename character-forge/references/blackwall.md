@@ -25,6 +25,10 @@ Check:
 
 - Does the character read as an animation character design rather than random real-life details?
 - Do occupation, gang, outfit, hairstyle, beard, and face shape support the same character?
+- Does the body preserve the fixed standard: very tall, extremely broad-shouldered, heavily muscular, thick neck, powerful torso, large arms, heavy limbs, compact head relative to body?
+- Does the inner base layer visibly wrap the chest and abdominal muscle contour with clean animation lines, unless the user explicitly requested otherwise?
+- Do the torso lines read as huge pectoral and abdominal anatomy pressing through the fitted base layer, rather than as generic fabric folds or bunched cloth?
+- Is the composition a single full-body character on a pure white background, with no multi-character layout, panels, split views, turnarounds, callout boxes, or character-sheet structure?
 - Is anything visually abrupt without a useful reason?
 - Is the outfit clean and readable?
 - Are there enough distinctive visual hooks for image generation?
@@ -38,6 +42,10 @@ Reject or reroute if the result contains:
 - cargo loading or unloading jobs
 - hard manual labor / coolie-like direction
 - fitness coach occupation
+- slim, average, lanky, lightly athletic, or small body proportions when the fixed body standard should apply
+- loose, boxy, or baggy inner base layers that hide the fixed chest and abdominal silhouette when no override was requested
+- torso linework that reads mainly as cloth folds, wrinkles, or bunching instead of large underlying pectoral and abdominal muscle forms
+- multiple characters, multiple poses, front-side-back turnarounds, segmented character sheets, panel layouts, callout boxes, background scenes, or non-white backgrounds unless the user explicitly asks for them
 - dirty, oily, greasy, stained, muddy, or unclean materials
 - clothing materials shown mainly through printed texture, dense texture maps, micro-weave details, small speckles, or other visual noise
 - cotton, linen, or similar fabric described in a way that would create tiny noisy surface detail instead of clean animation shapes

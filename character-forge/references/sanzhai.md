@@ -34,12 +34,19 @@ Fill:
 
 - Prioritize clean, readable, animation-friendly silhouettes.
 - Use the job as the anchor, then adjust details by wealth and personality.
+- Unless the user explicitly overrides it, make the inner `base_layer` fitted and body-hugging enough to show the wrapped contour of the chest, upper abdomen, and abdominal muscles through clean animation shape lines.
+- The visible torso detail must read as huge muscles pressing against and shaping the fitted inner layer: oversized pecs, separated blocky abs, side abdominal planes, and stretched tension around the ribcage and waist. It should not read as ordinary cloth folds, random wrinkles, or fabric bunching.
+- The fitted inner layer should support the fixed strong body standard while staying plausible for the job; outerwear may change freely by occupation.
 - Choose accessories that help image generation understand the character.
 - Keep clothing plausible for daily life.
 
 ## Avoid
 
 Avoid dirty, oily, stained, muddy, greasy, torn, or unclean materials. Avoid making muscular bodies automatically wear labor gear or gym wear.
+
+Avoid hiding the torso completely with a loose, boxy, or baggy inner layer unless the user asks for that specific silhouette.
+
+Avoid using cloth wrinkles as a substitute for muscle anatomy. If lines appear on the base layer, they should clarify the chest and abdominal masses underneath.
 
 Avoid describing fabric through tiny surface texture, micro-weave, dense prints, speckles, or texture-map-like detail. For animation-friendly clothing, express cotton, linen, and similar materials through color, clean silhouette, broad panels, and simple shape contrast instead.
 
