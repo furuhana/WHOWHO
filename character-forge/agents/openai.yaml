@@ -1,0 +1,4 @@
+interface:
+  display_name: "Character Forge"
+  short_description: "Modular character generation pipeline"
+  default_prompt: "Use $character-forge to generate a stylized character with the full pipeline."
