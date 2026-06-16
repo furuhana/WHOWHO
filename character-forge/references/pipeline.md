@@ -13,6 +13,8 @@ Run each module in strict order:
 6. 阿佐特 / Azoth
 ```
 
+Use the Chinese names in user-facing responses. The English aliases exist only to keep file names and internal references stable.
+
 ## Progress Logging
 
 Report progress as each module completes. Keep logs short and visible to the user.
@@ -28,25 +30,25 @@ Use these canonical states:
 [黑墙] 审核中
 [黑墙] 审核通过
 [黑墙] 未通过：<reason>
-[母体] 打回：<module-list>
+[母体] 打回：<中文模块名列表>
 [阿佐特] 已生成英文提示词与中文提示词
 [母体] 完成
 ```
 
 ## Reroute Logic
 
-If Blackwall finds issues, reroute the smallest possible set of modules:
+If 黑墙 finds issues, reroute the smallest possible set of modules:
 
-- Occupation or gang issue: reroute Bo Le, then San Zhai, Tony if needed.
-- Outfit issue: reroute San Zhai.
-- Hair, beard, or face issue: reroute Tony.
-- Prompt-only issue: reroute Azoth after Blackwall passes.
+- 职业或帮派问题：打回伯乐，必要时再跑三宅、托尼。
+- 工作服问题：打回三宅。
+- 发型、胡子或脸型问题：打回托尼。
+- 仅提示词问题：黑墙通过后打回阿佐特。
 
-Run Blackwall again after rerouted modules finish. Continue only when Blackwall passes.
+Run 黑墙 again after rerouted modules finish. Continue only when 黑墙 passes.
 
 ## Final Response Shape
 
-Use this final structure:
+Use this final structure. Keep headings and labels in Chinese except the English prompt body itself:
 
 ```text
 调度日志
@@ -58,7 +60,7 @@ Use this final structure:
 黑墙审核
 ...
 
-English Prompt
+英文提示词
 ...
 
 中文提示词

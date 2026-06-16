@@ -52,21 +52,77 @@ azoth:
   prompt_notes:
 ```
 
+The YAML keys above are internal structure keys. In user-facing output, translate them into Chinese labels.
+
+## User-Facing Chinese Labels
+
+Use these labels in final answers:
+
+```text
+basic -> 基础信息
+name -> 名字
+gender -> 性别
+age -> 年龄
+nationality -> 国籍
+body_type -> 体型
+personality -> 性格
+wealth -> 贫富值
+danger -> 危险值
+desire -> 欲望值
+execution -> 执行力
+social -> 社交力
+
+identity -> 社会身份
+job -> 职业
+gang -> 帮派
+match_reason -> 匹配理由
+
+outfit -> 工作服
+outerwear -> 外套
+base_layer -> 打底
+pants -> 裤子
+socks -> 袜子
+shoes -> 鞋子
+accessories -> 饰品/道具
+slot -> 部位
+item -> 物件
+outfit_reason -> 服装理由
+
+grooming -> 头脸造型
+hairstyle -> 发型
+beard -> 胡子
+face_shape -> 脸型
+grooming_reason -> 造型理由
+
+blackwall -> 黑墙审核
+passed -> 是否通过
+issues -> 问题
+module -> 问题模块
+reason -> 原因
+reroute_to -> 打回对象
+integrated_design -> 整合设定
+
+azoth -> 阿佐特提示词
+prompt_en -> 英文提示词
+prompt_cn -> 中文提示词
+prompt_notes -> 提示词说明
+```
+
 ## Score Meanings
 
-- `wealth`: visible economic impression, 1 is poor or modest, 10 is rich.
-- `danger`: moral ambiguity and threat aura, not physical strength. High values can be villainous, gray, or intimidating.
-- `desire`: appetite, ambition, greed, obsession, vanity, or restless wanting.
-- `execution`: ability to act, finish, organize, and enforce.
-- `social`: ability to read people, persuade, network, and blend in.
+- `wealth` / 贫富值：可见的经济印象，1 是贫穷或朴素，10 是富裕。
+- `danger` / 危险值：道德灰度和威胁感，不等于身体力量。高值可以是反派、灰色人物或压迫感。
+- `desire` / 欲望值：野心、贪念、执念、虚荣或躁动。
+- `execution` / 执行力：行动、完成、组织、落实的能力。
+- `social` / 社交力：读人、说服、经营关系和融入场面的能力。
 
 ## Visual Translation
 
 When later writing prompts, translate scores into visible traits. Do not write abstract scores directly.
 
-- Low wealth: modest but clean clothing, cheap details, practical accessories.
-- High wealth: better fabrics, polished accessories, deliberate styling.
-- High danger: sharp gaze, guarded posture, harder silhouette.
-- High desire: restless expression, showy detail, ambitious energy.
-- High execution: disciplined posture, practical tools, controlled styling.
-- High social: open expression, confident presentation, approachable details.
+- 低贫富值：朴素但干净的衣服、便宜细节、实用配件。
+- 高贫富值：更好的面料、更精致的饰品、更有意图的造型。
+- 高危险值：锐利眼神、防备姿态、更硬的轮廓。
+- 高欲望值：躁动表情、显眼细节、野心感。
+- 高执行力：克制姿态、实用工具、有条理的造型。
+- 高社交力：开放表情、自信呈现、容易接近的细节。

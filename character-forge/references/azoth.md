@@ -18,6 +18,8 @@ Use the full character record and Blackwall's `integrated_design`.
 
 - Write in English first.
 - Translate the final English prompt into Chinese so the user can quickly inspect the result.
+- Keep all non-prompt explanation in Chinese.
+- Use `英文提示词`, `中文提示词`, and `提示词说明` as user-facing labels.
 - Prefer visible details over abstract stats.
 - Keep daily-life occupation readable.
 - Include clean stylized animation character design.

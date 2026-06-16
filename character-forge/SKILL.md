@@ -1,6 +1,6 @@
 ---
 name: character-forge
-description: Modular character generation pipeline for creating stylized animation-ready human characters. Use when Codex needs to generate a character profile, coordinate the Da Men, Bo Le, San Zhai, Tony, Blackwall, and Azoth modules, audit role/outfit/grooming consistency, avoid forbidden occupation/material directions, and produce final English image-generation prompts plus Chinese summaries.
+description: Modular character generation pipeline for creating stylized animation-ready human characters with Chinese-readable user-facing outputs. Use when Codex needs to generate a character profile, coordinate the 大门, 伯乐, 三宅, 托尼, 黑墙, and 阿佐特 modules, audit role/outfit/grooming consistency, avoid forbidden occupation/material directions, and produce final English image-generation prompts plus Chinese summaries.
 ---
 
 # Character Forge
@@ -37,10 +37,12 @@ Load library files only when the matching module needs them:
 Run the modules in this order:
 
 ```text
-Da Men -> Bo Le -> San Zhai -> Tony -> Blackwall -> Azoth
+大门 -> 伯乐 -> 三宅 -> 托尼 -> 黑墙 -> 阿佐特
 ```
 
-Always show a short dispatch log in Chinese. Use this style:
+Always show user-facing module names and outputs in Chinese. Internal schema keys may stay English for stability, but the final answer must use Chinese labels the user can read at a glance.
+
+Use this dispatch log style:
 
 ```text
 [母体] 启动角色生成流程
@@ -63,9 +65,9 @@ Use this format:
 
 ```text
 [待确认写入]
-- library: outfits
-- entry: ...
-- reason: ...
+- 素材库：工作服
+- 条目：...
+- 原因：...
 ```
 
 ## Output
@@ -77,5 +79,7 @@ Return these sections for each completed character:
 3. 黑墙审核
 4. 英文提示词
 5. 中文提示词
+
+In `角色档案`, use Chinese field labels such as `名字`, `年龄`, `国籍`, `体型`, `性格`, `贫富值`, `危险值`, `欲望值`, `执行力`, `社交力`, `职业`, `帮派`, `工作服`, `发型`, `胡子`, and `脸型`.
 
 Keep generated content grounded in daily-life occupations and clean, stylized animation character design.
