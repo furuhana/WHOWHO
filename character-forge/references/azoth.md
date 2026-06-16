@@ -8,6 +8,8 @@ Merge the approved character record into image-generation prompts after Blackwal
 
 Use the full character record and Blackwall's `integrated_design`.
 
+If provided, use optional black-market formal expression stock only after Blackwall has approved the character design.
+
 ## Three Gates
 
 1. Merge all useful information into one visual design summary.
@@ -31,6 +33,24 @@ Use the full character record and Blackwall's `integrated_design`.
 - Avoid forbidden directions even if earlier modules accidentally imply them.
 - Do not ask for clothing material to be rendered through fine texture maps, tiny prints, micro-weave, speckles, or noisy surface detail.
 - If mentioning cotton, linen, or similar fabrics, express them through color and clean shape language rather than visible grain or small texture.
+
+## Black-Market Stock
+
+If `黑商货单` formal stock is available, Azoth may shop from `正式入库` for expression and acting stock only.
+
+Allowed stock:
+
+- gaze direction and intensity
+- eyebrow or eye state
+- mouth-corner state
+- facial tension
+- emotional layer
+- camera-facing performance
+- acting state
+
+Use only stock fields such as `名称`, `描述`, and `标签`. Never read or use `现场验货`, `常规描述`, source filenames, paths, raw image analysis, styling stock, makeup, facial features, face shape, complexion, grooming, or attractiveness judgments.
+
+Expression stock should appear as prompt-level performance language, not as permanent identity, face design, grooming, or beauty description.
 
 ## Useful Visual Conversions
 

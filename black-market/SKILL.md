@@ -121,11 +121,44 @@ Separate inspection output from inventory output.
 
 `正式入库` must include only the lightly rewritten stock. Other skills may read only `正式入库`, never `现场验货`, never `常规描述`, and never the raw source image analysis.
 
+## Source Filename Hygiene
+
+Source filenames are not stock. A filename may appear only in `来源` or, if needed, in `现场验货` as an inspection handle.
+
+Do not place raw filenames, extensions, paths, camera roll names, screenshot names, or folder-derived IDs in `正式入库` fields such as `名称`, `描述`, `标签`, `包含单品`, or expression stock entries.
+
+If an item is created from a file, convert it into a portable stock asset with:
+
+- `名称`: a short semantic name based on the visible asset, not the file name
+- `类别`: the usable stock category
+- `描述`: the lightly rewritten, image-generation-ready description
+- `标签`: searchable visual tags derived from the rewritten asset
+
+Bad formal stock:
+
+```yaml
+- 名称: "IMG_4821.webp"
+  描述: "IMG_4821.webp"
+```
+
+Good formal stock:
+
+```yaml
+- 名称: "短款机能外套"
+  类别: "上装"
+  描述: "短款深色机能外套，肩线偏硬挺，带明显金属拉链和轻微磨损质感。"
+  标签:
+    - "上装"
+    - "机能"
+    - "硬挺"
+```
+
 Hard rule:
 
 ```text
 常规描述只验货，不入库。
 其他 skill 只能读洗过的正式库存。
+文件名只标来源，不算货。
 ```
 
 ## Output Format

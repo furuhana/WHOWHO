@@ -26,6 +26,7 @@ Use:
 - job
 - gang
 - outfit
+- optional black-market formal hairstyle stock, if provided
 
 ## Output
 
@@ -41,6 +42,23 @@ Fill:
 - Match the face and hair to the character's social role and animation readability.
 - Use beard and face shape to strengthen personality, not to make the character generically tough.
 - Make the result visually distinct but still daily-life believable.
+
+## Black-Market Stock
+
+If `黑商货单` formal stock is available, Tony may shop from `正式入库` for hairstyle stock only.
+
+Allowed stock:
+
+- hairstyle
+- hair silhouette
+- hair length
+- hair volume
+- hair parting or direction
+- hair accessories only when they clearly belong to the hairstyle
+
+Use only stock fields such as `名称`, `类别`, `描述`, and `标签`. Never read or use `现场验货`, `常规描述`, source filenames, paths, raw image analysis, expression stock, clothing stock, makeup, facial features, face shape, complexion, beard details, or attractiveness judgments.
+
+Black-market stock may influence `hairstyle` only. `beard` and `face_shape` must still come from Tony's own role, the grooming library, and the current character record.
 
 ## Library Writes
 

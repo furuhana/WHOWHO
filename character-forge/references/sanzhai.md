@@ -17,6 +17,7 @@ Use:
 - basic body_type, personality, wealth, danger, desire, execution, social
 - identity.job
 - identity.gang
+- optional black-market formal styling stock, if provided
 
 ## Output
 
@@ -39,6 +40,26 @@ Fill:
 - The fitted inner layer should support the fixed strong body standard while staying plausible for the job; outerwear may change freely by occupation.
 - Choose accessories that help image generation understand the character.
 - Keep clothing plausible for daily life.
+
+## Black-Market Stock
+
+If `黑商货单` formal stock is available, San Zhai may shop from `正式入库` before falling back to the outfit library.
+
+Allowed stock:
+
+- complete outfit stock
+- clothing
+- footwear
+- accessories
+- hand-held props
+- worn props
+- materials
+- color relationships
+- layering
+
+Use only stock fields such as `名称`, `类别`, `描述`, `标签`, `套装货`, `单品货`, and `包含单品`. Never read or use `现场验货`, `常规描述`, source filenames, paths, raw image analysis, expression stock, makeup, facial features, complexion, or face-centered aesthetic judgments.
+
+Selected stock must still fit the job, gang, fixed body standard, clean animation readability, and all Avoid rules below. If a black-market item clashes with the character, adapt only by choosing a better item or lightly integrating compatible details; do not rewrite the character around the stock.
 
 ## Avoid
 

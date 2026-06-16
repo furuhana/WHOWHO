@@ -83,6 +83,17 @@ Use styling stock only in San Zhai or Tony when it matches their domain:
 
 Use expression stock only during Azoth prompt synthesis, and keep it separate from face shape, features, or grooming.
 
+## Black-Market Opening 1.0
+
+When black-market formal stock is available in the conversation, the mother pipeline should treat it as a small optional shop that relevant modules may visit at their own step:
+
+- 三宅：during work-outfit design, check formal styling stock for complete outfits, clothing, footwear, accessories, carried props, worn props, materials, color relationships, and layering.
+- 托尼：during head styling, check formal hairstyle stock only. Do not use black-market stock for beard, face shape, facial features, makeup, complexion, or attractiveness.
+- 阿佐特：during prompt synthesis, check formal expression stock for gaze, facial tension, mouth-corner state, emotional layer, and acting state. Keep expression stock separate from face shape, grooming, and appearance judgments.
+- 黑墙：audit any selected black-market stock after integration. Reject or reroute if the stock introduces forbidden directions, face-centered appearance judgments, makeup, complexion, dirty materials, noisy fabric texture, or any conflict with the fixed body and single-character prompt rules.
+
+All modules must read only `正式入库`. `现场验货`, `常规描述`, source filenames, paths, and raw image analysis are never valid stock for the mother pipeline.
+
 ## Output
 
 Return these sections for each completed character:
