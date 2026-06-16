@@ -27,6 +27,13 @@ These are hard avoid directions for the first version unless the user explicitly
 - sweat-soaked
 - torn labor clothes
 - rough industrial grime
+- clothing material expressed through dense prints, tiny texture maps, or noisy surface patterns
+- fine linen/cotton weave texture rendered as visible small speckles or micro-patterns
+- fabric realism that makes animation clothing look visually noisy
+
+## Animation Material Rule
+
+For clean stylized animation design, do not express clothing materials through dense texture maps, tiny printed patterns, micro-weave details, speckles, or surface noise. If cotton, linen, or similar fabric is needed, express it through color, simple silhouette, broad shape language, and clean flat areas instead of visible fine-grain texture.
 
 ## Important Allowed Direction
 

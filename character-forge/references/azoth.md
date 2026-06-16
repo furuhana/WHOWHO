@@ -24,6 +24,8 @@ Use the full character record and Blackwall's `integrated_design`.
 - Keep daily-life occupation readable.
 - Include clean stylized animation character design.
 - Avoid forbidden directions even if earlier modules accidentally imply them.
+- Do not ask for clothing material to be rendered through fine texture maps, tiny prints, micro-weave, speckles, or noisy surface detail.
+- If mentioning cotton, linen, or similar fabrics, express them through color and clean shape language rather than visible grain or small texture.
 
 ## Useful Visual Conversions
 
@@ -32,6 +34,7 @@ Use the full character record and Blackwall's `integrated_design`.
 - `desire`: convert to ambition, vanity, restlessness, or showy details.
 - `execution`: convert to controlled posture, prepared tools, and organized styling.
 - `social`: convert to approachable or closed body language.
+- material: convert cotton, linen, and similar fabric ideas into clean colors, broad panels, simple silhouettes, and matte flat areas; remove fine-grain texture wording.
 
 ## Output
 

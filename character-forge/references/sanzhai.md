@@ -41,6 +41,8 @@ Fill:
 
 Avoid dirty, oily, stained, muddy, greasy, torn, or unclean materials. Avoid making muscular bodies automatically wear labor gear or gym wear.
 
+Avoid describing fabric through tiny surface texture, micro-weave, dense prints, speckles, or texture-map-like detail. For animation-friendly clothing, express cotton, linen, and similar materials through color, clean silhouette, broad panels, and simple shape contrast instead.
+
 ## Library Writes
 
 If the job is missing from the outfit library, propose a candidate outfit and ask the user before treating it as a library entry.

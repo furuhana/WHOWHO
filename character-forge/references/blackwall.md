@@ -39,8 +39,12 @@ Reject or reroute if the result contains:
 - hard manual labor / coolie-like direction
 - fitness coach occupation
 - dirty, oily, greasy, stained, muddy, or unclean materials
+- clothing materials shown mainly through printed texture, dense texture maps, micro-weave details, small speckles, or other visual noise
+- cotton, linen, or similar fabric described in a way that would create tiny noisy surface detail instead of clean animation shapes
 
 Important distinction: muscular or strongly built body types are allowed and may be preferred. Reject only when the system turns muscularity into forbidden jobs, dirty labor aesthetics, or gym-coach identity.
+
+Material distinction: cotton, linen, and other natural fabric concepts are allowed only when expressed through color, simple silhouette, broad panels, and clean flat areas. Reject or reroute if the design asks image generation to render fine fabric grain, tiny prints, or texture-map-like surface detail on clothing.
 
 ## Output
 
