@@ -38,6 +38,8 @@ If provided, use optional black-market formal expression stock only after Blackw
 
 If `黑商货单` formal stock is available, Azoth may shop from `正式入库` for expression and acting stock only.
 
+Also check `black-market/inventory.md` before prompt synthesis. If it exists, Azoth may read only `正式入库 -> 表情库存`.
+
 Allowed stock:
 
 - gaze direction and intensity

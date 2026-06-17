@@ -47,6 +47,8 @@ Fill:
 
 If `黑商货单` formal stock is available, Tony may shop from `正式入库` for hairstyle stock only.
 
+Also check `black-market/inventory.md` before hairstyle selection. If it exists, Tony may read only `正式入库 -> 发型库存`.
+
 Allowed stock:
 
 - hairstyle

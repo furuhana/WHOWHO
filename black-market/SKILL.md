@@ -121,6 +121,27 @@ Separate inspection output from inventory output.
 
 `正式入库` must include only the lightly rewritten stock. Other skills may read only `正式入库`, never `现场验货`, never `常规描述`, and never the raw source image analysis.
 
+## Shared Shelf
+
+The persistent black-market shelf lives at:
+
+```text
+black-market/inventory.md
+```
+
+When the user asks to stock goods permanently, append only the cleaned `正式入库` items to `black-market/inventory.md`.
+
+Shelf lanes:
+
+- `造型库存 / 套装货`: complete outfit records.
+- `造型库存 / 单品货`: clothing, footwear, accessories, hand-held props, worn props, materials, color relationships, layering, and hairstyle items when they are not separated into the hairstyle lane.
+- `发型库存`: hairstyle-only stock for Tony.
+- `表情库存`: expression and acting stock for Azoth.
+
+Never write `现场验货`, `常规描述`, raw source-image analysis, filenames, paths, makeup, facial features, face shape, complexion, skin texture, or attractiveness judgments into `black-market/inventory.md`.
+
+If the user only asks for a temporary货单, respond with the normal货单 format and do not claim it has been written to the shelf. If the user asks to入库,上架,存货,放进黑商, or otherwise make the stock reusable, update `black-market/inventory.md` and report which shelf lane received the goods.
+
 ## Source Filename Hygiene
 
 Source filenames are not stock. A filename may appear only in `来源` or, if needed, in `现场验货` as an inspection handle.

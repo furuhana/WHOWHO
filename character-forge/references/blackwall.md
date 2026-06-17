@@ -51,6 +51,7 @@ Reject or reroute if the result contains:
 - clothing materials shown mainly through printed texture, dense texture maps, micro-weave details, small speckles, or other visual noise
 - cotton, linen, or similar fabric described in a way that would create tiny noisy surface detail instead of clean animation shapes
 - black-market `现场验货`, `常规描述`, source filenames, paths, or raw image analysis leaking into the character record or prompt
+- `black-market/inventory.md` content outside `正式入库` being used as stock
 - black-market styling stock used as expression, expression stock used as styling, or hairstyle stock used for beard, face shape, facial features, makeup, complexion, or attractiveness
 - any black-market stock that introduces makeup, facial feature description, complexion, face-centered aesthetic judgment, dirty material, forbidden occupation, forbidden setting, or noisy texture detail
 
