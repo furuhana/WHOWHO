@@ -36,7 +36,7 @@ If provided, use optional black-market formal expression stock only after Blackw
 
 ## Black-Market Stock
 
-If `黑商货单` formal stock is available, Azoth may shop from `正式入库` for expression and acting stock only.
+If `黑商货单` formal stock is available or the user asks to use black-market inventory, Azoth must shop from `正式入库` for expression and acting stock before final prompt synthesis.
 
 Also check `black-market/inventory/expression.md` before prompt synthesis. If it exists, Azoth may read only `正式入库 -> 表情库存`.
 
@@ -53,6 +53,19 @@ Allowed stock:
 Use only stock fields such as `名称`, `描述`, and `标签`. Never read or use `现场验货`, `常规描述`, source filenames, paths, raw image analysis, styling stock, makeup, facial features, face shape, complexion, grooming, or attractiveness judgments.
 
 Expression stock should appear as prompt-level performance language, not as permanent identity, face design, grooming, or beauty description.
+
+When using black-market stock, include the selected `名称` in `提示词说明`. If no expression stock is used, write `黑商取货：未使用` and give the concrete reason.
+
+When black-market inventory is enabled, record the inventory-level reasoning log using only formal stock fields:
+
+```text
+[阿佐特] 黑商取货：
+货道：black-market/inventory/expression.md / 表情库存
+候选：<1-3 stock names>
+使用：<selected stock name or 未使用>
+取货理由：<prompt-performance fit based on 名称, 描述, 标签>
+未选理由：<why other candidates fit less well>
+```
 
 ## Useful Visual Conversions
 

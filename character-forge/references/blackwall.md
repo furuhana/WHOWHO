@@ -33,6 +33,7 @@ Check:
 - Is the outfit clean and readable?
 - Are there enough distinctive visual hooks for image generation?
 - If black-market stock was used, did each module use only formal stock from its allowed category?
+- If black-market inventory was enabled, did each relevant module provide a `黑商取货` log with lane, candidates, selected stock, selection reason, and rejection reason?
 
 ## Second Gate: Forbidden Directions
 
@@ -54,6 +55,7 @@ Reject or reroute if the result contains:
 - black-market inventory content outside `正式入库` being used as stock
 - black-market styling stock used as expression, expression stock used as styling, or hairstyle stock used for beard, face shape, facial features, makeup, complexion, or attractiveness
 - any black-market stock that introduces makeup, facial feature description, complexion, face-centered aesthetic judgment, dirty material, forbidden occupation, forbidden setting, or noisy texture detail
+- `黑商取货` reasoning that mentions source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from the source
 
 Important distinction: muscular or strongly built body types are allowed and may be preferred. Reject only when the system turns muscularity into forbidden jobs, dirty labor aesthetics, or gym-coach identity.
 

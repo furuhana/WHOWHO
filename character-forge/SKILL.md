@@ -72,7 +72,7 @@ Use this format:
 
 ## Black-Market Stock
 
-When the user provides a `黑商货单` or explicitly asks to use `@黑商` inventory, treat it as optional external stock rather than part of the required module pipeline.
+When the user provides a `黑商货单` or explicitly asks to use `@黑商` inventory, treat it as active external stock for the relevant modules. It is still subordinate to Blackwall safety and character fit, but the matching module must check it before falling back to the normal library.
 
 Read only `正式入库` items from black-market stock. Use only each item's `名称`, `描述`, and `标签`. Never read or reconstruct `现场验货`, `常规描述`, raw reference-image analysis, makeup, facial features, complexion, or face-centered aesthetic judgments.
 
@@ -85,7 +85,7 @@ Use expression stock only during Azoth prompt synthesis, and keep it separate fr
 
 ## Black-Market Opening 1.0
 
-When black-market formal stock is available in the conversation, the mother pipeline should treat it as a small optional shop that relevant modules may visit at their own step:
+When black-market formal stock is available in the conversation, or when the user explicitly asks to use black-market inventory, the mother pipeline should treat it as a small shop that relevant modules must visit at their own step:
 
 - 三宅：during work-outfit design, check formal styling stock for complete outfits, clothing, footwear, accessories, carried props, worn props, materials, color relationships, and layering.
 - 托尼：during head styling, check formal hairstyle stock only. Do not use black-market stock for beard, face shape, facial features, makeup, complexion, or attractiveness.
@@ -96,16 +96,43 @@ All modules must read only `正式入库`. `现场验货`, `常规描述`, sourc
 
 ## Black-Market Shelf 1.2
 
-Before running the module pipeline, check whether `black-market/inventory.md` exists as the shelf index. Load optional external stock only from the matching lane file, and read only each file's `正式入库` section.
+Before running the module pipeline, check whether `black-market/inventory.md` exists as the shelf index. When the user asks to use black-market inventory, load external stock from the matching lane file before the normal library, and read only each file's `正式入库` section.
 
 Shelf routing:
 
-- 三宅 may use `black-market/inventory/styling.md` `造型库存 / 套装货` and `造型库存 / 单品货` for outfit, clothing, footwear, accessories, props, materials, color relationships, and layering.
-- 托尼 may use `black-market/inventory/hairstyle.md` `发型库存` for hairstyle only.
-- 阿佐特 may use `black-market/inventory/expression.md` `表情库存` for expression and acting language only.
+- 三宅 must check `black-market/inventory/styling.md` `造型库存 / 套装货` and `造型库存 / 单品货` for outfit, clothing, footwear, accessories, props, materials, color relationships, and layering.
+- 托尼 must check `black-market/inventory/hairstyle.md` `发型库存` for hairstyle only.
+- 阿佐特 must check `black-market/inventory/expression.md` `表情库存` for expression and acting language only.
 - 黑墙 must audit any selected shelf item using the same black-market rules.
 
-If the shelf is empty, missing, or has no matching lane, say briefly in the dispatch log that no matching black-market stock was available, then continue with the normal libraries.
+If the shelf is empty, missing, or has no matching lane, say briefly in the dispatch log that no matching black-market stock was available, then continue with the normal libraries. If matching stock exists but a module rejects it, the module must name the rejected stock and give a short fit reason.
+
+When black-market inventory is enabled, include a `黑商取货` note in the dispatch log or character record for each relevant module:
+
+```text
+[三宅] 黑商取货：
+货道：<lane file and shelf>
+候选：<1-3 formal stock names>
+使用：<selected formal stock name or 未使用>
+取货理由：<why this stock fits the current character>
+未选理由：<why the other candidates were not selected>
+
+[托尼] 黑商取货：
+货道：<lane file and shelf>
+候选：<1-3 formal stock names>
+使用：<selected formal stock name or 未使用>
+取货理由：<why this stock fits the current character>
+未选理由：<why the other candidates were not selected>
+
+[阿佐特] 黑商取货：
+货道：<lane file and shelf>
+候选：<1-3 formal stock names>
+使用：<selected formal stock name or 未使用>
+取货理由：<why this stock fits the current character>
+未选理由：<why the other candidates were not selected>
+```
+
+`黑商取货` is an inventory-level reasoning log. It may compare only formal stock fields such as `名称`, `类别`, `描述`, `标签`, and `包含单品`. It must not mention source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from the source.
 
 ## Output
 

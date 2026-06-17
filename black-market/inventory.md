@@ -24,7 +24,7 @@ Do not store `现场验货`, `常规描述`, raw image analysis, source filename
 
 ## 读取规则
 
-- 三宅读取 `black-market/inventory/styling.md` 的 `正式入库 / 套装货` 与 `正式入库 / 单品货`。
+- 三宅读取 `black-market/inventory/styling.md` 的 `正式入库 / 造型库存 / 套装货` 与 `正式入库 / 造型库存 / 单品货`。
 - 托尼读取 `black-market/inventory/hairstyle.md` 的 `正式入库 / 发型库存`。
 - 阿佐特读取 `black-market/inventory/expression.md` 的 `正式入库 / 表情库存`。
 - 黑墙审核所有被选中的黑商货。

@@ -1,39 +1,134 @@
 # Jobs Library
 
-Use daily-life occupations with clear visual signals. Avoid forbidden directions in `forbidden.md`.
+Use occupations with clear visual signals. Prefer daily-life jobs, but allow stylized specialty roles when the user explicitly adds them. Avoid forbidden directions in `forbidden.md`.
 
 ## Current Entries
 
+### Retail and Small Shops
+
 - convenience store owner
-- community security guard
-- taxi driver
-- barber shop owner
-- secondhand phone shop clerk
-- used car salesperson
-- property manager
-- hotpot restaurant manager
-- night market snack stall owner
-- neighborhood pharmacy clerk
-- courier station manager
-- small clinic receptionist
-- apartment leasing agent
-- karaoke lounge manager
-- wedding photographer
-- dry cleaner
+- barber
 - stationery shop owner
 - pet supply store clerk
-- mahjong parlor cashier
-- private driver
-- supermarket floor supervisor
-- repair shop front desk manager
-- tea house owner
-- lottery shop owner
 - appliance store salesperson
+- flower shop owner
+- aquarium shop clerk
+- water delivery station clerk
+- rare book collector
+
+### Community and Property Services
+
+- dry cleaner
+- repair shop front desk manager
+- home appliance repair technician
+- courier
+
+### Food and Drink
+
+- night market stall owner
+- ramen chef
+- baker
+- tea master
+- barista
+
+### Healthcare and Wellness
+
+- incompetent small clinic doctor
+- dentist
+- medical device developer
+- daoist medicine practitioner
+- aromatherapist
+
+### Entertainment and Leisure
+
+- celebration planner
+- mahjong master
+- arcade champion
+- amusement park intern
+- fishing champion
+- escape room NPC
+- board game consultant
+- magic prop shop salesperson
+- DJ
+
+### Craft and Artifact Making
+
+- traditional lantern maker
+- puppeteer
+
+### Transport and Driving
+
+- truck driver
+- taxi driver
+- private driver
+- racing driver
+
+### Creative and Specialty Services
+
+- wedding photographer
+- martial arts choreographer
+- film director
+- composer
+
+### Management and Operations
+
+- small grocery owner
+- tea house owner
+
+### Nature and Research
+
+- botanist
+- ornithologist
+- insect specimen maker
+- bonsai trimmer
+- geologist
+- mushroom cultivator
+- astronomer
+
+### Outdoor and Field Work
+
+- forest ranger
+
+### Occult and Divination
+
+- curse master
+- tarot diviner
+- exorcist
+
+### Security and Protection
+
+- private bodyguard
+
+### Underground and High-Risk Trades
+
+- behind-the-scenes mastermind
+- hacker
+- arms dealer
+- sniper
+
+### Combat and Performance Sports
+
+- beast trainer
+- equestrian coach
+- baseball coach
+- ninja
+- WWE wrestler
+- cold weapon blacksmith
+- fencing coach
+- sumo wrestler
+- marathon pacer
+- skateboarder
+- archery coach
+
+### Public Order
+
+- traffic police officer
+- subway security inspector
 
 ## Matching Notes
 
-- High social: salesperson, shop owner, lounge manager, leasing agent, photographer.
-- High execution: property manager, courier station manager, supermarket supervisor, private driver.
-- High danger: karaoke lounge manager, used car salesperson, mahjong parlor cashier, lottery shop owner.
-- Low wealth: convenience store owner, dry cleaner, repair shop front desk manager.
-- High wealth: private driver, wedding photographer, tea house owner, apartment leasing agent.
+- High social: barber, salesperson, shop owner, tea master, barista, celebration planner, board game consultant, magic prop shop salesperson, DJ, tarot diviner, puppeteer, baseball coach.
+- High execution: courier, home appliance repair technician, medical device developer, dentist, truck driver, private driver, film director, martial arts choreographer, private bodyguard, traffic police officer, subway security inspector, forest ranger, geologist, astronomer.
+- High danger: mahjong master, arcade champion, racing driver, behind-the-scenes mastermind, hacker, private bodyguard, curse master, exorcist, arms dealer, beast trainer, equestrian coach, ninja, WWE wrestler, cold weapon blacksmith, fencing coach, sumo wrestler, skateboarder, archery coach, sniper.
+- Low wealth: water delivery station clerk, dry cleaner, repair shop front desk manager, courier, night market stall owner, amusement park intern, small grocery owner, subway security inspector, marathon pacer.
+- High wealth: rare book collector, dentist, medical device developer, private driver, wedding photographer, film director, tea house owner, behind-the-scenes mastermind, arms dealer, equestrian coach, astronomer.
