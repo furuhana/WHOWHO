@@ -88,3 +88,20 @@ azoth:
 ```
 
 `prompt_notes` should mention which abstract details were translated or removed.
+
+## Black-Market Opportunities
+
+After `prompt_cn`, generate a user-facing `黑商商机` section with exactly 10 numbered procurement ideas.
+
+These ideas are not inventory and must not be treated as `正式入库`. They are future stock leads for the user to search, discuss, or pass to `@黑商` later.
+
+Use the completed character record, Blackwall-approved design, selected black-market stock, and final prompts to suggest concrete future stock. Cover a useful mix of:
+
+- `套装货`
+- `单品货`
+- `发型库存`
+- `表情库存`
+
+Ideas should be specific, imageable, and useful for the current character's occupation, gang, stats, outfit, hairstyle, or performance direction.
+
+Never include source image names, file paths, `现场验货`, `常规描述`, raw image analysis, makeup, facial features, face shape, complexion, skin texture, attractiveness judgments, or source-derived identity/story.

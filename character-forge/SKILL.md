@@ -143,7 +143,32 @@ Return these sections for each completed character:
 3. 黑墙审核
 4. 英文提示词
 5. 中文提示词
+6. 黑商商机
 
 In `角色档案`, use Chinese field labels such as `名字`, `年龄`, `国籍`, `体型`, `性格`, `贫富值`, `危险值`, `欲望值`, `执行力`, `社交力`, `职业`, `帮派`, `工作服`, `发型`, `胡子`, and `脸型`.
 
 Keep generated content grounded in daily-life occupations and clean, stylized animation character design.
+
+## Black-Market Opportunities
+
+After the final Chinese prompt, output `黑商商机` as a non-inventory procurement section.
+
+Rules:
+
+- Always provide exactly 10 numbered ideas when completing a character.
+- These are ideas only. Do not write them to any `black-market/inventory/*` file and do not call them `正式入库`.
+- Ideas should be inspired by the current character's occupation, gang, outfit, hairstyle, expression, stats, selected black-market stock, or gaps noticed during generation.
+- Ideas may propose future styling, hairstyle, expression, accessory, prop, material, color, layering, or full outfit stock.
+- Each idea must name a suggested stock category such as `套装货`, `单品货`, `发型库存`, or `表情库存`.
+- Keep each idea concrete enough that the user could search references or ask `@黑商` to turn it into stock later.
+- Never include source image names, file paths, `现场验货`, `常规描述`, raw image analysis, makeup, facial features, face shape, complexion, skin texture, attractiveness judgments, or identity/story copied from a source.
+- If an idea is based on a missing fit, phrase it as a procurement opportunity, not as a failed generation.
+
+Use this shape:
+
+```text
+黑商商机
+1. <category>: <concrete procurement idea and why it fits this character or occupation>
+...
+10. <category>: <concrete procurement idea and why it fits this character or occupation>
+```

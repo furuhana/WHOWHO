@@ -261,6 +261,19 @@ When another skill asks to select or use black-market stock:
 - Do not reintroduce forbidden categories such as makeup, facial features, or complexion.
 - Preserve the light rewrite as the canonical source of truth.
 
+## Opportunity Leads
+
+`黑商商机` is a procurement lead list, not inventory.
+
+Other skills may output `黑商商机` after a completed character to suggest future stock ideas, but those ideas are not reusable stock until the user explicitly asks `@黑商` to turn them into `正式入库`.
+
+Rules for `黑商商机`:
+
+- Do not write it to `black-market/inventory/*`.
+- Do not call it `正式入库`.
+- Do not include source image names, file paths, `现场验货`, `常规描述`, raw image analysis, makeup, facial features, face shape, complexion, skin texture, attractiveness judgments, or identity/story copied from a source.
+- Keep ideas concrete and searchable, with a suggested shelf such as `套装货`, `单品货`, `发型库存`, or `表情库存`.
+
 ## Operating Principles
 
 ```text
