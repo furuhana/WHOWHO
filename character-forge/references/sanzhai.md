@@ -45,7 +45,7 @@ Fill:
 
 If `黑商货单` formal stock is available, San Zhai may shop from `正式入库` before falling back to the outfit library.
 
-Also check `black-market/inventory.md` before outfit selection. If it exists, San Zhai may read only `正式入库 -> 造型库存 -> 套装货` and `正式入库 -> 造型库存 -> 单品货`.
+Also check `black-market/inventory/styling.md` before outfit selection. If it exists, San Zhai may read only `正式入库 -> 造型库存 -> 套装货` and `正式入库 -> 造型库存 -> 单品货`.
 
 Allowed stock:
 

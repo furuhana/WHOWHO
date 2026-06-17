@@ -129,18 +129,26 @@ The persistent black-market shelf lives at:
 black-market/inventory.md
 ```
 
-When the user asks to stock goods permanently, append only the cleaned `正式入库` items to `black-market/inventory.md`.
+`black-market/inventory.md` is the shelf index. Permanent stock is stored in lane files:
+
+```text
+black-market/inventory/styling.md
+black-market/inventory/hairstyle.md
+black-market/inventory/expression.md
+```
+
+When the user asks to stock goods permanently, append only the cleaned `正式入库` items to the matching lane file and keep `black-market/inventory.md` as an index.
 
 Shelf lanes:
 
-- `造型库存 / 套装货`: complete outfit records.
-- `造型库存 / 单品货`: clothing, footwear, accessories, hand-held props, worn props, materials, color relationships, layering, and hairstyle items when they are not separated into the hairstyle lane.
-- `发型库存`: hairstyle-only stock for Tony.
-- `表情库存`: expression and acting stock for Azoth.
+- `black-market/inventory/styling.md / 造型库存 / 套装货`: complete outfit records.
+- `black-market/inventory/styling.md / 造型库存 / 单品货`: clothing, footwear, accessories, hand-held props, worn props, materials, color relationships, and layering.
+- `black-market/inventory/hairstyle.md / 发型库存`: hairstyle-only stock for Tony.
+- `black-market/inventory/expression.md / 表情库存`: expression and acting stock for Azoth.
 
-Never write `现场验货`, `常规描述`, raw source-image analysis, filenames, paths, makeup, facial features, face shape, complexion, skin texture, or attractiveness judgments into `black-market/inventory.md`.
+Never write `现场验货`, `常规描述`, raw source-image analysis, filenames, paths, makeup, facial features, face shape, complexion, skin texture, or attractiveness judgments into any formal inventory file.
 
-If the user only asks for a temporary货单, respond with the normal货单 format and do not claim it has been written to the shelf. If the user asks to入库,上架,存货,放进黑商, or otherwise make the stock reusable, update `black-market/inventory.md` and report which shelf lane received the goods.
+If the user only asks for a temporary货单, respond with the normal货单 format and do not claim it has been written to the shelf. If the user asks to入库,上架,存货,放进黑商, or otherwise make the stock reusable, update the matching lane file and report which shelf lane received the goods.
 
 ## Source Filename Hygiene
 

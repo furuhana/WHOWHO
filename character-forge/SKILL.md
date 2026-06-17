@@ -94,15 +94,15 @@ When black-market formal stock is available in the conversation, the mother pipe
 
 All modules must read only `正式入库`. `现场验货`, `常规描述`, source filenames, paths, and raw image analysis are never valid stock for the mother pipeline.
 
-## Black-Market Shelf 1.1
+## Black-Market Shelf 1.2
 
-Before running the module pipeline, check whether `black-market/inventory.md` exists. If it exists, load it as optional external stock and read only its `正式入库` section.
+Before running the module pipeline, check whether `black-market/inventory.md` exists as the shelf index. Load optional external stock only from the matching lane file, and read only each file's `正式入库` section.
 
 Shelf routing:
 
-- 三宅 may use `造型库存 / 套装货` and `造型库存 / 单品货` for outfit, clothing, footwear, accessories, props, materials, color relationships, and layering.
-- 托尼 may use `发型库存` for hairstyle only.
-- 阿佐特 may use `表情库存` for expression and acting language only.
+- 三宅 may use `black-market/inventory/styling.md` `造型库存 / 套装货` and `造型库存 / 单品货` for outfit, clothing, footwear, accessories, props, materials, color relationships, and layering.
+- 托尼 may use `black-market/inventory/hairstyle.md` `发型库存` for hairstyle only.
+- 阿佐特 may use `black-market/inventory/expression.md` `表情库存` for expression and acting language only.
 - 黑墙 must audit any selected shelf item using the same black-market rules.
 
 If the shelf is empty, missing, or has no matching lane, say briefly in the dispatch log that no matching black-market stock was available, then continue with the normal libraries.
