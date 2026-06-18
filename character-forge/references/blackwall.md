@@ -56,6 +56,7 @@ Reject or reroute if the result contains:
 - black-market inventory content outside `正式入库` being used as stock
 - black-market styling stock used as expression, expression stock used as styling, or hairstyle stock used for beard, face shape, facial features, makeup, complexion, or attractiveness
 - any black-market stock that introduces makeup, facial feature description, complexion, face-centered aesthetic judgment, dirty material, forbidden occupation, forbidden setting, or noisy texture detail
+- curly, curled, coiled, ringlet, wavy, wave-like, 卷发, 卷曲, 波浪发, or similar hairstyle directions; if Tony or black-market hairstyle stock selects curled/wavy hair, reject and reroute to Tony for a non-curly hairstyle
 - `黑商取货` reasoning that mentions source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from the source
 - `黑商商机` being described as already入库, `正式入库`, or using source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from a source
 
