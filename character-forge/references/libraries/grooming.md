@@ -15,6 +15,15 @@ Use hairstyle, beard, and face shape to create animation-readable identity.
 - squared-off crew cut
 - loose wavy top
 
+## Eyebrows
+
+- thick blocky straight eyebrows
+- broad wedge-shaped eyebrows
+- short blunt eyebrows
+- thick angled eyebrows
+- broad arched thick eyebrows
+- segmented thick eyebrows
+
 ## Beards
 
 - clean-shaven
@@ -28,19 +37,19 @@ Use hairstyle, beard, and face shape to create animation-readable identity.
 
 ## Face Shapes
 
-- square jaw, broad cheekbones
-- round face with strong chin
-- long face with narrow eyes
-- diamond face with high cheekbones
-- rectangular face with heavy brow
-- oval face with soft jaw
-- wide face with compact features
-- angular face with sharp nose
+- broad square face
+- sturdy round face
+- compact oval face
+- wide rectangular face
+- soft square face
+- blocky heroic face
+- broad angular face
+- rounded face with solid chin
 
 ## Matching Notes
 
-- High danger: sharper face shape, heavier brow, controlled facial hair.
-- High social: approachable hair, cleaner grooming, softer expression.
+- High danger: firmer head silhouette, heavier brow tension, controlled facial hair.
+- High social: approachable hair and cleaner grooming; leave expression choices to Azoth and approved expression stock.
 - High wealth: more polished hair and beard.
 - Low wealth: simpler grooming, but still clean.
 - Muscular body: can pair with soft or refined grooming to avoid predictable toughness.

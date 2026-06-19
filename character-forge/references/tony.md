@@ -2,7 +2,7 @@
 
 ## Role
 
-Design hairstyle, beard, and face shape after Da Men, Bo Le, and San Zhai have produced the base, identity, and outfit.
+Design hairstyle, eyebrows, beard, and face shape after Da Men, Bo Le, and San Zhai have produced the base, identity, and outfit.
 
 ## Required Library
 
@@ -27,12 +27,14 @@ Use:
 - gang
 - outfit
 - optional black-market formal hairstyle stock, if provided
+- optional black-market formal eyebrow stock, if provided
 
 ## Output
 
 Fill:
 
 - hairstyle
+- eyebrows
 - beard
 - face_shape
 - grooming_reason
@@ -42,12 +44,16 @@ Fill:
 - Match the face and hair to the character's social role and animation readability.
 - Use beard and face shape to strengthen personality, not to make the character generically tough.
 - Make the result visually distinct but still daily-life believable.
+- Face shape must describe only the broad head silhouette and jaw/chin mass. Do not specify eye shape, nose shape, lip shape, cheekbone height, narrow eyes, long face, small eyes, sharp nose, high cheekbones, thin lips, realistic facial features, or detailed facial structure.
+- Eyebrows may create character recognition, but must describe only static eyebrow shape: thickness, block shape, angle, arc, segmentation, color, and clean animation edges. Do not use eyebrow wording to specify eye shape, gaze, eyelid state, expression, makeup, attractiveness, face shape, or detailed facial features.
 
 ## Black-Market Stock
 
-If `黑商货单` formal stock is available or the user asks to use black-market inventory, Tony must shop from `正式入库` for hairstyle stock before falling back to the grooming library.
+If `黑商货单` formal stock is available or the user asks to use black-market inventory, Tony must shop from `正式入库` for hairstyle and eyebrow stock before falling back to the grooming library.
 
 Also check `black-market/inventory/hairstyle.md` before hairstyle selection. If it exists, Tony may read only `正式入库 -> 发型库存`.
+
+Also check `black-market/inventory/eyebrow.md` before eyebrow selection. If it exists, Tony may read only `正式入库 -> 眉型库存`.
 
 Allowed stock:
 
@@ -57,12 +63,18 @@ Allowed stock:
 - hair volume
 - hair parting or direction
 - hair accessories only when they clearly belong to the hairstyle
+- eyebrow thickness
+- eyebrow block shape
+- eyebrow angle
+- eyebrow arc or straightness
+- eyebrow segmentation or corner shape
+- eyebrow color only when it is part of the eyebrow shape signal
 
-Use only stock fields such as `名称`, `类别`, `描述`, and `标签`. Never read or use `现场验货`, `常规描述`, source filenames, paths, raw image analysis, expression stock, clothing stock, makeup, facial features, face shape, complexion, beard details, or attractiveness judgments.
+Use only stock fields such as `名称`, `类别`, `描述`, and `标签`. Never read or use `现场验货`, `常规描述`, source filenames, paths, raw image analysis, expression stock, clothing stock, makeup, eye shape, gaze, eyelid state, facial features, face shape, complexion, beard details, or attractiveness judgments.
 
-Black-market stock may influence `hairstyle` only. `beard` and `face_shape` must still come from Tony's own role, the grooming library, and the current character record.
+Black-market hairstyle stock may influence `hairstyle` only. Black-market eyebrow stock may influence `eyebrows` only. `beard` and `face_shape` must still come from Tony's own role, the grooming library, and the current character record.
 
-When using black-market stock, include the selected `名称` in `grooming_reason`. If no hairstyle stock is used, write `黑商取货：未使用` and give the concrete reason.
+When using black-market stock, include each selected `名称` in `grooming_reason`. If no hairstyle or eyebrow stock is used, write `黑商取货：未使用` for that lane and give the concrete reason.
 
 When black-market inventory is enabled, record the inventory-level reasoning log using only formal stock fields:
 
@@ -72,6 +84,13 @@ When black-market inventory is enabled, record the inventory-level reasoning log
 候选：<1-3 stock names>
 使用：<selected stock name or 未使用>
 取货理由：<age/job/personality fit based on 名称, 类别, 描述, 标签>
+未选理由：<why other candidates fit less well>
+
+[托尼] 黑商取货：
+货道：black-market/inventory/eyebrow.md / 眉型库存
+候选：<1-3 stock names>
+使用：<selected stock name or 未使用>
+取货理由：<static eyebrow-shape fit based on 名称, 类别, 描述, 标签>
 未选理由：<why other candidates fit less well>
 ```
 

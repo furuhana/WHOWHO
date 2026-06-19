@@ -34,6 +34,7 @@ outfit:
 
 grooming:
   hairstyle:
+  eyebrows:
   beard:
   face_shape:
   grooming_reason:
@@ -90,6 +91,7 @@ outfit_reason -> 服装理由
 
 grooming -> 头脸造型
 hairstyle -> 发型
+eyebrows -> 眉型
 beard -> 胡子
 face_shape -> 脸型
 grooming_reason -> 造型理由
@@ -119,6 +121,8 @@ prompt_notes -> 提示词说明
 ## Visual Translation
 
 When later writing prompts, translate scores into visible traits. Do not write abstract scores directly.
+
+Expression and pose words here are selection hints only. Azoth must prefer approved `表情库存` and `姿势库存` when shaping face performance or full-body acting, and must not treat these examples as a private expression library.
 
 - 低贫富值：朴素但干净的衣服、便宜细节、实用配件。
 - 高贫富值：更好的面料、更精致的饰品、更有意图的造型。
