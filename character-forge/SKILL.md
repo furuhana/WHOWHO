@@ -80,8 +80,11 @@ Use black-market stock only in modules that own the matching domain:
 
 - San Zhai may use clothing, footwear, accessories, props, materials, colors, layering, or outfit relationships.
 - Tony may use hairstyle stock for `hairstyle` and eyebrow stock for `eyebrows` only.
+- Tony must apply hairstyle cooldown when selecting either black-market hairstyle stock or normal grooming-library hairstyles: never repeat the immediately previous generated hairstyle unless explicitly requested, hard-exclude the last 3 used hairstyles when alternatives exist, and strongly downweight the last 10.
 
 Use expression and pose stock only during Azoth prompt synthesis. Keep expression stock separate from face shape, features, or grooming; keep pose stock separate from outfit, anatomy redesign, multiple poses, character sheets, or background action.
+
+Black-market stock must not influence occupation selection. Bo Le chooses the occupation first from the jobs library using user constraints and balanced random selection. The random draw is authoritative when the user does not specify an occupation: stats may explain and flavor the selected job, but they must not reroll it toward a more compatible role such as wedding photographer. San Zhai may then adapt compatible styling stock to that chosen job, but it must not change the job to match a better-stocked outfit.
 
 ## Black-Market Opening 1.0
 
@@ -114,7 +117,9 @@ When black-market inventory is enabled, include a `黑商取货` note in the dis
 货道：<lane file and shelf>
 候选：<1-3 formal stock names>
 使用：<selected formal stock name or 未使用>
+使用策略：<完整套装继承 / 局部单品借用 / 只继承搭配方法 / 未使用>
 取货理由：<why this stock fits the current character>
+继承优点：<silhouette, color, material, layering, or role-fit strengths inherited from the selected stock>
 未选理由：<why the other candidates were not selected>
 
 [托尼] 黑商取货：
@@ -136,7 +141,7 @@ When black-market inventory is enabled, include a `黑商取货` note in the dis
 组合理由：<why the expression supports the selected full-body pose>
 ```
 
-`黑商取货` is an inventory-level reasoning log. It may compare only formal stock fields such as `名称`, `类别`, `描述`, `标签`, and `包含单品`. It must not mention source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from the source.
+`黑商取货` is an inventory-level reasoning log. It may compare only formal stock fields such as `名称`, `类别`, `描述`, `标签`, and `包含单品`. For 三宅 styling stock, it may also summarize inherited outfit strengths derived from those formal fields, such as silhouette, color, material, layering, and role-fit logic. It must not mention source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from the source.
 
 ## Output
 

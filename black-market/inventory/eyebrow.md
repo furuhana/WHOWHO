@@ -2,7 +2,7 @@
 
 This file is formal eyebrow-shape-only black-market stock for Tony.
 
-Do not store `现场验货`, `常规描述`, source filenames, paths, makeup, eye shape, facial features, face shape, complexion, beard details, attractiveness judgments, or expression acting here.
+Do not store `现场验货`, `常规描述`, source filenames, paths, makeup, eye shape, facial features, face shape, complexion, beard details, attractiveness judgments, eyebrow color, or expression acting here.
 
 ## 正式入库
 
@@ -25,7 +25,7 @@ Do not store `现场验货`, `常规描述`, source filenames, paths, makeup, ey
     - "斜角"
 - 名称: "短粗断角眉"
   类别: "眉型"
-  描述: "眉毛短而粗，中段或眉尾有清楚折角，整体像压缩的深色块面。"
+  描述: "眉毛短而粗，中段或眉尾有清楚折角，整体像压缩的块面。"
   标签:
     - "短眉"
     - "粗眉"
@@ -39,21 +39,21 @@ Do not store `现场验货`, `常规描述`, source filenames, paths, makeup, ey
     - "圆钝"
 - 名称: "厚斜压眉"
   类别: "眉型"
-  描述: "眉毛厚重并带明显斜向走势，眉体像低压的深色块面，外缘保持干净。"
+  描述: "眉毛厚重并带明显斜向走势，有低压的块面感，外缘保持干净。"
   标签:
     - "厚眉"
     - "斜向"
     - "压低"
 - 名称: "高折角厚眉"
   类别: "眉型"
-  描述: "眉毛厚实，眉峰形成清楚折角，前后段有明确方向变化但不细长。"
+  描述: "眉毛厚实，有峰形形成清楚折角，前后段方向变化明确但不细长。"
   标签:
     - "厚眉"
     - "折角"
     - "眉峰"
 - 名称: "短钝粗眉"
   类别: "眉型"
-  描述: "眉毛长度偏短，整体粗钝，眉头和眉尾都收得简洁，像小块深色标记。"
+  描述: "眉毛长度偏短，整体粗钝，眉头和眉尾都收得简洁，像小块标记。"
   标签:
     - "短眉"
     - "粗眉"
@@ -72,13 +72,13 @@ Do not store `现场验货`, `常规描述`, source filenames, paths, makeup, ey
     - "厚眉"
     - "上扬"
     - "短斜角"
-- 名称: "白色厚眉"
+- 名称: "厚块简影眉"
   类别: "眉型"
-  描述: "眉毛为浅色或白色厚块形，轮廓清楚，保留动画化的简洁眉体。"
+  描述: "眉毛呈厚块状简影，轮廓清楚，保留动画化的简洁眉体。"
   标签:
-    - "白眉"
     - "厚眉"
     - "块状"
+    - "简影"
 - 名称: "分段粗眉"
   类别: "眉型"
   描述: "眉毛粗厚但中段有轻微断开或错位感，整体仍保持清楚的块面结构。"

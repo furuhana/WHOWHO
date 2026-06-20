@@ -2,7 +2,7 @@
 
 ## Role
 
-Design hairstyle, eyebrows, beard, and face shape after Da Men, Bo Le, and San Zhai have produced the base, identity, and outfit.
+Design hairstyle, eyebrows, beard, and broad face silhouette after Da Men, Bo Le, and San Zhai have produced the base, identity, and outfit.
 
 ## Required Library
 
@@ -42,10 +42,11 @@ Fill:
 ## Rules
 
 - Match the face and hair to the character's social role and animation readability.
-- Use beard and face shape to strengthen personality, not to make the character generically tough.
+- Use beard and broad face silhouette to strengthen personality, not to make the character generically tough.
 - Make the result visually distinct but still daily-life believable.
+- Apply hairstyle cooldown across repeated character generations. Never select the same hairstyle as the immediately previous generated character unless the user explicitly requests it. Hard-exclude hairstyles used in the last 3 generated characters when alternatives exist, and strongly downweight hairstyles used in the last 10 generated characters. If the inventory is too small to satisfy the full cooldown, prefer the least-recently used hairstyle and state the cooldown constraint in `grooming_reason`.
 - Face shape must describe only the broad head silhouette and jaw/chin mass. Do not specify eye shape, nose shape, lip shape, cheekbone height, narrow eyes, long face, small eyes, sharp nose, high cheekbones, thin lips, realistic facial features, or detailed facial structure.
-- Eyebrows may create character recognition, but must describe only static eyebrow shape: thickness, block shape, angle, arc, segmentation, color, and clean animation edges. Do not use eyebrow wording to specify eye shape, gaze, eyelid state, expression, makeup, attractiveness, face shape, or detailed facial features.
+- Eyebrows may create character recognition, but must describe only static eyebrow shape: thickness, block shape, angle, arc, segmentation, and clean animation edges. Do not use eyebrow wording to specify eyebrow color, eye shape, gaze, eyelid state, expression, makeup, attractiveness, face shape, or detailed facial features.
 
 ## Black-Market Stock
 
@@ -68,11 +69,12 @@ Allowed stock:
 - eyebrow angle
 - eyebrow arc or straightness
 - eyebrow segmentation or corner shape
-- eyebrow color only when it is part of the eyebrow shape signal
 
-Use only stock fields such as `名称`, `类别`, `描述`, and `标签`. Never read or use `现场验货`, `常规描述`, source filenames, paths, raw image analysis, expression stock, clothing stock, makeup, eye shape, gaze, eyelid state, facial features, face shape, complexion, beard details, or attractiveness judgments.
+Use only stock fields such as `名称`, `类别`, `描述`, and `标签`. Never read or use `现场验货`, `常规描述`, source filenames, paths, raw image analysis, expression stock, clothing stock, makeup, eyebrow color, eye shape, gaze, eyelid state, facial features, face shape, complexion, beard details, or attractiveness judgments.
 
 Black-market hairstyle stock may influence `hairstyle` only. Black-market eyebrow stock may influence `eyebrows` only. `beard` and `face_shape` must still come from Tony's own role, the grooming library, and the current character record.
+
+Black-market hairstyle stock must still obey hairstyle cooldown. Candidate lists should avoid recently used hairstyle stock before scoring job fit. Do not pick a repeated hairstyle merely because its stock tags fit the current outfit.
 
 When using black-market stock, include each selected `名称` in `grooming_reason`. If no hairstyle or eyebrow stock is used, write `黑商取货：未使用` for that lane and give the concrete reason.
 

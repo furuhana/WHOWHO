@@ -79,7 +79,6 @@ For `@黑商 眉型`, extract only reusable static eyebrow-shape assets:
 - eyebrow angle
 - eyebrow arc or straightness
 - eyebrow segmentation or corner shape
-- eyebrow color only when it is part of the eyebrow shape signal
 
 Never include:
 
@@ -88,6 +87,7 @@ Never include:
 - eyelid state
 - expression or acting
 - makeup
+- eyebrow color
 - facial features
 - face shape
 - complexion or skin texture
@@ -120,6 +120,7 @@ Avoid eyebrow wording:
 - long slender
 - delicate
 - realistic hair flow
+- eyebrow color, such as white, black, blond, gray, dark, light, or any color-name label
 - close to the eyes
 - makes the eyes narrow
 - sharp eye shape

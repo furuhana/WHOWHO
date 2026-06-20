@@ -36,6 +36,10 @@ Check:
 - Are there enough distinctive visual hooks for image generation?
 - If black-market stock was used, did each module use only formal stock from its allowed category?
 - If black-market inventory was enabled, did each relevant module provide a `黑商取货` log with lane, candidates, selected stock, selection reason, and rejection reason?
+- If 三宅 used black-market styling stock, did the `黑商取货` log include a clear use strategy (`完整套装继承`, `局部单品借用`, `只继承搭配方法`, or `未使用`) and inherited outfit strengths based only on formal stock fields?
+- Did Bo Le choose the occupation before black-market inventory was considered?
+- If no occupation was specified, did Bo Le preserve the fair random draw instead of rerolling toward a more compatible, easier, or recently repeated job?
+- Did black-market styling stock serve the already selected occupation instead of causing the role to drift toward a better-stocked job?
 - If Azoth selected both pose and expression stock, do they support one coherent performance beat without conflicting body language or facial acting?
 - If Azoth used black-market expression stock, preserve valid five-part expression descriptions as prompt-useful material when they contain mouth shape, eyebrow/eye state, gaze, facial tension, and reusable acting intention.
 - If `黑商商机` is present, is it clearly non-inventory and free of black-market forbidden source or appearance leakage?
@@ -50,7 +54,7 @@ Reject or reroute if the result contains:
 - hard manual labor / coolie-like direction
 - fitness coach occupation
 - slim, average, lanky, lightly athletic, or small body proportions when the fixed body standard should apply
-- eyebrow wording that changes eye shape or face style, including willow-leaf eyebrows, thin eyebrows, long slender eyebrows, delicate eyebrows, realistic eyebrow hair flow, close-to-eye eyebrows, makes the eyes narrow, sharp eye shape, 柳叶眉, 细眉, 修长眉, 精致眉, 写实毛流, 贴眼眉, 让眼睛变窄, or 锐利眼型
+- eyebrow wording that changes eye shape or face style, or that specifies eyebrow color, including willow-leaf eyebrows, thin eyebrows, long slender eyebrows, delicate eyebrows, realistic eyebrow hair flow, close-to-eye eyebrows, makes the eyes narrow, sharp eye shape, white eyebrows, black eyebrows, blond eyebrows, gray eyebrows, 柳叶眉, 细眉, 修长眉, 精致眉, 写实毛流, 贴眼眉, 让眼睛变窄, 锐利眼型, 白眉, 白色眉, 黑眉, 金眉, 灰眉, or any eyebrow color label
 - permanent eye shape or detailed face-shape wording that changes the base anime style, including long face, narrow eyes, small eyes, sharp nose, high cheekbones, thin lips, delicate features, realistic facial features, detailed facial structure, 长脸, 窄眼, 小眼, 尖鼻, 高颧骨, 薄唇, 精致五官, 写实五官, or 详细五官结构
 - loose, boxy, or baggy inner base layers that hide the fixed chest and abdominal silhouette when no override was requested
 - torso linework that reads mainly as cloth folds, wrinkles, or bunching instead of large underlying pectoral and abdominal muscle forms
@@ -63,8 +67,13 @@ Reject or reroute if the result contains:
 - black-market styling stock used as expression, expression stock used as styling or pose, pose stock used as styling or face design, hairstyle stock used for beard, eyebrows, face shape, facial features, makeup, complexion, or attractiveness, or eyebrow stock used for hairstyle, beard, eye shape, expression acting, face shape, facial features, makeup, complexion, or attractiveness
 - black-market pose stock that creates multiple poses, front-side-back turnarounds, segmented character sheets, panel layouts, callout boxes, background scenes, anatomy redesign, or action clutter instead of one clear full-body pose
 - any black-market stock that introduces makeup, facial feature description, complexion, face-centered aesthetic judgment, dirty material, forbidden occupation, forbidden setting, or noisy texture detail
+- black-market styling stock deciding, boosting, replacing, or retroactively changing the occupation
+- changing the occupation because a black-market outfit has a stronger fit to another job
+- rerolling an unspecified random occupation because the character stats, outfit library, or prompt clarity make another job easier
+- repeating `wedding photographer`, `photographer`, or `婚庆摄影师` during recent-history cooldown unless the user explicitly names that job
 - curly, curled, coiled, ringlet, wavy, wave-like, 卷发, 卷曲, 波浪发, or similar hairstyle directions; if Tony or black-market hairstyle stock selects curled/wavy hair, reject and reroute to Tony for a non-curly hairstyle
 - `黑商取货` reasoning that mentions source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from the source
+- 三宅 `黑商取货` reasoning that invents outfit strengths from source context instead of deriving them from formal stock fields such as `名称`, `类别`, `描述`, `标签`, and `包含单品`
 - Azoth expression and pose selection that visually contradict each other, unless the contradiction is explicit, useful, and still readable as one single-character performance
 - `黑商商机` being described as already入库, `正式入库`, or using source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from a source
 

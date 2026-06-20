@@ -47,6 +47,12 @@ If `黑商货单` formal stock is available or the user asks to use black-market
 
 Also check `black-market/inventory/styling.md` before outfit selection. If it exists, San Zhai may read only `正式入库 -> 造型库存 -> 套装货` and `正式入库 -> 造型库存 -> 单品货`.
 
+Black-market styling stock is subordinate to the already selected occupation. San Zhai must not change, replace, or reinterpret `identity.job` because a stock item has a better match to another job. If the best stock points toward a different occupation, either:
+
+- borrow only compatible silhouette, color, material, layering, accessory, or prop logic;
+- use a smaller individual item that supports the current job;
+- or mark black-market styling as `未使用` and fall back to the normal outfit library.
+
 Allowed stock:
 
 - complete outfit stock
@@ -63,17 +69,38 @@ Use only stock fields such as `名称`, `类别`, `描述`, `标签`, `套装货
 
 Selection rule when black-market inventory is enabled:
 
-1. First scan `套装货` for complete outfits whose tags, description, or contained items fit the job and social role.
-2. If no complete outfit fits, scan `单品货` and integrate at least one compatible black-market item into `outerwear`, `base_layer`, `pants`, `shoes`, or the 3 accessories/props.
-3. If no stock can be used, write `黑商取货：未使用` and give the concrete reason.
-4. Record the inventory-level reasoning log using only formal stock fields:
+1. First scan `套装货` for complete outfits whose tags, description, or contained items fit the already selected job and social role.
+2. If no complete outfit fits the chosen job, scan `单品货` and integrate at least one compatible black-market item into `outerwear`, `base_layer`, `pants`, `shoes`, or the 3 accessories/props.
+3. If a stock item would pull the role toward another occupation, reject that use and name the fit conflict in `未选理由`.
+4. If no stock can be used, write `黑商取货：未使用` and give the concrete reason.
+5. Record the inventory-level reasoning log using only formal stock fields:
+
+Before selecting stock, judge the outfit value rather than simply copying the item. Identify which strengths are worth inheriting:
+
+- silhouette strength: body proportion, shoulder/waist balance, leg weight, readable outer contour
+- color relationship: dominant color, accent color, contrast, job-appropriate restraint or emphasis
+- material relationship: broad, clean material blocks that support animation readability
+- layering: whether the outfit creates useful depth without hiding the fitted torso standard
+- role fit: whether the outfit supports the job, gang, wealth, personality, and social role
+- visual priority: whether the stock supports the character instead of turning the character into an outfit display
+- occupation lock: whether the stock serves the selected job instead of causing job drift
+
+Choose one use strategy:
+
+1. `完整套装继承`: use one complete outfit when the whole structure fits the job, gang, body standard, and animation readability.
+2. `局部单品借用`: use one or more individual items when a complete outfit is too specific, too loud, or only partially relevant.
+3. `只继承搭配方法`: borrow the stock's silhouette, color, material, or layering logic without using the named item directly.
+
+If a complete outfit has a strong visual idea but clashes with the current character, prefer `局部单品借用` or `只继承搭配方法` over forcing the whole outfit into the design.
 
 ```text
 [三宅] 黑商取货：
 货道：black-market/inventory/styling.md / 造型库存 / <套装货 or 单品货>
 候选：<1-3 stock names>
 使用：<selected stock name or 未使用>
+使用策略：<完整套装继承 / 局部单品借用 / 只继承搭配方法 / 未使用>
 取货理由：<job/social-role fit based on 名称, 类别, 描述, 标签, 包含单品>
+继承优点：<silhouette, color, material, layering, or role-fit strengths inherited from the selected stock>
 未选理由：<why other candidates fit less well>
 ```
 
