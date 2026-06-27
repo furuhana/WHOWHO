@@ -1,0 +1,17 @@
+# 阿佐特长版提示词测试
+
+## 英文提示词
+
+Generate one image of a single full-body Japanese TV anime character standing alone on a pure white background, cleanly framed from head to feet, with no character sheet layout, no multiple poses, no turnaround view, no panels, no callout boxes, and no background scene. The character is a very tall adult male power-line maintenance worker, with extremely broad shoulders, a thick neck, a wide chest, a powerful torso, a narrow but solid waist, large muscular arms, strong forearms, thick thighs, oversized hands, a compact head relative to the body, and a stable imposing stance. His body should read as massive and grounded, but still suitable for an animation-ready daily-life worker rather than a fantasy warrior.
+
+He wears a fitted inner base layer stretched tightly over his torso, visibly wrapping huge pectorals and large blocky abdominal muscles with clean stylized contour lines. Make the chest and abdominal structure come from oversized muscle masses pressing through the fitted clothing, not from ordinary cloth folds, wrinkles, or fabric bunching. Over the base layer, give him a practical short work jacket with broad simple panels, clean cuffs, a clear collar shape, and a slightly boxy utility silhouette. Add straight work pants with a solid waistband, reinforced-looking knee areas expressed through simple shape blocks, heavy practical work shoes, a compact belt pouch, and a shoulder strap or tool sling that supports the occupation without turning into a fantasy weapon loadout. Keep all materials readable through clean colors, broad matte panels, and tidy graphic edges rather than tiny fabric texture.
+
+His hairstyle is short and practical, with a compact swept shape that keeps the forehead and neck clear for work. His eyebrows are thick, short, blunt block shapes with clean edges, kept as a static eyebrow design rather than a detailed facial-feature description. Do not add permanent eye-shape or face-shape wording. The current face performance is controlled and focused: the mouth is held almost flat with a small restrained corner tension, the brows press slightly downward over the static blocky eyebrow shape, the gaze is directed forward as if checking whether the other person understood the instruction, and the overall facial tension feels calm but alert.
+
+Use the selected pose as full-body performance language: the body faces slightly forward while walking into the frame, the weight lands on the front foot, one hand grips a shoulder-side strap or load point, and the other arm bends forward in a short, clear pointing gesture, as if he is walking while confirming the target direction. Keep the gesture practical and readable, with the shoulder strap hand stabilizing the body and the pointing hand creating the main action beat. The stance should feel like a worker moving through a site, giving a precise instruction, not posing for a fashion image.
+
+Render in clean high-quality Japanese TV anime cel shading, crisp linework, fresh but controlled colors, tidy shadows, clear silhouette design, and polished stylized animation character design. Use readable proportions, strong shape language, and a full-body composition with enough white space around the figure for inspection. Avoid realistic skin texture, makeup, detailed facial structure, noisy fabric grain, micro-weave, dirty surface detail, text labels, logos, and decorative background elements.
+
+## 中文提示词节选
+
+生成一张图：一个单独的全身日式 TV 动画角色，纯白背景，从头到脚完整入镜。他是一个非常高大的电力线路维修工，体型厚重、站姿稳定，服装、发型、眉型、姿势和表情都以可见的动画设计语言展开。

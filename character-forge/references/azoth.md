@@ -22,6 +22,17 @@ If provided, use optional black-market formal expression and pose stock only aft
 - Translate the final English prompt into Chinese so the user can quickly inspect the result.
 - Keep all non-prompt explanation in Chinese.
 - Use `英文提示词`, `中文提示词`, and `提示词说明` as user-facing labels.
+- Start `prompt_en` with an explicit image-generation instruction, preferably `Generate one image of ...`, so image2 treats the text as a direct image request instead of analysis material.
+- Start `prompt_cn` with `生成一张图：` for the same reason; the Chinese version should read like a direct generation request, not a critique or explanation.
+- Do not optimize the final prompt for brevity. The goal is a complete, imageable prompt, not a short prompt.
+- Preserve every Blackwall-approved visible design domain as its own prompt material: body standard, occupation readability, outfit silhouette and layers, hairstyle, static eyebrow shape, selected pose stock, selected expression stock, rendering style, and single-character white-background constraints.
+- Expand approved visual details into concrete prompt language instead of compressing them into labels, summaries, or abstract traits.
+- Remove only forbidden, contradictory, non-visual, or generation-harming phrases. Do not remove useful visual information merely because the prompt is already long.
+- When a selected black-market pose or expression is used, translate its full `描述` into the English prompt unless a phrase must be trimmed for safety or direct contradiction.
+- Keep the expanded prompt efficient: avoid meta-explanations such as `should read as`, `rather than`, `instead of`, `not posing for`, or repeated instructions about what the design is not.
+- Prefer positive visual wording over negative prohibitions. Use one compact negative-constraint sentence near the end for banned output formats and forbidden rendering details.
+- Split very long prompt sentences when they exceed roughly 35 English words, especially body-standard, pose, and expression sentences.
+- Do not repeat the same visual adjective more than needed. If words such as `clean`, `practical`, `clear`, `shape`, or `stylized` recur heavily, merge or replace them with more specific visual language.
 - Prefer visible details over abstract stats.
 - Always include the fixed body standard in the prompt unless the user explicitly overrides it: very tall, extremely broad shoulders, thick neck, wide chest, powerful torso, narrow but solid waist, large muscular arms, strong forearms, thick thighs, oversized hands, compact head relative to body, stable imposing stance.
 - Always describe the inner base layer as fitted and stretched over the torso, visibly wrapping huge pectorals and large blocky abdominal muscles with clean stylized contour lines, unless the user explicitly overrides this.

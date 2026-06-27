@@ -30,7 +30,7 @@ Do not store `现场验货`, `常规描述`, raw image analysis, source filename
 ### 姿势库存
 
 - 货架：`black-market/inventory/pose.md`
-- 姿势货：0 件
+- 姿势货：59 件
 
 ## 璇诲彇瑙勫垯
 
