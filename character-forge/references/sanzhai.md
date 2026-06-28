@@ -17,7 +17,7 @@ Use:
 - basic body_type, personality, wealth, danger, desire, execution, social
 - identity.job
 - identity.gang
-- optional black-market formal styling stock, if provided
+- black-market formal styling stock, enabled by default when the shelf exists
 
 ## Output
 
@@ -37,13 +37,14 @@ Fill:
 - Use the job as the anchor, then adjust details by wealth and personality.
 - Unless the user explicitly overrides it, make the inner `base_layer` fitted and body-hugging enough to show the wrapped contour of the chest, upper abdomen, and abdominal muscles through clean animation shape lines.
 - The visible torso detail must read as huge muscles pressing against and shaping the fitted inner layer: oversized pecs, separated blocky abs, side abdominal planes, and stretched tension around the ribcage and waist. It should not read as ordinary cloth folds, random wrinkles, or fabric bunching.
+- For white tank tops, fitted T-shirts, undershirts, or similar tucked base layers, exaggerate the torso pressure more than usual: the lower edge of the pectorals, the center chest divide, stacked abdominal blocks, and side abdominal masses should be clearly readable as simplified anime anatomy under the fabric. The shirt may have broad tension arcs, but those arcs must follow the muscle masses, not generic cloth wrinkles.
 - The fitted inner layer should support the fixed strong body standard while staying plausible for the job; outerwear may change freely by occupation.
 - Choose accessories that help image generation understand the character.
 - Keep clothing plausible for daily life.
 
 ## Black-Market Stock
 
-If `黑商货单` formal stock is available or the user asks to use black-market inventory, San Zhai must shop from `正式入库` before falling back to the outfit library.
+If `黑商货单` formal stock is available, the user asks to use black-market inventory, or `black-market/inventory.md` exists, San Zhai must shop from `正式入库` before falling back to the outfit library.
 
 Also check `black-market/inventory/styling.md` before outfit selection. If it exists, San Zhai may read only `正式入库 -> 造型库存 -> 套装货` and `正式入库 -> 造型库存 -> 单品货`.
 
@@ -69,8 +70,8 @@ Use only stock fields such as `名称`, `类别`, `描述`, `标签`, `套装货
 
 Selection rule when black-market inventory is enabled:
 
-1. First scan `套装货` for complete outfits whose tags, description, or contained items fit the already selected job and social role.
-2. If no complete outfit fits the chosen job, scan `单品货` and integrate at least one compatible black-market item into `outerwear`, `base_layer`, `pants`, `shoes`, or the 3 accessories/props.
+1. First scan `单品货` and integrate at least one compatible black-market item into `outerwear`, `base_layer`, `pants`, `shoes`, or the 3 accessories/props.
+2. Then scan `套装货` only when a complete outfit's tags, description, or contained items naturally fit the already selected job and social role, or when the user explicitly asks for whole-outfit inheritance.
 3. If a stock item would pull the role toward another occupation, reject that use and name the fit conflict in `未选理由`.
 4. If no stock can be used, write `黑商取货：未使用` and give the concrete reason.
 5. Record the inventory-level reasoning log using only formal stock fields:
@@ -87,8 +88,8 @@ Before selecting stock, judge the outfit value rather than simply copying the it
 
 Choose one use strategy:
 
-1. `完整套装继承`: use one complete outfit when the whole structure fits the job, gang, body standard, and animation readability.
-2. `局部单品借用`: use one or more individual items when a complete outfit is too specific, too loud, or only partially relevant.
+1. `局部单品借用`: default strategy; use one or more individual items that support the selected job while preserving the current outfit system.
+2. `完整套装继承`: use one complete outfit only when the whole structure fits the job, gang, body standard, and animation readability.
 3. `只继承搭配方法`: borrow the stock's silhouette, color, material, or layering logic without using the named item directly.
 
 If a complete outfit has a strong visual idea but clashes with the current character, prefer `局部单品借用` or `只继承搭配方法` over forcing the whole outfit into the design.
@@ -115,6 +116,8 @@ Avoid dirty, oily, stained, muddy, greasy, torn, or unclean materials. Avoid mak
 Avoid hiding the torso completely with a loose, boxy, or baggy inner layer unless the user asks for that specific silhouette.
 
 Avoid using cloth wrinkles as a substitute for muscle anatomy. If lines appear on the base layer, they should clarify the chest and abdominal masses underneath.
+
+Avoid making the fitted base layer look smooth across the belly or chest on male heavyweight characters. Smooth torso clothing without visible chest-abdominal pressure fails the fixed body standard unless the user explicitly asks to hide the body.
 
 Avoid describing fabric through tiny surface texture, micro-weave, dense prints, speckles, or texture-map-like detail. For animation-friendly clothing, express cotton, linen, and similar materials through color, clean silhouette, broad panels, and simple shape contrast instead.
 

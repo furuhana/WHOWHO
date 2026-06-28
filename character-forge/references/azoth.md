@@ -8,7 +8,7 @@ Merge the approved character record into image-generation prompts after Blackwal
 
 Use the full character record and Blackwall's `integrated_design`.
 
-If provided, use optional black-market formal expression and pose stock only after Blackwall has approved the character design.
+Use black-market formal expression and pose stock by default when the shelf exists, but only after Blackwall has approved the character design.
 
 ## Three Gates
 
@@ -34,10 +34,15 @@ If provided, use optional black-market formal expression and pose stock only aft
 - Split very long prompt sentences when they exceed roughly 35 English words, especially body-standard, pose, and expression sentences.
 - Do not repeat the same visual adjective more than needed. If words such as `clean`, `practical`, `clear`, `shape`, or `stylized` recur heavily, merge or replace them with more specific visual language.
 - Prefer visible details over abstract stats.
-- Always include the fixed body standard in the prompt unless the user explicitly overrides it: very tall, extremely broad shoulders, thick neck, wide chest, powerful torso, narrow but solid waist, large muscular arms, strong forearms, thick thighs, oversized hands, compact head relative to body, stable imposing stance.
-- Always describe the inner base layer as fitted and stretched over the torso, visibly wrapping huge pectorals and large blocky abdominal muscles with clean stylized contour lines, unless the user explicitly overrides this.
-- Make clear that the chest and abdominal lines come from oversized muscle masses pressing through the fitted clothing, not from ordinary cloth folds, wrinkles, or fabric bunching.
+- Always include the fixed body standard in the prompt unless the user explicitly overrides it: width-first and grounded, around 6.2-6.6 heads tall, dramatically broad and heavy super-heavyweight fighting-game build, shoulder span much wider than the hips, short thick neck buried between huge traps, enormous rounded deltoids, huge chest shelf, thick barrel ribcage, powerful square torso, dense compact waist, giant upper arms, huge forearms, oversized heavy hands, very thick thighs, strong calves, large heavy feet, compact head, and stable heavy stance. Make clear that the first read is extreme horizontal muscle mass rather than height.
+- Always describe the inner base layer as fitted and stretched over the torso, visibly wrapping enormous pectorals, a deep lower-pectoral shelf, center chest divide, broad ribcage, thick side-ab planes, and large stacked blocky abdominal muscles with clean stylized contour lines, unless the user explicitly overrides this.
+- Make clear that the chest and abdominal lines come from oversized muscle masses pressing through the fitted clothing, not from ordinary cloth folds, wrinkles, fabric bunching, or a smooth shirt surface.
+- When the user asks for a white tank top, white fitted T-shirt, tucked undershirt, or similar base layer, strengthen the prompt with explicit torso readability: the pectoral shelf, chest divide, upper-ab blocks, lower-ab blocks, and oblique side planes must be visible through the clean white fabric as simplified anime anatomy.
 - Always specify a single full-body character standing alone on a pure white background.
+- Always include the fixed white-background lighting module unless the user explicitly asks for different lighting: one single soft neutral key light from upper left, mostly clean white with only a faint warm daylight tendency. Keep the lighting natural, restrained, and character-bound.
+- Add very narrow pale cream-white lit-edge highlights only on the light-facing silhouette and surfaces, adapted to the current outfit and tools: hair tips, cheek edge, shoulder, collar edge, outer sleeve, forearm ridge, chest folds, belt buckle, badge or plastic card, trouser side folds, and boot leather edges. These highlights must look like painted cel-shading accents attached to the character surface, not glow.
+- Keep the shadow side darker with only minimal ambient fill and no second rim light. Preserve the readable silhouette through crisp dark outer linework plus small neutral edge highlights.
+- Strengthen the white-background constraint with: flat pure white background, no gradient, no vignette, no aura, no halo, no glow around the character, no visible light source, and no scenery.
 - Avoid character sheet wording: no multiple characters, no multiple poses, no front-side-back turnaround, no panel layout, no split view, no callout boxes, no background scene unless the user explicitly asks.
 - Keep daily-life occupation readable.
 - Include clean high-quality Japanese TV anime cel shading, crisp linework, fresh colors, tidy shadows, and clean stylized animation character design.
@@ -51,7 +56,7 @@ If provided, use optional black-market formal expression and pose stock only aft
 
 ## Black-Market Stock
 
-If `黑商货单` formal stock is available or the user asks to use black-market inventory, Azoth must shop from `正式入库` for expression and pose stock before final prompt synthesis.
+If `黑商货单` formal stock is available, the user asks to use black-market inventory, or `black-market/inventory.md` exists, Azoth must shop from `正式入库` for expression and pose stock before final prompt synthesis.
 
 Also check these shelves before prompt synthesis, when they exist:
 
@@ -158,3 +163,29 @@ Use the completed character record, Blackwall-approved design, selected black-ma
 Ideas should be specific, imageable, and useful for the current character's occupation, gang, stats, outfit, hairstyle, or performance direction.
 
 Never include source image names, file paths, `现场验货`, `常规描述`, raw image analysis, makeup, facial features, face shape, complexion, skin texture, attractiveness judgments, or source-derived identity/story.
+
+## Image Generation Handoff
+
+After `黑商商机`, hand the final English prompt to the mother pipeline's Image Gen tail step. Do not remove or shorten the previous text sections.
+
+Before Image Gen runs, the mother pipeline must load both local reference images with `view_image` and pass them as `Input image 1` and `Input image 2`:
+
+```text
+Input image 1 / style reference:
+E:\sw\eagle\BaiduSyncdisk\A.library\images\MKXONR4EBPO4Z.info\0_0.png
+
+Input image 2 / body reference:
+E:\wk\GitHub\WHOWHO\character-forge\references\assets\width_first_body_reference.png
+```
+
+Input image 1 is allowed to guide rendering style, full-body framing, line weight, flat cel-shading, clean white background, and crisp anime readability. Input image 2 is allowed to guide width-first grounded body proportion, simplified muscle anatomy, stable stance, broad muscle mass, and compact heavy silhouette. Neither reference may override the approved character record, selected black-market stock, outfit, grooming, expression, prompt content, or source-character separation.
+
+When handing off to Image Gen, wrap `prompt_en` with:
+
+```text
+Use Input image 1 as the mandatory visual reference for rendering style, full-body framing, line weight, flat cel-shading, tidy contour lines, smooth color blocks, and clean white-background presentation. Use Input image 2 as the mandatory visual reference for width-first grounded super-heavyweight body proportion, simplified muscle anatomy, extreme horizontal muscle mass, 6.2-6.6 head proportions, very wide shoulders, huge traps, huge chest and back, giant arms, oversized hands, very thick thighs, and large heavy feet. Keep the new character's identity, outfit, job, grooming, pose, and expression from the prompt below. Preserve one single soft neutral upper-left key light with narrow painted cel-shading lit-edge highlights only on the light-facing silhouette. Keep the background flat pure white with no gradient, vignette, aura, halo, or glow. Do not copy either reference character's exact face, clothing, identity, or any overly tall vertical proportion.
+
+<prompt_en>
+```
+
+Keep `prompt_en` compatible with that wrapper: avoid painterly, semi-realistic, rendered, detailed skin, gritty, textured, cinematic, volumetric, or realistic material language unless the user explicitly asks for that style.

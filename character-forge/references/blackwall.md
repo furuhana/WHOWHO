@@ -25,7 +25,7 @@ Check:
 
 - Does the character read as an animation character design rather than random real-life details?
 - Do occupation, gang, outfit, hairstyle, beard, and face shape support the same character?
-- Does the body preserve the fixed standard: very tall, extremely broad-shouldered, heavily muscular, thick neck, powerful torso, large arms, heavy limbs, compact head relative to body?
+- Does the body preserve the fixed standard: width-first and grounded, around 6.2-6.6 heads tall, dramatically broad and heavily muscled, shoulder span much wider than hips, short thick neck buried between huge traps, enormous deltoids, huge chest shelf, thick barrel torso, large arms like pillars, huge forearms, oversized heavy hands, very thick thighs, natural but not long legs, large heavy feet, and a compact head?
 - Does eyebrow language stay at static eyebrow shape, without turning into eye shape, gaze, expression acting, makeup, attractiveness, or detailed facial-feature wording?
 - Does face-shape language stay at broad head silhouette and jaw/chin mass, without permanent eye shape or detailed facial-feature wording?
 - Does the inner base layer visibly wrap the chest and abdominal muscle contour with clean animation lines, unless the user explicitly requested otherwise?
@@ -53,7 +53,8 @@ Reject or reroute if the result contains:
 - cargo loading or unloading jobs
 - hard manual labor / coolie-like direction
 - fitness coach occupation
-- slim, average, lanky, lightly athletic, or small body proportions when the fixed body standard should apply
+- slim, average, lanky, lightly athletic, small, tall-and-fit, normally proportioned hero, or merely athletic body proportions when the fixed body standard should apply
+- overly tall, towering-giant, stretched vertical proportions, normal 7-head tall hero proportions, narrow shoulders, insufficient chest/back width, excessively long legs, or an excessively shrunken head when the fixed width-first super-heavyweight body standard should apply
 - eyebrow wording that changes eye shape or face style, or that specifies eyebrow color, including willow-leaf eyebrows, thin eyebrows, long slender eyebrows, delicate eyebrows, realistic eyebrow hair flow, close-to-eye eyebrows, makes the eyes narrow, sharp eye shape, white eyebrows, black eyebrows, blond eyebrows, gray eyebrows, 柳叶眉, 细眉, 修长眉, 精致眉, 写实毛流, 贴眼眉, 让眼睛变窄, 锐利眼型, 白眉, 白色眉, 黑眉, 金眉, 灰眉, or any eyebrow color label
 - permanent eye shape or detailed face-shape wording that changes the base anime style, including long face, narrow eyes, small eyes, sharp nose, high cheekbones, thin lips, delicate features, realistic facial features, detailed facial structure, 长脸, 窄眼, 小眼, 尖鼻, 高颧骨, 薄唇, 精致五官, 写实五官, or 详细五官结构
 - loose, boxy, or baggy inner base layers that hide the fixed chest and abdominal silhouette when no override was requested

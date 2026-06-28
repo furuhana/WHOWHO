@@ -26,8 +26,8 @@ Use:
 - job
 - gang
 - outfit
-- optional black-market formal hairstyle stock, if provided
-- optional black-market formal eyebrow stock, if provided
+- black-market formal hairstyle stock, enabled by default when the shelf exists
+- black-market formal eyebrow stock, enabled by default when the shelf exists
 
 ## Output
 
@@ -50,7 +50,7 @@ Fill:
 
 ## Black-Market Stock
 
-If `黑商货单` formal stock is available or the user asks to use black-market inventory, Tony must shop from `正式入库` for hairstyle and eyebrow stock before falling back to the grooming library.
+If `黑商货单` formal stock is available, the user asks to use black-market inventory, or `black-market/inventory.md` exists, Tony must shop from `正式入库` for hairstyle and eyebrow stock before falling back to the grooming library.
 
 Also check `black-market/inventory/hairstyle.md` before hairstyle selection. If it exists, Tony may read only `正式入库 -> 发型库存`.
 
