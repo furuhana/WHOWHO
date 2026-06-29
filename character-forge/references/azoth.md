@@ -39,6 +39,7 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Make clear that the chest and abdominal lines come from oversized muscle masses pressing through the fitted clothing, not from ordinary cloth folds, wrinkles, fabric bunching, or a smooth shirt surface.
 - When the user asks for a white tank top, white fitted T-shirt, tucked undershirt, or similar base layer, strengthen the prompt with explicit torso readability: the pectoral shelf, chest divide, upper-ab blocks, lower-ab blocks, and oblique side planes must be visible through the clean white fabric as simplified anime anatomy.
 - Always specify a single full-body character standing alone on a pure white background.
+- Always preserve face readability for the viewer: the head should be turned enough that the face is visible, and the eyes should look toward the screen, the camera, or very near the camera. Side-facing or side-body poses may keep the torso angled, but they still need a three-quarter head turn or camera-near gaze so the face does not disappear into a pure profile.
 - Always include the fixed white-background lighting module unless the user explicitly asks for different lighting: one single soft neutral key light from upper left, mostly clean white with only a faint warm daylight tendency. Keep the lighting natural, restrained, and character-bound.
 - Add very narrow pale cream-white lit-edge highlights only on the light-facing silhouette and surfaces, adapted to the current outfit and tools: hair tips, cheek edge, shoulder, collar edge, outer sleeve, forearm ridge, chest folds, belt buckle, badge or plastic card, trouser side folds, and boot leather edges. These highlights must look like painted cel-shading accents attached to the character surface, not glow.
 - Keep the shadow side darker with only minimal ambient fill and no second rim light. Preserve the readable silhouette through crisp dark outer linework plus small neutral edge highlights.
@@ -64,6 +65,26 @@ Also check these shelves before prompt synthesis, when they exist:
 - `black-market/inventory/expression.md`: read only `正式入库 -> 表情库存`.
 
 Azoth is a selector and prompt synthesizer, not the original pose director or expression designer. It may choose, combine, adapt lightly for prompt clarity, and translate approved stock into the final English and Chinese prompts. It must not invent a new pose system, rewrite stock into permanent identity, or treat expression as face design.
+
+## Pose Diversity Gate
+
+When black-market pose stock exists, Azoth must run pose selection before writing any prompt prose. Treat the selected pose as the locked full-body action skeleton for the current character. Outfit details, carried props, worn props, and expression must adapt to that locked pose; they must not pull the body language back to a generic front-facing presentation pose.
+
+Pose selection must follow this order:
+
+1. Identify the broad pose category for each viable pose candidate, such as `standing`, `walking`, `seated`, `low seated`, `crouching`, `kneeling`, `half-reclining`, `leaning`, `arms crossed`, `hands on hips`, `shoulder-carried prop`, `low center of gravity`, or `action freeze`.
+2. Apply recent-pose cooldown before scoring job fit. Hard-exclude the last 3 used pose categories when alternatives exist. Strongly downweight the last 10 used pose categories.
+3. Hard-exclude recent or overused hand-display patterns when alternatives exist: one hand extended forward, open palm presenting, pointing at the viewer, one hand holding a small object forward, or one hand gripping a chest strap while the other hand presents forward.
+4. Choose the pose category first, then choose one concrete pose stock item within that category.
+5. After choosing a pose, normalize face visibility without changing the locked body action: add a head-and-gaze clause that keeps the face readable to the viewer. For side-body, angled, walking-away, turning-back, low, or action poses, require the head to turn toward the camera in a three-quarter view and the eyes to look toward the screen/camera area. Do not let profile, looking far off-frame, looking down, or looking fully away hide the face unless the user explicitly requests that mood.
+6. If the selected pose is not a presentation pose, keep occupational props on the belt, backpack, shoulder strap, leg side, chest badge, neck loop, or carried neutrally at the side instead of forcing a hand-forward display.
+7. If all viable pose stock is recently used, select the least-recently used category and state the cooldown limitation in the pose reasoning log.
+
+The selected pose stock must be visibly present in `prompt_en` and `prompt_cn`. If the character's job requires a prop, the prop placement must preserve the locked pose. Do not replace the selected pose with generic phrasing such as `standing naturally with one hand forward` unless that exact pose stock was selected and is not under cooldown.
+
+When the selected pose is not a hand-forward presentation pose, add a compact negative constraint to `prompt_en`, such as `no forward presenting hand, no pointing at the viewer, no hand extended toward the camera`, while keeping the rest of the prompt positive and imageable.
+
+When the selected pose turns the body sideways or away from the viewer, add positive prompt language such as `his head turns back toward the camera in a readable three-quarter view, eyes looking toward the viewer or just beside the camera`. If an expression stock says the gaze is to one side, adapt it to `slightly beside the camera` rather than far off-frame, unless the user explicitly asks for an avoidant or hidden-face look.
 
 Allowed expression stock:
 
@@ -98,6 +119,8 @@ Pose stock should appear as full-body performance language, not as clothing, ana
 
 When both pose and expression stock are available, choose pose first, then choose an expression that supports the pose. The final combination should feel like one coherent performance beat. If they conflict, prefer the pose and select a quieter or more compatible expression.
 
+The pose reasoning log must name the selected pose category, note any cooldown exclusion or downweighting, and explain how occupational props were placed without overriding the locked pose. If Azoth chooses a hand-forward presentation pose, it must explicitly justify why no non-presentation candidate fit the character better.
+
 When using black-market stock, include each selected `名称` in `提示词说明`. If no matching pose or expression stock is used, write `黑商取货：未使用` for that lane and give the concrete reason.
 
 When black-market inventory is enabled, record the inventory-level reasoning log using only formal stock fields:
@@ -107,6 +130,9 @@ When black-market inventory is enabled, record the inventory-level reasoning log
 货道：black-market/inventory/pose.md / 姿势库存
 候选：<1-3 pose stock names or 无可用库存>
 使用：<selected pose stock name or 未使用>
+姿势大类：<selected broad pose category>
+冷却处理：<excluded or downweighted recent pose categories, or none>
+道具适配：<how job props preserve the locked pose instead of forcing a hand-forward display>
 取货理由：<body-performance fit based on 名称, 描述, 标签>
 未选理由：<why other candidates fit less well>
 
@@ -145,6 +171,8 @@ azoth:
 ```
 
 `prompt_notes` should mention which abstract details were translated or removed.
+
+`prompt_notes` must also include `本轮姿势库存：<selected pose stock name>` and `姿势大类：<selected pose category>`. If no pose stock was used, explain why in one sentence. If a non-presentation pose was selected, mention the anti-presentation constraint added to `prompt_en`.
 
 ## Black-Market Opportunities
 

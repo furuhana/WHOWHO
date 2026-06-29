@@ -28,6 +28,7 @@ Check:
 - Does the body preserve the fixed standard: width-first and grounded, around 6.2-6.6 heads tall, dramatically broad and heavily muscled, shoulder span much wider than hips, short thick neck buried between huge traps, enormous deltoids, huge chest shelf, thick barrel torso, large arms like pillars, huge forearms, oversized heavy hands, very thick thighs, natural but not long legs, large heavy feet, and a compact head?
 - Does eyebrow language stay at static eyebrow shape, without turning into eye shape, gaze, expression acting, makeup, attractiveness, or detailed facial-feature wording?
 - Does face-shape language stay at broad head silhouette and jaw/chin mass, without permanent eye shape or detailed facial-feature wording?
+- Does the final pose preserve face readability for the viewer, with the head turned enough to show the face and the eyes looking toward the screen, the camera, or very near the camera? Side-body, side-face, turning-back, walking-away, low, or action poses should still keep a readable three-quarter head angle unless the user explicitly requests a hidden-face or off-frame gaze.
 - Does the inner base layer visibly wrap the chest and abdominal muscle contour with clean animation lines, unless the user explicitly requested otherwise?
 - Do the torso lines read as huge pectoral and abdominal anatomy pressing through the fitted base layer, rather than as generic fabric folds or bunched cloth?
 - Is the composition a single full-body character on a pure white background, with no multi-character layout, panels, split views, turnarounds, callout boxes, or character-sheet structure?
@@ -41,6 +42,10 @@ Check:
 - If no occupation was specified, did Bo Le preserve the fair random draw instead of rerolling toward a more compatible, easier, or recently repeated job?
 - Did black-market styling stock serve the already selected occupation instead of causing the role to drift toward a better-stocked job?
 - If Azoth selected both pose and expression stock, do they support one coherent performance beat without conflicting body language or facial acting?
+- If black-market pose stock exists, did Azoth select and lock one pose stock item before prompt writing, rather than inventing or defaulting to a generic display pose?
+- Did Azoth record the selected pose stock name, broad pose category, cooldown handling, and prop-placement adaptation in the reasoning or prompt notes?
+- If the selected pose is not a presentation pose, does the prompt preserve that body language and include a compact negative constraint against forward hand presentation, pointing at the viewer, or a hand extended toward the camera?
+- If the selected pose angles the body sideways or away from the viewer, did Azoth add a head-and-gaze clause that keeps the face visible and keeps the eyes toward the viewer or just beside the camera?
 - If Azoth used black-market expression stock, preserve valid five-part expression descriptions as prompt-useful material when they contain mouth shape, eyebrow/eye state, gaze, facial tension, and reusable acting intention.
 - If `黑商商机` is present, is it clearly non-inventory and free of black-market forbidden source or appearance leakage?
 
@@ -54,6 +59,7 @@ Reject or reroute if the result contains:
 - hard manual labor / coolie-like direction
 - fitness coach occupation
 - slim, average, lanky, lightly athletic, small, tall-and-fit, normally proportioned hero, or merely athletic body proportions when the fixed body standard should apply
+- pure side profile, hidden face, head turned fully away, eyes looking far off-frame, sustained downward gaze hiding the eyes, or any side-body pose that fails to add a readable three-quarter face and camera-near gaze, unless the user explicitly asks for a hidden-face or avoidant-gaze image
 - overly tall, towering-giant, stretched vertical proportions, normal 7-head tall hero proportions, narrow shoulders, insufficient chest/back width, excessively long legs, or an excessively shrunken head when the fixed width-first super-heavyweight body standard should apply
 - eyebrow wording that changes eye shape or face style, or that specifies eyebrow color, including willow-leaf eyebrows, thin eyebrows, long slender eyebrows, delicate eyebrows, realistic eyebrow hair flow, close-to-eye eyebrows, makes the eyes narrow, sharp eye shape, white eyebrows, black eyebrows, blond eyebrows, gray eyebrows, 柳叶眉, 细眉, 修长眉, 精致眉, 写实毛流, 贴眼眉, 让眼睛变窄, 锐利眼型, 白眉, 白色眉, 黑眉, 金眉, 灰眉, or any eyebrow color label
 - permanent eye shape or detailed face-shape wording that changes the base anime style, including long face, narrow eyes, small eyes, sharp nose, high cheekbones, thin lips, delicate features, realistic facial features, detailed facial structure, 长脸, 窄眼, 小眼, 尖鼻, 高颧骨, 薄唇, 精致五官, 写实五官, or 详细五官结构
@@ -67,6 +73,9 @@ Reject or reroute if the result contains:
 - black-market inventory content outside `正式入库` being used as stock
 - black-market styling stock used as expression, expression stock used as styling or pose, pose stock used as styling or face design, hairstyle stock used for beard, eyebrows, face shape, facial features, makeup, complexion, or attractiveness, or eyebrow stock used for hairstyle, beard, eye shape, expression acting, face shape, facial features, makeup, complexion, or attractiveness
 - black-market pose stock that creates multiple poses, front-side-back turnarounds, segmented character sheets, panel layouts, callout boxes, background scenes, anatomy redesign, or action clutter instead of one clear full-body pose
+- black-market pose stock being available but Azoth omitting pose selection, failing to name the selected pose, or replacing the selected pose with generic prompt language
+- repeated use of the same recent pose category when viable alternatives exist, especially one hand extended forward, open palm presenting, pointing, hand-forward small-object display, or chest-strap grip plus hand-forward presentation
+- occupation props forcing the hands back into a forward display pose when the selected pose could carry props on the belt, backpack, strap, leg side, chest badge, neck loop, or neutral side carry
 - any black-market stock that introduces makeup, facial feature description, complexion, face-centered aesthetic judgment, dirty material, forbidden occupation, forbidden setting, or noisy texture detail
 - black-market styling stock deciding, boosting, replacing, or retroactively changing the occupation
 - changing the occupation because a black-market outfit has a stronger fit to another job

@@ -86,6 +86,8 @@ Use black-market stock only in modules that own the matching domain:
 
 Use expression and pose stock only during Azoth prompt synthesis. Keep expression stock separate from face shape, features, or grooming; keep pose stock separate from outfit, anatomy redesign, multiple poses, character sheets, or background action.
 
+Pose diversity is mandatory when pose stock exists. Azoth must select and lock one black-market pose before prompt writing, choose a broad pose category before choosing the concrete pose, apply recent-pose cooldown, and adapt outfit props to the selected body language. Do not let occupational readability collapse the character back into a repeated one-hand-forward presentation pose.
+
 Black-market stock must not influence occupation selection. Bo Le chooses the occupation first from the jobs library using user constraints and balanced random selection. The random draw is authoritative when the user does not specify an occupation: stats may explain and flavor the selected job, but they must not reroll it toward a more compatible role such as wedding photographer. San Zhai may then adapt compatible styling stock to that chosen job, but it must not change the job to match a better-stocked outfit.
 
 ## Black-Market Opening 1.0
@@ -94,7 +96,7 @@ When black-market formal stock is available in the conversation, when the shelf 
 
 - 三宅：during work-outfit design, check formal styling stock for clothing, footwear, accessories, carried props, worn props, materials, color relationships, and layering. Default to `单品货` selection; only use `套装货` when the whole outfit fits the locked occupation.
 - 托尼：during head styling, check formal hairstyle stock for `hairstyle` and formal eyebrow stock for `eyebrows` only. Do not use black-market stock for beard, face shape, eye shape, facial features, makeup, complexion, or attractiveness.
-- 阿佐特：during prompt synthesis, check formal pose stock for body angle, weight shift, hand placement, gesture, prop interaction, and action freeze-frame; then check formal expression stock for gaze, facial tension, mouth-corner state, emotional layer, and acting state. Pose should be selected first, expression second. Keep expression stock separate from face shape, grooming, and appearance judgments.
+- 阿佐特：during prompt synthesis, check formal pose stock for body angle, weight shift, hand placement, gesture, prop interaction, and action freeze-frame; then check formal expression stock for gaze, facial tension, mouth-corner state, emotional layer, and acting state. Pose must be selected and locked first, expression second. Apply pose cooldown: hard-exclude the last 3 used pose categories when alternatives exist, strongly downweight the last 10, and avoid repeated hand-forward presentation patterns unless explicitly required. Keep expression stock separate from face shape, grooming, and appearance judgments.
 - 黑墙：audit any selected black-market stock after integration. Reject or reroute if the stock introduces forbidden directions, face-centered appearance judgments, makeup, complexion, dirty materials, noisy fabric texture, or any conflict with the fixed body and single-character prompt rules.
 
 All modules must read only `正式入库`. `现场验货`, `常规描述`, source filenames, paths, and raw image analysis are never valid stock for the mother pipeline.
@@ -107,7 +109,7 @@ Shelf routing:
 
 - 三宅 must check `black-market/inventory/styling.md` `造型库存 / 单品货` first for outfit components, clothing, footwear, accessories, props, materials, color relationships, and layering. It may then check `造型库存 / 套装货` only when no direct single item fits or a complete outfit is naturally compatible.
 - 托尼 must check `black-market/inventory/hairstyle.md` `发型库存` for hairstyle only and `black-market/inventory/eyebrow.md` `眉型库存` for static eyebrow shape only.
-- 阿佐特 must check `black-market/inventory/pose.md` `姿势库存` for full-body pose and action language when the shelf exists, then check `black-market/inventory/expression.md` `表情库存` for expression and acting language only.
+- 阿佐特 must check `black-market/inventory/pose.md` `姿势库存` for full-body pose and action language when the shelf exists, select a broad pose category, lock one concrete pose, then check `black-market/inventory/expression.md` `表情库存` for expression and acting language only. If the locked pose is not a presentation pose, occupational tools should be placed on belts, packs, straps, leg sides, badges, neck loops, or neutral side carry instead of forcing a forward hand display.
 - 黑墙 must audit any selected shelf item using the same black-market rules.
 
 If the shelf is empty, missing, or has no matching lane, say briefly in the dispatch log that no matching black-market stock was available, then continue with the normal libraries. If matching stock exists but a module rejects it, the module must name the rejected stock and give a short fit reason.
