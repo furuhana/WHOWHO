@@ -45,7 +45,7 @@ Fill:
 - Use beard and broad face silhouette to strengthen personality, not to make the character generically tough.
 - Make the result visually distinct but still daily-life believable.
 - Apply hairstyle cooldown across repeated character generations. Never select the same hairstyle as the immediately previous generated character unless the user explicitly requests it. Hard-exclude hairstyles used in the last 3 generated characters when alternatives exist, and strongly downweight hairstyles used in the last 10 generated characters. If the inventory is too small to satisfy the full cooldown, prefer the least-recently used hairstyle and state the cooldown constraint in `grooming_reason`.
-- Face shape must describe only the broad head silhouette and jaw/chin mass. Do not specify eye shape, nose shape, lip shape, cheekbone height, narrow eyes, long face, small eyes, sharp nose, high cheekbones, thin lips, realistic facial features, or detailed facial structure.
+- Face shape may describe the broad head silhouette, jaw/chin mass, and simplified stylized facial proportions when useful for animation readability. These details must belong to the new character, not recreate a reference image's recognizable face, exact feature arrangement, same-face likeness, or realistic identity match.
 - Eyebrows may create character recognition, but must describe only static eyebrow shape: thickness, block shape, angle, arc, segmentation, and clean animation edges. Do not use eyebrow wording to specify eyebrow color, eye shape, gaze, eyelid state, expression, makeup, attractiveness, face shape, or detailed facial features.
 
 ## Black-Market Stock

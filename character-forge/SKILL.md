@@ -9,7 +9,15 @@ description: Modular character generation pipeline for creating stylized animati
 
 Use this skill as the mother dispatch console for a modular character generation system. Generate one character by running the modules in order, reporting progress after each module, and preserving a structured character record.
 
-Default scope: build the character, audit it, produce image-generation prompts, call Image Gen with the configured reference image, then run a post-generation visual audit unless the user explicitly asks for text-only output. Do not try to create exhaustive lore, relationships, or environments unless the user asks.
+Default scope: build the character, audit it, produce image-generation prompts, apply the local Mirage / 蜃楼 floating scene-slice post-processor when available, call Image Gen with the configured reference image, then run a post-generation visual audit unless the user explicitly asks for text-only output. Do not try to create exhaustive lore, relationships, or full environments unless the user asks.
+
+## Default Mirage Policy
+
+When the user asks to create a character and does not explicitly request text-only output, use Mirage / 蜃楼 by default if `mirage/SKILL.md` exists in the workspace. This is not optional and does not require the user to repeat the floating-platform rules.
+
+Mirage runs after Azoth prompt synthesis and before Image Gen. It adds one compact scene-slice paragraph and compact negative constraints: one coherent floating platform, solid themed ground, 2-3 dynamically selected rooted props, naturally broken edges fading into pure white, and no complete background, room, walls, ceiling, full landscape, scattered props, separated prop pack, or floating standalone props.
+
+Mirage must not change the approved character, occupation, body, outfit anchors, black-market stock, hairstyle, eyebrows, pose, expression, or identity. If the user explicitly asks for a plain pure-white character with no platform, skip Mirage for that turn.
 
 ## Required Workflow
 
@@ -23,6 +31,8 @@ Read these references before generating a character:
 6. `references/tony.md` for hairstyle, beard, and face matching.
 7. `references/blackwall.md` for design audit and forbidden directions.
 8. `references/azoth.md` for prompt synthesis.
+
+9. `../mirage/SKILL.md` or workspace `mirage/SKILL.md` when it exists, for default floating scene-slice composition before Image Gen.
 
 Load library files only when the matching module needs them:
 
@@ -192,6 +202,8 @@ Use this shape:
 
 After preserving all text sections above, the mother pipeline must run one final `图像生成` step unless the user explicitly asks for text only.
 
+For any non-text-only character generation, run the local `mirage` / `蜃楼` skill after Azoth and before Image Gen when that skill is available, unless the user explicitly asks for no platform or a plain character-only white background. Mirage may add only the scene-platform paragraph and compact negative constraints. It must not change the approved character, body, occupation, outfit anchors, black-market stock, grooming, pose, or expression.
+
 Use the built-in Image Gen path. Before every Image Gen call, load both local reference images with `view_image` so they are visible in the conversation context, then send them with the final English prompt from `英文提示词`:
 
 ```text
@@ -202,7 +214,7 @@ Input image 2 / body reference:
 E:\wk\GitHub\WHOWHO\character-forge\references\assets\width_first_body_reference.png
 ```
 
-Treat `Input image 1` as the style and rendering reference only, not as identity, costume, face, exact character copying, or body-proportion authority. Treat `Input image 2` as the body-proportion and muscle-mass reference only, not as identity, costume, face, hairstyle, or exact character copying. The generated image must follow the current character's approved prompt while matching these reference-image qualities as closely as the model allows:
+Treat `Input image 1` as the style and rendering reference only, not as identity, costume, exact character copying, or body-proportion authority. Treat `Input image 2` as the body-proportion and muscle-mass reference only, not as identity, costume, hairstyle, or exact character copying. Broad stylized face-shape direction and simplified facial proportions may follow the approved character prompt and anime style, but neither input may cause the result to copy the same recognizable face, exact feature arrangement, or identity likeness. The generated image must follow the current character's approved prompt while matching these reference-image qualities as closely as the model allows:
 
 - clean Japanese TV anime cel-shading, crisp dark outer linework, tidy internal contour lines, smooth flat color blocks, soft but controlled shadow shapes, and minimal background noise
 - width-first grounded body proportion, around 6.2-6.6 heads tall, dramatically broad super-heavyweight fighting-game mass, compact head, short thick neck buried between huge traps, enormous deltoids, huge chest shelf, thick barrel ribcage, giant upper arms, huge forearms, oversized heavy hands, very thick thighs, strong calves, large heavy boots or feet, and stable full-body presentation. The first read must be extreme horizontal muscle mass rather than height.
@@ -213,7 +225,7 @@ Treat `Input image 1` as the style and rendering reference only, not as identity
 Add this Image Gen prompt wrapper around the final English prompt:
 
 ```text
-Use Input image 1 as the mandatory visual reference for rendering style, full-body framing, line weight, flat cel-shading, tidy contour lines, smooth color blocks, and clean white-background presentation. Use Input image 2 as the mandatory visual reference for width-first grounded super-heavyweight body proportion, simplified muscle anatomy, extreme horizontal muscle mass, 6.2-6.6 head proportions, very wide shoulders, huge traps, huge chest and back, giant arms, oversized hands, very thick thighs, and large heavy feet. Keep the new character's identity, outfit, job, grooming, pose, and expression from the prompt below. Preserve one single soft neutral upper-left key light with very narrow pale cream-white painted cel-shading lit-edge highlights only on the light-facing silhouette and surfaces. Keep the background flat pure white with no gradient, vignette, aura, halo, glow, visible light source, or scenery. Do not copy either reference character's exact face, clothing, identity, or any overly tall vertical proportion.
+Use Input image 1 as the mandatory visual reference for rendering style, full-body framing, line weight, flat cel-shading, tidy contour lines, smooth color blocks, and clean white-background presentation. Use Input image 2 as the mandatory visual reference for width-first grounded super-heavyweight body proportion, simplified muscle anatomy, extreme horizontal muscle mass, 6.2-6.6 head proportions, very wide shoulders, huge traps, huge chest and back, giant arms, oversized hands, very thick thighs, and large heavy feet. Keep the new character's identity, outfit, job, grooming, pose, and expression from the prompt below. Preserve one single soft neutral upper-left key light with very narrow pale cream-white painted cel-shading lit-edge highlights only on the light-facing silhouette and surfaces. Keep the background flat pure white with no gradient, vignette, aura, halo, glow, visible light source, or scenery. Broad stylized face-shape direction and simplified facial proportions are allowed, but do not copy either reference character's recognizable facial identity, exact feature arrangement, same-face likeness, clothing, or any overly tall vertical proportion.
 
 <final English prompt>
 ```

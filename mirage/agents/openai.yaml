@@ -1,0 +1,4 @@
+interface:
+  display_name: "蜃楼"
+  short_description: "Build floating scene-slice platforms."
+  default_prompt: "Use $mirage to convert this character prompt into a single floating scene-slice card composition."

@@ -2,7 +2,7 @@
 
 ## Role
 
-Design the character's work outfit from Bo Le's occupation. First version should use clean, recognizable, slightly stereotyped real-world professional clothing.
+Design the character's work outfit from Bo Le's occupation. First version should use clear, occupation-readable, animation-friendly character clothing.
 
 ## Required Library
 
@@ -35,12 +35,16 @@ Fill:
 
 - Prioritize clean, readable, animation-friendly silhouettes.
 - Use the job as the anchor, then adjust details by wealth and personality.
+- Keep clothing believable enough for the selected job, but do not over-lock the outfit into modern urban, streetwear, city casual, or real-world uniform styling unless the user explicitly asks for that style.
 - Unless the user explicitly overrides it, make the inner `base_layer` fitted and body-hugging enough to show the wrapped contour of the chest, upper abdomen, and abdominal muscles through clean animation shape lines.
+- Unless the user explicitly overrides it, preserve the user's recurring outfit anchor when compatible with the job: a clear black belt, plain visible white socks, and a fitted inner white T-shirt. Do not force shorts by default. If shorts are selected naturally by the job or outfit stock, keep them ending above the knee so the plain white socks remain clearly visible between the shorts and shoes. If long pants are selected, default to a 9.5-length trouser cut: straight, slightly relaxed, or naturally falling hems that stop just above the shoe collar or lightly touch the shoe opening, revealing a small clean glimpse of plain white sock. The long pants must not become joggers, elastic cuffs, tight tapered hems, leggings-like pants, or pants tucked into socks.
+- When preserving visible white socks, keep them solid plain white with no vertical stripes, ribbed stripe pattern, colored bands, logos, text, or sporty tube-sock markings.
 - The visible torso detail must read as huge muscles pressing against and shaping the fitted inner layer: oversized pecs, separated blocky abs, side abdominal planes, and stretched tension around the ribcage and waist. It should not read as ordinary cloth folds, random wrinkles, or fabric bunching.
 - For white tank tops, fitted T-shirts, undershirts, or similar tucked base layers, exaggerate the torso pressure more than usual: the lower edge of the pectorals, the center chest divide, stacked abdominal blocks, and side abdominal masses should be clearly readable as simplified anime anatomy under the fabric. The shirt may have broad tension arcs, but those arcs must follow the muscle masses, not generic cloth wrinkles.
 - The fitted inner layer should support the fixed strong body standard while staying plausible for the job; outerwear may change freely by occupation.
 - Choose accessories that help image generation understand the character.
 - Keep clothing plausible for daily life.
+- Apply footwear cooldown across repeated character generations when viable alternatives exist. Do not repeat the exact same shoe stock or specific shoe description used in the last 3 generated characters unless the user explicitly requests it or the job has no believable alternative. Strongly downweight shoe choices used in the last 10 generated characters. Preserve occupation-necessary footwear categories when needed, but vary concrete visual details such as color blocking, shoe height, sole weight, closure structure, or toe shape instead of repeating the same shoe.
 
 ## Black-Market Stock
 
@@ -74,7 +78,8 @@ Selection rule when black-market inventory is enabled:
 2. Then scan `套装货` only when a complete outfit's tags, description, or contained items naturally fit the already selected job and social role, or when the user explicitly asks for whole-outfit inheritance.
 3. If a stock item would pull the role toward another occupation, reject that use and name the fit conflict in `未选理由`.
 4. If no stock can be used, write `黑商取货：未使用` and give the concrete reason.
-5. Record the inventory-level reasoning log using only formal stock fields:
+5. Apply footwear cooldown before final shoe selection. Avoid recently used exact shoe stock first; if the same footwear category is required for the job, choose the least-recent compatible item and vary concrete shoe details.
+6. Record the inventory-level reasoning log using only formal stock fields:
 
 Before selecting stock, judge the outfit value rather than simply copying the item. Identify which strengths are worth inheriting:
 
@@ -85,6 +90,17 @@ Before selecting stock, judge the outfit value rather than simply copying the it
 - role fit: whether the outfit supports the job, gang, wealth, personality, and social role
 - visual priority: whether the stock supports the character instead of turning the character into an outfit display
 - occupation lock: whether the stock serves the selected job instead of causing job drift
+
+Treat broad style labels as weak hints, not final outfit style. When stock uses labels such as city, urban, street, streetwear, city casual, casual, workwear, or light utility, do not copy those labels directly into the outfit or final prompt unless the user asked for that exact style. Translate them into concrete usable outfit qualities instead:
+
+- city or urban: public-facing practicality, compact service details, everyday color restraint
+- street or streetwear: relaxed silhouette, sporty accent, bolder color blocking, casual energy
+- city casual: approachable layering, easy daily wear, softened formal structure
+- workwear or light utility: pocket placement, sturdy silhouette, functional straps, broad material blocks
+
+If a broad style label would make the outfit feel too specifically urban or streetwear, inherit only its silhouette, color relationship, layering, footwear shape, or functional detail, then restate the outfit around the selected occupation.
+
+For pants and sock interaction, avoid solving sock visibility by using joggers, elastic cuffs, tight tapered hems, leggings-like pants, or pants tucked into socks. When the outfit uses long pants, default to a 9.5-length natural trouser break: the hem is loose enough to sit outside the ankle, stopping just above or resting lightly around the shoe collar, with a small crescent or sliver of plain white sock visible above the shoe.
 
 Choose one use strategy:
 
@@ -120,6 +136,8 @@ Avoid using cloth wrinkles as a substitute for muscle anatomy. If lines appear o
 Avoid making the fitted base layer look smooth across the belly or chest on male heavyweight characters. Smooth torso clothing without visible chest-abdominal pressure fails the fixed body standard unless the user explicitly asks to hide the body.
 
 Avoid describing fabric through tiny surface texture, micro-weave, dense prints, speckles, or texture-map-like detail. For animation-friendly clothing, express cotton, linen, and similar materials through color, clean silhouette, broad panels, and simple shape contrast instead.
+
+Avoid jogger cuffs, elastic ankle cuffs, overly tight tapered pants, pants tucked into socks, sock-like leggings, and striped or ribbed white socks unless the user explicitly asks for them. Visible white socks should look like plain socks naturally peeking out at the shoe opening, not like a sports stripe detail or a tucked-pants styling trick.
 
 ## Library Writes
 
