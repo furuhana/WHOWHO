@@ -24,10 +24,11 @@ Use the approved character record and final prompt:
 - occupation, gang, and role-readable props
 - outfit anchors and selected black-market stock
 - locked pose and expression
+- Azoth `PLATFORM_DYNAMIC_DECISIONS`, when available
 - user-provided `{{场景主题}}`, if any
 - user environment rules, if any
 
-If the user provides no scene theme, infer one from the approved character. Do not use a fixed occupation-to-scene mapping table. Examples may help reasoning, but never encode them as mandatory pairs.
+If Azoth provides `PLATFORM_DYNAMIC_DECISIONS`, preserve those scene decisions unless they violate Mirage constraints. If neither Azoth nor the user provides a scene theme, infer one from the approved character. Do not use a fixed occupation-to-scene mapping table. Examples may help reasoning, but never encode them as mandatory pairs.
 
 ## Generation Logic
 
@@ -59,6 +60,8 @@ If the user provides no scene theme, infer one from the approved character. Do n
    - Do not add examples or unused alternatives to the final prompt.
 
 ## Prompt Template
+
+When used with Character Forge, load `character-forge/references/prompt_blocks/mirage-platform-template.md` and use that template as the stable platform wording. Replace only the bracketed fields.
 
 Adapt this template to the current character. Replace bracketed text with concrete decisions:
 

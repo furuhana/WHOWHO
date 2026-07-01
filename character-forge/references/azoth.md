@@ -25,6 +25,7 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Start `prompt_en` with an explicit image-generation instruction, preferably `Generate one image of ...`, so image2 treats the text as a direct image request instead of analysis material.
 - Start `prompt_cn` with `生成一张图：` for the same reason; the Chinese version should read like a direct generation request, not a critique or explanation.
 - Do not optimize the final prompt for brevity. The goal is a complete, imageable prompt, not a short prompt.
+- Default to omitting the character's personal name from `prompt_en` unless the user requests it or the name itself has visible design meaning. Keep names in the Chinese character record, not in the image prompt.
 - Preserve every Blackwall-approved visible design domain as its own prompt material: body standard, occupation readability, outfit silhouette and layers, hairstyle, static eyebrow shape, selected pose stock, selected expression stock, rendering style, and single-character white-background constraints.
 - Expand approved visual details into concrete prompt language instead of compressing them into labels, summaries, or abstract traits.
 - Remove only forbidden, contradictory, non-visual, or generation-harming phrases. Do not remove useful visual information merely because the prompt is already long.
@@ -59,6 +60,95 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Do not ask for clothing material to be rendered through fine texture maps, tiny prints, micro-weave, speckles, or noisy surface detail.
 - If mentioning cotton, linen, or similar fabrics, express them through color and clean shape language rather than visible grain or small texture.
 - If white socks are present, keep them solid plain white. Add a compact negative phrase when needed: no striped socks, no ribbed vertical sock pattern, no colored sock bands, no pants tucked into socks, no jogger cuffs.
+
+## Fixed Prompt Blocks
+
+Load these fixed prompt block files when synthesizing `prompt_en` or handing off to Image Gen. Fixed blocks are template resources, not prose suggestions; insert their text verbatim unless the user explicitly changes that constraint.
+
+- `references/prompt_blocks/body-standard.md`
+- `references/prompt_blocks/rendering-style.md`
+- `references/prompt_blocks/lighting-white-background.md`
+- `references/prompt_blocks/global-negative.md`
+- `references/prompt_blocks/mirage-platform-template.md` when Mirage is active
+- `references/prompt_blocks/sock-and-belt-guards.md`
+- `references/prompt_blocks/imagegen-wrapper.md` for the final Image Gen handoff wrapper
+
+Do not shorten dynamic clothing, accessory, grooming, pose, or expression blocks because fixed blocks are long. Fixed blocks do not count toward dynamic-section length targets.
+
+## Dynamic Prompt Slots
+
+Before writing the final `prompt_en`, draft these dynamic slots from the approved character record. Use only visible, image-helpful information.
+
+```text
+ROLE_VISUAL
+OUTFIT_DYNAMIC
+ACCESSORY_DYNAMIC
+GROOMING_DYNAMIC
+POSE_DYNAMIC
+EXPRESSION_DYNAMIC
+PLATFORM_DYNAMIC_DECISIONS
+```
+
+Use these target lengths for English dynamic slots. They are guidance for useful density, not a reason to pad with filler.
+
+- `ROLE_VISUAL`: 15-30 words. Use occupation-readable visible cues only; do not include a personal name.
+- `OUTFIT_DYNAMIC`: 120-180 words. Cover outerwear/top, base layer, pants/shorts, socks, and shoes as separate imageable material.
+- `ACCESSORY_DYNAMIC`: 40-80 words. Cover belts, bags, ID cards, tools, jewelry, worn props, and carried props with position and attachment.
+- `GROOMING_DYNAMIC`: 35-70 words. Cover hairstyle, static eyebrow shape, beard, and broad stylized face shape without beauty, complexion, makeup, or realistic feature reconstruction.
+- `POSE_DYNAMIC`: 35-70 words. Cover body angle, weight shift, hand placement, prop interaction, and face readability.
+- `EXPRESSION_DYNAMIC`: 25-50 words. Cover gaze, brow/eye state, mouth state, facial tension, and acting intention; keep it separate from permanent face design.
+- `PLATFORM_DYNAMIC_DECISIONS`: 25-50 words. Provide scene theme, solid ground material, and exactly 2-3 rooted props for Mirage to place into its fixed template.
+
+Dynamic slots may be written in `prompt_notes` for inspection when useful, but the final user-facing `英文提示词` must be the completed prompt, not a list of raw slots.
+
+## Outfit And Accessory Expansion
+
+Do not reduce clothing to item labels such as `green jacket`, `white T-shirt`, or `olive trousers`. For every major garment, describe at least four imageable aspects:
+
+- silhouette or fit
+- material expressed through broad clean shape language
+- construction such as panel seams, closures, pocket layout, cuffs, waistband, hems, or straps
+- layering or body relationship
+- color blocking or trim
+- how the garment sits in the selected pose
+
+Main outerwear or upper-body garments should usually be 35-60 English words each. Pants or shorts should usually be 30-55 words. Shoes and socks should usually be 18-35 words. Bags, belts, IDs, tools, and small accessories should usually be 12-30 words each.
+
+Accessories must state where they sit on the body, how they attach or hang, their readable shape, and one or two clean construction details. For example, use `a compact rectangular side bag hanging close to the hip from a short shoulder strap, with a flap closure and flat buckle tabs`, not only `side bag`.
+
+Use clean durability language by default: `reinforced stitching`, `panel seams`, `matte fabric`, `sturdy waistband`, `crisp cuffs`, `flat buckle tabs`, `clean edge lines`, and `structured pockets`.
+
+Avoid default outfit language that implies dirty, damaged, gritty, aged, or noisy texture: `faded`, `worn`, `weathered`, `scuffed`, `dusty`, `stained`, `frayed`, `grimy`, `oily`, `torn`, `distressed`, `rough texture`, `visible fabric grain`, `micro-weave`, `speckled`, or `noisy texture`. Use these only when the user explicitly asks and Blackwall accepts the direction.
+
+## Final Prompt Assembly
+
+Assemble `prompt_en` in this order:
+
+```text
+Generate one image of a single full-body original male Japanese TV anime [ROLE_VISUAL], standing alone on a flat pure white background.
+
+[BODY_STANDARD fixed block]
+
+[OUTFIT_DYNAMIC]
+
+[ACCESSORY_DYNAMIC]
+
+[GROOMING_DYNAMIC]
+
+[POSE_DYNAMIC]
+
+[EXPRESSION_DYNAMIC]
+
+[MIRAGE_PLATFORM paragraph generated from PLATFORM_DYNAMIC_DECISIONS, when Mirage is active]
+
+[RENDERING_STYLE fixed block]
+
+[LIGHTING_WHITE_BACKGROUND fixed block]
+
+[GLOBAL_NEGATIVE fixed block plus any pose-specific compact negative]
+```
+
+If Mirage is active, Azoth should output `PLATFORM_DYNAMIC_DECISIONS` in `prompt_notes` so Mirage can fill its template without changing character details.
 
 ## Black-Market Stock
 
@@ -170,6 +260,14 @@ Fill:
 
 ```yaml
 azoth:
+  dynamic_slots:
+    role_visual:
+    outfit_dynamic:
+    accessory_dynamic:
+    grooming_dynamic:
+    pose_dynamic:
+    expression_dynamic:
+    platform_dynamic_decisions:
   prompt_en:
   prompt_cn:
   prompt_notes:
@@ -218,9 +316,7 @@ Input image 1 is allowed to guide rendering style, full-body framing, line weigh
 When handing off to Image Gen, wrap `prompt_en` with:
 
 ```text
-Use Input image 1 as the mandatory visual reference for rendering style, full-body framing, line weight, flat cel-shading, tidy contour lines, smooth color blocks, and clean white-background presentation. Use Input image 2 as the mandatory visual reference for width-first grounded super-heavyweight body proportion, simplified muscle anatomy, extreme horizontal muscle mass, 6.2-6.6 head proportions, very wide shoulders, huge traps, huge chest and back, giant arms, oversized hands, very thick thighs, and large heavy feet. Keep the new character's identity, outfit, job, grooming, pose, and expression from the prompt below. Preserve one single soft neutral upper-left key light with narrow painted cel-shading lit-edge highlights only on the light-facing silhouette. Keep the background flat pure white with no gradient, vignette, aura, halo, or glow. Broad stylized face-shape direction and simplified facial proportions are allowed, but do not copy either reference character's recognizable facial identity, exact feature arrangement, same-face likeness, clothing, or any overly tall vertical proportion.
-
-<prompt_en>
+<the exact wrapper from references/prompt_blocks/imagegen-wrapper.md>
 ```
 
 Keep `prompt_en` compatible with that wrapper: avoid painterly, semi-realistic, rendered, detailed skin, gritty, textured, cinematic, volumetric, or realistic material language unless the user explicitly asks for that style.

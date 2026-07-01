@@ -60,6 +60,14 @@ blackwall:
   integrated_design:
 
 azoth:
+  dynamic_slots:
+    role_visual:
+    outfit_dynamic:
+    accessory_dynamic:
+    grooming_dynamic:
+    pose_dynamic:
+    expression_dynamic:
+    platform_dynamic_decisions:
   prompt_en:
   prompt_cn:
   prompt_notes:
@@ -123,6 +131,14 @@ reroute_to -> 打回对象
 integrated_design -> 整合设定
 
 azoth -> 阿佐特提示词
+dynamic_slots -> 动态提示词槽位
+role_visual -> 职业视觉
+outfit_dynamic -> 服装动态描述
+accessory_dynamic -> 饰品/道具动态描述
+grooming_dynamic -> 头脸动态描述
+pose_dynamic -> 姿势动态描述
+expression_dynamic -> 表情动态描述
+platform_dynamic_decisions -> 底座动态决策
 prompt_en -> 英文提示词
 prompt_cn -> 中文提示词
 prompt_notes -> 提示词说明

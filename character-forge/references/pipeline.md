@@ -12,8 +12,9 @@ Run each module in strict order:
 5. 缪斯 / Muse
 6. 黑墙 / Blackwall
 7. 阿佐特 / Azoth
-8. 图像生成 / Image Gen
-9. 成图审核 / Post-Generation Visual Audit
+8. 蜃楼 / Mirage, when available and not explicitly skipped
+9. 图像生成 / Image Gen
+10. 成图审核 / Post-Generation Visual Audit
 ```
 
 Use the Chinese names in user-facing responses. The English aliases exist only to keep file names and internal references stable.
@@ -39,6 +40,7 @@ Use these canonical states:
 [黑墙] 未通过：<reason>
 [母体] 打回：<中文模块名列表>
 [阿佐特] 已生成英文提示词与中文提示词
+[蜃楼] 已合成浮动底座
 [图像生成] 已发送参考图并调用 Image Gen
 [成图审核] 审核通过
 [母体] 完成
@@ -62,6 +64,12 @@ If 黑墙 finds issues, reroute the smallest possible set of modules:
 - 仅提示词问题：黑墙通过后打回阿佐特。
 
 Run 缪斯 again after rerouted modules finish if outfit or grooming changed, then run 黑墙 again. Continue only when 黑墙 passes.
+
+## Prompt Composition
+
+Azoth drafts variable prompt content as dynamic slots, then assembles `prompt_en` with fixed blocks from `references/prompt_blocks/`. Fixed blocks cover the body standard, rendering style, lighting and white background, global negative constraints, sock/belt guards, Mirage platform template, and Image Gen wrapper. Insert fixed blocks verbatim unless the user explicitly changes that constraint.
+
+The fixed blocks do not count toward dynamic-section length targets. Do not compress `OUTFIT_DYNAMIC`, `ACCESSORY_DYNAMIC`, `GROOMING_DYNAMIC`, `POSE_DYNAMIC`, or `EXPRESSION_DYNAMIC` because the fixed prefix, suffix, or wrapper is long.
 
 ## Final Response Shape
 
@@ -112,12 +120,10 @@ character-forge/references/assets/width_first_body_reference.png
 
 Resolve both paths relative to the workspace root when possible. If the agent is running from inside `character-forge/`, use `references/assets/style_reference.png` and `references/assets/width_first_body_reference.png`. Do not fall back to external sync folders or Windows drive paths unless the local asset is genuinely missing.
 
-Use the final English prompt as the generation prompt, wrapped with:
+Use the final English prompt as the generation prompt, wrapped with the exact block in `references/prompt_blocks/imagegen-wrapper.md`:
 
 ```text
-Use Input image 1 as the mandatory visual reference for rendering style, full-body framing, line weight, flat cel-shading, tidy contour lines, smooth color blocks, and clean white-background presentation. Use Input image 2 as the mandatory visual reference for width-first grounded super-heavyweight body proportion, simplified muscle anatomy, extreme horizontal muscle mass, 6.2-6.6 head proportions, very wide shoulders, huge traps, huge chest and back, giant arms, oversized hands, very thick thighs, and large heavy feet. Keep the new character's identity, outfit, job, grooming, pose, and expression from the prompt below. Broad stylized face-shape direction and simplified facial-proportion language may follow the approved character prompt and anime style, but the result must not copy either reference character's recognizable facial identity, exact feature arrangement, same-face likeness, clothing, or any overly tall vertical proportion.
-
-<final English prompt>
+<the exact wrapper from references/prompt_blocks/imagegen-wrapper.md>
 ```
 
 Input image 1 must guide clean Japanese TV anime cel-shading, crisp dark outer linework, tidy internal contour lines, smooth flat color blocks, soft controlled shadow shapes, centered full-body framing, and pure white background. Input image 2 must guide width-first super-heavyweight mass, oversized arms and hands, heavy lower body, compact proportions, and muscle-block readability. Neither reference may override the current character's approved identity, outfit, grooming, pose, expression, or source character separation. Face shape and facial proportions may be style-adjacent, but must resolve as a new person rather than a clone or recognizable match to either reference face.

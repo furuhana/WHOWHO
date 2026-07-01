@@ -32,6 +32,7 @@ Read these references before generating a character:
 7. `../muse/SKILL.md` or workspace `muse/SKILL.md` when it exists, for outfit and styling quality audit before Blackwall.
 8. `references/blackwall.md` for design audit and forbidden directions.
 9. `references/azoth.md` for prompt synthesis.
+   - When Azoth composes prompts, load only the needed files from `references/prompt_blocks/` for fixed prompt blocks and final Image Gen wrapper assembly.
 
 10. `../mirage/SKILL.md` or workspace `mirage/SKILL.md` when it exists, for default floating scene-slice composition before Image Gen.
 
@@ -48,7 +49,7 @@ Load library files only when the matching module needs them:
 Run the modules in this order:
 
 ```text
-大门 -> 伯乐 -> 三宅 -> 托尼 -> 缪斯 -> 黑墙 -> 阿佐特 -> 图像生成 -> 成图审核
+大门 -> 伯乐 -> 三宅 -> 托尼 -> 缪斯 -> 黑墙 -> 阿佐特 -> 蜃楼 -> 图像生成 -> 成图审核
 ```
 
 Always show user-facing module names and outputs in Chinese. Internal schema keys may stay English for stability, but the final answer must use Chinese labels the user can read at a glance.
@@ -64,6 +65,7 @@ Use this dispatch log style:
 [缪斯] 审核通过
 [黑墙] 审核通过
 [阿佐特] 已生成英文提示词与中文提示词
+[蜃楼] 已合成浮动底座
 [图像生成] 已发送参考图并调用 Image Gen
 [成图审核] 审核通过
 [母体] 完成
@@ -252,12 +254,10 @@ Treat `Input image 1` as the style and rendering reference only, not as identity
 - single full-body character, centered on a flat pure white background, with no scene, props display, panels, turnarounds, gradient, vignette, aura, halo, glow, or extra characters
 - one single soft neutral key light from upper left, mostly clean white with only a faint warm daylight tendency; very narrow pale cream-white painted cel-shading lit-edge highlights only on the light-facing silhouette and surfaces; no second rim light, no colored dual rim light, and no glow around the character
 
-Add this Image Gen prompt wrapper around the final English prompt:
+Add the Image Gen prompt wrapper from `references/prompt_blocks/imagegen-wrapper.md` around the final English prompt:
 
 ```text
-Use Input image 1 as the mandatory visual reference for rendering style, full-body framing, line weight, flat cel-shading, tidy contour lines, smooth color blocks, and clean white-background presentation. Use Input image 2 as the mandatory visual reference for width-first grounded super-heavyweight body proportion, simplified muscle anatomy, extreme horizontal muscle mass, 6.2-6.6 head proportions, very wide shoulders, huge traps, huge chest and back, giant arms, oversized hands, very thick thighs, and large heavy feet. Keep the new character's identity, outfit, job, grooming, pose, and expression from the prompt below. Preserve one single soft neutral upper-left key light with very narrow pale cream-white painted cel-shading lit-edge highlights only on the light-facing silhouette and surfaces. Keep the background flat pure white with no gradient, vignette, aura, halo, glow, visible light source, or scenery. Broad stylized face-shape direction and simplified facial proportions are allowed, but do not copy either reference character's recognizable facial identity, exact feature arrangement, same-face likeness, clothing, or any overly tall vertical proportion.
-
-<final English prompt>
+<the exact wrapper from references/prompt_blocks/imagegen-wrapper.md>
 ```
 
 Add this log line after the call:

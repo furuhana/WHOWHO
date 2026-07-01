@@ -74,6 +74,7 @@ Reject or reroute if the result contains:
 - multiple characters, multiple poses, front-side-back turnarounds, segmented character sheets, panel layouts, callout boxes, background scenes, or non-white backgrounds unless the user explicitly asks for them
 - Mirage / 蜃楼 platform wording that pushes the image toward 3D rendering, toy figurine presentation, physical model bases, collectible statues, miniature diorama renders, plastic/resin product photography, or any non-flat 2D anime cel-shading result
 - dirty, oily, greasy, stained, muddy, or unclean materials
+- default outfit wording that implies aged, damaged, gritty, or worn-down clothing, including faded, worn, weathered, scuffed, dusty, frayed, distressed, rough texture, visible fabric grain, speckled surface, or noisy weave, unless the user explicitly requests that direction and it remains clean enough for flat anime cel-shading
 - clothing materials shown mainly through printed texture, dense texture maps, micro-weave details, small speckles, or other visual noise
 - cotton, linen, or similar fabric described in a way that would create tiny noisy surface detail instead of clean animation shapes
 - black-market `现场验货`, `常规描述`, source filenames, paths, or raw image analysis leaking into the character record or prompt
