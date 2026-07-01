@@ -9,10 +9,11 @@ Run each module in strict order:
 2. 伯乐 / Bo Le
 3. 三宅 / San Zhai
 4. 托尼 / Tony
-5. 黑墙 / Blackwall
-6. 阿佐特 / Azoth
-7. 图像生成 / Image Gen
-8. 成图审核 / Post-Generation Visual Audit
+5. 缪斯 / Muse
+6. 黑墙 / Blackwall
+7. 阿佐特 / Azoth
+8. 图像生成 / Image Gen
+9. 成图审核 / Post-Generation Visual Audit
 ```
 
 Use the Chinese names in user-facing responses. The English aliases exist only to keep file names and internal references stable.
@@ -29,6 +30,10 @@ Use these canonical states:
 [伯乐] 已匹配职业与帮派
 [三宅] 已匹配工作服
 [托尼] 已匹配头脸造型
+[缪斯] 审核中
+[缪斯] 审核通过
+[缪斯] 勉强通过：<brief outfit issue and accepted reason>
+[缪斯] 未通过：<reason>
 [黑墙] 审核中
 [黑墙] 审核通过
 [黑墙] 未通过：<reason>
@@ -41,6 +46,14 @@ Use these canonical states:
 
 ## Reroute Logic
 
+If 缪斯 finds outfit-quality issues, reroute the smallest possible set of modules before Blackwall:
+
+- 工作服、外层、层次、鞋履、饰品、包具、道具、色彩、材质、轮廓问题：打回三宅。
+- 仅发型与穿搭协调问题：打回托尼。
+- 仅提示词表达问题：设计通过后交给阿佐特写清楚。
+
+Run 缪斯 again after rerouted modules finish. Continue to 黑墙 only when 缪斯 passes or explicitly accepts a minor issue as `勉强通过`.
+
 If 黑墙 finds issues, reroute the smallest possible set of modules:
 
 - 职业或帮派问题：打回伯乐，必要时再跑三宅、托尼。
@@ -48,7 +61,7 @@ If 黑墙 finds issues, reroute the smallest possible set of modules:
 - 发型、胡子或脸型问题：打回托尼。
 - 仅提示词问题：黑墙通过后打回阿佐特。
 
-Run 黑墙 again after rerouted modules finish. Continue only when 黑墙 passes.
+Run 缪斯 again after rerouted modules finish if outfit or grooming changed, then run 黑墙 again. Continue only when 黑墙 passes.
 
 ## Final Response Shape
 
@@ -59,6 +72,9 @@ Use this final structure. Keep headings and labels in Chinese except the English
 ...
 
 角色档案
+...
+
+缪斯审核
 ...
 
 黑墙审核
@@ -88,11 +104,13 @@ Before every Image Gen call, load both local reference images with `view_image` 
 
 ```text
 Input image 1 / style reference:
-E:\sw\eagle\BaiduSyncdisk\A.library\images\MKXONR4EBPO4Z.info\0_0.png
+character-forge/references/assets/style_reference.png
 
 Input image 2 / body reference:
-E:\wk\GitHub\WHOWHO\character-forge\references\assets\width_first_body_reference.png
+character-forge/references/assets/width_first_body_reference.png
 ```
+
+Resolve both paths relative to the workspace root when possible. If the agent is running from inside `character-forge/`, use `references/assets/style_reference.png` and `references/assets/width_first_body_reference.png`. Do not fall back to external sync folders or Windows drive paths unless the local asset is genuinely missing.
 
 Use the final English prompt as the generation prompt, wrapped with:
 

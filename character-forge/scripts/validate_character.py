@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 
-REQUIRED_TOP_LEVEL = ["basic", "identity", "outfit", "grooming", "blackwall", "azoth"]
+REQUIRED_TOP_LEVEL = ["basic", "identity", "outfit", "grooming", "muse", "blackwall", "azoth"]
 REQUIRED_BASIC = [
     "name",
     "gender",

@@ -39,6 +39,18 @@ grooming:
   face_shape:
   grooming_reason:
 
+muse:
+  verdict:
+  outfit_read:
+  strengths:
+    - 
+  issues:
+    - module:
+      reason:
+      reroute_to:
+  repair_advice:
+    - 
+
 blackwall:
   passed:
   issues:
@@ -95,6 +107,12 @@ eyebrows -> 眉型
 beard -> 胡子
 face_shape -> 脸型
 grooming_reason -> 造型理由
+
+muse -> 缪斯审核
+verdict -> 结论
+outfit_read -> 穿搭识别
+strengths -> 值得保留
+repair_advice -> 修改建议
 
 blackwall -> 黑墙审核
 passed -> 是否通过

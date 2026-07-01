@@ -205,11 +205,13 @@ Before Image Gen runs, the mother pipeline must load both local reference images
 
 ```text
 Input image 1 / style reference:
-E:\sw\eagle\BaiduSyncdisk\A.library\images\MKXONR4EBPO4Z.info\0_0.png
+character-forge/references/assets/style_reference.png
 
 Input image 2 / body reference:
-E:\wk\GitHub\WHOWHO\character-forge\references\assets\width_first_body_reference.png
+character-forge/references/assets/width_first_body_reference.png
 ```
+
+Resolve both paths relative to the workspace root when possible. If the agent is running from inside `character-forge/`, use `references/assets/style_reference.png` and `references/assets/width_first_body_reference.png`. Do not fall back to external sync folders or Windows drive paths unless the local asset is genuinely missing.
 
 Input image 1 is allowed to guide rendering style, full-body framing, line weight, flat cel-shading, clean white background, and crisp anime readability. Input image 2 is allowed to guide width-first grounded body proportion, simplified muscle anatomy, stable stance, broad muscle mass, and compact heavy silhouette. Neither reference may override the approved character record, selected black-market stock, outfit, grooming, expression, prompt content, or source-character separation. Broad face-shape direction and simplified facial proportions may be style-adjacent, but the generated face must read as a new person, not the same face or a recognizable identity match to either reference.
 

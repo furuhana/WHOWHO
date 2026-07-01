@@ -1,0 +1,7 @@
+interface:
+  display_name: "缪斯"
+  short_description: "秀场级穿搭识别、混搭判断与审美审核"
+  default_prompt: "Use $muse（缪斯）审核这套穿搭是否成立。"
+
+policy:
+  allow_implicit_invocation: true

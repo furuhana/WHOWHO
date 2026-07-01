@@ -1,6 +1,6 @@
 ---
 name: character-forge
-description: Modular character generation pipeline for creating stylized animation-ready human characters with Chinese-readable user-facing outputs. Use when Codex needs to generate a character profile, coordinate the 大门, 伯乐, 三宅, 托尼, 黑墙, and 阿佐特 modules, audit role/outfit/grooming consistency, avoid forbidden occupation/material directions, and produce final English image-generation prompts plus Chinese summaries.
+description: Modular character generation pipeline for creating stylized animation-ready human characters with Chinese-readable user-facing outputs. Use when Codex needs to generate a character profile, coordinate the 大门, 伯乐, 三宅, 托尼, 缪斯, 黑墙, and 阿佐特 modules, audit role/outfit/grooming consistency, review outfit quality before Blackwall, avoid forbidden occupation/material directions, and produce final English image-generation prompts plus Chinese summaries.
 ---
 
 # Character Forge
@@ -29,10 +29,11 @@ Read these references before generating a character:
 4. `references/bole.md` for occupation and gang matching.
 5. `references/sanzhai.md` for work outfit matching.
 6. `references/tony.md` for hairstyle, beard, and face matching.
-7. `references/blackwall.md` for design audit and forbidden directions.
-8. `references/azoth.md` for prompt synthesis.
+7. `../muse/SKILL.md` or workspace `muse/SKILL.md` when it exists, for outfit and styling quality audit before Blackwall.
+8. `references/blackwall.md` for design audit and forbidden directions.
+9. `references/azoth.md` for prompt synthesis.
 
-9. `../mirage/SKILL.md` or workspace `mirage/SKILL.md` when it exists, for default floating scene-slice composition before Image Gen.
+10. `../mirage/SKILL.md` or workspace `mirage/SKILL.md` when it exists, for default floating scene-slice composition before Image Gen.
 
 Load library files only when the matching module needs them:
 
@@ -47,7 +48,7 @@ Load library files only when the matching module needs them:
 Run the modules in this order:
 
 ```text
-大门 -> 伯乐 -> 三宅 -> 托尼 -> 黑墙 -> 阿佐特 -> 图像生成 -> 成图审核
+大门 -> 伯乐 -> 三宅 -> 托尼 -> 缪斯 -> 黑墙 -> 阿佐特 -> 图像生成 -> 成图审核
 ```
 
 Always show user-facing module names and outputs in Chinese. Internal schema keys may stay English for stability, but the final answer must use Chinese labels the user can read at a glance.
@@ -60,6 +61,7 @@ Use this dispatch log style:
 [伯乐] 已匹配职业与帮派
 [三宅] 已匹配工作服
 [托尼] 已匹配头脸造型
+[缪斯] 审核通过
 [黑墙] 审核通过
 [阿佐特] 已生成英文提示词与中文提示词
 [图像生成] 已发送参考图并调用 Image Gen
@@ -67,7 +69,32 @@ Use this dispatch log style:
 [母体] 完成
 ```
 
-If Blackwall fails, report the reason, reroute only the named modules, then run Blackwall again before Azoth. Do not continue to Azoth while Blackwall has unresolved issues.
+If Muse fails, report the reason, reroute only the named modules, then run Muse again before Blackwall. Do not continue to Blackwall while Muse has unresolved outfit-quality issues. If Blackwall fails, report the reason, reroute only the named modules, then run Muse again only when outfit or grooming changed, then run Blackwall again before Azoth. Do not continue to Azoth while Blackwall has unresolved issues.
+
+## Muse / 缪斯 Outfit Audit
+
+When `muse/SKILL.md` exists in the workspace, run 缪斯 after Tony and before Blackwall. This is a trial integration: keep it lightweight, reversible, and subordinate to the mother pipeline.
+
+缪斯 audits whether the outfit and styling read as a high-quality character design. It checks clothing, footwear, accessories, bags, carried or worn props, silhouette, layering, color, material, era, occupation fit, mixed-style control, visual-load distribution, runway-level design references, and animation/concept-art viability.
+
+缪斯 must not evaluate face shape, facial features, complexion, skin texture, beauty, ugliness, makeup, attractiveness, identity, ethnicity, or source-character lore. 缪斯 may mention hairstyle only as outfit coordination.
+
+Use these states in the dispatch log:
+
+```text
+[缪斯] 审核中
+[缪斯] 审核通过
+[缪斯] 勉强通过：<brief outfit issue and accepted reason>
+[缪斯] 未通过：<brief reason>
+```
+
+If 缪斯 returns `需要重做`, reroute the smallest possible modules:
+
+- outfit, layering, accessories, bag, prop, shoe, color, material, or silhouette issues: 打回三宅.
+- hairstyle coordination issue only: 打回托尼.
+- prompt wording issue only after design is otherwise approved: allow Blackwall to pass, then let Azoth phrase the design more clearly.
+
+Do not let 缪斯 change the occupation chosen by Bo Le, selected black-market stock provenance, fixed body type, pose, expression, identity, or Blackwall safety rules. If 缪斯 suggests a stronger fashion direction, San Zhai may implement it only through the locked occupation and approved inventory/library materials.
 
 ## User-Controlled Library Writes
 
@@ -163,12 +190,13 @@ Return these sections for each completed character:
 
 1. 调度日志
 2. 角色档案
-3. 黑墙审核
-4. 英文提示词
-5. 中文提示词
-6. 黑商商机
-7. 图像生成
-8. 成图审核
+3. 缪斯审核
+4. 黑墙审核
+5. 英文提示词
+6. 中文提示词
+7. 黑商商机
+8. 图像生成
+9. 成图审核
 
 In `角色档案`, use Chinese field labels such as `名字`, `年龄`, `国籍`, `体型`, `性格`, `贫富值`, `危险值`, `欲望值`, `执行力`, `社交力`, `职业`, `帮派`, `工作服`, `发型`, `眉型`, `胡子`, and `脸型`.
 
@@ -208,11 +236,13 @@ Use the built-in Image Gen path. Before every Image Gen call, load both local re
 
 ```text
 Input image 1 / style reference:
-E:\sw\eagle\BaiduSyncdisk\A.library\images\MKXONR4EBPO4Z.info\0_0.png
+character-forge/references/assets/style_reference.png
 
 Input image 2 / body reference:
-E:\wk\GitHub\WHOWHO\character-forge\references\assets\width_first_body_reference.png
+character-forge/references/assets/width_first_body_reference.png
 ```
+
+Resolve both paths relative to the workspace root when possible. If the agent is running from inside `character-forge/`, use `references/assets/style_reference.png` and `references/assets/width_first_body_reference.png`. Do not fall back to external sync folders or Windows drive paths unless the local asset is genuinely missing.
 
 Treat `Input image 1` as the style and rendering reference only, not as identity, costume, exact character copying, or body-proportion authority. Treat `Input image 2` as the body-proportion and muscle-mass reference only, not as identity, costume, hairstyle, or exact character copying. Broad stylized face-shape direction and simplified facial proportions may follow the approved character prompt and anime style, but neither input may cause the result to copy the same recognizable face, exact feature arrangement, or identity likeness. The generated image must follow the current character's approved prompt while matching these reference-image qualities as closely as the model allows:
 

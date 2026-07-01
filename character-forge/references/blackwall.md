@@ -18,6 +18,7 @@ Use all fields from:
 - Bo Le
 - San Zhai
 - Tony
+- Muse / 缪斯
 
 ## First Gate: Reasonableness and Animation Design
 
@@ -38,6 +39,7 @@ Check:
 - Is the outfit clean and readable?
 - Are there enough distinctive visual hooks for image generation?
 - If black-market stock was used, did each module use only formal stock from its allowed category?
+- If 缪斯 was run, did it pass or explicitly accept only minor outfit-quality issues as `勉强通过` before Blackwall?
 - If black-market inventory was enabled, did each relevant module provide a `黑商取货` log with lane, candidates, selected stock, selection reason, and rejection reason?
 - If 三宅 used black-market styling stock, did the `黑商取货` log include a clear use strategy (`完整套装继承`, `局部单品借用`, `只继承搭配方法`, or `未使用`) and inherited outfit strengths based only on formal stock fields?
 - Did Bo Le choose the occupation before black-market inventory was considered?
@@ -111,7 +113,7 @@ Fill:
 blackwall:
   passed: true/false
   issues:
-    - module: bole|sanzhai|tony|azoth|multiple
+    - module: bole|sanzhai|tony|muse|azoth|multiple
       reason:
       reroute_to:
   integrated_design:
