@@ -25,6 +25,7 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Start `prompt_en` with an explicit image-generation instruction, preferably `Generate one image of ...`, so image2 treats the text as a direct image request instead of analysis material.
 - Start `prompt_cn` with `生成一张图：` for the same reason; the Chinese version should read like a direct generation request, not a critique or explanation.
 - Do not optimize the final prompt for brevity. The goal is a complete, imageable prompt, not a short prompt.
+- Never compress, summarize, or omit prompt details to satisfy language or display checks. Fix wrong-language, empty, or misplaced sections by restoring the full completed prompt in the correct field.
 - Default to omitting the character's personal name from `prompt_en` unless the user requests it or the name itself has visible design meaning. Keep names in the Chinese character record, not in the image prompt.
 - Preserve every Blackwall-approved visible design domain as its own prompt material: body standard, occupation readability, outfit silhouette and layers, hairstyle, static eyebrow shape, selected pose stock, selected expression stock, rendering style, and single-character white-background constraints.
 - Expand approved visual details into concrete prompt language instead of compressing them into labels, summaries, or abstract traits.
@@ -100,6 +101,17 @@ Use these target lengths for English dynamic slots. They are guidance for useful
 - `PLATFORM_DYNAMIC_DECISIONS`: 25-50 words. Provide scene theme, solid ground material, and exactly 2-3 rooted props for Mirage to place into its fixed template.
 
 Dynamic slots may be written in `prompt_notes` for inspection when useful, but the final user-facing `英文提示词` must be the completed prompt, not a list of raw slots.
+
+## Prompt Integrity Gate
+
+Before returning Azoth output or handing off to Mirage/Image Gen, run this gate:
+
+1. `prompt_en` must be non-empty, start with `Generate one image`, and be written as English prompt prose. It may contain only unavoidable proper nouns or fixed labels from approved stock; it must not contain Chinese sentence blocks such as `生成一张图`, `已用于生成`, `单人全身`, or a translated Chinese prompt body.
+2. `prompt_cn` must be non-empty, start with `生成一张图：`, and be a Chinese translation or inspection version of the completed English prompt.
+3. The user-facing `英文提示词` section must display the full completed `prompt_en`, including dynamic slots, fixed prompt blocks, Mirage paragraph when active, and negative constraints. Do not replace it with a Chinese summary, a note that it was used, raw dynamic-slot names, or an omitted placeholder.
+4. The user-facing `中文提示词` section must display the full completed `prompt_cn`, not a second copy of the English prompt.
+5. If any check fails, stop before Mirage or Image Gen, regenerate only the prompt fields from the approved character record, and run the gate again. Do not reroute earlier character modules unless the approved design itself changed.
+6. This gate is a correctness check, not a shortening pass. Preserve the target slot lengths, all fixed blocks, selected pose/expression stock descriptions, outfit/accessory detail density, and required body/rendering/lighting constraints.
 
 ## Outfit And Accessory Expansion
 
@@ -297,7 +309,7 @@ Never include source image names, file paths, `现场验货`, `常规描述`, ra
 
 ## Image Generation Handoff
 
-After `黑商商机`, hand the final English prompt to the mother pipeline's Image Gen tail step. Do not remove or shorten the previous text sections.
+After `黑商商机`, hand the final English prompt to the mother pipeline's Image Gen tail step and later desktop archive step. Do not remove or shorten the previous text sections.
 
 Before Image Gen runs, the mother pipeline must load both local reference images with `view_image` and pass them as `Input image 1` and `Input image 2`:
 

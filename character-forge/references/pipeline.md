@@ -71,6 +71,8 @@ Azoth drafts variable prompt content as dynamic slots, then assembles `prompt_en
 
 The fixed blocks do not count toward dynamic-section length targets. Do not compress `OUTFIT_DYNAMIC`, `ACCESSORY_DYNAMIC`, `GROOMING_DYNAMIC`, `POSE_DYNAMIC`, or `EXPRESSION_DYNAMIC` because the fixed prefix, suffix, or wrapper is long.
 
+Before leaving 阿佐特, run the prompt integrity gate from `references/azoth.md`: `prompt_en` must be non-empty, start with `Generate one image`, and remain English prompt prose; `prompt_cn` must be non-empty, start with `生成一张图：`, and remain Chinese. If either section is empty, swapped, summarized, or written in the wrong language, regenerate only the prompt fields and recheck before continuing. This gate must never compress the prompt; it exists to restore the full prompt to the correct visible section.
+
 ## Final Response Shape
 
 Use this final structure. Keep headings and labels in Chinese except the English prompt body itself:
@@ -102,11 +104,16 @@ Use this final structure. Keep headings and labels in Chinese except the English
 
 成图审核
 ...
+
+文件归档
+...
 ```
 
 ## Image Generation Tail Step
 
 After all previous text sections are produced, keep them intact and run one final Image Gen step unless the user explicitly asks for text-only output.
+
+Before calling Image Gen, verify that the visible `英文提示词` section has already shown the full completed English prompt, not a Chinese summary or hidden tool-only prompt. If it has not, print the full `英文提示词` first and only then continue to the Image Gen call. Do not shorten the prompt to make it fit the final answer.
 
 Before every Image Gen call, load both local reference images with `view_image` so they are visible in the conversation context, then attach them as `Input image 1` and `Input image 2`:
 
@@ -162,3 +169,34 @@ After the corrective attempt, audit again. If it still fails, show the best imag
 ```text
 成图审核：未通过，原因：<brief reason>。已保留当前生成结果，建议下一轮使用更强参考或更硬体型提示词。
 ```
+
+## Desktop GP Archive
+
+After the final image is selected or the image attempt is declared unavailable, create a filesystem archive under the user's desktop `GP` folder:
+
+1. Resolve the desktop path as `$HOME\Desktop\GP` on Windows or `~/Desktop/GP` on macOS/Linux-style environments, then create it if missing.
+2. Create a subfolder named from the current approved `职业`. Sanitize invalid path characters and trailing dots/spaces; if the sanitized name is empty, use `unknown-job`.
+3. If the folder already exists, append `-2`, `-3`, and so on until a new folder can be created. Never overwrite an existing character archive.
+4. Save the final retained generated image as `image.<ext>` when an image file path, bytes, or downloadable artifact is available. Preserve the original extension when known; otherwise use `.png`.
+5. Save `prompts.md` containing the full English original and full Chinese translation exactly as shown in the visible `英文提示词` and `中文提示词` sections. Do not truncate, summarize, or replace either prompt with a note.
+6. If no image file can be saved, Image Gen is unavailable, or the user requested text-only output, still save `prompts.md` and add `image-unavailable.txt` with the reason.
+
+Use this `prompts.md` structure:
+
+````markdown
+# <职业>
+
+## 英文原版
+
+```text
+<full prompt_en>
+```
+
+## 中文翻译
+
+```text
+<full prompt_cn>
+```
+````
+
+In the final `文件归档` section, report the absolute archive folder path and created files.

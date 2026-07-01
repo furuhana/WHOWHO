@@ -199,10 +199,18 @@ Return these sections for each completed character:
 7. 黑商商机
 8. 图像生成
 9. 成图审核
+10. 文件归档
 
 In `角色档案`, use Chinese field labels such as `名字`, `年龄`, `国籍`, `体型`, `性格`, `贫富值`, `危险值`, `欲望值`, `执行力`, `社交力`, `职业`, `帮派`, `工作服`, `发型`, `眉型`, `胡子`, and `脸型`.
 
 Keep generated content grounded in daily-life occupations and clean, stylized animation character design.
+
+Before any `图像生成` step, enforce prompt visibility and language integrity:
+
+- `英文提示词` must show the full completed English prompt from Azoth. It must be non-empty, start with `Generate one image`, and not be replaced by Chinese text, a summary, a hidden handoff note, or raw slot labels.
+- `中文提示词` must show the full completed Chinese inspection prompt. It must be non-empty and start with `生成一张图：`.
+- If the two sections are swapped, empty, truncated into summaries, or written in the wrong language, stop before Mirage/Image Gen and ask Azoth to regenerate only `prompt_en` and `prompt_cn` from the approved character record.
+- This check must not compress the prompt. Preserve the full dynamic slot detail, fixed body/rendering/lighting/negative blocks, selected pose and expression descriptions, Mirage paragraph when active, and all generation-critical constraints.
 
 ## Black-Market Opportunities
 
@@ -235,6 +243,8 @@ After preserving all text sections above, the mother pipeline must run one final
 For any non-text-only character generation, run the local `mirage` / `蜃楼` skill after Azoth and before Image Gen when that skill is available, unless the user explicitly asks for no platform or a plain character-only white background. Mirage may add only the scene-platform paragraph and compact negative constraints. It must not change the approved character, body, occupation, outfit anchors, black-market stock, grooming, pose, or expression.
 
 Use the built-in Image Gen path. Before every Image Gen call, load both local reference images with `view_image` so they are visible in the conversation context, then send them with the final English prompt from `英文提示词`:
+
+Do not call Image Gen with a prompt that is only stored in the tool call or hidden from the user. The completed English prompt must already be visible under `英文提示词`; if it is missing, print the full prompt first without shortening it, then continue.
 
 ```text
 Input image 1 / style reference:
@@ -301,3 +311,34 @@ After the corrective attempt, audit again. If it still fails, show the best imag
 ```text
 成图审核：未通过，原因：<brief reason>。已保留当前生成结果，建议下一轮使用更强参考或更硬体型提示词。
 ```
+
+## Desktop GP Archive
+
+After the final image is selected or the image attempt is declared unavailable, archive the generated assets under the user's desktop:
+
+- Use `~/Desktop/GP` on macOS/Linux-style environments and `$HOME\Desktop\GP` on Windows. Create `GP` if it does not exist.
+- Create one subfolder per generated character, named after the current `职业` from the approved character record.
+- Sanitize the folder name for the current filesystem: remove or replace path separators and characters invalid on Windows such as `< > : " / \ | ? *`; trim trailing dots/spaces. If the job is missing after sanitizing, use `unknown-job`.
+- If a folder with that job name already exists, append a numeric suffix: `<职业>-2`, `<职业>-3`, and so on. Do not overwrite a previous character folder.
+- Save the final retained generated image in that folder as `image.<ext>` when the Image Gen result provides a file path, bytes, or downloadable artifact. Preserve the original extension when known; otherwise use `.png`.
+- Save a Markdown file named `prompts.md` in the same folder. It must contain the full `英文提示词` and full `中文提示词`, with no truncation, summaries, or hidden-only prompt text.
+
+Use this exact `prompts.md` shape:
+
+````markdown
+# <职业>
+
+## 英文原版
+
+```text
+<full prompt_en exactly as shown under 英文提示词>
+```
+
+## 中文翻译
+
+```text
+<full prompt_cn exactly as shown under 中文提示词>
+```
+````
+
+If Image Gen is unavailable, the user requested text-only output, or the generated image cannot be saved as a file, still create the folder and `prompts.md`, then add a short `image-unavailable.txt` explaining why the image file is missing. In the final `文件归档` section, report the absolute folder path and list the files created.
