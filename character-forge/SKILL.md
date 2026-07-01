@@ -1,4 +1,4 @@
----
+﻿---
 name: character-forge
 description: Modular character generation pipeline for creating stylized animation-ready human characters with Chinese-readable user-facing outputs. Use when Codex needs to generate a character profile, coordinate the 大门, 伯乐, 三宅, 托尼, 缪斯, 黑墙, and 阿佐特 modules, audit role/outfit/grooming consistency, review outfit quality before Blackwall, avoid forbidden occupation/material directions, and produce final English image-generation prompts plus Chinese summaries.
 ---
@@ -119,7 +119,7 @@ Read only `正式入库` items from black-market stock. Use only each item's `�
 
 Use black-market stock only in modules that own the matching domain:
 
-- San Zhai may use clothing, footwear, accessories, props, materials, colors, layering, or outfit relationships. By default, San Zhai should directly try `单品货` first and integrate compatible individual assets into the current job outfit; use `套装货` only when a complete outfit naturally fits the already selected occupation or the user explicitly asks for a whole outfit.
+- San Zhai may use clothing, footwear, accessories, props, materials, colors, layering, or outfit relationships. By default, San Zhai should scan `套装货` first for complete outfit structure, silhouette, layering, value-map logic, and accessory systems; then use `单品货` to adapt, complete, replace, or add individual assets.
 - Tony may use hairstyle stock for `hairstyle` and eyebrow stock for `eyebrows` only.
 - Tony must apply hairstyle cooldown when selecting either black-market hairstyle stock or normal grooming-library hairstyles: never repeat the immediately previous generated hairstyle unless explicitly requested, hard-exclude the last 3 used hairstyles when alternatives exist, and strongly downweight the last 10.
 
@@ -133,7 +133,7 @@ Black-market stock must not influence occupation selection. Bo Le chooses the oc
 
 When black-market formal stock is available in the conversation, when the shelf exists, or when the user explicitly asks to use black-market inventory, the mother pipeline should treat it as a small shop that relevant modules must visit at their own step:
 
-- 三宅：during work-outfit design, check formal styling stock for clothing, footwear, accessories, carried props, worn props, materials, color relationships, and layering. Default to `单品货` selection; only use `套装货` when the whole outfit fits the locked occupation.
+- 三宅：during work-outfit design, check formal styling stock for clothing, footwear, accessories, carried props, worn props, materials, color relationships, and layering. Default to scanning `套装货` first for complete structure; use `单品货` afterward for component-level adaptation and mix-and-match.
 - 托尼：during head styling, check formal hairstyle stock for `hairstyle` and formal eyebrow stock for `eyebrows` only. Do not use black-market stock for beard, face shape, eye shape, facial features, makeup, complexion, or attractiveness.
 - 阿佐特：during prompt synthesis, check formal pose stock for body angle, weight shift, hand placement, gesture, prop interaction, and action freeze-frame; then check formal expression stock for gaze, facial tension, mouth-corner state, emotional layer, and acting state. Pose must be selected and locked first, expression second. Apply pose cooldown: hard-exclude the last 3 used pose categories when alternatives exist, strongly downweight the last 10, and avoid repeated hand-forward presentation patterns unless explicitly required. Keep expression stock separate from face shape, grooming, and appearance judgments.
 - 黑墙：audit any selected black-market stock after integration. Reject or reroute if the stock introduces forbidden directions, face-centered appearance judgments, makeup, complexion, dirty materials, noisy fabric texture, or any conflict with the fixed body and single-character prompt rules.
@@ -146,7 +146,7 @@ Before running the module pipeline, check whether `black-market/inventory.md` ex
 
 Shelf routing:
 
-- 三宅 must check `black-market/inventory/styling.md` `造型库存 / 单品货` first for outfit components, clothing, footwear, accessories, props, materials, color relationships, and layering. It may then check `造型库存 / 套装货` only when no direct single item fits or a complete outfit is naturally compatible.
+- 三宅 must check `black-market/inventory/styling/sets.md` first for `造型库存 / 套装货`, then check `black-market/inventory/styling/items/*.md` for `造型库存 / 单品货` when it needs adaptation, replacement, mix-and-match, or extra accessories/props.
 - 托尼 must check `black-market/inventory/hairstyle.md` `发型库存` for hairstyle only and `black-market/inventory/eyebrow.md` `眉型库存` for static eyebrow shape only.
 - 阿佐特 must check `black-market/inventory/pose.md` `姿势库存` for full-body pose and action language when the shelf exists, select a broad pose category, lock one concrete pose, then check `black-market/inventory/expression.md` `表情库存` for expression and acting language only. If the locked pose is not a presentation pose, occupational tools should be placed on belts, packs, straps, leg sides, badges, neck loops, or neutral side carry instead of forcing a forward hand display.
 - 黑墙 must audit any selected shelf item using the same black-market rules.
@@ -209,7 +209,9 @@ Before any `图像生成` step, enforce prompt visibility and language integrity
 
 - `英文提示词` must show the full completed English prompt from Azoth. It must be non-empty, start with `Generate one image`, and not be replaced by Chinese text, a summary, a hidden handoff note, or raw slot labels.
 - `中文提示词` must show the full completed Chinese inspection prompt. It must be non-empty and start with `生成一张图：`.
+- Every user-facing prompt body must be wrapped in a directly copyable fenced code block. Under `英文提示词`, put only the complete English prompt inside one ```text code fence. Under `中文提示词`, put only the complete Chinese prompt inside one ```text code fence. Do not print long prompt prose outside a code fence.
 - If the two sections are swapped, empty, truncated into summaries, or written in the wrong language, stop before Mirage/Image Gen and ask Azoth to regenerate only `prompt_en` and `prompt_cn` from the approved character record.
+- If either prompt body contains stock provenance, inventory names, module names, selection reasoning, or abstract mood-borrowing, stop before Mirage/Image Gen and ask Azoth to regenerate only `prompt_en`, `prompt_cn`, and `prompt_notes` from the approved character record. Forbidden prompt-body wording includes `black-market`, `inventory`, `based on the stock`, `uses the stock`, `from the stock`, `adapted from the stock`, `selected stock`, `stock name`, `库存`, `黑商`, `取货`, raw stock names, `only for its mood`, and phrases such as `not as a scarf`. Do not fail legitimate visual words such as `stocky`, `stockroom`, `livestock`, or `stock pot` unless they are being used as inventory provenance.
 - This check must not compress the prompt. Preserve the full dynamic slot detail, fixed body/rendering/lighting/negative blocks, selected pose and expression descriptions, Mirage paragraph when active, and all generation-critical constraints.
 
 ## Black-Market Opportunities
@@ -244,7 +246,7 @@ For any non-text-only character generation, run the local `mirage` / `蜃楼` sk
 
 Use the built-in Image Gen path. Before every Image Gen call, load both local reference images with `view_image` so they are visible in the conversation context, then send them with the final English prompt from `英文提示词`:
 
-Do not call Image Gen with a prompt that is only stored in the tool call or hidden from the user. The completed English prompt must already be visible under `英文提示词`; if it is missing, print the full prompt first without shortening it, then continue.
+Do not call Image Gen with a prompt that is only stored in the tool call or hidden from the user. The completed English prompt must already be visible under `英文提示词` inside a ```text fenced code block; if it is missing, print the full prompt first in one copyable code block without shortening it, then continue. Before the Image Gen call, run the prompt clean-audit one final time. If the visible prompt still contains stock provenance, raw stock names, module names, selection notes, or abstract mood-borrowing, stop and have Azoth rewrite only the prompt fields; do not send that dirty prompt to Image Gen.
 
 ```text
 Input image 1 / style reference:
@@ -312,33 +314,8 @@ After the corrective attempt, audit again. If it still fails, show the best imag
 成图审核：未通过，原因：<brief reason>。已保留当前生成结果，建议下一轮使用更强参考或更硬体型提示词。
 ```
 
-## Desktop GP Archive
+## No Filesystem Archive
 
-After the final image is selected or the image attempt is declared unavailable, archive the generated assets under the user's desktop:
+Do not create a desktop `GP` folder, character subfolder, `prompts.md`, `image-unavailable.txt`, or any other local archive file after generation. The previous Desktop GP archive step is disabled by default because it slows the workflow.
 
-- Use `~/Desktop/GP` on macOS/Linux-style environments and `$HOME\Desktop\GP` on Windows. Create `GP` if it does not exist.
-- Create one subfolder per generated character, named after the current `职业` from the approved character record.
-- Sanitize the folder name for the current filesystem: remove or replace path separators and characters invalid on Windows such as `< > : " / \ | ? *`; trim trailing dots/spaces. If the job is missing after sanitizing, use `unknown-job`.
-- If a folder with that job name already exists, append a numeric suffix: `<职业>-2`, `<职业>-3`, and so on. Do not overwrite a previous character folder.
-- Save the final retained generated image in that folder as `image.<ext>` when the Image Gen result provides a file path, bytes, or downloadable artifact. Preserve the original extension when known; otherwise use `.png`.
-- Save a Markdown file named `prompts.md` in the same folder. It must contain the full `英文提示词` and full `中文提示词`, with no truncation, summaries, or hidden-only prompt text.
-
-Use this exact `prompts.md` shape:
-
-````markdown
-# <职业>
-
-## 英文原版
-
-```text
-<full prompt_en exactly as shown under 英文提示词>
-```
-
-## 中文翻译
-
-```text
-<full prompt_cn exactly as shown under 中文提示词>
-```
-````
-
-If Image Gen is unavailable, the user requested text-only output, or the generated image cannot be saved as a file, still create the folder and `prompts.md`, then add a short `image-unavailable.txt` explaining why the image file is missing. In the final `文件归档` section, report the absolute folder path and list the files created.
+Keep the generated image, English prompt, Chinese prompt, audits, and logs visible in the conversation only. In the final `文件归档` section, write `未归档：已按当前规则跳过本地文件保存。` Do not report a folder path or created files unless the user explicitly asks to save or export the result in that turn.

@@ -2,13 +2,15 @@
 
 ## Role
 
-Design the character's work outfit from Bo Le's occupation. First version should use clear, occupation-readable, animation-friendly character clothing.
+三宅负责把伯乐选定的职业转换成可生成、可读、动画友好的角色造型。三宅设计服装、鞋履、护具、饰品、小件和随身道具，但不改变职业、人设、体型、脸、发型或姿势。
 
-## Required Library
+## Required Libraries
 
 Read:
 
 - `references/libraries/outfits.md`
+- `black-market/inventory/styling/sets.md` when it exists
+- `black-market/inventory/styling/items/*.md` when they exist
 
 ## Inputs
 
@@ -17,7 +19,7 @@ Use:
 - basic body_type, personality, wealth, danger, desire, execution, social
 - identity.job
 - identity.gang
-- black-market formal styling stock, enabled by default when the shelf exists
+- black-market formal styling stock, enabled by default when the structured shelf exists
 
 ## Output
 
@@ -28,117 +30,142 @@ Fill:
 - pants
 - socks
 - shoes
-- exactly 3 accessories or props, selected from head, ear, neck, hand, leg
+- exactly 3 accessories or props, selected from head, neck, shoulder, chest, hand, waist, leg, carried item
 - outfit_reason
+- 黑商取货 log when black-market inventory is checked
 
-## Rules
+## Core Rules
 
+- Use the selected job as the anchor. Do not change, replace, or reinterpret `identity.job` to fit a better outfit.
 - Prioritize clean, readable, animation-friendly silhouettes.
-- Use the job as the anchor, then adjust details by wealth and personality.
-- Keep clothing believable enough for the selected job, but do not over-lock the outfit into modern urban, streetwear, city casual, or real-world uniform styling unless the user explicitly asks for that style.
-- Unless the user explicitly overrides it, make the inner `base_layer` fitted and body-hugging enough to show the wrapped contour of the chest, upper abdomen, and abdominal muscles through clean animation shape lines.
-- Unless the user explicitly overrides it, preserve the user's recurring outfit anchor when compatible with the job: a clear black belt, plain visible white socks, and a fitted inner white T-shirt. Do not force shorts by default. If shorts are selected naturally by the job or outfit stock, keep them ending above the knee so the plain white socks remain clearly visible between the shorts and shoes. If long pants are selected, default to a 9.5-length trouser cut: straight, slightly relaxed, or naturally falling hems that stop just above the shoe collar or lightly touch the shoe opening, revealing a small clean glimpse of plain white sock. The long pants must not become joggers, elastic cuffs, tight tapered hems, leggings-like pants, or pants tucked into socks.
-- When preserving visible white socks, keep them solid plain white with no vertical stripes, ribbed stripe pattern, colored bands, logos, text, or sporty tube-sock markings.
-- The visible torso detail must read as huge muscles pressing against and shaping the fitted inner layer: oversized pecs, separated blocky abs, side abdominal planes, and stretched tension around the ribcage and waist. It should not read as ordinary cloth folds, random wrinkles, or fabric bunching.
-- For white tank tops, fitted T-shirts, undershirts, or similar tucked base layers, exaggerate the torso pressure more than usual: the lower edge of the pectorals, the center chest divide, stacked abdominal blocks, and side abdominal masses should be clearly readable as simplified anime anatomy under the fabric. The shirt may have broad tension arcs, but those arcs must follow the muscle masses, not generic cloth wrinkles.
-- The fitted inner layer should support the fixed strong body standard while staying plausible for the job; outerwear may change freely by occupation.
-- Choose accessories that help image generation understand the character.
-- Keep clothing plausible for daily life.
-- Apply footwear cooldown across repeated character generations when viable alternatives exist. Do not repeat the exact same shoe stock or specific shoe description used in the last 3 generated characters unless the user explicitly requests it or the job has no believable alternative. Strongly downweight shoe choices used in the last 10 generated characters. Preserve occupation-necessary footwear categories when needed, but vary concrete visual details such as color blocking, shoe height, sole weight, closure structure, or toe shape instead of repeating the same shoe.
+- Keep clothing believable enough for the job, but do not over-lock the result into ordinary modern urban servicewear unless the job truly requires it.
+- The visible torso detail must support the fixed strong body standard. When a fitted inner layer is visible, it should show chest and abdominal masses through clean animation shape lines, not random fabric wrinkles.
+- Avoid hiding the torso completely with loose, boxy layers unless the selected outfit structure needs that silhouette and still has strong readable design information elsewhere.
+- Choose accessories and small items that help image generation understand the role and design, not just filler.
 
-## Black-Market Stock
+## Recurring Anchor
 
-If `黑商货单` formal stock is available, the user asks to use black-market inventory, or `black-market/inventory.md` exists, San Zhai must shop from `正式入库` before falling back to the outfit library.
+Unless the user explicitly overrides it, preserve the recurring outfit anchor only when compatible with the selected job and selected black-market structure:
 
-Also check `black-market/inventory/styling.md` before outfit selection. If it exists, San Zhai may read only `正式入库 -> 造型库存 -> 套装货` and `正式入库 -> 造型库存 -> 单品货`.
+- a clear black belt
+- plain visible white socks
+- a fitted inner white T-shirt
 
-Black-market styling stock is subordinate to the already selected occupation. San Zhai must not change, replace, or reinterpret `identity.job` because a stock item has a better match to another job. If the best stock points toward a different occupation, either:
+This anchor is subordinate to strong black-market套装结构. Do not force the anchor if it collapses a distinctive outfit into generic shirt styling.
 
-- borrow only compatible silhouette, color, material, layering, accessory, or prop logic;
-- use a smaller individual item that supports the current job;
-- or mark black-market styling as `未使用` and fall back to the normal outfit library.
+If non-short pants are selected, use a 9-length trouser break: the hem stops just above or rests lightly around the shoe collar, with a small clean glimpse of plain white sock. Do not use full-length trousers, capri length, jogger cuffs, tight tapered hems, pants tucked into socks, or striped/ribbed socks unless the user asks.
 
-Allowed stock:
+## Black-Market Structured Shelf
 
-- complete outfit stock
-- clothing
-- footwear
-- accessories
-- hand-held props
-- worn props
-- materials
-- color relationships
-- layering
-
-Use only stock fields such as `名称`, `类别`, `描述`, `标签`, `套装货`, `单品货`, and `包含单品`. Never read or use `现场验货`, `常规描述`, source filenames, paths, raw image analysis, expression stock, makeup, facial features, complexion, or face-centered aesthetic judgments.
-
-Selection rule when black-market inventory is enabled:
-
-1. First scan `单品货` and integrate at least one compatible black-market item into `outerwear`, `base_layer`, `pants`, `shoes`, or the 3 accessories/props.
-2. Then scan `套装货` only when a complete outfit's tags, description, or contained items naturally fit the already selected job and social role, or when the user explicitly asks for whole-outfit inheritance.
-3. If a stock item would pull the role toward another occupation, reject that use and name the fit conflict in `未选理由`.
-4. If no stock can be used, write `黑商取货：未使用` and give the concrete reason.
-5. Apply footwear cooldown before final shoe selection. Avoid recently used exact shoe stock first; if the same footwear category is required for the job, choose the least-recent compatible item and vary concrete shoe details.
-6. Record the inventory-level reasoning log using only formal stock fields:
-
-Before selecting stock, judge the outfit value rather than simply copying the item. Identify which strengths are worth inheriting:
-
-- silhouette strength: body proportion, shoulder/waist balance, leg weight, readable outer contour
-- color relationship: dominant color, accent color, contrast, job-appropriate restraint or emphasis
-- material relationship: broad, clean material blocks that support animation readability
-- layering: whether the outfit creates useful depth without hiding the fitted torso standard
-- role fit: whether the outfit supports the job, gang, wealth, personality, and social role
-- visual priority: whether the stock supports the character instead of turning the character into an outfit display
-- occupation lock: whether the stock serves the selected job instead of causing job drift
-
-Treat broad style labels as weak hints, not final outfit style. When stock uses labels such as city, urban, street, streetwear, city casual, casual, workwear, or light utility, do not copy those labels directly into the outfit or final prompt unless the user asked for that exact style. Translate them into concrete usable outfit qualities instead:
-
-- city or urban: public-facing practicality, compact service details, everyday color restraint
-- street or streetwear: relaxed silhouette, sporty accent, bolder color blocking, casual energy
-- city casual: approachable layering, easy daily wear, softened formal structure
-- workwear or light utility: pocket placement, sturdy silhouette, functional straps, broad material blocks
-
-If a broad style label would make the outfit feel too specifically urban or streetwear, inherit only its silhouette, color relationship, layering, footwear shape, or functional detail, then restate the outfit around the selected occupation.
-
-For pants and sock interaction, avoid solving sock visibility by using joggers, elastic cuffs, tight tapered hems, leggings-like pants, or pants tucked into socks. When the outfit uses long pants, default to a 9.5-length natural trouser break: the hem is loose enough to sit outside the ankle, stopping just above or resting lightly around the shoe collar, with a small crescent or sliver of plain white sock visible above the shoe.
-
-Choose one use strategy:
-
-1. `局部单品借用`: default strategy; use one or more individual items that support the selected job while preserving the current outfit system.
-2. `完整套装继承`: use one complete outfit only when the whole structure fits the job, gang, body standard, and animation readability.
-3. `只继承搭配方法`: borrow the stock's silhouette, color, material, or layering logic without using the named item directly.
-
-If a complete outfit has a strong visual idea but clashes with the current character, prefer `局部单品借用` or `只继承搭配方法` over forcing the whole outfit into the design.
+Black-market styling is enabled by default when this shelf exists:
 
 ```text
-[三宅] 黑商取货：
-货道：black-market/inventory/styling.md / 造型库存 / <套装货 or 单品货>
-候选：<1-3 stock names>
-使用：<selected stock name or 未使用>
-使用策略：<完整套装继承 / 局部单品借用 / 只继承搭配方法 / 未使用>
-取货理由：<job/social-role fit based on 名称, 类别, 描述, 标签, 包含单品>
-继承优点：<silhouette, color, material, layering, or role-fit strengths inherited from the selected stock>
-未选理由：<why other candidates fit less well>
+black-market/inventory/styling/
 ```
 
-Selected stock must still fit the job, gang, fixed body standard, clean animation readability, and all Avoid rules below. If a black-market item clashes with the character, adapt only by choosing a better item or lightly integrating compatible details; do not rewrite the character around the stock.
+三宅 must read the structured shelf in this order:
 
-When using black-market stock, include the selected `名称` in `outfit_reason`. Do not say only "from black-market inventory"; name the actual stock item such as `卡其侦探风衣套` or `卡其侦探长风衣组`.
+1. `black-market/inventory/styling/sets.md`
+2. `black-market/inventory/styling/items/outerwear.md`
+3. `black-market/inventory/styling/items/tops.md`
+4. `black-market/inventory/styling/items/bottoms.md`
+5. `black-market/inventory/styling/items/footwear.md`
+6. `black-market/inventory/styling/items/armor.md`
+7. `black-market/inventory/styling/items/accessories.md`
+8. `black-market/inventory/styling/items/materials.md`
+9. `black-market/inventory/styling/items/props.md`
+
+### Selection Priority
+
+1. First scan `套装货` in `sets.md`.
+2. If a complete outfit naturally fits the already selected job, social role, body standard, and safety rules, inherit the complete outfit structure.
+3. Use `单品货` only to:
+   - complete missing pieces from the selected套装;
+   - adapt footwear, accessories, or props to the job;
+   - replace a conflicting piece while preserving the set's structure;
+   - add role readability when no full set fits.
+4. If no complete set fits, then build from单品货 and the normal outfits library.
+5. Fall back to `references/libraries/outfits.md` only when black-market structure cannot serve the selected job.
+
+### What To Inherit From 套装货
+
+When selecting a set, inherit:
+
+- 结构描述: garment architecture and visible construction.
+- 轮廓重心: shoulder/waist/leg balance and visual mass.
+- 层次关系: outer/inner/armor/accessory stacking.
+- 色块图谱: value blocks, area, position, and role.
+- 边界类型: piping, panel seams, hard edges, soft folds, drawstrings, buckles.
+- 材质分区: cloth, hard shell, leather-like zones, waterproof panels, metal hardware.
+- 饰品系统: bags, straps, goggles, masks, gloves, wrist pieces, leg pieces, badges, cords, zippers, buckles, hooks.
+
+Do not copy specific source colors unless the stock's `上色规则` or user request explicitly makes a color functional. Preserve the value-map relation instead.
+
+### 单品货 Use
+
+Single items must stay in their visible domain:
+
+- outerwear remains outerwear
+- tops remain inner/upper layers
+- bottoms remain bottoms
+- footwear remains footwear
+- armor remains armor/protection
+- accessories remain accessories or small worn/carried items
+- props remain hand-held or carried props
+- materials remain material guidance
+
+Do not turn a scarf into a jacket, a bag into a personality, or a color mood into a new garment.
+
+### 饰品系统
+
+饰品 and small items are required design information when available. 三宅 should consider:
+
+- bags: hand bag, clutch/抱包, waist bag, leg bag, crossbody bag, hard-shell pouch, backpack
+- straps: chest harness, cross strap, load-bearing strap, waist cinch, broad belt, leg strap
+- head/neck: hat, headband, mask, goggles, scarf, shawl, neck wrap, hood frame
+- hand/arm: gloves, wrist guards, boxing gloves, forearm plates
+- leg: knee pads, leg armor, bindings, sock covers, tabi-like pieces
+- markers: badges, ID cards, armbands, tags, emblem plates
+- hardware: drawstrings, zippers, buckles, metal rings, hooks, connector tabs
+
+At least one accessory or small item should be considered when it supports the selected job and does not overcrowd the design.
+
+## Anti-Repetition Rules
+
+- Do not repeatedly make the main visual read as shirt, button-up shirt, T-shirt, polo, undershirt, or service uniform shirt when viable alternatives exist.
+- A fitted T-shirt or shirt may remain as base_layer, but it should not become the primary outfit idea unless the selected set or job requires it.
+- Prefer outerwear, armor, harnesses, aprons, robes, jackets, vests, wraps, or accessory systems as the primary visual structure when compatible.
+- Apply footwear cooldown across repeated character generations when alternatives exist. Vary shoe height, sole weight, closure structure, toe shape, color-block position, or material block.
+
+## Black-Market Log
+
+When black-market inventory is checked, include:
+
+```text
+[三宅] 黑商取货:
+货道: black-market/inventory/styling/<sets.md or items/*.md>
+候选: <1-3 stock names>
+使用: <selected stock name or 未使用>
+使用策略: 完整套装继承 / 套装结构继承并局部替换 / 单品补强 / 未使用
+取货理由: <job/social-role fit>
+继承重点: <structure, silhouette, color-map, layering, accessories, material zones>
+未选理由: <why other candidates fit less well>
+```
+
+Selected stock names may appear in `outfit_reason` and the log. Prompt-facing outfit fields must contain only imageable clothing descriptions, not provenance phrases such as "from black-market stock" or "adapted from inventory".
 
 ## Avoid
 
-Avoid dirty, oily, stained, muddy, greasy, torn, or unclean materials. Avoid making muscular bodies automatically wear labor gear or gym wear.
+Avoid:
 
-Avoid hiding the torso completely with a loose, boxy, or baggy inner layer unless the user asks for that specific silhouette.
-
-Avoid using cloth wrinkles as a substitute for muscle anatomy. If lines appear on the base layer, they should clarify the chest and abdominal masses underneath.
-
-Avoid making the fitted base layer look smooth across the belly or chest on male heavyweight characters. Smooth torso clothing without visible chest-abdominal pressure fails the fixed body standard unless the user explicitly asks to hide the body.
-
-Avoid describing fabric through tiny surface texture, micro-weave, dense prints, speckles, or texture-map-like detail. For animation-friendly clothing, express cotton, linen, and similar materials through color, clean silhouette, broad panels, and simple shape contrast instead.
-
-Avoid jogger cuffs, elastic ankle cuffs, overly tight tapered pants, pants tucked into socks, sock-like leggings, and striped or ribbed white socks unless the user explicitly asks for them. Visible white socks should look like plain socks naturally peeking out at the shoe opening, not like a sports stripe detail or a tucked-pants styling trick.
+- dirty, oily, stained, muddy, greasy, torn, or unclean materials
+- making muscular bodies automatically wear labor gear or gym wear
+- hiding all torso mass with a blank loose shirt
+- using cloth wrinkles as a substitute for muscle anatomy
+- micro-weave, dense fabric texture, speckles, noisy texture-map detail
+- full-length trousers, capri pants, jogger cuffs, pants tucked into socks, striped white socks unless explicitly requested
+- reducing a complex set into a generic shirt plus pants
 
 ## Library Writes
 
-If the job is missing from the outfit library, propose a candidate outfit and ask the user before treating it as a library entry.
+If a job is missing from the normal outfit library, propose a candidate outfit and ask the user before treating it as a library entry.

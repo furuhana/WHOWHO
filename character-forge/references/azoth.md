@@ -15,6 +15,7 @@ Use black-market formal expression and pose stock by default when the shelf exis
 1. Merge all useful information into one visual design summary.
 2. Convert the visual summary into an English prompt that image2 can understand.
 3. Audit whether each prompt phrase helps generation. Remove or translate abstract traits that do not help.
+4. Run the pre-Image-Gen prompt audit. The final prompt body must contain only imageable character, outfit, pose, expression, platform, rendering, lighting, and negative-output instructions. It must not contain inventory names, source labels, module names, selection reasoning, or stock provenance.
 
 ## Prompt Rules
 
@@ -27,7 +28,7 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Do not optimize the final prompt for brevity. The goal is a complete, imageable prompt, not a short prompt.
 - Never compress, summarize, or omit prompt details to satisfy language or display checks. Fix wrong-language, empty, or misplaced sections by restoring the full completed prompt in the correct field.
 - Default to omitting the character's personal name from `prompt_en` unless the user requests it or the name itself has visible design meaning. Keep names in the Chinese character record, not in the image prompt.
-- Preserve every Blackwall-approved visible design domain as its own prompt material: body standard, occupation readability, outfit silhouette and layers, hairstyle, static eyebrow shape, selected pose stock, selected expression stock, rendering style, and single-character white-background constraints.
+- Preserve every Blackwall-approved visible design domain as its own prompt material: body standard, occupation readability, outfit silhouette and layers, hairstyle, static eyebrow shape, selected pose description, selected expression description, rendering style, and single-character white-background constraints.
 - Expand approved visual details into concrete prompt language instead of compressing them into labels, summaries, or abstract traits.
 - Remove only forbidden, contradictory, non-visual, or generation-harming phrases. Do not remove useful visual information merely because the prompt is already long.
 - When a selected black-market pose or expression is used, translate its full `描述` into the English prompt unless a phrase must be trimmed for safety or direct contradiction.
@@ -39,7 +40,7 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Always include the fixed body standard in the prompt unless the user explicitly overrides it: width-first and grounded, around 6.2-6.6 heads tall, dramatically broad and heavy super-heavyweight fighting-game build, shoulder span much wider than the hips, short thick neck buried between huge traps, enormous rounded deltoids, huge chest shelf, thick barrel ribcage, powerful square torso, dense compact waist, giant upper arms, huge forearms, oversized heavy hands, very thick thighs, strong calves, large heavy feet, compact head, and stable heavy stance. Make clear that the first read is extreme horizontal muscle mass rather than height.
 - Always describe the inner base layer as fitted and stretched over the torso, visibly wrapping enormous pectorals, a deep lower-pectoral shelf, center chest divide, broad ribcage, thick side-ab planes, and large stacked blocky abdominal muscles with clean stylized contour lines, unless the user explicitly overrides this.
 - When the approved outfit includes shorts and plain white socks, explicitly preserve the pants-length guard: the shorts end above the knee, leaving the plain white socks clearly visible between the shorts and shoes. Keep the black belt readable when it is part of the approved outfit.
-- When the approved outfit includes long pants and visible plain white socks, describe the sock visibility as natural trouser length: straight or softly relaxed pant hems sit outside the ankle near the shoe opening, slightly above or around the shoe collar, revealing a small clean glimpse of plain white sock. Do not describe pants tucked into socks, elastic cuffs, jogger cuffs, tight tapered hems, leggings-like pants, ribbed socks, vertical sock stripes, colored sock bands, logos, or text.
+- When the approved outfit includes any non-short pants and visible plain white socks, describe them as 9-length pants regardless of style. Straight trousers, relaxed trousers, slacks, chinos, jeans-like work pants, uniform trousers, cargo pants, field trousers, service trousers, and every other non-short pant style must stop just above or lightly around the shoe collar, revealing a small clean glimpse of plain white sock. Do not describe full-length trousers, mid-calf capri pants, seven-tenths pants, pants tucked into socks, elastic cuffs, jogger cuffs, tight tapered hems, leggings-like pants, ribbed socks, vertical sock stripes, colored sock bands, or logos.
 - Make clear that the chest and abdominal lines come from oversized muscle masses pressing through the fitted clothing, not from ordinary cloth folds, wrinkles, fabric bunching, or a smooth shirt surface.
 - When the user asks for a white tank top, white fitted T-shirt, tucked undershirt, or similar base layer, strengthen the prompt with explicit torso readability: the pectoral shelf, chest divide, upper-ab blocks, lower-ab blocks, and oblique side planes must be visible through the clean white fabric as simplified anime anatomy.
 - Always specify a single full-body character standing alone on a pure white background.
@@ -106,12 +107,35 @@ Dynamic slots may be written in `prompt_notes` for inspection when useful, but t
 
 Before returning Azoth output or handing off to Mirage/Image Gen, run this gate:
 
-1. `prompt_en` must be non-empty, start with `Generate one image`, and be written as English prompt prose. It may contain only unavoidable proper nouns or fixed labels from approved stock; it must not contain Chinese sentence blocks such as `生成一张图`, `已用于生成`, `单人全身`, or a translated Chinese prompt body.
+1. `prompt_en` must be non-empty, start with `Generate one image`, and be written as English prompt prose. It may contain only unavoidable proper nouns that are legitimate visual terms, character/job names requested by the user, or fixed rendering labels. It must not contain Chinese sentence blocks such as `生成一张图`, `已用于生成`, `单人全身`, or a translated Chinese prompt body.
 2. `prompt_cn` must be non-empty, start with `生成一张图：`, and be a Chinese translation or inspection version of the completed English prompt.
 3. The user-facing `英文提示词` section must display the full completed `prompt_en`, including dynamic slots, fixed prompt blocks, Mirage paragraph when active, and negative constraints. Do not replace it with a Chinese summary, a note that it was used, raw dynamic-slot names, or an omitted placeholder.
 4. The user-facing `中文提示词` section must display the full completed `prompt_cn`, not a second copy of the English prompt.
-5. If any check fails, stop before Mirage or Image Gen, regenerate only the prompt fields from the approved character record, and run the gate again. Do not reroute earlier character modules unless the approved design itself changed.
-6. This gate is a correctness check, not a shortening pass. Preserve the target slot lengths, all fixed blocks, selected pose/expression stock descriptions, outfit/accessory detail density, and required body/rendering/lighting constraints.
+5. Both user-facing prompt sections must wrap the prompt body in directly copyable fenced code blocks. Use exactly one ```text fence for the complete `prompt_en` under the English prompt heading, and exactly one ```text fence for the complete `prompt_cn` under the Chinese prompt heading. Long prompt prose outside a code fence fails this gate.
+6. If any check fails, stop before Mirage or Image Gen, regenerate only the prompt fields from the approved character record, and run the gate again. Do not reroute earlier character modules unless the approved design itself changed.
+7. This gate is a correctness check, not a shortening pass. Preserve the target slot lengths, all fixed blocks, selected pose/expression stock descriptions, outfit/accessory detail density, and required body/rendering/lighting constraints.
+
+## Pre-Image-Gen Prompt Audit
+
+Run this audit after assembling `prompt_en` and `prompt_cn`, before Mirage or Image Gen. This audit is stricter than the language-integrity gate: it checks whether the prompt is clean generation prose rather than a mixed workflow log.
+
+Fail the audit if `prompt_en` or `prompt_cn` contains source/provenance wording in the prompt body, including:
+
+- Provenance phrases such as `black-market`, `black market`, `inventory`, `shelf`, `lane`, `formal stock`, `based on the stock`, `uses the stock`, `use the stock`, `from the stock`, `adapted from the stock`, `selected stock`, `stock name`, `stock item`, `only for its mood`, or `not as a <stock item category>`. Do not fail legitimate visual words that merely contain the letters `stock`, such as `stocky`, `stockroom`, `livestock`, or `stock pot`, unless they are being used as inventory provenance.
+- Chinese equivalents such as `库存`, `黑商`, `货架`, `货道`, `基于库存`, `使用库存`, `来自库存`, `采用库存`, `取货`, or `只取氛围`.
+- Raw stock names inside the prompt body, even when surrounded by imageable description.
+- Module names or workflow labels such as `San Zhai`, `Tony`, `Azoth`, `Blackwall`, `Muse`, `Mirage`, `三宅`, `托尼`, `阿佐特`, `黑墙`, `缪斯`, or `蜃楼`.
+- Prompt notes, reasoning, rejection reasons, cooldown notes, candidate lists, or any explanation of why an item was selected.
+- Prompt-engineering instructions that read like rules instead of image prose, such as `For any non-short pants style`, `use 9-length pants only`, `Do not describe`, `must be written as`, `insert this`, or `apply this guard`. Rewrite those as direct visual description and compact negative image constraints.
+
+Fail the audit if an inventory item is used only as abstract mood or category drift instead of visible material. Examples that must be rejected:
+
+- A scarf stock becoming a jacket because it has a soft layered mood.
+- A pose stock appearing as `black-market pose stock "<name>"` before the actual pose description.
+- A hairstyle or eyebrow sentence that says `uses the stock "<name>"` before the translated visual description.
+- An expression sentence that names a stock item instead of directly describing mouth, gaze, facial tension, and acting.
+
+When the audit fails, do not continue to Mirage or Image Gen. Regenerate only `prompt_en`, `prompt_cn`, and `prompt_notes` from the approved character record. Preserve the same selected stock choices, but rewrite every affected sentence so the prompt body contains only the translated visual description and necessary character-owned adaptation. Put stock names and selection explanations only in `prompt_notes` / `鎻愮ず璇嶈鏄巂`.
 
 ## Outfit And Accessory Expansion
 
@@ -187,7 +211,7 @@ Pose selection must follow this order:
 6. If the selected pose is not a presentation pose, keep occupational props on the belt, backpack, shoulder strap, leg side, chest badge, neck loop, or carried neutrally at the side instead of forcing a hand-forward display.
 7. If all viable pose stock is recently used, select the least-recently used category and state the cooldown limitation in the pose reasoning log.
 
-The selected pose stock must be visibly present in `prompt_en` and `prompt_cn`. If the character's job requires a prop, the prop placement must preserve the locked pose. Do not replace the selected pose with generic phrasing such as `standing naturally with one hand forward` unless that exact pose stock was selected and is not under cooldown.
+The selected pose description must be visibly present in `prompt_en` and `prompt_cn`. If the character's job requires a prop, the prop placement must preserve the locked pose. Do not replace the selected pose with generic phrasing such as `standing naturally with one hand forward` unless that exact pose description was selected and is not under cooldown. Keep the pose stock name in reasoning or `prompt_notes`, not in the prompt body.
 
 When the selected pose is not a hand-forward presentation pose, add a compact negative constraint to `prompt_en`, such as `no forward presenting hand, no pointing at the viewer, no hand extended toward the camera`, while keeping the rest of the prompt positive and imageable.
 
@@ -217,6 +241,8 @@ Allowed pose stock:
 Use only stock fields such as `名称`, `描述`, and `标签`. Never read or use `现场验货`, `常规描述`, source filenames, paths, raw image analysis, styling stock, makeup, facial features, face shape, complexion, grooming, or attractiveness judgments.
 
 For the final prompt body, translate and use the selected stock's `描述`, not its `名称` or `标签`. `名称` and `标签` are for selection, matching, logs, and `提示词说明` only.
+
+This rule applies to every final prompt body, including grooming, outfit, pose, expression, and Mirage-related prose. The final prompt must never say `uses the stock`, `based on the stock`, `from the stock`, `black-market stock`, or similar provenance wording. A clean sentence says `His hair is short, straight, fragmented, thickly lifted on top, and tightened at the sides`; it does not say `His hairstyle uses the stock "厚蓬碎短发"`.
 
 Expression stock should appear as prompt-level performance language, not as permanent identity, face design, grooming, or beauty description.
 
@@ -309,7 +335,7 @@ Never include source image names, file paths, `现场验货`, `常规描述`, ra
 
 ## Image Generation Handoff
 
-After `黑商商机`, hand the final English prompt to the mother pipeline's Image Gen tail step and later desktop archive step. Do not remove or shorten the previous text sections.
+After `黑商商机`, hand the final English prompt to the mother pipeline's Image Gen tail step. Do not remove or shorten the previous text sections.
 
 Before Image Gen runs, the mother pipeline must load both local reference images with `view_image` and pass them as `Input image 1` and `Input image 2`:
 

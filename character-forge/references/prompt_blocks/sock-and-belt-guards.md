@@ -8,8 +8,8 @@ Use only the matching guard. Insert it in `OUTFIT_DYNAMIC` near the pants or sho
 The shorts end above the knee, leaving the plain white socks clearly visible between the shorts and shoes. Keep the black belt readable at the waist.
 ```
 
-## Long Pants With Plain White Socks
+## Nine-Length Pants With Plain White Socks
 
 ```text
-The trouser hems sit naturally near the shoe collars, leaving a small clean glimpse of plain white socks. Do not describe pants tucked into socks, elastic cuffs, jogger cuffs, tight tapered hems, ribbed socks, vertical sock stripes, colored sock bands, logos, or text.
+The non-short pants are 9-length, with hems sitting just above or lightly around the shoe collars and a small clean glimpse of plain white socks visible above the shoes. No full-length trousers, mid-calf capri pants, seven-tenths pants, pants tucked into socks, elastic cuffs, jogger cuffs, tight tapered hems, ribbed socks, vertical sock stripes, colored sock bands, or logos.
 ```
