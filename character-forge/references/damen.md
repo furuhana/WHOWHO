@@ -38,6 +38,7 @@ Fill these fields:
 - nationality
 - body_type
 - personality
+- temperament
 - wealth, 1-10
 - danger, 1-10
 - desire, 1-10
@@ -73,5 +74,7 @@ World context may influence Bo Le's eligible flavor, San Zhai's outfit structure
 ## Guidance
 
 Prefer concrete, daily-life-readable traits. Avoid making the default character automatically drift into dock, shipyard, cargo, manual labor, dirty material, or gym-trainer directions.
+
+Select exactly one internal `temperament` for each generated character unless the user provides one. Never select multiple temperaments for the same character. Use balanced random selection from this list, with no immediate repeat when recent generation context is known: 憨厚、温柔、野性、力量、精致、疏离、亲和、圆润、阳光、深邃、华丽、健康、英雄、硬朗、厚重、可靠、高级、无辜、硬汉、邻家、草食. Treat `temperament` as a hidden visual variation seed, not as identity, ethnicity, attractiveness, makeup, complexion, or copied reference-face lore. It should not be displayed as a basic-info label in the final character profile; downstream modules should translate it into grooming and prompt language.
 
 Keep the base compact. Later modules add identity, outfit, and grooming. World context should give those modules a living street and material ecology, not a story synopsis.

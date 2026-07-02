@@ -18,6 +18,7 @@ Use:
 - nationality
 - body_type
 - personality
+- temperament
 - wealth
 - danger
 - desire
@@ -44,11 +45,15 @@ Fill:
 ## Rules
 
 - Match the face and hair to the character's social role and animation readability.
+- Use the single selected `temperament` as Tony's main face-diversity seed. Let it influence broad stylized head silhouette, hairstyle volume, beard presence, and static eyebrow shape so the new character reads as a different person from the reference images while staying inside the approved anime style.
+- Map temperament into visible grooming decisions without realistic feature copying: 憨厚/可靠/厚重 can use sturdier rounded or square silhouettes and calmer hair mass; 温柔/亲和/邻家/草食 can use softer hair flow, lower beard pressure, and gentler eyebrow geometry; 野性/硬汉/硬朗/力量 can use sharper hair direction, heavier eyebrow blocks, or stronger beard choices; 精致/高级/华丽 can use more controlled grooming polish and deliberate hair parting; 疏离/深邃/无辜 can alter brow angle, hair framing, and simplified face proportion restraint; 阳光/健康/英雄 can use open, clean, energetic grooming shapes.
+- Do not let `temperament` specify eye shape, nose shape, mouth shape, skin tone, makeup, beauty level, ethnicity, celebrity likeness, or any source-character identity. It is a variation control for character-owned silhouette and grooming only.
 - Coordinate hairstyle volume and silhouette with the approved outfit's head/neck system. If the outfit includes masks, goggles, hood frames, high collars, headphones, scarves, or shoulder/upper-back volume, choose hair that leaves those structures readable and does not fight their silhouette.
 - Let world context lightly shape grooming only through clean, visible social fit: workplace neatness, street association polish, festival-town restraint, regulated-service tidiness, or self-governed alley practicality. Do not turn world context into face copying, ethnicity inference, makeup, complexion, or source identity.
 - Respect `world_context.visual_taboo` when it affects grooming drift, such as avoiding heavy military styling, over-cyberpunk excess, dirty presentation, or ordinary service-uniform sameness.
 - Use beard and broad face silhouette to strengthen personality, not to make the character generically tough.
 - Make the result visually distinct but still daily-life believable.
+- If the current result would share the same broad face read as the style or body reference, change at least two Tony-owned elements among `face_shape`, `hairstyle`, `eyebrows`, and `beard`, guided by `temperament`.
 - Apply hairstyle cooldown across repeated character generations. Never select the same hairstyle as the immediately previous generated character unless the user explicitly requests it. Hard-exclude hairstyles used in the last 3 generated characters when alternatives exist, and strongly downweight hairstyles used in the last 10 generated characters. If the inventory is too small to satisfy the full cooldown, prefer the least-recently used hairstyle and state the cooldown constraint in `grooming_reason`.
 - Face shape may describe the broad head silhouette, jaw/chin mass, and simplified stylized facial proportions when useful for animation readability. These details must belong to the new character, not recreate a reference image's recognizable face, exact feature arrangement, same-face likeness, or realistic identity match.
 - Eyebrows may create character recognition, but must describe only static eyebrow shape: thickness, block shape, angle, arc, segmentation, and clean animation edges. Do not use eyebrow wording to specify eyebrow color, eye shape, gaze, eyelid state, expression, makeup, attractiveness, face shape, or detailed facial features.

@@ -46,8 +46,33 @@ Use hairstyle, beard, and face shape to create animation-readable identity.
 - broad angular face
 - rounded face with solid chin
 
+## Temperaments
+
+- 憨厚
+- 温柔
+- 野性
+- 力量
+- 精致
+- 疏离
+- 亲和
+- 圆润
+- 阳光
+- 深邃
+- 华丽
+- 健康
+- 英雄
+- 硬朗
+- 厚重
+- 可靠
+- 高级
+- 无辜
+- 硬汉
+- 邻家
+- 草食
+
 ## Matching Notes
 
+- Temperament is the main face-diversity seed. Use it to vary broad stylized face silhouette, hair volume, static eyebrow geometry, and beard pressure while avoiding copied reference-face likeness.
 - High danger: firmer head silhouette, heavier brow tension, controlled facial hair.
 - High social: approachable hair and cleaner grooming; leave expression choices to Azoth and approved expression stock.
 - High wealth: more polished hair and beard.

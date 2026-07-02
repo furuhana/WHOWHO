@@ -10,6 +10,7 @@ basic:
   nationality:
   body_type:
   personality:
+  temperament:
   wealth: 1-10
   danger: 1-10
   desire: 1-10
@@ -40,6 +41,11 @@ outfit:
   accessories:
     - slot:
       item:
+  garment_line:
+  banned_shape_check:
+  professional_keywords:
+    -
+  negative_clothing:
   styling_algorithm:
   base_garment_prototype:
   designer_method_references:
@@ -170,6 +176,10 @@ accessories -> 饰品/道具
 slot -> 部位
 item -> 物件
 styling_algorithm -> 造型算法
+garment_line -> 服装线
+banned_shape_check -> 禁用形态检查
+professional_keywords -> 专业关键词
+negative_clothing -> 服装反向约束
 base_garment_prototype -> 基础款原型
 designer_method_references -> 匿名设计方法
 designer_prompt_references -> 设计师提示引用

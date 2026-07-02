@@ -29,8 +29,11 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Never compress, summarize, or omit prompt details to satisfy language or display checks. Fix wrong-language, empty, or misplaced sections by restoring the full completed prompt in the correct field.
 - Default to omitting the character's personal name from `prompt_en` unless the user requests it or the name itself has visible design meaning. Keep names in the Chinese character record, not in the image prompt.
 - Preserve every Blackwall-approved visible design domain as its own prompt material: body standard, occupation readability, outfit silhouette and layers, hairstyle, static eyebrow shape, selected pose description, selected expression description, rendering style, and single-character white-background constraints.
+- Preserve the single approved `temperament` as a subtle character-owned variation layer inside `GROOMING_DYNAMIC` and, when useful, `EXPRESSION_DYNAMIC`. Translate it into visible stylized grooming, broad head silhouette, brow geometry, facial tension, and performance tone. Do not write it as an abstract label only.
+- Convert `temperament` into one or two compact simile-like prompt phrases rather than showing it as a profile field. English prompt examples: `like a dependable neighborhood older brother`, `with the distant stillness of someone standing behind glass`, `like a bright outdoor worker who smiles before speaking`. Chinese prompt examples: `像可靠的邻家大哥一样`, `带着隔着玻璃看人的疏离感`, `像晒惯太阳的健康青年似的`. Keep these phrases imageable and character-owned; tie them to grooming, posture, facial tension, or expression.
 - Expand approved visual details into concrete prompt language instead of compressing them into labels, summaries, or abstract traits.
 - Translate San Zhai's `styling_algorithm`, `design_function_slots`, `replacement_slots_used`, `variation_matrix`, and `anti_default_decision` into visible outfit and accessory description. Do not put these internal field names or Chinese algorithm labels into the final prompt body.
+- When Garment Grammar fields exist, consume `professional_keywords` as the primary clothing wording source and add `negative_clothing` to the compact negative constraints. Do not expose `garment_line`, `banned_shape_check`, or field names in the final prompt body.
 - Translate San Zhai's advanced design grammar fields into visible prompt material: `base_garment_prototype`, `designer_method_references`, `design_operators`, `panel_paths`, `pattern_strategy`, `craft_boundaries`, `body_fit_strategy`, `complexity_budget`, and `design_failure_avoidance`.
 - If the user explicitly allowed designer names in prompts and San Zhai recorded `designer_prompt_references`, a short designer-method reference clause may appear in `OUTFIT_DYNAMIC`, but it must be subordinate to concrete construction and must never replace clothing detail. Prefer wording such as `with restrained design-method references to Issey Miyake garment pleating and Maison Margiela exposed construction`, then immediately describe the visible panel paths, piping, folds, or shoe structure.
 - Do not write `in the style of <designer>` as the whole outfit direction. Designer names are allowed only as method references when requested, not as brand copying, source identity, or a substitute for panel paths and craft boundaries.
@@ -56,12 +59,14 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Strengthen the white-background constraint with: flat pure white background, no gradient, no vignette, no aura, no halo, no glow around the character, no visible light source, and no scenery.
 - Avoid character sheet wording: no multiple characters, no multiple poses, no front-side-back turnaround, no panel layout, no split view, no callout boxes, no background scene unless the user explicitly asks.
 - Keep daily-life occupation readable.
+- Keep the no-skirt/no-apron preference visible in the final compact negative clothing clause when Garment Grammar is active: no skirt, no dress, no apron, no pinafore, no apron-like front panel.
 - Do not copy broad styling labels such as urban, streetwear, city casual, casual, workwear, or light utility into the final prompt unless the user explicitly requested that style. If those labels come from outfit stock, translate them into concrete visual details such as silhouette, layering, color blocks, pocket placement, straps, footwear shape, or functional accessories.
-- Do not copy styling algorithm labels such as `警示机能型`, `职业异化型`, `仪式宽体型`, `轻装装甲型`, or `权力套装型` into the prompt. Convert them into concrete construction: high-visibility trim, segmented outer shell, apron panels, wide sleeves, harness straps, protective plates, broad belt, hanging tags, transparent layer, tool pouches, heavy boots, or other approved visible elements.
+- Do not copy styling algorithm labels such as `警示机能型`, `职业异化型`, `仪式宽体型`, `轻装装甲型`, or `权力套装型` into the prompt. Convert them into concrete construction: high-visibility trim, segmented outer shell, waist panels, wide sleeves, harness straps, protective plates, broad belt, hanging tags, transparent layer, tool pouches, heavy boots, or other approved visible elements.
 - Do not copy world-context labels such as `时代背景`, `文化体系`, `文化阶段`, `市井特点`, `技术层级`, `秩序状态`, `材料生态`, `视觉禁忌`, `near-future`, `East Asian street market`, or `semi-regulated` as abstract labels. Convert them into visible prompt details, such as rainproof short jacket panels, arcade service tags, municipal badge tabs, clean metal buckles, transparent sleeve guards, compact repair pouch, or simple civic scanner.
 - Include clean high-quality Japanese TV anime cel shading, crisp linework, fresh colors, tidy shadows, and clean stylized animation character design.
 - Include Tony's `eyebrows` as static eyebrow-shape language when it is useful for character recognition. Keep it separate from expression acting.
 - The final prompt may include broad stylized face-shape direction and simplified facial-proportion language when it comes from the approved character record or the target anime rendering style. This is allowed as design guidance. It must not become a copied reference-face identity, exact feature arrangement, recognizable likeness, celebrity/source-character match, or realistic face reconstruction.
+- When reference images are used, include a character-owned face-diversity clause derived from `temperament` if needed, preferably as a compact simile-like phrase rather than a raw label. Keep this clause short and tied to visible grooming or expression; do not turn it into a detailed realistic feature list.
 - Avoid overly specific realistic feature lists unless the user explicitly requests them. If facial wording is needed, keep it stylized and character-owned rather than source-owned.
 - Use expression, gaze direction, brow tension, mouth state, and facial tension only when needed; these may describe the current performance, not permanent eye shape, permanent eyebrow shape, or facial structure.
 - When combining static eyebrow shape with expression stock, preserve the selected eyebrow shape first, then add temporary brow movement only if it does not contradict that shape.
@@ -112,6 +117,8 @@ Dynamic slots may be written in `prompt_notes` for inspection when useful, but t
 
 When drafting `OUTFIT_DYNAMIC` and `ACCESSORY_DYNAMIC`, consume the San Zhai styling-decision fields as follows:
 
+- `professional_keywords`: preserve useful professional garment terms such as structured tailoring, offset placket, exposed facing, panelled technical pants, articulated knee seams, concealed closure, square shoulder, clean bound edge, matte fabric zones, sculptural sole sidewall, and load-bearing waist system.
+- `negative_clothing`: move banned clothing terms into the prompt's compact negative sentence; never describe the character as wearing a skirt, dress, apron, pinafore, wrap skirt, or apron-like panel unless the user explicitly overrode the rule.
 - `styling_algorithm`: use it only to decide which visible systems deserve emphasis.
 - `design_function_slots`: make each active slot visible through clothing construction, silhouette, attachment, exposure, concealment, material contrast, or motion release.
 - `replacement_slots_used`: ensure the prompt names the replacement carriers, especially non-shirt carriers like waist system, outer volume, head/neck system, hand/arm system, leg system, or marker system.
@@ -237,6 +244,7 @@ Avoid fake advanced-design prompt language:
 - `thick shoes` without sole architecture
 - `many accessories` without attachment and body role
 - `designer-inspired` without visible construction
+- `apron-like` or `skirt-like` as a workaround for the no-skirt/no-apron rule
 
 ## Final Prompt Assembly
 
@@ -437,7 +445,7 @@ character-forge/references/assets/width_first_body_reference.png
 
 Resolve both paths relative to the workspace root when possible. If the agent is running from inside `character-forge/`, use `references/assets/style_reference.png` and `references/assets/width_first_body_reference.png`. Do not fall back to external sync folders or Windows drive paths unless the local asset is genuinely missing.
 
-Input image 1 is allowed to guide rendering style, full-body framing, line weight, flat cel-shading, clean white background, and crisp anime readability. Input image 2 is allowed to guide width-first grounded body proportion, simplified muscle anatomy, stable stance, broad muscle mass, and compact heavy silhouette. Neither reference may override the approved character record, selected black-market stock, outfit, grooming, expression, prompt content, or source-character separation. Broad face-shape direction and simplified facial proportions may be style-adjacent, but the generated face must read as a new person, not the same face or a recognizable identity match to either reference.
+Input image 1 is allowed to guide rendering style, full-body framing, line weight, flat cel-shading, clean white background, and crisp anime readability. Input image 2 is allowed to guide width-first grounded body proportion, simplified muscle anatomy, stable stance, broad muscle mass, and compact heavy silhouette. Neither reference may override the approved character record, selected black-market stock, outfit, temperament, grooming, pose, expression, prompt content, or source-character separation. Broad face-shape direction and simplified facial proportions may be style-adjacent, but the generated face must read as a new person, not the same face or a recognizable identity match to either reference.
 
 When handing off to Image Gen, wrap `prompt_en` with:
 

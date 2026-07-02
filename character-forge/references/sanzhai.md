@@ -9,6 +9,7 @@
 Read:
 
 - `references/libraries/outfits.md`
+- `garment-grammar/SKILL.md` and `garment-grammar/references/no-skirt-garment-grammar.md` when they exist
 - `black-market/inventory/styling/sets.md` when it exists
 - `black-market/inventory/styling/items/*.md` when they exist
 - `black-market/references/designer-methods.md` when it exists
@@ -36,6 +37,10 @@ Fill:
 - socks
 - shoes
 - exactly 3 accessories or props, selected from head, neck, shoulder, chest, hand, waist, leg, carried item
+- garment_line
+- banned_shape_check
+- professional_keywords
+- negative_clothing
 - styling_algorithm
 - base_garment_prototype
 - designer_method_references
@@ -57,6 +62,9 @@ Fill:
 ## Core Rules
 
 - Use the selected job as the anchor. Do not change, replace, or reinterpret `identity.job` to fit a better outfit.
+- Apply Garment Grammar when available. Treat no skirts, no dresses, no aprons, no pinafores, and no apron-like substitutes as a standing user preference unless the user explicitly overrides it.
+- If a job normally suggests an apron, replace the apron function with a utility vest, waist belt, chest harness, tool belt, structured overshirt, protective placket, trouser-mounted pouch, or crossbody tool bag.
+- If a job or stock suggests a skirt or dress silhouette, replace it with wide-leg trousers, pleated trousers, panelled technical pants, cropped tailored trousers, shorts, jumpsuit, or coverall.
 - Prioritize clean, readable, animation-friendly silhouettes.
 - Keep clothing believable enough for the job, but do not over-lock the result into ordinary modern urban servicewear unless the job truly requires it.
 - The visible torso detail must support the fixed strong body standard. When a fitted inner layer is visible, it should show chest and abdominal masses through clean animation shape lines, not random fabric wrinkles.
@@ -67,7 +75,7 @@ Fill:
 - When the user explicitly allows designer names in prompts, San Zhai may record `designer_prompt_references`; otherwise use anonymous `designer_method_references` only.
 - Every substantial outfit should have at least one structural transformation, one panel path, one craft boundary, and one memory point across clothing, footwear, or accessories.
 - Use the default complexity budget: large silhouette 60%, medium panels 25%, small craft details 10%, pattern/symbols 5%. Do not spread equal detail over the whole body.
-- Use shirts, button-ups, T-shirts, polos, undershirts, and service-uniform shirts as base layers only when justified by job or selected stock. They should not be the primary visual idea when viable outerwear, harness, apron, armor, robe, vest, wrap, belt, or accessory systems can carry the outfit.
+- Use shirts, button-ups, T-shirts, polos, undershirts, and service-uniform shirts as base layers only when justified by job or selected stock. They should not be the primary visual idea when viable outerwear, harness, armor, vest, structured overshirt, waist belt, trouser system, or accessory systems can carry the outfit.
 - Treat `world_context` as the outfit's street and material ecology. Translate it into visible clothing structure, not lore text.
 - Respect `visual_taboo` as a local design guard. If it bans ordinary shirt lock-in, dirty materials, heavy military drift, dock/cargo drift, or over-cyberpunk excess, San Zhai must avoid those directions unless the user explicitly overrides them.
 
@@ -77,6 +85,10 @@ Before filling garment fields, decide these design items:
 
 1. `styling_algorithm`: the reusable outfit method, such as `警示机能型`, `轻装装甲型`, `职业异化型`, `权力套装型`, `仪式宽体型`, `透明防护型`, `裸核束缚型`, `街头战术型`, `厨工匠人型`, `贵族改装型`, `荒野补丁型`, `冷感封闭型`, `松弛居家型`, `制服拆解型`, `机械维修型`, or another concrete algorithm inherited from black-market stock.
 2. `base_garment_prototype`: name the readable starting point: short jacket, work vest, button shirt, high-neck base layer, wide trousers, canvas sneaker, work boot, waist bag, gloves, or another clear prototype.
+2a. `garment_line`: choose one line from Garment Grammar, such as `quiet_tailoring`, `soft_deconstruction`, `utility_atelier`, `street_atelier`, or `protective_tailoring`.
+2b. `banned_shape_check`: explicitly state `no skirt, no dress, no apron, no pinafore; any apron function is replaced by <non-apron structure>`.
+2c. `professional_keywords`: list compact English garment keywords for Azoth, including silhouette, cut, construction, fabric zones, closure, panel path, trouser design, footwear structure, and accessory structure.
+2d. `negative_clothing`: include `no skirt, no dress, no apron, no pinafore, no maid outfit, no school uniform skirt, no wrap skirt, no apron-like front panel, no generic T-shirt and jeans, no plain casualwear`.
 3. `designer_method_references`: choose 1-3 anonymous methods from the designer-method library, such as `平面到立体`, `解剖式戏剧裁剪`, `制作痕迹外露`, `身体建筑与垂坠体块`, `熟悉原型加雕塑变形底`, `鞋履建筑结构`, or `性能叙事可视化`.
 4. `designer_prompt_references`: optional designer names only when the user explicitly asks to test designer references in prompts. Keep them out of normal prompt prose unless Azoth's prompt rules allow them.
 5. `design_operators`: choose 1-2 operators such as `错位`, `膨胀`, `压缩`, `分段`, `外露`, `折叠`, `框架`, `开口`, `包覆`, or `悬挂`; specify body part and visible purpose.
@@ -109,7 +121,7 @@ If designer prompt references are recorded, keep them short and subordinate to c
 Before choosing final garments, convert `world_context` into outfit constraints:
 
 - `era_background`: choose era-readable silhouette, closure, layer rhythm, and accessory density. Keep it subtle; do not turn every character into a costume-history plate.
-- `culture_system`: choose culturally grounded construction hints such as wrap logic, apron panels, waist sash, municipal badges, market tags, temple-town cords, arcade service tabs, or guild-like tool placement.
+- `culture_system`: choose culturally grounded construction hints such as wrap logic, waist panels, waist sash, municipal badges, market tags, temple-town cords, arcade service tabs, or guild-like tool placement.
 - `culture_stage`: decide whether clothing reads as new issue, carefully maintained old-system remnant, clean self-modified piece, strict regulated uniform, prosperous custom item, or transitional mixed kit.
 - `street_texture`: add everyday setting details through bags, pouches, tickets, rain covers, repair tools, vendor tags, kiosk IDs, service loops, route cards, or small clean carried objects.
 - `technology_level`: decide how much visible hardware is allowed: analog tags, mechanical buckles, simple civic devices, transparent plastic guards, compact scanners, or low-tech textile solutions.
@@ -124,8 +136,8 @@ Never write `world_context` phrases directly into outfit fields as abstract labe
 Use functional slots to diversify outfits without changing the job:
 
 - 身体暴露: chest opening, bare arms, shoulder cut, back opening, leg exposure, or no exposure.
-- 体积扩张: shoulder width, sleeve mass, back shell, wide pants, heavy sole, broad apron, or robe volume.
-- 收束: belt, cinch, harness, high collar, cuff, leg strap, waist wrap, or apron tie.
+- 体积扩张: shoulder width, sleeve mass, back shell, wide pants, heavy sole, structured overshirt volume, or vest volume.
+- 收束: belt, cinch, harness, high collar, cuff, leg strap, waist wrap, or buckle tab.
 - 功能挂载: waist tools, leg bag, chest badge, back pack, forearm device, neck loop, or side carry.
 - 身份标记: armband, text tape, badge, color strip, number, emblem, or patterned panel.
 - 材质冲突: soft cloth with hard shell, transparent layer over fitted base, traditional textile with buckles, matte fabric with metal hardware.
@@ -242,8 +254,9 @@ At least one accessory or small item should be considered when it supports the s
 ## Anti-Repetition Rules
 
 - Do not repeatedly make the main visual read as shirt, button-up shirt, T-shirt, polo, undershirt, or service uniform shirt when viable alternatives exist.
+- Do not use skirts, dresses, aprons, pinafores, apron-like front panels, wrap skirts, or skirt-over-pants structures as anti-repetition devices.
 - A fitted T-shirt or shirt may remain as base_layer, but it should not become the primary outfit idea unless the selected set or job requires it.
-- Prefer outerwear, armor, harnesses, aprons, robes, jackets, vests, wraps, or accessory systems as the primary visual structure when compatible.
+- Prefer outerwear, armor, harnesses, jackets, vests, structured overshirts, waist systems, trouser systems, footwear, or accessory systems as the primary visual structure when compatible.
 - If the previous or obvious job default is a shirt, choose at least two non-shirt carriers from `外层体积`, `腰部系统`, `头颈系统`, `手臂系统`, `腿部系统`, or `标记系统`.
 - If a shirt-like base is required, mutate at least three visible variables: collar/neckline, sleeve state, layer over it, waist structure, material block, fastening, accessory load, or pants/footwear silhouette.
 - Do not let `fitted inner white T-shirt` from the recurring anchor become the whole concept. It exists to support body readability; another garment system must carry identity unless the job truly requires plainness.
@@ -284,6 +297,7 @@ Selected stock names may appear in `outfit_reason` and the log. Prompt-facing ou
 
 Avoid:
 
+- skirts, dresses, aprons, pinafores, apron-like front panels, wrap skirts, skirt-over-pants structures, maid outfits, school uniform skirts
 - dirty, oily, stained, muddy, greasy, torn, or unclean materials
 - making muscular bodies automatically wear labor gear or gym wear
 - hiding all torso mass with a blank loose shirt

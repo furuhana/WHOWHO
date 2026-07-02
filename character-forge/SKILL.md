@@ -28,6 +28,7 @@ Read these references before generating a character:
 3. `references/damen.md` for base character generation.
 4. `references/bole.md` for occupation and gang matching.
 5. `references/sanzhai.md` for work outfit matching.
+   - When `../garment-grammar/SKILL.md` or workspace `garment-grammar/SKILL.md` exists, San Zhai must use it before designing clothing. It upgrades plain job clothing into no-skirt, no-apron garment construction language and passes professional keywords downstream.
    - When the black-market design grammar exists, San Zhai and all downstream audit/prompt modules should also use:
      - `../black-market/references/designer-methods.md`
      - `../black-market/references/design-operators.md`
@@ -54,7 +55,7 @@ Load library files only when the matching module needs them:
 Run the modules in this order:
 
 ```text
-大门 -> 伯乐 -> 三宅 -> 托尼 -> 缪斯 -> 黑墙 -> 阿佐特 -> 蜃楼 -> 图像生成 -> 成图审核
+大门 -> 伯乐 -> 三宅(+服装语法) -> 托尼 -> 缪斯 -> 黑墙 -> 阿佐特 -> 蜃楼 -> 图像生成 -> 成图审核
 ```
 
 Always show user-facing module names and outputs in Chinese. Internal schema keys may stay English for stability, but the final answer must use Chinese labels the user can read at a glance.
@@ -65,7 +66,7 @@ Use this dispatch log style:
 [母体] 启动角色生成流程
 [大门] 已生成基础角色
 [伯乐] 已匹配职业与帮派
-[三宅] 已匹配工作服
+[三宅] 已匹配工作服并应用服装语法
 [托尼] 已匹配头脸造型
 [缪斯] 审核通过
 [黑墙] 审核通过
@@ -106,6 +107,7 @@ Do not let 缪斯 change the occupation chosen by Bo Le, selected black-market s
 When the design grammar files exist, 缪斯 should also audit whether San Zhai supplied:
 
 - a readable `base_garment_prototype`
+- a `banned_shape_check` or equivalent proof that no skirt, dress, apron, pinafore, or apron-like lower/front garment was used
 - anonymous `designer_method_references`, and optional `designer_prompt_references` only if the user allowed designer-name prompt testing
 - concrete `design_operators`
 - at least one `panel_paths` entry with start, route, endpoint, and body rule
@@ -227,10 +229,10 @@ Default to Markdown tables inside `角色档案` for scanability. Use compact tw
 
 Use these defaults:
 
-- `基础信息`: two-group table. Put identity fields on the left (`名字`, `性别`, `年龄`, `国籍`, `体型`, `性格`) and score fields on the right (`贫富值`, `危险值`, `欲望值`, `执行力`, `社交力`).
+- `基础信息`: two-group table. Put identity fields on the left (`名字`, `性别`, `年龄`, `国籍`, `体型`, `性格`) and score fields on the right (`贫富值`, `危险值`, `欲望值`, `执行力`, `社交力`). Do not show the internal `temperament` field as a basic-info row; let Azoth translate it into the prompt instead.
 - `世界底盘`: two-group table. Left group: `时代背景`, `文化体系`, `文化阶段`, `市井特点`. Right group: `技术层级`, `秩序状态`, `材料生态`, `视觉禁忌`.
 - `社会身份 + 头脸造型`: two-group table when both are compact. Left group: `职业`, `帮派`, `匹配理由`. Right group: `发型`, `眉型`, `胡子`, `脸型`, `造型理由`.
-- `工作服`: use a one-group table or short grouped list because clothing fields can be long. Include `外套`, `打底`, `裤子`, `袜子`, `鞋子`, `饰品/道具`, `造型算法`, `基础款原型`, `匿名设计方法`, `设计师提示引用` when user allowed it, `设计操作符`, `裁片路径`, `图案策略`, `工艺边界`, `身体适配`, `鞋饰结构`, `复杂度配额`, `失败规避`, `可替换位`, `世界底盘继承`, `反默认判断`, and `服装理由` when available.
+- `工作服`: use a one-group table or short grouped list because clothing fields can be long. Include `外套`, `打底`, `裤子`, `袜子`, `鞋子`, `饰品/道具`, `造型算法`, `服装线`, `禁用形态检查`, `专业关键词`, `基础款原型`, `匿名设计方法`, `设计师提示引用` when user allowed it, `设计操作符`, `裁片路径`, `图案策略`, `工艺边界`, `身体适配`, `鞋饰结构`, `复杂度配额`, `失败规避`, `可替换位`, `世界底盘继承`, `反默认判断`, and `服装理由` when available.
 - If any cell would become too long and make the table hard to read, switch only that section to a single two-column table (`字段 | 内容`) or a short list.
 - Do not put English prompt bodies, Chinese prompt bodies, or long audits into tables. Keep prompt bodies in fenced code blocks.
 

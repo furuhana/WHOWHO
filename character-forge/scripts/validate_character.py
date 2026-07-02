@@ -23,6 +23,7 @@ REQUIRED_BASIC = [
     "nationality",
     "body_type",
     "personality",
+    "temperament",
     "wealth",
     "danger",
     "desire",
@@ -51,7 +52,7 @@ def main() -> None:
         fail("usage: validate_character.py <character.json>")
 
     path = Path(sys.argv[1])
-    data = json.loads(path.read_text(encoding="utf-8"))
+    data = json.loads(path.read_text(encoding="utf-8-sig"))
 
     for key in REQUIRED_TOP_LEVEL:
         if key not in data:

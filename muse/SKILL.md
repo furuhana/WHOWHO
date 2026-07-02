@@ -157,7 +157,7 @@ Flag `设计信息不足` when most of these are true:
 
 - 内层 is a plain base item with no collar, cut, proportion, material, or graphic information.
 - 外层 is missing or equally plain.
-- 腰部 has no belt, wrap, pouch, apron tie, harness, pocket system, or other structure.
+- 腰部 has no belt, wrap, pouch, buckle tab, harness, pocket system, or other structure.
 - 手部 has no gloves, cuffs, tools, tickets, device, bag strap, or occupation-relevant object.
 - 鞋履 reads as generic and does not support occupation, era, or attitude.
 - There is no bag, outer layer, accessory, or carried object to add setting information.

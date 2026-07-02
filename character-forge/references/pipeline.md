@@ -113,6 +113,7 @@ Inside `角色档案`, prefer Markdown tables for readability:
 
 - Use two-group side-by-side tables for compact sections such as `基础信息`, `世界底盘`, and `社会身份 + 头脸造型`.
 - Use a single two-column table or short grouped list for long sections such as `工作服`.
+- Do not show the internal `temperament` field as a `基础信息` row. It is a hidden generation seed that should surface only through Tony's grooming choices and Azoth's prompt wording.
 - When advanced design grammar is present, `工作服` should include compact rows for `基础款原型`, `匿名设计方法`, optional `设计师提示引用`, `设计操作符`, `裁片路径`, `图案策略`, `工艺边界`, `身体适配`, `鞋饰结构`, `复杂度配额`, `失败规避`, and `反默认判断` when available.
 - Keep prompt sections outside tables and inside fenced code blocks.
 
@@ -162,7 +163,7 @@ Use the final English prompt as the generation prompt, wrapped with the exact bl
 <the exact wrapper from references/prompt_blocks/imagegen-wrapper.md>
 ```
 
-Input image 1 must guide clean Japanese TV anime cel-shading, crisp dark outer linework, tidy internal contour lines, smooth flat color blocks, soft controlled shadow shapes, centered full-body framing, and pure white background. Input image 2 must guide width-first super-heavyweight mass, oversized arms and hands, heavy lower body, compact proportions, and muscle-block readability. Neither reference may override the current character's approved identity, outfit, grooming, pose, expression, or source character separation. Face shape and facial proportions may be style-adjacent, but must resolve as a new person rather than a clone or recognizable match to either reference face.
+Input image 1 must guide clean Japanese TV anime cel-shading, crisp dark outer linework, tidy internal contour lines, smooth flat color blocks, soft controlled shadow shapes, centered full-body framing, and pure white background. Input image 2 must guide width-first super-heavyweight mass, oversized arms and hands, heavy lower body, compact proportions, and muscle-block readability. Neither reference may override the current character's approved identity, outfit, temperament, grooming, pose, expression, or source character separation. Face shape and facial proportions may be style-adjacent, but must resolve as a new person rather than a clone or recognizable match to either reference face.
 
 If Image Gen succeeds, show the generated image under `图像生成`. If Image Gen is unavailable or fails, preserve the text output and write `图像生成：未完成，原因：<brief reason>`.
 

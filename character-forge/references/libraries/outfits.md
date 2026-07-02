@@ -31,7 +31,7 @@ Use clean, recognizable workwear. Each entry supplies a starting point; adjust b
 
 ## barber shop owner
 
-- outerwear: black barber apron
+- outerwear: black structured barber vest with waist tool tabs
 - base_layer: fitted dark T-shirt
 - pants: tapered black trousers
 - socks: black socks
