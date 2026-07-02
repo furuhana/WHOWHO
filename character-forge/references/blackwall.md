@@ -40,6 +40,13 @@ Check:
 - Is the outfit clean and readable?
 - Are there enough distinctive visual hooks for image generation?
 - Did San Zhai record a concrete `styling_algorithm`, active `design_function_slots`, `replacement_slots_used`, `variation_matrix`, and `anti_default_decision`?
+- Did San Zhai record a readable `base_garment_prototype`, anonymous `designer_method_references`, concrete `design_operators`, `panel_paths`, `pattern_strategy`, `craft_boundaries`, `body_fit_strategy`, `complexity_budget`, and `design_failure_avoidance` when advanced design grammar is available?
+- If the user allowed designer prompt references, are `designer_prompt_references` short, optional, and backed by visible construction rather than used as a substitute for garment detail?
+- Does at least one clothing, footwear, or accessory element have a clear panel/cutting path with start point, route, endpoint, and rule?
+- Is patterning controlled by placement and density rather than full-body tiny marks, random lines, or noisy texture?
+- Do shoes include a readable prototype plus sole structure, upper cutting, cuff/sock/trouser connection, and center-of-gravity role rather than only being called thick shoes?
+- Do accessories alter shoulder width, waist split, hand/arm mass, leg weight, head/neck frame, or role readability rather than floating as decorative extras?
+- Does the outfit roughly preserve the complexity budget of large silhouette 60%, medium panels 25%, small craft 10%, and pattern/symbol 5%?
 - If `world_context` exists, did San Zhai translate era, culture, street texture, technology, order, material ecology, and visual taboo into visible outfit decisions?
 - If a shirt-like base layer is present, does another visible system carry the main outfit idea, such as outer volume, waist structure, head/neck structure, hand/arm gear, leg structure, markers, material contrast, or functional mounted objects?
 - Did Muse explicitly pass or accept the outfit's styling algorithm, replacement-slot use, anti-default behavior, and world-context translation instead of only judging generic clothing coherence?
@@ -86,6 +93,14 @@ Reject or reroute if the result contains:
 - black-market inventory content outside `正式入库` being used as stock
 - black-market styling stock used as expression, expression stock used as styling or pose, pose stock used as styling or face design, hairstyle stock used for beard, eyebrows, face shape, facial features, makeup, complexion, or attractiveness, or eyebrow stock used for hairstyle, beard, eye shape, expression acting, face shape, facial features, makeup, complexion, or attractiveness
 - San Zhai output that lacks a styling algorithm, lacks functional-slot reasoning, or cannot explain why this outfit is not just another occupation-locked shirt formula
+- San Zhai output that uses designer names as the actual design instead of anonymous methods and visible construction, unless the user explicitly allowed short designer prompt references and the outfit still has full structural description
+- San Zhai output that records designer prompt references but lacks concrete design operators, panel paths, craft boundaries, footwear structure, or body-fit strategy
+- San Zhai output that claims complex cutting, paneling, trimming, patterning, deconstruction, pleating, drape, or sculptural footwear but cannot name where it starts, how it travels, where it ends, and what body or role function it serves
+- outfit complexity that reads as full-body random lines, all-over tiny patterns, fake cyber glow, texture-map fabric, equal-detail noise, or surface graphics pasted over joints
+- panel lines that cut across elbows, knees, ankles, chest, or abdomen as unbroken surface graphics instead of breaking, turning, or serving body structure
+- footwear that is only described as thick-soled, heavy, futuristic, or stylish without sole sidewall, outsole segmentation, heel/arch structure, upper paneling, or trouser/sock connection
+- accessories that are only decorative hanging objects without a clear attachment point, shape, body-reading role, or occupation cue
+- complexity budget missing or obviously inverted so that tiny marks and symbols dominate the outfit while silhouette and medium panel structure disappear
 - `world_context` used as lore, background scenery, source identity, or faction story instead of compact everyday-world constraints
 - `world_context` causing Bo Le to invent jobs outside the jobs library, reroll a fair job draw, or drift into forbidden dock, cargo, heavy manual labor, or fitness-coach directions
 - `world_context.visual_taboo` being ignored when it bans ordinary shirt lock-in, dirty materials, heavy military drift, dock/cargo drift, over-cyberpunk excess, or other local constraints

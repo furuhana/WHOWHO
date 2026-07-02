@@ -24,7 +24,7 @@ Allowed:
 - silhouette, proportion, layering, color, material, texture, era, occupation, setting, and visual story
 - animation readability and concept-art production viability
 
-Do not treat a famous designer as a style to copy. Use runway and designer methods as audit lenses, not as imitation targets.
+Do not treat a famous designer as a style to copy. Use runway and designer methods as audit lenses, not as imitation targets. If the user explicitly allows designer names in prompts, judge whether the names are backed by concrete garment construction; a designer name alone is not a design.
 
 ## Character Forge Integration
 
@@ -75,6 +75,16 @@ Judge whether the outfit is a complete character design rather than a random out
 - 视觉负荷分配
 - 混搭控制
 - 设计信息密度
+- 基础款原型
+- 匿名设计方法
+- 设计操作符
+- 裁片路径
+- 图案密度
+- 工艺边界
+- 鞋履结构
+- 饰品身体作用
+- 复杂度配额
+- 假高级规避
 - 动画可实现性
 - 秀场级参照
 
@@ -96,12 +106,26 @@ Require:
 - A clear primary visual carrier beyond a plain shirt/T-shirt/Polo/service uniform shirt, unless the job truly requires that garment and other slots compensate.
 - A variation matrix reason: scene, emotional posture, body need, resource source, recognition strength, or variation幅度 should be visible enough to prevent the occupation from locking every outfit into one formula.
 - A visible translation of `world_context` when Character Forge provides it: era, culture, street texture, technology, order, material ecology, and visual taboo should affect construction, materials, accessories, or silhouette.
+- A readable base garment prototype that remains visible after modification.
+- At least one concrete design operator such as offset, expansion, compression, segmentation, exposed construction, folding, frame, opening, wrapping, or hanging.
+- At least one panel path with start point, route, endpoint, and body rule.
+- Controlled pattern placement and density; patterns should sit on edges, local emblems, side stripes, ribs, or fold lines rather than fill the whole body.
+- Visible craft boundaries such as piping, binding, topstitching, exposed seam, zipper teeth, buckle tabs, ribbed hems, drawcords, hard plate edges, or shoe sidewalls.
+- Footwear that has prototype, sole structure, upper cutting, cuff/sock/trouser connection, and center-of-gravity role.
+- Accessories that change body reading: shoulder width, waist split, hand size, leg weight, head/neck frame, or occupation cue.
+- A complexity budget close to 大形体 60 / 中型裁片 25 / 小工艺 10 / 图案符号 5.
 
 Flag `衬衫默认复发` when a shirt-like garment becomes the primary visual and the rest of the outfit does not provide enough silhouette, waist, head/neck, hand/arm, leg, marker, accessory, material, or prop information.
 
 Flag `算法缺席` when the outfit is only a list of garments and has no reusable structure, no functional slot logic, and no reason why this character would choose this arrangement today.
 
 Flag `世界底盘空转` when the record includes era/culture/street/material context but the outfit still reads as generic modern clothing with no visible material ecology, street object, order marker, cultural construction, or visual taboo response.
+
+Flag `假高级` when the outfit tries to look advanced through random lines, all-over tiny patterns, cyber glow, texture-map fabric, structureless thick soles, or loose decorative accessories that do not change silhouette, construction, body reading, or role readability.
+
+Flag `裁片缺席` when the outfit says complex cut, paneling, trimming, or patterning but cannot name a clear path such as shoulder-to-side-waist, sleeve-outside-to-forearm, hip-to-knee, or shoe-sidewall-to-heel.
+
+Flag `鞋饰降级` when shoes are only `thick shoes` or accessories are only `hanging decorations` without sole architecture, upper cutting, body attachment, or center-of-gravity effect.
 
 Sample audit language:
 
@@ -183,6 +207,10 @@ Use these lenses when the outfit needs runway-level critique:
 - Yohji Yamamoto lens: If restrained, does it still have proportion, drape, asymmetry, shadow, movement, and material depth?
 - Issey Miyake lens: Does fabric behavior serve motion, transformation, function, and animation readability?
 - Margiela lens: If deconstructed or mismatched, is the incompletion, exposure, repurposing, or wrongness conceptually justified?
+- Mihara Yasuhiro lens: If shoes are distorted or thick-soled, does the familiar upper remain readable while the sole has sculptural sidewall, outsole, or toe/heel logic?
+- United Nude lens: Does footwear use architectural support, heel, arch, or frame logic without becoming unwearable?
+- Tinker Hatfield lens: Does performance footwear show visible functional storytelling through support, cushioning, side wings, ankle protection, or marked construction?
+- Iris van Herpen lens: If biological, wave, rib, or technical lace logic appears, is it controlled and animation-readable rather than noisy detail?
 
 Do not require every outfit to satisfy every lens. Select the relevant two or three lenses and explain why.
 
@@ -215,6 +243,14 @@ For image reading plus audit, use:
 - 世界底盘转译：
 - 配饰功能性：
 - 视觉负荷分配：
+- 基础款原型：
+- 设计操作符：
+- 裁片路径：
+- 图案密度：
+- 工艺边界：
+- 鞋饰结构：
+- 复杂度配额：
+- 假高级规避：
 - 混搭控制：
 - 动画可实现性：
 - 秀场级参照：

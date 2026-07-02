@@ -113,6 +113,7 @@ Inside `角色档案`, prefer Markdown tables for readability:
 
 - Use two-group side-by-side tables for compact sections such as `基础信息`, `世界底盘`, and `社会身份 + 头脸造型`.
 - Use a single two-column table or short grouped list for long sections such as `工作服`.
+- When advanced design grammar is present, `工作服` should include compact rows for `基础款原型`, `匿名设计方法`, optional `设计师提示引用`, `设计操作符`, `裁片路径`, `图案策略`, `工艺边界`, `身体适配`, `鞋饰结构`, `复杂度配额`, `失败规避`, and `反默认判断` when available.
 - Keep prompt sections outside tables and inside fenced code blocks.
 
 Recommended table shapes:

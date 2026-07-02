@@ -28,6 +28,11 @@ Read these references before generating a character:
 3. `references/damen.md` for base character generation.
 4. `references/bole.md` for occupation and gang matching.
 5. `references/sanzhai.md` for work outfit matching.
+   - When the black-market design grammar exists, San Zhai and all downstream audit/prompt modules should also use:
+     - `../black-market/references/designer-methods.md`
+     - `../black-market/references/design-operators.md`
+     - `../black-market/references/pattern-and-cutting.md`
+     - `../black-market/references/footwear-accessory-grammar.md`
 6. `references/tony.md` for hairstyle, beard, and face matching.
 7. `../muse/SKILL.md` or workspace `muse/SKILL.md` when it exists, for outfit and styling quality audit before Blackwall.
 8. `references/blackwall.md` for design audit and forbidden directions.
@@ -97,6 +102,19 @@ If 缪斯 returns `需要重做`, reroute the smallest possible modules:
 - prompt wording issue only after design is otherwise approved: allow Blackwall to pass, then let Azoth phrase the design more clearly.
 
 Do not let 缪斯 change the occupation chosen by Bo Le, selected black-market stock provenance, fixed body type, pose, expression, identity, or Blackwall safety rules. If 缪斯 suggests a stronger fashion direction, San Zhai may implement it only through the locked occupation and approved inventory/library materials.
+
+When the design grammar files exist, 缪斯 should also audit whether San Zhai supplied:
+
+- a readable `base_garment_prototype`
+- anonymous `designer_method_references`, and optional `designer_prompt_references` only if the user allowed designer-name prompt testing
+- concrete `design_operators`
+- at least one `panel_paths` entry with start, route, endpoint, and body rule
+- a controlled `pattern_strategy`
+- visible `craft_boundaries`
+- a `body_fit_strategy` that reinforces the WHOWHO width-first body
+- a footwear/accessory structure that changes body reading or role readability
+- a `complexity_budget` close to large silhouette 60 / medium panels 25 / small craft 10 / pattern-symbol 5
+- explicit `design_failure_avoidance`
 
 ## User-Controlled Library Writes
 
@@ -212,7 +230,7 @@ Use these defaults:
 - `基础信息`: two-group table. Put identity fields on the left (`名字`, `性别`, `年龄`, `国籍`, `体型`, `性格`) and score fields on the right (`贫富值`, `危险值`, `欲望值`, `执行力`, `社交力`).
 - `世界底盘`: two-group table. Left group: `时代背景`, `文化体系`, `文化阶段`, `市井特点`. Right group: `技术层级`, `秩序状态`, `材料生态`, `视觉禁忌`.
 - `社会身份 + 头脸造型`: two-group table when both are compact. Left group: `职业`, `帮派`, `匹配理由`. Right group: `发型`, `眉型`, `胡子`, `脸型`, `造型理由`.
-- `工作服`: use a one-group table or short grouped list because clothing fields can be long. Include `外套`, `打底`, `裤子`, `袜子`, `鞋子`, `饰品/道具`, `造型算法`, `可替换位`, `世界底盘继承`, and `服装理由` when available.
+- `工作服`: use a one-group table or short grouped list because clothing fields can be long. Include `外套`, `打底`, `裤子`, `袜子`, `鞋子`, `饰品/道具`, `造型算法`, `基础款原型`, `匿名设计方法`, `设计师提示引用` when user allowed it, `设计操作符`, `裁片路径`, `图案策略`, `工艺边界`, `身体适配`, `鞋饰结构`, `复杂度配额`, `失败规避`, `可替换位`, `世界底盘继承`, `反默认判断`, and `服装理由` when available.
 - If any cell would become too long and make the table hard to read, switch only that section to a single two-column table (`字段 | 内容`) or a short list.
 - Do not put English prompt bodies, Chinese prompt bodies, or long audits into tables. Keep prompt bodies in fenced code blocks.
 

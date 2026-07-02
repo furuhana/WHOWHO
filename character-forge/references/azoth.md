@@ -31,6 +31,9 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Preserve every Blackwall-approved visible design domain as its own prompt material: body standard, occupation readability, outfit silhouette and layers, hairstyle, static eyebrow shape, selected pose description, selected expression description, rendering style, and single-character white-background constraints.
 - Expand approved visual details into concrete prompt language instead of compressing them into labels, summaries, or abstract traits.
 - Translate San Zhai's `styling_algorithm`, `design_function_slots`, `replacement_slots_used`, `variation_matrix`, and `anti_default_decision` into visible outfit and accessory description. Do not put these internal field names or Chinese algorithm labels into the final prompt body.
+- Translate San Zhai's advanced design grammar fields into visible prompt material: `base_garment_prototype`, `designer_method_references`, `design_operators`, `panel_paths`, `pattern_strategy`, `craft_boundaries`, `body_fit_strategy`, `complexity_budget`, and `design_failure_avoidance`.
+- If the user explicitly allowed designer names in prompts and San Zhai recorded `designer_prompt_references`, a short designer-method reference clause may appear in `OUTFIT_DYNAMIC`, but it must be subordinate to concrete construction and must never replace clothing detail. Prefer wording such as `with restrained design-method references to Issey Miyake garment pleating and Maison Margiela exposed construction`, then immediately describe the visible panel paths, piping, folds, or shoe structure.
+- Do not write `in the style of <designer>` as the whole outfit direction. Designer names are allowed only as method references when requested, not as brand copying, source identity, or a substitute for panel paths and craft boundaries.
 - Translate approved `world_context` only through visible character-bound details: garment construction, material zones, tools, tags, badges, bags, fasteners, cultural cut logic, civic devices, and Mirage platform props when active. Do not paste world-context field names or abstract setting labels into the prompt body.
 - Remove only forbidden, contradictory, non-visual, or generation-harming phrases. Do not remove useful visual information merely because the prompt is already long.
 - When a selected black-market pose or expression is used, translate its full `描述` into the English prompt unless a phrase must be trimmed for safety or direct contradiction.
@@ -114,6 +117,31 @@ When drafting `OUTFIT_DYNAMIC` and `ACCESSORY_DYNAMIC`, consume the San Zhai sty
 - `replacement_slots_used`: ensure the prompt names the replacement carriers, especially non-shirt carriers like waist system, outer volume, head/neck system, hand/arm system, leg system, or marker system.
 - `variation_matrix`: express only visible consequences, such as off-duty looseness, formal structure, defensive concealment, action-ready mounting, ceremony drape, or repaired-but-clean construction.
 - `anti_default_decision`: if a shirt-like base exists, describe the compensating structure that keeps the outfit from reading as a plain shirt outfit.
+- `base_garment_prototype`: keep the readable starting garment visible before describing its modifications.
+- `designer_method_references`: translate anonymous methods into visible operations, such as garment pleating, anatomical tailoring, exposed construction, controlled drape, sculptural sole logic, architectural shoe support, or performance footwear storytelling.
+- `designer_prompt_references`: use designer names only when the user explicitly allowed them; keep the clause short and still describe all visible construction afterward.
+- `design_operators`: name the visible effect, not the internal label. For example, write `an offset front placket` instead of `the operator is offset`.
+- `panel_paths`: preserve start point, route, endpoint, and body rule in English prose. Example: `curved chest-side panels start below the shoulder peak, follow the outer pectoral mass, and end at the side waist`.
+- `pattern_strategy`: describe pattern type, placement, and density. Use low-density edge trim, local emblems, interrupted side stripes, controlled plaid, radiating ribs, or heat-pressed fold lines; avoid all-over tiny pattern language.
+- `craft_boundaries`: explicitly render piping, binding, topstitching, exposed seams, zipper teeth, buckle tabs, ribbed hems, drawcords, hard plate edges, or shoe sidewalls.
+- `body_fit_strategy`: describe how the outfit reinforces width-first mass, chest/abdomen readability, giant arms, heavy hands, thick thighs, and stable footwear.
+- `complexity_budget`: do not write the numeric budget into the final prompt unless useful; translate it into `large readable silhouette, controlled medium panels, sparse craft details, and very low-density markings`.
+- `design_failure_avoidance`: use compact negative constraints only when needed: no random surface lines, no all-over tiny pattern, no cyber glow, no noisy fabric texture, no structureless thick soles.
+
+When drafting footwear, always cover:
+
+- readable shoe prototype
+- sole structure, such as sculptural sidewall, segmented outsole, flared sidewall, hollow heel, arch frame, or cushioning blocks
+- upper cutting, such as toe cap, side wing, heel wrap, tongue, strap, or lace zone
+- cuff/sock/trouser connection
+- center-of-gravity or body-mass role
+
+When drafting accessories, always cover:
+
+- body location
+- attachment method
+- shape and volume
+- body-reading role, such as widening shoulders, splitting waist, enlarging hands, weighting legs, framing head/neck, or adding occupation cue
 
 When consuming `world_context`, use it this way:
 
@@ -153,6 +181,15 @@ Fail the audit if `prompt_en` or `prompt_cn` contains source/provenance wording 
 - World-context field names or abstract labels such as `world_context`, `era_background`, `culture_system`, `culture_stage`, `street_texture`, `technology_level`, `order_level`, `material_ecology`, `visual_taboo`, `世界底盘`, `时代背景`, `文化体系`, `文化阶段`, `市井特点`, `技术层级`, `秩序状态`, `材料生态`, or `视觉禁忌`.
 - Prompt-engineering instructions that read like rules instead of image prose, such as `For any non-short pants style`, `use 9-length pants only`, `Do not describe`, `must be written as`, `insert this`, or `apply this guard`. Rewrite those as direct visual description and compact negative image constraints.
 
+Do not fail designer names solely because they are famous proper nouns when all of these are true:
+
+- the user explicitly allowed testing designer references in prompts;
+- the names appear as short `design-method references`, not as `in the style of` brand copying;
+- the same prompt sentence or nearby sentence translates the reference into visible construction;
+- no brand logo, exact product name, runway look, source character, or proprietary motif is requested.
+
+Fail designer-name use when it replaces construction detail, requests brand imitation, or appears in stock provenance language.
+
 Fail the audit if an inventory item is used only as abstract mood or category drift instead of visible material. Examples that must be rejected:
 
 - A scarf stock becoming a jacket because it has a soft layered mood.
@@ -160,7 +197,7 @@ Fail the audit if an inventory item is used only as abstract mood or category dr
 - A hairstyle or eyebrow sentence that says `uses the stock "<name>"` before the translated visual description.
 - An expression sentence that names a stock item instead of directly describing mouth, gaze, facial tension, and acting.
 
-When the audit fails, do not continue to Mirage or Image Gen. Regenerate only `prompt_en`, `prompt_cn`, and `prompt_notes` from the approved character record. Preserve the same selected stock choices, but rewrite every affected sentence so the prompt body contains only the translated visual description and necessary character-owned adaptation. Put stock names and selection explanations only in `prompt_notes` / `鎻愮ず璇嶈鏄巂`.
+When the audit fails, do not continue to Mirage or Image Gen. Regenerate only `prompt_en`, `prompt_cn`, and `prompt_notes` from the approved character record. Preserve the same selected stock choices, but rewrite every affected sentence so the prompt body contains only the translated visual description and necessary character-owned adaptation. Put stock names and selection explanations only in `prompt_notes` / `提示词说明`.
 
 ## Outfit And Accessory Expansion
 
@@ -175,11 +212,31 @@ Do not reduce clothing to item labels such as `green jacket`, `white T-shirt`, o
 
 Main outerwear or upper-body garments should usually be 35-60 English words each. Pants or shorts should usually be 30-55 words. Shoes and socks should usually be 18-35 words. Bags, belts, IDs, tools, and small accessories should usually be 12-30 words each.
 
+When advanced design grammar is present, major outfit descriptions should preserve:
+
+- the base garment prototype
+- one or two visible operations
+- one panel path with start/route/endpoint
+- one craft boundary
+- controlled pattern or marking placement
+- the body-fit purpose
+
+Do not reduce `panel_paths` to `complex lines`, `stylish cuts`, `geometric details`, or `decorative panels`.
+
 Accessories must state where they sit on the body, how they attach or hang, their readable shape, and one or two clean construction details. For example, use `a compact rectangular side bag hanging close to the hip from a short shoulder strap, with a flap closure and flat buckle tabs`, not only `side bag`.
 
 Use clean durability language by default: `reinforced stitching`, `panel seams`, `matte fabric`, `sturdy waistband`, `crisp cuffs`, `flat buckle tabs`, `clean edge lines`, and `structured pockets`.
 
 Avoid default outfit language that implies dirty, damaged, gritty, aged, or noisy texture: `faded`, `worn`, `weathered`, `scuffed`, `dusty`, `stained`, `frayed`, `grimy`, `oily`, `torn`, `distressed`, `rough texture`, `visible fabric grain`, `micro-weave`, `speckled`, or `noisy texture`. Use these only when the user explicitly asks and Blackwall accepts the direction.
+
+Avoid fake advanced-design prompt language:
+
+- `complex outfit` without structure
+- `detailed patterns` without placement and density
+- `futuristic glowing lines`
+- `thick shoes` without sole architecture
+- `many accessories` without attachment and body role
+- `designer-inspired` without visible construction
 
 ## Final Prompt Assembly
 

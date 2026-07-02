@@ -40,6 +40,48 @@ outfit:
   accessories:
     - slot:
       item:
+  styling_algorithm:
+  base_garment_prototype:
+  designer_method_references:
+    -
+  designer_prompt_references:
+    -
+  design_operators:
+    - operator:
+      body_part:
+      purpose:
+  panel_paths:
+    - name:
+      start:
+      route:
+      endpoint:
+      rule:
+  pattern_strategy:
+    type:
+    placement:
+      -
+    density:
+    prohibitions:
+      -
+  craft_boundaries:
+    -
+  body_fit_strategy:
+  footwear_accessory_structure:
+  complexity_budget:
+  design_failure_avoidance:
+    -
+  design_function_slots:
+    -
+  replacement_slots_used:
+    -
+  variation_matrix:
+    scene:
+    emotion:
+    body_need:
+    resource_source:
+    recognition_strength:
+    variation_scale:
+  anti_default_decision:
   outfit_reason:
 
 grooming:
@@ -127,6 +169,40 @@ shoes -> 鞋子
 accessories -> 饰品/道具
 slot -> 部位
 item -> 物件
+styling_algorithm -> 造型算法
+base_garment_prototype -> 基础款原型
+designer_method_references -> 匿名设计方法
+designer_prompt_references -> 设计师提示引用
+design_operators -> 设计操作符
+operator -> 操作
+body_part -> 部位
+purpose -> 作用
+panel_paths -> 裁片路径
+name -> 名称
+start -> 起点
+route -> 经过
+endpoint -> 终点
+rule -> 规则
+pattern_strategy -> 图案策略
+type -> 类型
+placement -> 位置
+density -> 密度
+prohibitions -> 禁忌
+craft_boundaries -> 工艺边界
+body_fit_strategy -> 身体适配
+footwear_accessory_structure -> 鞋饰结构
+complexity_budget -> 复杂度配额
+design_failure_avoidance -> 失败规避
+design_function_slots -> 设计功能位
+replacement_slots_used -> 可替换位
+variation_matrix -> 变化矩阵
+scene -> 场景
+emotion -> 情绪
+body_need -> 身体需求
+resource_source -> 资源来源
+recognition_strength -> 识别强度
+variation_scale -> 变化幅度
+anti_default_decision -> 反默认判断
 outfit_reason -> 服装理由
 
 grooming -> 头脸造型

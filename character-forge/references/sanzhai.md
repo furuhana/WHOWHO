@@ -11,6 +11,10 @@ Read:
 - `references/libraries/outfits.md`
 - `black-market/inventory/styling/sets.md` when it exists
 - `black-market/inventory/styling/items/*.md` when they exist
+- `black-market/references/designer-methods.md` when it exists
+- `black-market/references/design-operators.md` when it exists
+- `black-market/references/pattern-and-cutting.md` when it exists
+- `black-market/references/footwear-accessory-grammar.md` when it exists
 
 ## Inputs
 
@@ -33,6 +37,16 @@ Fill:
 - shoes
 - exactly 3 accessories or props, selected from head, neck, shoulder, chest, hand, waist, leg, carried item
 - styling_algorithm
+- base_garment_prototype
+- designer_method_references
+- designer_prompt_references
+- design_operators
+- panel_paths
+- pattern_strategy
+- craft_boundaries
+- body_fit_strategy
+- complexity_budget
+- design_failure_avoidance
 - design_function_slots
 - replacement_slots_used
 - variation_matrix
@@ -49,21 +63,46 @@ Fill:
 - Avoid hiding the torso completely with loose, boxy layers unless the selected outfit structure needs that silhouette and still has strong readable design information elsewhere.
 - Choose accessories and small items that help image generation understand the role and design, not just filler.
 - Treat the main outfit decision as a styling algorithm, not a garment-name lookup. Choose what carries the design first: silhouette, layer system, waist structure, head/neck structure, accessory system, material contrast, or functional mounting.
+- Treat high fashion references as methods, not costumes. If designer-method references are used, translate them into visible construction such as garment pleating, anatomical paneling, exposed construction, sculptural sole logic, architectural shoe framing, controlled drape, or low-density markings.
+- When the user explicitly allows designer names in prompts, San Zhai may record `designer_prompt_references`; otherwise use anonymous `designer_method_references` only.
+- Every substantial outfit should have at least one structural transformation, one panel path, one craft boundary, and one memory point across clothing, footwear, or accessories.
+- Use the default complexity budget: large silhouette 60%, medium panels 25%, small craft details 10%, pattern/symbols 5%. Do not spread equal detail over the whole body.
 - Use shirts, button-ups, T-shirts, polos, undershirts, and service-uniform shirts as base layers only when justified by job or selected stock. They should not be the primary visual idea when viable outerwear, harness, apron, armor, robe, vest, wrap, belt, or accessory systems can carry the outfit.
 - Treat `world_context` as the outfit's street and material ecology. Translate it into visible clothing structure, not lore text.
 - Respect `visual_taboo` as a local design guard. If it bans ordinary shirt lock-in, dirty materials, heavy military drift, dock/cargo drift, or over-cyberpunk excess, San Zhai must avoid those directions unless the user explicitly overrides them.
 
 ## Styling Decision Engine
 
-Before filling garment fields, decide these five items:
+Before filling garment fields, decide these design items:
 
 1. `styling_algorithm`: the reusable outfit method, such as `警示机能型`, `轻装装甲型`, `职业异化型`, `权力套装型`, `仪式宽体型`, `透明防护型`, `裸核束缚型`, `街头战术型`, `厨工匠人型`, `贵族改装型`, `荒野补丁型`, `冷感封闭型`, `松弛居家型`, `制服拆解型`, `机械维修型`, or another concrete algorithm inherited from black-market stock.
-2. `design_function_slots`: list the active functions: `身体暴露`, `体积扩张`, `收束`, `功能挂载`, `身份标记`, `材质冲突`, `遮蔽`, `动作释放`, `仪式装饰`, `生活磨损`. Use at least three when the job allows it.
-3. `replacement_slots_used`: state which replaceable slots carried the design: `基础层`, `外层体积`, `腰部系统`, `腿部系统`, `手臂系统`, `头颈系统`, `标记系统`.
-4. `variation_matrix`: state the current `场景`, `情绪`, `身体需求`, `资源来源`, `识别强度`, and `变化幅度`. Infer conservatively from the character record and selected job when the user does not specify a scene.
-5. `anti_default_decision`: explain why the outfit does or does not use a shirt-like default as the primary visual. If it does, name the compensating structure that keeps it from being generic.
+2. `base_garment_prototype`: name the readable starting point: short jacket, work vest, button shirt, high-neck base layer, wide trousers, canvas sneaker, work boot, waist bag, gloves, or another clear prototype.
+3. `designer_method_references`: choose 1-3 anonymous methods from the designer-method library, such as `平面到立体`, `解剖式戏剧裁剪`, `制作痕迹外露`, `身体建筑与垂坠体块`, `熟悉原型加雕塑变形底`, `鞋履建筑结构`, or `性能叙事可视化`.
+4. `designer_prompt_references`: optional designer names only when the user explicitly asks to test designer references in prompts. Keep them out of normal prompt prose unless Azoth's prompt rules allow them.
+5. `design_operators`: choose 1-2 operators such as `错位`, `膨胀`, `压缩`, `分段`, `外露`, `折叠`, `框架`, `开口`, `包覆`, or `悬挂`; specify body part and visible purpose.
+6. `body_fit_strategy`: explain how the design reinforces the WHOWHO width-first body: shoulder width, chest/abdomen readability, giant arms, heavy hands, thick thighs, stable shoes, or lowered center of gravity.
+7. `panel_paths`: write at least one path with start, route, endpoint, and rule. The path should avoid random surface lines and should not break the chest/abdomen into tiny shapes.
+8. `pattern_strategy`: choose low-density pattern placement such as edge trim, local emblem, interrupted side stripe, controlled plaid, radiating ribs, or heat-pressed fold lines. State density and forbidden misuse.
+9. `craft_boundaries`: name visible craft boundaries such as piping, binding, topstitching, exposed seam, zipper teeth, flat buckle tabs, ribbed hem, drawcords, hard plate edge, or shoe sidewall.
+10. `footwear_accessory_structure`: ensure shoes answer prototype, sole structure, upper cutting, cuff/sock/trouser connection, and center-of-gravity role; ensure accessories answer body location, attachment, shape, body-reading role, and occupation cue.
+11. `complexity_budget`: state `large silhouette 60 / medium panels 25 / small craft 10 / pattern-symbol 5`, or justify a small deviation.
+12. `design_failure_avoidance`: name avoided fake-high-design traps: random lines, all-over tiny pattern, cyber glow, texture-map fabric, structureless thick sole, or accessories as loose decoration.
+13. `design_function_slots`: list the active functions: `身体暴露`, `体积扩张`, `收束`, `功能挂载`, `身份标记`, `材质冲突`, `遮蔽`, `动作释放`, `仪式装饰`, `生活磨损`. Use at least three when the job allows it.
+14. `replacement_slots_used`: state which replaceable slots carried the design: `基础层`, `外层体积`, `腰部系统`, `腿部系统`, `手臂系统`, `头颈系统`, `标记系统`.
+15. `variation_matrix`: state the current `场景`, `情绪`, `身体需求`, `资源来源`, `识别强度`, and `变化幅度`. Infer conservatively from the character record and selected job when the user does not specify a scene.
+16. `anti_default_decision`: explain why the outfit does or does not use a shirt-like default as the primary visual. If it does, name the compensating structure that keeps it from being generic.
 
-If black-market stock provides `造型算法`, `设计功能位`, `可替换位`, `反默认价值`, or `变化矩阵标签`, prefer these fields when scoring stock fit. If older stock lacks these fields, infer only from formal fields already allowed to San Zhai, such as structure, silhouette, layering, accessories, material zones, and tags.
+If black-market stock provides `基础款原型`, `设计来源方法`, `设计师提示引用`, `设计操作`, `裁片路径`, `图案策略`, `工艺边界`, `身体适配`, `复杂度配额`, `失败规避`, `造型算法`, `设计功能位`, `可替换位`, `反默认价值`, or `变化矩阵标签`, prefer these fields when scoring stock fit. If older stock lacks these fields, infer only from formal fields already allowed to San Zhai, such as structure, silhouette, layering, accessories, material zones, and tags.
+
+### Designer Reference Handling
+
+Designer names are allowed only as prompt-level tests when the user asks for them. San Zhai should still create the outfit as original character design:
+
+- Good: `designer_method_references: ["解剖式戏剧裁剪", "熟悉原型加雕塑变形底"]`, then describe broad shoulder panels, a cinched waist, and a sculptural clean sole.
+- Conditional: `designer_prompt_references: ["Alexander McQueen", "Mihara Yasuhiro"]` when the user explicitly says designer names may be tried in the prompt.
+- Bad: `Alexander McQueen jacket`, `Rick Owens boots`, `Margiela style outfit`, or any designer name used instead of construction.
+
+If designer prompt references are recorded, keep them short and subordinate to construction. The visual outfit fields must remain fully understandable without the designer names.
 
 ### World Context Translation
 
@@ -157,6 +196,7 @@ black-market/inventory/styling/
 When selecting a set, inherit:
 
 - 结构描述: garment architecture and visible construction.
+- 基础款原型, 设计来源方法, 设计师提示引用, 设计操作, 裁片路径, 图案策略, 工艺边界, 身体适配, 复杂度配额, 失败规避 when present.
 - 造型算法: reusable outfit method.
 - 轮廓重心: shoulder/waist/leg balance and visual mass.
 - 层次关系: outer/inner/armor/accessory stacking.
@@ -226,6 +266,13 @@ When black-market inventory is checked, include:
 功能位: <active design function slots>
 可替换位: <slots used to avoid shirt/default lock-in>
 变化矩阵: <scene, emotion, body need, resource source, recognition strength, variation scale>
+设计来源方法: <anonymous designer-method references used>
+设计操作: <operators used and visible body parts>
+裁片路径: <main panel path start, route, endpoint, and rule>
+图案策略: <pattern type, placement, density, and prohibition>
+工艺边界: <craft boundaries used>
+鞋饰结构: <footwear sole/upper/cuff logic and accessory body role>
+复杂度配额: <large silhouette / medium panels / small craft / pattern-symbol distribution>
 世界底盘继承: <visible outfit decisions inherited from era, culture, street texture, technology, order, material ecology, and visual taboo>
 反默认判断: <why the outfit avoids or justifies shirt-like default>
 未选理由: <why other candidates fit less well>
@@ -246,6 +293,10 @@ Avoid:
 - reducing a complex set into a generic shirt plus pants
 - treating `职业` as permission to repeat the same shirt formula across characters
 - using abstract style labels without visible functional slots, replacement slots, or accessory systems
+- using designer names as a substitute for visible construction
+- using designer names in prompt-facing fields unless the user explicitly allowed designer prompt references
+- treating advanced design as random lines, full-body tiny patterns, cyber glow, texture-map fabric, structureless thick soles, or loose decorative accessories
+- drawing panel lines over joints without breaks or over the WHOWHO chest/abdomen as random surface graphics
 - copying `world_context` as prompt-like lore instead of turning it into visible garment decisions
 - using world context to drift into forbidden dock, cargo, heavy manual labor, dirty material, or heavy military aesthetics
 
