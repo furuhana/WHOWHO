@@ -67,6 +67,10 @@ Judge whether the outfit is a complete character design rather than a random out
 - 时代统一性
 - 轮廓识别
 - 层次完整度
+- 造型算法清晰度
+- 可替换位使用
+- 反默认表现
+- 世界底盘转译
 - 配饰功能性
 - 视觉负荷分配
 - 混搭控制
@@ -79,6 +83,35 @@ Use the verdicts:
 - `通过`: the outfit is coherent, readable, and has a strong design reason.
 - `勉强通过`: the outfit works but needs targeted strengthening.
 - `需要重做`: the outfit lacks design information, is visually incoherent, or collapses into generic clothing.
+
+### 3. Styling Algorithm Audit
+
+When auditing Character Forge output, check whether San Zhai actually used a styling algorithm rather than a garment-name default.
+
+Require:
+
+- A visible `造型算法` or clearly inferable outfit method.
+- At least three active design function slots when the job allows it, such as volume, cinch, mounting, marker, concealment, material contrast, movement release, or ritual decoration.
+- At least two non-shirt replacement slots if the outfit contains a shirt-like base layer.
+- A clear primary visual carrier beyond a plain shirt/T-shirt/Polo/service uniform shirt, unless the job truly requires that garment and other slots compensate.
+- A variation matrix reason: scene, emotional posture, body need, resource source, recognition strength, or variation幅度 should be visible enough to prevent the occupation from locking every outfit into one formula.
+- A visible translation of `world_context` when Character Forge provides it: era, culture, street texture, technology, order, material ecology, and visual taboo should affect construction, materials, accessories, or silhouette.
+
+Flag `衬衫默认复发` when a shirt-like garment becomes the primary visual and the rest of the outfit does not provide enough silhouette, waist, head/neck, hand/arm, leg, marker, accessory, material, or prop information.
+
+Flag `算法缺席` when the outfit is only a list of garments and has no reusable structure, no functional slot logic, and no reason why this character would choose this arrangement today.
+
+Flag `世界底盘空转` when the record includes era/culture/street/material context but the outfit still reads as generic modern clothing with no visible material ecology, street object, order marker, cultural construction, or visual taboo response.
+
+Sample audit language:
+
+```text
+这套的问题不是用了衬衫，而是衬衫承担了全部视觉任务。三宅需要补出明确造型算法，让腰部系统、外层体积、头颈遮蔽或功能挂载至少两项接管主视觉。
+```
+
+```text
+世界底盘没有进入衣服。既然设定里有雨棚街、修理铺和半管制秩序，造型至少要在材质、腰部挂载、身份标记或鞋履上给出可见回应。
+```
 
 ## Judgment System
 
@@ -104,6 +137,10 @@ Flag `设计信息不足` when most of these are true:
 - 手部 has no gloves, cuffs, tools, tickets, device, bag strap, or occupation-relevant object.
 - 鞋履 reads as generic and does not support occupation, era, or attitude.
 - There is no bag, outer layer, accessory, or carried object to add setting information.
+- The styling algorithm is missing or only repeats the occupation label.
+- No replacement slot besides `基础层` is doing design work.
+- The outfit relies on a shirt-like default without a compensating waist, outerwear, head/neck, hand/arm, leg, marker, material, or prop system.
+- World context exists but does not appear in silhouette, layer logic, material choice, accessories, street props, order markers, or taboo avoidance.
 
 Sample audit language:
 
@@ -172,6 +209,10 @@ For image reading plus audit, use:
 - 时代统一性：
 - 轮廓识别：
 - 层次完整度：
+- 造型算法清晰度：
+- 可替换位使用：
+- 反默认表现：
+- 世界底盘转译：
 - 配饰功能性：
 - 视觉负荷分配：
 - 混搭控制：

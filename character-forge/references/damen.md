@@ -43,9 +43,35 @@ Fill these fields:
 - desire, 1-10
 - execution, 1-10
 - social, 1-10
+- world_context:
+  - era_background
+  - culture_system
+  - culture_stage
+  - street_texture
+  - technology_level
+  - order_level
+  - material_ecology
+  - visual_taboo
+
+## World Context
+
+Generate a compact `world_context` after the basic person fields. This is the character's world floor: the everyday era, culture, street life, materials, and order conditions that later modules use. Keep each field short and visual. Do not write lore, plot, factions, relationships, full geography, or background scenes.
+
+Use:
+
+- `era_background`: visual-era feeling, not a strict calendar year. Examples: near-future with old shopping-street residue, late-industrial city, alternate modern, festival-normal city, post-bubble urban rebuild.
+- `culture_system`: cultural design source. Examples: East Asian street market, corporate municipality, temple-town commerce, repair-shop alley culture, commuter arcade culture, local guild association.
+- `culture_stage`: social-development phase. Examples: expansion, decline, reconstruction, prosperity, transition, strict regulation, informal autonomy.
+- `street_texture`: everyday street features that can become occupations, props, and outfit details. Examples: rain awnings, night markets, repair stalls, ticket booths, vending alleys, neighborhood patrol kiosks, uniform-heavy service streets.
+- `technology_level`: visible civilian technology level. Examples: modern, near-future civic devices, common mechanical tools, low-tech with ritual signage, mixed analog-digital.
+- `order_level`: public-order condition. Examples: stable, semi-regulated, high-surveillance, street self-governed, festival-loose, underground economy visible.
+- `material_ecology`: common clean materials available to clothing and props. Examples: rainproof cloth, transparent plastic, matte synthetic panels, metal buckles, old uniform cloth, thick cotton blocks, traditional textile panels.
+- `visual_taboo`: concise local avoid-list for later modules. Include defaults such as avoiding ordinary white-shirt lock-in, dirty or torn materials, heavy military drift, dock/cargo drift, and over-cyberpunk excess when relevant.
+
+World context may influence Bo Le's eligible flavor, San Zhai's outfit structure, Tony's head/neck coordination, Muse's styling audit, Blackwall's safety gate, and Azoth's visible prompt translation. It must not override user constraints or the fixed body standard.
 
 ## Guidance
 
 Prefer concrete, daily-life-readable traits. Avoid making the default character automatically drift into dock, shipyard, cargo, manual labor, dirty material, or gym-trainer directions.
 
-Keep the base compact. Later modules add identity, outfit, and grooming.
+Keep the base compact. Later modules add identity, outfit, and grooming. World context should give those modules a living street and material ecology, not a story synopsis.

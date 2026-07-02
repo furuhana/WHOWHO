@@ -52,6 +52,15 @@ Use Da Men fields:
 - desire
 - execution
 - social
+- world_context:
+  - era_background
+  - culture_system
+  - culture_stage
+  - street_texture
+  - technology_level
+  - order_level
+  - material_ecology
+  - visual_taboo
 
 ## Output
 
@@ -68,6 +77,11 @@ Fill:
 - Match high execution to organized or responsibility-heavy roles.
 - Match high social to public-facing roles.
 - Match high danger to morally gray jobs or associations only when it helps the design.
+- Use `world_context` to explain how the selected daily-life occupation exists in this world: street ecology, local order, material availability, technology level, and cultural system may flavor the match reason and gang/association.
+- When the user has not specified an occupation, world context may shape category weights only through the jobs library's ordinary eligible categories; it must not invent a new job outside `## Current Entries`, reroll an already selected fair draw, or force every result toward the most visually compatible job.
+- `street_texture` may suggest daily-life job families such as repair, vending, ticketing, patrol, service, shopkeeping, transport-adjacent-but-not-cargo, clerical, neighborhood management, entertainment, or ritual commerce when those jobs already exist in the library.
+- `order_level` may shape the gang/association style: municipal club, neighborhood watch, market association, underground broker circle, festival committee, repair guild, tenant union, or corporate service chapter.
+- `visual_taboo` is binding. If world context says to avoid ordinary shirt lock-in, dirty materials, heavy military drift, dock/cargo drift, or over-cyberpunk excess, mention it in `match_reason` as guidance for later modules without changing the selected job.
 - These matching notes explain the selected job after the fair draw; they are not permission to override or reroll the selected job.
 - Keep the result imageable and useful for later outfit design.
 - If a later black-market stock item fits a different job better than the chosen job, keep the chosen job and let San Zhai adapt, borrow only compatible parts, or fall back to the normal outfit library.

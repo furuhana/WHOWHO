@@ -25,6 +25,7 @@ Use all fields from:
 Check:
 
 - Does the character read as an animation character design rather than random real-life details?
+- If Da Men provided `world_context`, did later modules use it as visible everyday-world guidance rather than lore, background scenery, or an excuse to change the character's occupation after selection?
 - Do occupation, gang, outfit, hairstyle, beard, and face shape support the same character?
 - Does the body preserve the fixed standard: width-first and grounded, around 6.2-6.6 heads tall, dramatically broad and heavily muscled, shoulder span much wider than hips, short thick neck buried between huge traps, enormous deltoids, huge chest shelf, thick barrel torso, large arms like pillars, huge forearms, oversized heavy hands, very thick thighs, natural but not long legs, large heavy feet, and a compact head?
 - Does eyebrow language stay at static eyebrow shape, without turning into eye shape, gaze, expression acting, makeup, attractiveness, or detailed facial-feature wording?
@@ -38,6 +39,10 @@ Check:
 - Is anything visually abrupt without a useful reason?
 - Is the outfit clean and readable?
 - Are there enough distinctive visual hooks for image generation?
+- Did San Zhai record a concrete `styling_algorithm`, active `design_function_slots`, `replacement_slots_used`, `variation_matrix`, and `anti_default_decision`?
+- If `world_context` exists, did San Zhai translate era, culture, street texture, technology, order, material ecology, and visual taboo into visible outfit decisions?
+- If a shirt-like base layer is present, does another visible system carry the main outfit idea, such as outer volume, waist structure, head/neck structure, hand/arm gear, leg structure, markers, material contrast, or functional mounted objects?
+- Did Muse explicitly pass or accept the outfit's styling algorithm, replacement-slot use, anti-default behavior, and world-context translation instead of only judging generic clothing coherence?
 - If black-market stock was used, did each module use only formal stock from its allowed category?
 - If 缪斯 was run, did it pass or explicitly accept only minor outfit-quality issues as `勉强通过` before Blackwall?
 - If black-market inventory was enabled, did each relevant module provide a `黑商取货` log with lane, candidates, selected stock, selection reason, and rejection reason?
@@ -80,6 +85,14 @@ Reject or reroute if the result contains:
 - black-market `现场验货`, `常规描述`, source filenames, paths, or raw image analysis leaking into the character record or prompt
 - black-market inventory content outside `正式入库` being used as stock
 - black-market styling stock used as expression, expression stock used as styling or pose, pose stock used as styling or face design, hairstyle stock used for beard, eyebrows, face shape, facial features, makeup, complexion, or attractiveness, or eyebrow stock used for hairstyle, beard, eye shape, expression acting, face shape, facial features, makeup, complexion, or attractiveness
+- San Zhai output that lacks a styling algorithm, lacks functional-slot reasoning, or cannot explain why this outfit is not just another occupation-locked shirt formula
+- `world_context` used as lore, background scenery, source identity, or faction story instead of compact everyday-world constraints
+- `world_context` causing Bo Le to invent jobs outside the jobs library, reroll a fair job draw, or drift into forbidden dock, cargo, heavy manual labor, or fitness-coach directions
+- `world_context.visual_taboo` being ignored when it bans ordinary shirt lock-in, dirty materials, heavy military drift, dock/cargo drift, over-cyberpunk excess, or other local constraints
+- San Zhai outfit output that receives world context but shows no visible translation through material ecology, street accessories, order markers, cultural construction, technology level, or taboo avoidance
+- a shirt, button-up, T-shirt, polo, undershirt, or service-uniform shirt becoming the primary visual when no compensating outerwear, harness, apron, armor, robe, vest, wrap, waist system, head/neck system, hand/arm system, leg system, marker system, material contrast, or prop system carries the design
+- `anti_default_decision` that merely says the job requires a shirt without naming visible compensating structures, unless the user explicitly requested a plain shirt outfit
+- `variation_matrix` missing from San Zhai when the outfit otherwise collapses into the same occupational default
 - black-market pose stock that creates multiple poses, front-side-back turnarounds, segmented character sheets, panel layouts, callout boxes, background scenes, anatomy redesign, or action clutter instead of one clear full-body pose
 - black-market pose stock being available but Azoth omitting pose selection, failing to name the selected pose, or replacing the selected pose with generic prompt language
 - repeated use of the same recent pose category when viable alternatives exist, especially one hand extended forward, open palm presenting, pointing, hand-forward small-object display, or chest-strap grip plus hand-forward presentation

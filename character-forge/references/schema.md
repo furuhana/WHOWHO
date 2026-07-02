@@ -16,6 +16,16 @@ basic:
   execution: 1-10
   social: 1-10
 
+world_context:
+  era_background:
+  culture_system:
+  culture_stage:
+  street_texture:
+  technology_level:
+  order_level:
+  material_ecology:
+  visual_taboo:
+
 identity:
   job:
   gang:
@@ -93,6 +103,16 @@ desire -> 欲望值
 execution -> 执行力
 social -> 社交力
 
+world_context -> 世界底盘
+era_background -> 时代背景
+culture_system -> 文化体系
+culture_stage -> 文化阶段
+street_texture -> 市井特点
+technology_level -> 技术层级
+order_level -> 秩序状态
+material_ecology -> 材料生态
+visual_taboo -> 视觉禁忌
+
 identity -> 社会身份
 job -> 职业
 gang -> 帮派
@@ -164,3 +184,47 @@ Expression and pose words here are selection hints only. Azoth must prefer appro
 - 高欲望值：躁动表情、显眼细节、野心感。
 - 高执行力：克制姿态、实用工具、有条理的造型。
 - 高社交力：开放表情、自信呈现、容易接近的细节。
+
+## User-Facing Table Display
+
+In `角色档案`, prefer Markdown tables over long field lists.
+
+Use two-group side-by-side tables when fields are compact:
+
+```markdown
+| 基础信息 | 内容 | 能力数值 | 内容 |
+|---|---|---|---|
+| 名字 |  | 贫富值 |  |
+| 性别 |  | 危险值 |  |
+| 年龄 |  | 欲望值 |  |
+| 国籍 |  | 执行力 |  |
+| 体型 |  | 社交力 |  |
+| 性格 |  |  |  |
+
+| 世界底盘 | 内容 | 世界底盘 | 内容 |
+|---|---|---|---|
+| 时代背景 |  | 技术层级 |  |
+| 文化体系 |  | 秩序状态 |  |
+| 文化阶段 |  | 材料生态 |  |
+| 市井特点 |  | 视觉禁忌 |  |
+
+| 社会身份 | 内容 | 头脸造型 | 内容 |
+|---|---|---|---|
+| 职业 |  | 发型 |  |
+| 帮派 |  | 眉型 |  |
+| 匹配理由 |  | 胡子 |  |
+|  |  | 脸型 |  |
+```
+
+Use a single two-column table or short grouped list when values are long, especially for `工作服`, `服装理由`, audits, and prompt notes. Keep final prompts in fenced code blocks, not tables.
+
+World context fields are selection and translation hints, not prompt text. Later modules should translate them into visible character-bound design:
+
+- 时代背景：轮廓、闭合方式、层次节奏、硬件密度。
+- 文化体系：包覆方式、腰部结构、身份标记、纹样位置、服务/市集/工会小件。
+- 文化阶段：新配发、旧制度残留、干净自改、严格管制、繁荣定制、转型混搭。
+- 市井特点：票卡、腰包、摊位牌、修理工具、雨具、巡查标、路线卡等随身物。
+- 技术层级：模拟标签、机械扣具、民用设备、透明防护件、小型扫描器。
+- 秩序状态：遮蔽、证件、徽章、巡查标记、防御层或街区自治标识。
+- 材料生态：防水布、透明塑料、哑光合成面、金属扣具、旧制服布料、传统织物片。
+- 视觉禁忌：直接约束服装、职业、材质和提示词，不写入最终 prompt 字面。

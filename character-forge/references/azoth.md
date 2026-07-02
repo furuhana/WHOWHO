@@ -30,6 +30,8 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Default to omitting the character's personal name from `prompt_en` unless the user requests it or the name itself has visible design meaning. Keep names in the Chinese character record, not in the image prompt.
 - Preserve every Blackwall-approved visible design domain as its own prompt material: body standard, occupation readability, outfit silhouette and layers, hairstyle, static eyebrow shape, selected pose description, selected expression description, rendering style, and single-character white-background constraints.
 - Expand approved visual details into concrete prompt language instead of compressing them into labels, summaries, or abstract traits.
+- Translate San Zhai's `styling_algorithm`, `design_function_slots`, `replacement_slots_used`, `variation_matrix`, and `anti_default_decision` into visible outfit and accessory description. Do not put these internal field names or Chinese algorithm labels into the final prompt body.
+- Translate approved `world_context` only through visible character-bound details: garment construction, material zones, tools, tags, badges, bags, fasteners, cultural cut logic, civic devices, and Mirage platform props when active. Do not paste world-context field names or abstract setting labels into the prompt body.
 - Remove only forbidden, contradictory, non-visual, or generation-harming phrases. Do not remove useful visual information merely because the prompt is already long.
 - When a selected black-market pose or expression is used, translate its full `描述` into the English prompt unless a phrase must be trimmed for safety or direct contradiction.
 - Keep the expanded prompt efficient: avoid meta-explanations such as `should read as`, `rather than`, `instead of`, `not posing for`, or repeated instructions about what the design is not.
@@ -52,6 +54,8 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Avoid character sheet wording: no multiple characters, no multiple poses, no front-side-back turnaround, no panel layout, no split view, no callout boxes, no background scene unless the user explicitly asks.
 - Keep daily-life occupation readable.
 - Do not copy broad styling labels such as urban, streetwear, city casual, casual, workwear, or light utility into the final prompt unless the user explicitly requested that style. If those labels come from outfit stock, translate them into concrete visual details such as silhouette, layering, color blocks, pocket placement, straps, footwear shape, or functional accessories.
+- Do not copy styling algorithm labels such as `警示机能型`, `职业异化型`, `仪式宽体型`, `轻装装甲型`, or `权力套装型` into the prompt. Convert them into concrete construction: high-visibility trim, segmented outer shell, apron panels, wide sleeves, harness straps, protective plates, broad belt, hanging tags, transparent layer, tool pouches, heavy boots, or other approved visible elements.
+- Do not copy world-context labels such as `时代背景`, `文化体系`, `文化阶段`, `市井特点`, `技术层级`, `秩序状态`, `材料生态`, `视觉禁忌`, `near-future`, `East Asian street market`, or `semi-regulated` as abstract labels. Convert them into visible prompt details, such as rainproof short jacket panels, arcade service tags, municipal badge tabs, clean metal buckles, transparent sleeve guards, compact repair pouch, or simple civic scanner.
 - Include clean high-quality Japanese TV anime cel shading, crisp linework, fresh colors, tidy shadows, and clean stylized animation character design.
 - Include Tony's `eyebrows` as static eyebrow-shape language when it is useful for character recognition. Keep it separate from expression acting.
 - The final prompt may include broad stylized face-shape direction and simplified facial-proportion language when it comes from the approved character record or the target anime rendering style. This is allowed as design guidance. It must not become a copied reference-face identity, exact feature arrangement, recognizable likeness, celebrity/source-character match, or realistic face reconstruction.
@@ -103,6 +107,25 @@ Use these target lengths for English dynamic slots. They are guidance for useful
 
 Dynamic slots may be written in `prompt_notes` for inspection when useful, but the final user-facing `英文提示词` must be the completed prompt, not a list of raw slots.
 
+When drafting `OUTFIT_DYNAMIC` and `ACCESSORY_DYNAMIC`, consume the San Zhai styling-decision fields as follows:
+
+- `styling_algorithm`: use it only to decide which visible systems deserve emphasis.
+- `design_function_slots`: make each active slot visible through clothing construction, silhouette, attachment, exposure, concealment, material contrast, or motion release.
+- `replacement_slots_used`: ensure the prompt names the replacement carriers, especially non-shirt carriers like waist system, outer volume, head/neck system, hand/arm system, leg system, or marker system.
+- `variation_matrix`: express only visible consequences, such as off-duty looseness, formal structure, defensive concealment, action-ready mounting, ceremony drape, or repaired-but-clean construction.
+- `anti_default_decision`: if a shirt-like base exists, describe the compensating structure that keeps the outfit from reading as a plain shirt outfit.
+
+When consuming `world_context`, use it this way:
+
+- `era_background`: visible era-specific garment rhythm and hardware, not a year label.
+- `culture_system`: visible construction, tags, wrap logic, service markers, market objects, or association symbols.
+- `culture_stage`: new issue, maintained remnant, self-modified, regulated, prosperous custom, or transitional mixed kit.
+- `street_texture`: small character-bound objects and accessories, not a background scene.
+- `technology_level`: amount and type of visible civilian hardware.
+- `order_level`: ID markers, concealment, patrol/service cues, or association badges.
+- `material_ecology`: broad clean material zones.
+- `visual_taboo`: negative and positive constraints that keep the prompt away from forbidden or overused directions.
+
 ## Prompt Integrity Gate
 
 Before returning Azoth output or handing off to Mirage/Image Gen, run this gate:
@@ -126,6 +149,8 @@ Fail the audit if `prompt_en` or `prompt_cn` contains source/provenance wording 
 - Raw stock names inside the prompt body, even when surrounded by imageable description.
 - Module names or workflow labels such as `San Zhai`, `Tony`, `Azoth`, `Blackwall`, `Muse`, `Mirage`, `三宅`, `托尼`, `阿佐特`, `黑墙`, `缪斯`, or `蜃楼`.
 - Prompt notes, reasoning, rejection reasons, cooldown notes, candidate lists, or any explanation of why an item was selected.
+- Internal styling-decision labels or field names such as `styling_algorithm`, `design_function_slots`, `replacement_slots_used`, `variation_matrix`, `anti_default_decision`, `造型算法`, `设计功能位`, `可替换位`, `变化矩阵`, `反默认判断`, or `反默认价值`.
+- World-context field names or abstract labels such as `world_context`, `era_background`, `culture_system`, `culture_stage`, `street_texture`, `technology_level`, `order_level`, `material_ecology`, `visual_taboo`, `世界底盘`, `时代背景`, `文化体系`, `文化阶段`, `市井特点`, `技术层级`, `秩序状态`, `材料生态`, or `视觉禁忌`.
 - Prompt-engineering instructions that read like rules instead of image prose, such as `For any non-short pants style`, `use 9-length pants only`, `Do not describe`, `must be written as`, `insert this`, or `apply this guard`. Rewrite those as direct visual description and compact negative image constraints.
 
 Fail the audit if an inventory item is used only as abstract mood or category drift instead of visible material. Examples that must be rejected:
@@ -203,13 +228,17 @@ When black-market pose stock exists, Azoth must run pose selection before writin
 
 Pose selection must follow this order:
 
-1. Identify the broad pose category for each viable pose candidate, such as `standing`, `walking`, `seated`, `low seated`, `crouching`, `kneeling`, `half-reclining`, `leaning`, `arms crossed`, `hands on hips`, `shoulder-carried prop`, `low center of gravity`, or `action freeze`.
-2. Apply recent-pose cooldown before scoring job fit. Hard-exclude the last 3 used pose categories when alternatives exist. Strongly downweight the last 10 used pose categories.
-3. Hard-exclude recent or overused hand-display patterns when alternatives exist: one hand extended forward, open palm presenting, pointing at the viewer, one hand holding a small object forward, or one hand gripping a chest strap while the other hand presents forward.
-4. Choose the pose category first, then choose one concrete pose stock item within that category.
-5. After choosing a pose, normalize face visibility without changing the locked body action: add a head-and-gaze clause that keeps the face readable to the viewer. For side-body, angled, walking-away, turning-back, low, or action poses, require the head to turn toward the camera in a three-quarter view and the eyes to look toward the screen/camera area. Do not let profile, looking far off-frame, looking down, or looking fully away hide the face unless the user explicitly requests that mood.
-6. If the selected pose is not a presentation pose, keep occupational props on the belt, backpack, shoulder strap, leg side, chest badge, neck loop, or carried neutrally at the side instead of forcing a hand-forward display.
-7. If all viable pose stock is recently used, select the least-recently used category and state the cooldown limitation in the pose reasoning log.
+1. Read the stock's structure fields when present: `姿势大类`, `身体朝向`, `重心高度`, `动势强度`, `手部策略`, and `展示风险`. If an older stock item lacks them, infer these fields from `名称`, `描述`, and `标签`.
+2. Treat `姿势大类` as a broad silhouette family, not a micro-label. Valid broad families include `standing`, `walking`, `seated`, `crouching`, `kneeling`, `airborne`, `kick`, `fighting`, `lunge`, `leaning`, `shoulder_prop`, `turning_guard`, `victory`, `retreat`, and `tired`.
+3. Roll the broad pose family before scoring job fit. Draw across available `姿势大类` families, not across individual stock names. This keeps the first decision about silhouette, height, and motion instead of occupation convenience.
+4. Apply recent-pose cooldown to `姿势大类` before scoring job fit. Hard-exclude the last 3 used pose families when alternatives exist. Strongly downweight the last 10 used pose families.
+5. Downweight `standing` as a family unless the user explicitly asks for a plain standing pose, the job absolutely needs a neutral display, or all viable non-standing families are exhausted. If the user has complained about pose sameness, side-standing, or basic standing in the current request or recent context, hard-exclude `standing` for the next pose selection when any non-standing family is viable. Do not treat side-standing, hand-on-hip, strap-holding, object-display, and relaxed-standing as meaningful pose variety from each other.
+6. Downweight `展示风险: "high"` and overused hand-display strategies when alternatives exist: `forward_display`, `object_display`, `garment_display`, `pointing`, `forward_reach`, one hand extended forward, open palm presenting, pointing at the viewer, one hand holding a small object forward, or one hand gripping a chest strap while the other hand presents forward.
+7. Give priority to visibly different structures when the job allows it: `seated`, `crouching`, `kneeling`, `airborne`, `kick`, `fighting`, `lunge`, `turning_guard`, `retreat`, `walking`, `shoulder_prop`, `victory`, and `tired`. Prefer low, airborne, kicking, seated, crouched, turning-back, or full-body action silhouettes over another side-standing variant.
+8. Choose one concrete pose stock item inside the rolled or highest-weight viable `姿势大类`.
+9. After choosing a pose, normalize face visibility without changing the locked body action: add a head-and-gaze clause that keeps the face readable to the viewer. For side-body, angled, walking-away, turning-back, low, or action poses, require the head to turn toward the camera in a three-quarter view and the eyes to look toward the screen/camera area. Do not let profile, looking far off-frame, looking down, or looking fully away hide the face unless the user explicitly requests that mood.
+10. If the selected pose is not a presentation pose, keep occupational props on the belt, backpack, shoulder strap, leg side, chest badge, neck loop, or carried neutrally at the side instead of forcing a hand-forward display.
+11. If all viable pose stock is recently used, select the least-recently used non-standing family first; use `standing` only when every stronger silhouette is incompatible, and state the limitation in the pose reasoning log.
 
 The selected pose description must be visibly present in `prompt_en` and `prompt_cn`. If the character's job requires a prop, the prop placement must preserve the locked pose. Do not replace the selected pose with generic phrasing such as `standing naturally with one hand forward` unless that exact pose description was selected and is not under cooldown. Keep the pose stock name in reasoning or `prompt_notes`, not in the prompt body.
 
@@ -232,15 +261,16 @@ Allowed pose stock:
 - standing pose
 - weight shift
 - body angle
+- pose structure metadata: `姿势大类`, `身体朝向`, `重心高度`, `动势强度`, `手部策略`, `展示风险`
 - arm and hand placement
 - gesture
 - prop interaction
 - body language
 - action freeze-frame
 
-Use only stock fields such as `名称`, `描述`, and `标签`. Never read or use `现场验货`, `常规描述`, source filenames, paths, raw image analysis, styling stock, makeup, facial features, face shape, complexion, grooming, or attractiveness judgments.
+Use only stock fields such as `名称`, `描述`, `标签`, `姿势大类`, `身体朝向`, `重心高度`, `动势强度`, `手部策略`, and `展示风险`. Never read or use `现场验货`, `常规描述`, source filenames, paths, raw image analysis, styling stock, makeup, facial features, face shape, complexion, grooming, or attractiveness judgments.
 
-For the final prompt body, translate and use the selected stock's `描述`, not its `名称` or `标签`. `名称` and `标签` are for selection, matching, logs, and `提示词说明` only.
+For the final prompt body, translate and use the selected stock's `描述`, not its `名称`, `标签`, or structure metadata. `名称`, `标签`, `姿势大类`, `身体朝向`, `重心高度`, `动势强度`, `手部策略`, and `展示风险` are for selection, matching, logs, and `提示词说明` only.
 
 This rule applies to every final prompt body, including grooming, outfit, pose, expression, and Mirage-related prose. The final prompt must never say `uses the stock`, `based on the stock`, `from the stock`, `black-market stock`, or similar provenance wording. A clean sentence says `His hair is short, straight, fragmented, thickly lifted on top, and tightened at the sides`; it does not say `His hairstyle uses the stock "厚蓬碎短发"`.
 
@@ -264,9 +294,10 @@ When black-market inventory is enabled, record the inventory-level reasoning log
 候选：<1-3 pose stock names or 无可用库存>
 使用：<selected pose stock name or 未使用>
 姿势大类：<selected broad pose category>
+结构抽选：<身体朝向 / 重心高度 / 动势强度 / 手部策略 / 展示风险>
 冷却处理：<excluded or downweighted recent pose categories, or none>
 道具适配：<how job props preserve the locked pose instead of forcing a hand-forward display>
-取货理由：<body-performance fit based on 名称, 描述, 标签>
+取货理由：<body-performance fit based on 名称, 描述, 标签, and structure metadata>
 未选理由：<why other candidates fit less well>
 
 [阿佐特] 黑商取货：

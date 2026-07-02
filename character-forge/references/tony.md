@@ -26,6 +26,8 @@ Use:
 - job
 - gang
 - outfit
+- world_context when present, especially culture_system, era_background, street_texture, order_level, and visual_taboo
+- San Zhai head/neck outfit structures such as masks, goggles, hood frames, high collars, headphones, scarves, head wraps, neck loops, and shoulder/upper-back volume
 - black-market formal hairstyle stock, enabled by default when the shelf exists
 - black-market formal eyebrow stock, enabled by default when the shelf exists
 
@@ -42,6 +44,9 @@ Fill:
 ## Rules
 
 - Match the face and hair to the character's social role and animation readability.
+- Coordinate hairstyle volume and silhouette with the approved outfit's head/neck system. If the outfit includes masks, goggles, hood frames, high collars, headphones, scarves, or shoulder/upper-back volume, choose hair that leaves those structures readable and does not fight their silhouette.
+- Let world context lightly shape grooming only through clean, visible social fit: workplace neatness, street association polish, festival-town restraint, regulated-service tidiness, or self-governed alley practicality. Do not turn world context into face copying, ethnicity inference, makeup, complexion, or source identity.
+- Respect `world_context.visual_taboo` when it affects grooming drift, such as avoiding heavy military styling, over-cyberpunk excess, dirty presentation, or ordinary service-uniform sameness.
 - Use beard and broad face silhouette to strengthen personality, not to make the character generically tough.
 - Make the result visually distinct but still daily-life believable.
 - Apply hairstyle cooldown across repeated character generations. Never select the same hairstyle as the immediately previous generated character unless the user explicitly requests it. Hard-exclude hairstyles used in the last 3 generated characters when alternatives exist, and strongly downweight hairstyles used in the last 10 generated characters. If the inventory is too small to satisfy the full cooldown, prefer the least-recently used hairstyle and state the cooldown constraint in `grooming_reason`.

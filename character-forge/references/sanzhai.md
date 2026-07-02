@@ -17,6 +17,7 @@ Read:
 Use:
 
 - basic body_type, personality, wealth, danger, desire, execution, social
+- world_context: era_background, culture_system, culture_stage, street_texture, technology_level, order_level, material_ecology, visual_taboo
 - identity.job
 - identity.gang
 - black-market formal styling stock, enabled by default when the structured shelf exists
@@ -31,6 +32,11 @@ Fill:
 - socks
 - shoes
 - exactly 3 accessories or props, selected from head, neck, shoulder, chest, hand, waist, leg, carried item
+- styling_algorithm
+- design_function_slots
+- replacement_slots_used
+- variation_matrix
+- anti_default_decision
 - outfit_reason
 - 黑商取货 log when black-market inventory is checked
 
@@ -42,6 +48,65 @@ Fill:
 - The visible torso detail must support the fixed strong body standard. When a fitted inner layer is visible, it should show chest and abdominal masses through clean animation shape lines, not random fabric wrinkles.
 - Avoid hiding the torso completely with loose, boxy layers unless the selected outfit structure needs that silhouette and still has strong readable design information elsewhere.
 - Choose accessories and small items that help image generation understand the role and design, not just filler.
+- Treat the main outfit decision as a styling algorithm, not a garment-name lookup. Choose what carries the design first: silhouette, layer system, waist structure, head/neck structure, accessory system, material contrast, or functional mounting.
+- Use shirts, button-ups, T-shirts, polos, undershirts, and service-uniform shirts as base layers only when justified by job or selected stock. They should not be the primary visual idea when viable outerwear, harness, apron, armor, robe, vest, wrap, belt, or accessory systems can carry the outfit.
+- Treat `world_context` as the outfit's street and material ecology. Translate it into visible clothing structure, not lore text.
+- Respect `visual_taboo` as a local design guard. If it bans ordinary shirt lock-in, dirty materials, heavy military drift, dock/cargo drift, or over-cyberpunk excess, San Zhai must avoid those directions unless the user explicitly overrides them.
+
+## Styling Decision Engine
+
+Before filling garment fields, decide these five items:
+
+1. `styling_algorithm`: the reusable outfit method, such as `警示机能型`, `轻装装甲型`, `职业异化型`, `权力套装型`, `仪式宽体型`, `透明防护型`, `裸核束缚型`, `街头战术型`, `厨工匠人型`, `贵族改装型`, `荒野补丁型`, `冷感封闭型`, `松弛居家型`, `制服拆解型`, `机械维修型`, or another concrete algorithm inherited from black-market stock.
+2. `design_function_slots`: list the active functions: `身体暴露`, `体积扩张`, `收束`, `功能挂载`, `身份标记`, `材质冲突`, `遮蔽`, `动作释放`, `仪式装饰`, `生活磨损`. Use at least three when the job allows it.
+3. `replacement_slots_used`: state which replaceable slots carried the design: `基础层`, `外层体积`, `腰部系统`, `腿部系统`, `手臂系统`, `头颈系统`, `标记系统`.
+4. `variation_matrix`: state the current `场景`, `情绪`, `身体需求`, `资源来源`, `识别强度`, and `变化幅度`. Infer conservatively from the character record and selected job when the user does not specify a scene.
+5. `anti_default_decision`: explain why the outfit does or does not use a shirt-like default as the primary visual. If it does, name the compensating structure that keeps it from being generic.
+
+If black-market stock provides `造型算法`, `设计功能位`, `可替换位`, `反默认价值`, or `变化矩阵标签`, prefer these fields when scoring stock fit. If older stock lacks these fields, infer only from formal fields already allowed to San Zhai, such as structure, silhouette, layering, accessories, material zones, and tags.
+
+### World Context Translation
+
+Before choosing final garments, convert `world_context` into outfit constraints:
+
+- `era_background`: choose era-readable silhouette, closure, layer rhythm, and accessory density. Keep it subtle; do not turn every character into a costume-history plate.
+- `culture_system`: choose culturally grounded construction hints such as wrap logic, apron panels, waist sash, municipal badges, market tags, temple-town cords, arcade service tabs, or guild-like tool placement.
+- `culture_stage`: decide whether clothing reads as new issue, carefully maintained old-system remnant, clean self-modified piece, strict regulated uniform, prosperous custom item, or transitional mixed kit.
+- `street_texture`: add everyday setting details through bags, pouches, tickets, rain covers, repair tools, vendor tags, kiosk IDs, service loops, route cards, or small clean carried objects.
+- `technology_level`: decide how much visible hardware is allowed: analog tags, mechanical buckles, simple civic devices, transparent plastic guards, compact scanners, or low-tech textile solutions.
+- `order_level`: decide the amount of concealment, identification, defensive layering, patrol-like markers, or self-governed street association symbols.
+- `material_ecology`: choose broad clean material zones such as rainproof cloth, transparent plastic, matte synthetic panels, metal buckles, old uniform cloth, thick cotton blocks, traditional textile panels, or hard shell accents.
+- `visual_taboo`: hard-filter outfit directions that would violate the local world floor.
+
+Never write `world_context` phrases directly into outfit fields as abstract labels. Convert them into visible garments, construction, accessories, materials, and color/value relationships.
+
+### Functional Slot Menu
+
+Use functional slots to diversify outfits without changing the job:
+
+- 身体暴露: chest opening, bare arms, shoulder cut, back opening, leg exposure, or no exposure.
+- 体积扩张: shoulder width, sleeve mass, back shell, wide pants, heavy sole, broad apron, or robe volume.
+- 收束: belt, cinch, harness, high collar, cuff, leg strap, waist wrap, or apron tie.
+- 功能挂载: waist tools, leg bag, chest badge, back pack, forearm device, neck loop, or side carry.
+- 身份标记: armband, text tape, badge, color strip, number, emblem, or patterned panel.
+- 材质冲突: soft cloth with hard shell, transparent layer over fitted base, traditional textile with buckles, matte fabric with metal hardware.
+- 遮蔽: mask, goggles, hood, high collar, gloves, scarf, or head wrap.
+- 动作释放: short outer layer, sleeveless top, wide pants, slit, stretch base layer, open-front layer.
+- 仪式装饰: drape, long hanging strap, wide sleeve, waist sash, symbolic panel, or large collar.
+- 生活磨损: relaxed roll, temporary tie, softened fold, repaired seam, or loosened fastening. Keep it clean; do not introduce dirt, stains, tears, grease, or noisy texture.
+
+### Variation Matrix
+
+Use the matrix to prevent occupational lock-in:
+
+- 场景: work, off-duty, street, action, ceremony, travel, indoor, rain, night.
+- 情绪: defensive, showing off, tired, excited, oppressive, relaxed, disguised, unstable.
+- 身体需求: mobility, strength display, concealment, cooling, warmth, injury support.
+- 资源来源: issued, self-modified, borrowed, repaired cleanly, expensive custom, improvised cleanly.
+- 识别强度: strong, medium, weak, disguised.
+- 变化幅度: 20% small variation, 50% scene change, 80% story-node change.
+
+When no explicit scene exists, default to `work / medium识别 / 50%换场景` and still avoid making the job collapse into one fixed shirt formula.
 
 ## Recurring Anchor
 
@@ -92,12 +157,16 @@ black-market/inventory/styling/
 When selecting a set, inherit:
 
 - 结构描述: garment architecture and visible construction.
+- 造型算法: reusable outfit method.
 - 轮廓重心: shoulder/waist/leg balance and visual mass.
 - 层次关系: outer/inner/armor/accessory stacking.
+- 设计功能位: body exposure, volume, cinch, mounting, marker, material contrast, concealment, movement, ritual, and clean wear functions.
 - 色块图谱: value blocks, area, position, and role.
 - 边界类型: piping, panel seams, hard edges, soft folds, drawstrings, buckles.
 - 材质分区: cloth, hard shell, leather-like zones, waterproof panels, metal hardware.
 - 饰品系统: bags, straps, goggles, masks, gloves, wrist pieces, leg pieces, badges, cords, zippers, buckles, hooks.
+- 可替换位: base layer, outer volume, waist system, leg system, arm system, head/neck system, and marker system.
+- 反默认价值 and 变化矩阵标签 when present.
 
 Do not copy specific source colors unless the stock's `上色规则` or user request explicitly makes a color functional. Preserve the value-map relation instead.
 
@@ -135,6 +204,10 @@ At least one accessory or small item should be considered when it supports the s
 - Do not repeatedly make the main visual read as shirt, button-up shirt, T-shirt, polo, undershirt, or service uniform shirt when viable alternatives exist.
 - A fitted T-shirt or shirt may remain as base_layer, but it should not become the primary outfit idea unless the selected set or job requires it.
 - Prefer outerwear, armor, harnesses, aprons, robes, jackets, vests, wraps, or accessory systems as the primary visual structure when compatible.
+- If the previous or obvious job default is a shirt, choose at least two non-shirt carriers from `外层体积`, `腰部系统`, `头颈系统`, `手臂系统`, `腿部系统`, or `标记系统`.
+- If a shirt-like base is required, mutate at least three visible variables: collar/neckline, sleeve state, layer over it, waist structure, material block, fastening, accessory load, or pants/footwear silhouette.
+- Do not let `fitted inner white T-shirt` from the recurring anchor become the whole concept. It exists to support body readability; another garment system must carry identity unless the job truly requires plainness.
+- If `world_context.visual_taboo` includes avoiding ordinary white-shirt lock-in or service-uniform default, treat that as stronger than the recurring anchor and use the fitted white T-shirt only as a visible body-readable underlayer.
 - Apply footwear cooldown across repeated character generations when alternatives exist. Vary shoe height, sole weight, closure structure, toe shape, color-block position, or material block.
 
 ## Black-Market Log
@@ -149,6 +222,12 @@ When black-market inventory is checked, include:
 使用策略: 完整套装继承 / 套装结构继承并局部替换 / 单品补强 / 未使用
 取货理由: <job/social-role fit>
 继承重点: <structure, silhouette, color-map, layering, accessories, material zones>
+造型算法: <selected or inferred reusable outfit algorithm>
+功能位: <active design function slots>
+可替换位: <slots used to avoid shirt/default lock-in>
+变化矩阵: <scene, emotion, body need, resource source, recognition strength, variation scale>
+世界底盘继承: <visible outfit decisions inherited from era, culture, street texture, technology, order, material ecology, and visual taboo>
+反默认判断: <why the outfit avoids or justifies shirt-like default>
 未选理由: <why other candidates fit less well>
 ```
 
@@ -165,6 +244,10 @@ Avoid:
 - micro-weave, dense fabric texture, speckles, noisy texture-map detail
 - full-length trousers, capri pants, jogger cuffs, pants tucked into socks, striped white socks unless explicitly requested
 - reducing a complex set into a generic shirt plus pants
+- treating `职业` as permission to repeat the same shirt formula across characters
+- using abstract style labels without visible functional slots, replacement slots, or accessory systems
+- copying `world_context` as prompt-like lore instead of turning it into visible garment decisions
+- using world context to drift into forbidden dock, cargo, heavy manual labor, dirty material, or heavy military aesthetics
 
 ## Library Writes
 

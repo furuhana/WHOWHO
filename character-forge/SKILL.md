@@ -115,7 +115,7 @@ Use this format:
 
 Black-market inventory is enabled by default whenever the shelf exists. When the user provides a `黑商货单`, explicitly asks to use `@黑商` inventory, or `black-market/inventory.md` exists in the workspace, treat it as active external stock for the relevant modules. It is still subordinate to Blackwall safety and character fit, but the matching module must check it before falling back to the normal library.
 
-Read only `正式入库` items from black-market stock. Use only each item's `名称`, `描述`, and `标签`. Never read or reconstruct `现场验货`, `常规描述`, raw reference-image analysis, makeup, facial features, complexion, or face-centered aesthetic judgments.
+Read only `正式入库` items from black-market stock. Use only each item's formal reusable fields. For most stock this means `名称`, `描述`, and `标签`; for pose stock, Azoth may also use `姿势大类`, `身体朝向`, `重心高度`, `动势强度`, `手部策略`, and `展示风险` for selection, cooldown, and downweighting. Never read or reconstruct `现场验货`, `常规描述`, raw reference-image analysis, makeup, facial features, complexion, or face-centered aesthetic judgments.
 
 Use black-market stock only in modules that own the matching domain:
 
@@ -184,7 +184,7 @@ When black-market inventory is enabled, include a `黑商取货` note in the dis
 组合理由：<why the expression supports the selected full-body pose>
 ```
 
-`黑商取货` is an inventory-level reasoning log. It may compare only formal stock fields such as `名称`, `类别`, `描述`, `标签`, and `包含单品`. For 三宅 styling stock, it may also summarize inherited outfit strengths derived from those formal fields, such as silhouette, color, material, layering, and role-fit logic. It must not mention source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from the source.
+`黑商取货` is an inventory-level reasoning log. It may compare only formal stock fields such as `名称`, `类别`, `描述`, `标签`, and `包含单品`; for pose stock, it may also compare `姿势大类`, `身体朝向`, `重心高度`, `动势强度`, `手部策略`, and `展示风险`. For 三宅 styling stock, it may also summarize inherited outfit strengths derived from those formal fields, such as silhouette, color, material, layering, and role-fit logic. It must not mention source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from the source.
 
 ## Output
 
@@ -201,7 +201,34 @@ Return these sections for each completed character:
 9. 成图审核
 10. 文件归档
 
-In `角色档案`, use Chinese field labels such as `名字`, `年龄`, `国籍`, `体型`, `性格`, `贫富值`, `危险值`, `欲望值`, `执行力`, `社交力`, `职业`, `帮派`, `工作服`, `发型`, `眉型`, `胡子`, and `脸型`.
+In `角色档案`, use Chinese field labels such as `名字`, `年龄`, `国籍`, `体型`, `性格`, `贫富值`, `危险值`, `欲望值`, `执行力`, `社交力`, `世界底盘`, `时代背景`, `文化体系`, `文化阶段`, `市井特点`, `技术层级`, `秩序状态`, `材料生态`, `视觉禁忌`, `职业`, `帮派`, `工作服`, `发型`, `眉型`, `胡子`, and `脸型`.
+
+### 角色档案表格格式
+
+Default to Markdown tables inside `角色档案` for scanability. Use compact two-group side-by-side tables for short sections, and use normal one-group tables when the content is too long for side-by-side layout.
+
+Use these defaults:
+
+- `基础信息`: two-group table. Put identity fields on the left (`名字`, `性别`, `年龄`, `国籍`, `体型`, `性格`) and score fields on the right (`贫富值`, `危险值`, `欲望值`, `执行力`, `社交力`).
+- `世界底盘`: two-group table. Left group: `时代背景`, `文化体系`, `文化阶段`, `市井特点`. Right group: `技术层级`, `秩序状态`, `材料生态`, `视觉禁忌`.
+- `社会身份 + 头脸造型`: two-group table when both are compact. Left group: `职业`, `帮派`, `匹配理由`. Right group: `发型`, `眉型`, `胡子`, `脸型`, `造型理由`.
+- `工作服`: use a one-group table or short grouped list because clothing fields can be long. Include `外套`, `打底`, `裤子`, `袜子`, `鞋子`, `饰品/道具`, `造型算法`, `可替换位`, `世界底盘继承`, and `服装理由` when available.
+- If any cell would become too long and make the table hard to read, switch only that section to a single two-column table (`字段 | 内容`) or a short list.
+- Do not put English prompt bodies, Chinese prompt bodies, or long audits into tables. Keep prompt bodies in fenced code blocks.
+
+Example shape:
+
+```markdown
+| 基础信息 | 内容 | 能力数值 | 内容 |
+|---|---|---|---|
+| 名字 | ... | 贫富值 | ... |
+| 年龄 | ... | 危险值 | ... |
+
+| 世界底盘 | 内容 | 世界底盘 | 内容 |
+|---|---|---|---|
+| 时代背景 | ... | 技术层级 | ... |
+| 文化体系 | ... | 秩序状态 | ... |
+```
 
 Keep generated content grounded in daily-life occupations and clean, stylized animation character design.
 

@@ -109,6 +109,32 @@ Use this final structure. Keep headings and labels in Chinese except the English
 ...
 ```
 
+Inside `角色档案`, prefer Markdown tables for readability:
+
+- Use two-group side-by-side tables for compact sections such as `基础信息`, `世界底盘`, and `社会身份 + 头脸造型`.
+- Use a single two-column table or short grouped list for long sections such as `工作服`.
+- Keep prompt sections outside tables and inside fenced code blocks.
+
+Recommended table shapes:
+
+```markdown
+| 基础信息 | 内容 | 能力数值 | 内容 |
+|---|---|---|---|
+| 名字 | ... | 贫富值 | ... |
+| 性别 | ... | 危险值 | ... |
+| 年龄 | ... | 欲望值 | ... |
+| 国籍 | ... | 执行力 | ... |
+| 体型 | ... | 社交力 | ... |
+| 性格 | ... |  |  |
+
+| 世界底盘 | 内容 | 世界底盘 | 内容 |
+|---|---|---|---|
+| 时代背景 | ... | 技术层级 | ... |
+| 文化体系 | ... | 秩序状态 | ... |
+| 文化阶段 | ... | 材料生态 | ... |
+| 市井特点 | ... | 视觉禁忌 | ... |
+```
+
 Prompt copy-container rule: every user-facing prompt body must be wrapped in a directly copyable fenced code block. Under `英文提示词`, put only the complete English prompt inside one ```text code fence. Under `中文提示词`, put only the complete Chinese prompt inside one ```text code fence. Do not print long prompt prose outside a code fence.
 
 ## Image Generation Tail Step

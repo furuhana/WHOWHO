@@ -6,7 +6,16 @@ import sys
 from pathlib import Path
 
 
-REQUIRED_TOP_LEVEL = ["basic", "identity", "outfit", "grooming", "muse", "blackwall", "azoth"]
+REQUIRED_TOP_LEVEL = [
+    "basic",
+    "world_context",
+    "identity",
+    "outfit",
+    "grooming",
+    "muse",
+    "blackwall",
+    "azoth",
+]
 REQUIRED_BASIC = [
     "name",
     "gender",
@@ -19,6 +28,16 @@ REQUIRED_BASIC = [
     "desire",
     "execution",
     "social",
+]
+REQUIRED_WORLD_CONTEXT = [
+    "era_background",
+    "culture_system",
+    "culture_stage",
+    "street_texture",
+    "technology_level",
+    "order_level",
+    "material_ecology",
+    "visual_taboo",
 ]
 
 
@@ -41,6 +60,10 @@ def main() -> None:
     for key in REQUIRED_BASIC:
         if key not in data["basic"]:
             fail(f"missing basic key: {key}")
+
+    for key in REQUIRED_WORLD_CONTEXT:
+        if key not in data["world_context"]:
+            fail(f"missing world_context key: {key}")
 
     for key in ["wealth", "danger", "desire", "execution", "social"]:
         value = data["basic"][key]
