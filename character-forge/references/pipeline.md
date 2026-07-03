@@ -96,7 +96,7 @@ Use this final structure. Keep headings and labels in Chinese except the English
 中文提示词
 ...
 
-黑商商机
+设计思路
 ...
 
 图像生成
@@ -114,7 +114,7 @@ Inside `角色档案`, prefer Markdown tables for readability:
 - Use two-group side-by-side tables for compact sections such as `基础信息`, `世界底盘`, and `社会身份 + 头脸造型`.
 - Use a single two-column table or short grouped list for long sections such as `工作服`.
 - Do not show the internal `temperament` field as a `基础信息` row. It is a hidden generation seed that should surface only through Tony's grooming choices and Azoth's prompt wording.
-- When advanced design grammar is present, `工作服` should include compact rows for `基础款原型`, `匿名设计方法`, optional `设计师提示引用`, `设计操作符`, `裁片路径`, `图案策略`, `工艺边界`, `身体适配`, `鞋饰结构`, `复杂度配额`, `失败规避`, and `反默认判断` when available.
+- When advanced design grammar is present, `工作服` should include compact rows for `基础款原型`, `外层原型`, `结构事件`, `材质行为`, `衬衫夹克默认规避`, `匿名设计方法`, optional `设计师提示引用`, `设计操作符`, `裁片路径`, `图案策略`, `工艺边界`, `身体适配`, `鞋饰结构`, `复杂度配额`, `失败规避`, and `反默认判断` when available.
 - Keep prompt sections outside tables and inside fenced code blocks.
 
 Recommended table shapes:
@@ -163,7 +163,7 @@ Use the final English prompt as the generation prompt, wrapped with the exact bl
 <the exact wrapper from references/prompt_blocks/imagegen-wrapper.md>
 ```
 
-Input image 1 must guide clean Japanese TV anime cel-shading, crisp dark outer linework, tidy internal contour lines, smooth flat color blocks, soft controlled shadow shapes, centered full-body framing, and pure white background. Input image 2 must guide width-first super-heavyweight mass, oversized arms and hands, heavy lower body, compact proportions, and muscle-block readability. Neither reference may override the current character's approved identity, outfit, temperament, grooming, pose, expression, or source character separation. Face shape and facial proportions may be style-adjacent, but must resolve as a new person rather than a clone or recognizable match to either reference face.
+Input image 1 must guide clean Japanese TV anime cel-shading, crisp dark outer linework, tidy internal contour lines, smooth flat color blocks, soft controlled shadow shapes, centered full-body framing, and pure white background. Input image 2 must guide width-first super-heavyweight mass, oversized arms and hands, heavy lower body, compact proportions, muscle-block readability, and a hard segmented abdominal read. Neither reference may override the current character's approved identity, outfit, temperament, grooming, pose, expression, or source character separation. Face shape and facial proportions may be style-adjacent, but must resolve as a new person rather than a clone or recognizable match to either reference face. If the torso projects forward, it must still read as ribcage pressure and stacked abdominal blocks, never as a soft pot belly, round smooth stomach, sagging abdomen, or unsegmented convex belly.
 
 If Image Gen succeeds, show the generated image under `图像生成`. If Image Gen is unavailable or fails, preserve the text output and write `图像生成：未完成，原因：<brief reason>`.
 
@@ -175,7 +175,7 @@ Mandatory checks:
 
 - Style: must match clean Japanese TV anime cel-shading, crisp dark outer linework, flat color blocks, tidy internal contour lines, controlled shadows, and pure white background. Fail if it drifts into painterly, semi-realistic, gritty, 3D, fashion-illustration, or noisy texture rendering.
 - Body: male characters must remain width-first, grounded, and visually extremely broad, thick, heavy, and powerful. Fail if the result becomes slim, narrow-shouldered, lanky, long-legged, fashion-model-like, lightly athletic, small-armed, small-handed, vertically stretched, normally 7-head heroic, or merely tall and muscular.
-- Mass: shoulders, chest, traps, neck, back width, arms, forearms, hands, waist, thighs, calves, and boots/feet must visibly carry super-heavyweight mass. The silhouette should read like a wall of muscle with shoulder span much wider than hips, short thick neck, giant arms, huge forearms, oversized hands, very thick thighs, and large heavy feet. When a fitted base layer is visible, the torso must show large simple pectoral and abdominal masses pressing through it, not ordinary wrinkles. The pectoral shelf, center chest divide, stacked abdominal blocks, and side-ab planes must be readable; fail smooth white tank tops or T-shirts that hide the chest and abdomen.
+- Mass: shoulders, chest, traps, neck, back width, arms, forearms, hands, waist, thighs, calves, and boots/feet must visibly carry super-heavyweight mass. The silhouette should read like a wall of muscle with shoulder span much wider than hips, short thick neck, giant arms, huge forearms, oversized hands, very thick thighs, and large heavy feet. When a fitted base layer is visible, the torso must show large simple pectoral and abdominal masses pressing through it, not ordinary wrinkles. The pectoral shelf, center chest divide, stacked abdominal blocks, firm upper-ab wall, and side-ab planes must be readable; fail smooth white tank tops or T-shirts that hide the chest and abdomen. Also fail any soft pot belly, round smooth stomach, sagging abdomen, or unsegmented convex belly, even when the rest of the body is broad and heavy.
 - Character: occupation, outfit, grooming, pose, expression, selected black-market stock, single-character framing, and white background must match the approved prompt.
 - Forbidden outputs: fail multiple characters, multiple poses, turnarounds, character sheets, panels, callout boxes, background scenes, dirty/oily/stained clothing, dense prints, micro-weave/noisy fabric detail, realistic skin texture, or forbidden occupation drift.
 
@@ -192,7 +192,7 @@ If the audit fails, add:
 [成图审核] 未通过：<brief reason>
 ```
 
-Then run one corrective Image Gen attempt using the same approved character record. Strengthen only the failed constraints. For body failures, the corrective prompt must explicitly prioritize `width-first super-heavyweight fighting-game anime body`, `around 6.2-6.6 heads tall`, `dramatically wider and thicker than a normal tall hero`, `shoulder span much wider than hips`, `short thick neck buried between huge traps`, `enormous rounded deltoids`, `huge chest shelf`, `thick barrel ribcage`, `deep pectoral shelf`, `visible center chest valley`, `large stacked blocky abs pressing through the fitted shirt`, `thick oblique side planes`, `giant upper arms`, `huge forearms`, `oversized heavy hands`, `very thick thighs`, `strong calves`, `large heavy feet`, and `wall of muscle silhouette`, and must explicitly avoid `slim`, `narrow shoulders`, `long legs`, `7-head tall normal hero proportions`, `fashion-model proportions`, `smooth torso shirt`, `lightly athletic build`, and `merely tall and muscular`.
+Then run one corrective Image Gen attempt using the same approved character record. Strengthen only the failed constraints. For body failures, the corrective prompt must explicitly prioritize `width-first super-heavyweight fighting-game anime body`, `around 6.2-6.6 heads tall`, `dramatically wider and thicker than a normal tall hero`, `shoulder span much wider than hips`, `short thick neck buried between huge traps`, `enormous rounded deltoids`, `huge chest shelf`, `thick barrel ribcage`, `deep pectoral shelf`, `visible center chest valley`, `large stacked blocky abs pressing through the fitted shirt`, `firm upper-ab wall`, `thick oblique side planes`, `giant upper arms`, `huge forearms`, `oversized heavy hands`, `very thick thighs`, `strong calves`, `large heavy feet`, and `wall of muscle silhouette`, and must explicitly avoid `slim`, `narrow shoulders`, `long legs`, `7-head tall normal hero proportions`, `fashion-model proportions`, `smooth torso shirt`, `soft pot belly`, `round smooth stomach`, `sagging abdomen`, `unsegmented convex belly`, `lightly athletic build`, and `merely tall and muscular`.
 
 After the corrective attempt, audit again. If it still fails, show the best image but clearly write:
 

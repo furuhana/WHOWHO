@@ -34,6 +34,7 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Expand approved visual details into concrete prompt language instead of compressing them into labels, summaries, or abstract traits.
 - Translate San Zhai's `styling_algorithm`, `design_function_slots`, `replacement_slots_used`, `variation_matrix`, and `anti_default_decision` into visible outfit and accessory description. Do not put these internal field names or Chinese algorithm labels into the final prompt body.
 - When Garment Grammar fields exist, consume `professional_keywords` as the primary clothing wording source and add `negative_clothing` to the compact negative constraints. Do not expose `garment_line`, `banned_shape_check`, or field names in the final prompt body.
+- When `outer_shell_prototype`, `structural_event`, `material_behavior`, or `anti_shirt_jacket_default` exist, preserve their visible effect in `OUTFIT_DYNAMIC`. Do not collapse them into generic jacket, shirt, coat, vest, deconstruction, transparent material, or stylish details.
 - Translate San Zhai's advanced design grammar fields into visible prompt material: `base_garment_prototype`, `designer_method_references`, `design_operators`, `panel_paths`, `pattern_strategy`, `craft_boundaries`, `body_fit_strategy`, `complexity_budget`, and `design_failure_avoidance`.
 - If the user explicitly allowed designer names in prompts and San Zhai recorded `designer_prompt_references`, a short designer-method reference clause may appear in `OUTFIT_DYNAMIC`, but it must be subordinate to concrete construction and must never replace clothing detail. Prefer wording such as `with restrained design-method references to Issey Miyake garment pleating and Maison Margiela exposed construction`, then immediately describe the visible panel paths, piping, folds, or shoe structure.
 - Do not write `in the style of <designer>` as the whole outfit direction. Designer names are allowed only as method references when requested, not as brand copying, source identity, or a substitute for panel paths and craft boundaries.
@@ -118,6 +119,10 @@ Dynamic slots may be written in `prompt_notes` for inspection when useful, but t
 When drafting `OUTFIT_DYNAMIC` and `ACCESSORY_DYNAMIC`, consume the San Zhai styling-decision fields as follows:
 
 - `professional_keywords`: preserve useful professional garment terms such as structured tailoring, offset placket, exposed facing, panelled technical pants, articulated knee seams, concealed closure, square shoulder, clean bound edge, matte fabric zones, sculptural sole sidewall, and load-bearing waist system.
+- `outer_shell_prototype`: name the precise outer shell in imageable English, such as `hooded rain smock`, `field coat`, `long sleeveless coat`, `protective vest`, `pullover anorak`, `offset-placket jacket`, `inside-out shell`, or `sealed pocket shell`; never reduce it to `jacket`.
+- `structural_event`: translate the event into visible mechanism: side entry, inactive sleeve opening, exposed facing, cutaway uniform front, sealed pocket blocks, single-sheet wrap shell, false sleeve layer, one hardware focal point, or heat-pressed fold planes.
+- `material_behavior`: describe what the material does: reveals inner layers, seals objects, forms a rain shell, behaves as a second skin, supports semi-rigid volume, transfers weight, or compresses volume at cuffs/waist.
+- `anti_shirt_jacket_default`: if shirt-like garments appear, explicitly show which non-shirt carrier owns the primary silhouette or memory point.
 - `negative_clothing`: move banned clothing terms into the prompt's compact negative sentence; never describe the character as wearing a skirt, dress, apron, pinafore, wrap skirt, or apron-like panel unless the user explicitly overrode the rule.
 - `styling_algorithm`: use it only to decide which visible systems deserve emphasis.
 - `design_function_slots`: make each active slot visible through clothing construction, silhouette, attachment, exposure, concealment, material contrast, or motion release.
@@ -304,15 +309,18 @@ Pose selection must follow this order:
 6. Downweight `standing` as a family unless the user explicitly asks for a plain standing pose, the job absolutely needs a neutral display, or all viable non-standing families are exhausted. If the user has complained about pose sameness, side-standing, or basic standing in the current request or recent context, hard-exclude `standing` for the next pose selection when any non-standing family is viable. Do not treat side-standing, hand-on-hip, strap-holding, object-display, and relaxed-standing as meaningful pose variety from each other.
 7. Treat `seated` as a special low-frequency family, not the default cure for pose sameness. Only select `seated` when the job, mood, or scene naturally provides a believable support surface or rest/work beat. If the user has complained that poses are always sitting, hard-exclude `seated` for the next 3 pose selections when alternatives exist, and strongly downweight it for the next 10. Never choose two seated poses in a row unless the user explicitly asks for sitting.
 8. Downweight `展示风险: "high"` and overused hand-display strategies when alternatives exist: `forward_display`, `object_display`, `garment_display`, `pointing`, `forward_reach`, one hand extended forward, open palm presenting, pointing at the viewer, one hand holding a small object forward, or one hand gripping a chest strap while the other hand presents forward.
-9. Give priority to visibly different structures when the job allows it: `crouching`, `kneeling`, `airborne`, `kick`, `fighting`, `lunge`, `turning_guard`, `retreat`, `walking`, `shoulder_prop`, `victory`, `tired`, and only context-justified `seated`. Prefer low, airborne, kicking, crouched, turning-back, walking, or full-body action silhouettes over another side-standing or seated-rest variant.
-10. After the broad family is locked, list the concrete candidates inside only that family, score 1-3 best items for job fit, cooldown, hand strategy, support-surface needs, prop compatibility, and face readability, then lock exactly one concrete stock item by `名称`. If no item inside the locked family is viable, discard the family and repeat from broad-family selection; do not fill the gap with an invented pose.
-11. After choosing a concrete pose item, normalize face visibility without changing the locked body action: add a head-and-gaze clause that keeps the face readable to the viewer. For side-body, angled, walking-away, turning-back, low, or action poses, require the head to turn toward the camera in a three-quarter view and the eyes to look toward the screen/camera area. Do not let profile, looking far off-frame, looking down, or looking fully away hide the face unless the user explicitly requests that mood.
-12. If the selected pose is not a presentation pose, keep occupational props on the belt, backpack, shoulder strap, leg side, chest badge, neck loop, or carried neutrally at the side instead of forcing a hand-forward display.
-13. If all viable pose stock is recently used, select the least-recently used non-standing and non-seated family first; use `standing` only when every stronger silhouette is incompatible, and use `seated` only when a support surface or rest/work beat is genuinely appropriate. State the limitation in the pose reasoning log.
+9. If a viable pose contains seductive-fashion signals such as hand-on-hip, hip tilt, hip cocked, crossed legs, runway pose, S-curve body, arched back, pelvis pushed forward, elegant feminine stance, or playful finger flourish, do not delete the pose outright. Translate it into a grounded masculine version: squared hips, squared shoulders, planted feet, balanced weight, no crossed legs, no exaggerated hip tilt, hand resting on belt or thumb hooked on belt instead of a fashion hand-on-hip, and stern composed body language.
+10. Give priority to visibly different structures when the job allows it: `crouching`, `kneeling`, `airborne`, `kick`, `fighting`, `lunge`, `turning_guard`, `retreat`, `walking`, `shoulder_prop`, `victory`, `tired`, and only context-justified `seated`. Prefer low, airborne, kicking, crouched, turning-back, walking, or full-body action silhouettes over another side-standing or seated-rest variant.
+11. After the broad family is locked, list the concrete candidates inside only that family, score 1-3 best items for job fit, cooldown, hand strategy, support-surface needs, prop compatibility, and face readability, then lock exactly one concrete stock item by `名称`. If no item inside the locked family is viable, discard the family and repeat from broad-family selection; do not fill the gap with an invented pose.
+12. After choosing a concrete pose item, normalize face visibility without changing the locked body action: add a head-and-gaze clause that keeps the face readable to the viewer. For side-body, angled, walking-away, turning-back, low, or action poses, require the head to turn toward the camera in a three-quarter view and the eyes to look toward the screen/camera area. Do not let profile, looking far off-frame, looking down, or looking fully away hide the face unless the user explicitly requests that mood.
+13. If the selected pose is not a presentation pose, keep occupational props on the belt, backpack, shoulder strap, leg side, chest badge, neck loop, or carried neutrally at the side instead of forcing a hand-forward display.
+14. If all viable pose stock is recently used, select the least-recently used non-standing and non-seated family first; use `standing` only when every stronger silhouette is incompatible, and use `seated` only when a support surface or rest/work beat is genuinely appropriate. State the limitation in the pose reasoning log.
 
 The selected pose description must be visibly present in `prompt_en` and `prompt_cn`. If the character's job requires a prop, the prop placement must preserve the locked pose. Do not replace the selected pose with generic phrasing such as `standing naturally with one hand forward` unless that exact pose description was selected and is not under cooldown. Keep the pose stock name in reasoning or `prompt_notes`, not in the prompt body.
 
 When the selected pose is not a hand-forward presentation pose, add a compact negative constraint to `prompt_en`, such as `no forward presenting hand, no pointing at the viewer, no hand extended toward the camera`, while keeping the rest of the prompt positive and imageable.
+
+When the selected pose needed the grounded-masculine correction, preserve its action but add a compact positive correction clause to `POSE_DYNAMIC`: `squared hips and shoulders, planted feet, balanced weight, stern composed stance`. Also add compact negatives: `no crossed legs, no runway pose, no S-curve body, no exaggerated hip tilt, no arched-back fashion pose`.
 
 When the selected pose turns the body sideways or away from the viewer, add positive prompt language such as `his head turns back toward the camera in a readable three-quarter view, eyes looking toward the viewer or just beside the camera`. If an expression stock says the gaze is to one side, adapt it to `slightly beside the camera` rather than far off-frame, unless the user explicitly asks for an avoidant or hidden-face look.
 
@@ -417,27 +425,28 @@ azoth:
 
 `prompt_notes` must also include `本轮姿势库存：<selected pose stock name>` and `姿势大类：<selected pose category>`. If no pose stock was used, explain why in one sentence. If a non-presentation pose was selected, mention the anti-presentation constraint added to `prompt_en`.
 
-## Black-Market Opportunities
+## Design Thinking
 
-After `prompt_cn`, generate a user-facing `黑商商机` section with exactly 10 numbered procurement ideas.
+After `prompt_cn`, generate a user-facing `设计思路` section with 6-10 numbered design notes.
 
-These ideas are not inventory and must not be treated as `正式入库`. They are future stock leads for the user to search, discuss, or pass to `@黑商` later.
+These notes explain the approved design. They are not inventory, procurement leads, or `正式入库`.
 
-Use the completed character record, Blackwall-approved design, selected black-market stock, and final prompts to suggest concrete future stock. Cover a useful mix of:
+Use the completed character record, Blackwall-approved design, selected black-market stock, and final prompts to describe concrete design thinking. Cover a useful mix of:
 
-- `套装货`
-- `单品货`
-- `发型库存`
-- `姿势库存`
-- `表情库存`
+- `裁剪` / `裁片路径`
+- `材质替换` / `材质行为`
+- `结构事件` / `解构`
+- `饰品搭配` / `道具用法`
+- `层次关系` / `搭配方式`
+- `巧思` / `身体适配` / `复杂度控制`
 
-Ideas should be specific, imageable, and useful for the current character's occupation, gang, stats, outfit, hairstyle, or performance direction.
+Notes should be specific, imageable, and useful for understanding why the current outfit, accessories, material choices, hairstyle, pose, or expression work together.
 
 Never include source image names, file paths, `现场验货`, `常规描述`, raw image analysis, makeup, facial features, face shape, complexion, skin texture, attractiveness judgments, or source-derived identity/story.
 
 ## Image Generation Handoff
 
-After `黑商商机`, hand the final English prompt to the mother pipeline's Image Gen tail step. Do not remove or shorten the previous text sections.
+After `设计思路`, hand the final English prompt to the mother pipeline's Image Gen tail step. Do not remove or shorten the previous text sections.
 
 Before Image Gen runs, the mother pipeline must load both local reference images with `view_image` and pass them as `Input image 1` and `Input image 2`:
 
@@ -451,7 +460,7 @@ character-forge/references/assets/width_first_body_reference.png
 
 Resolve both paths relative to the workspace root when possible. If the agent is running from inside `character-forge/`, use `references/assets/style_reference.png` and `references/assets/width_first_body_reference.png`. Do not fall back to external sync folders or Windows drive paths unless the local asset is genuinely missing.
 
-Input image 1 is allowed to guide rendering style, full-body framing, line weight, flat cel-shading, clean white background, and crisp anime readability. Input image 2 is allowed to guide width-first grounded body proportion, simplified muscle anatomy, stable stance, broad muscle mass, and compact heavy silhouette. Neither reference may override the approved character record, selected black-market stock, outfit, temperament, grooming, pose, expression, prompt content, or source-character separation. Broad face-shape direction and simplified facial proportions may be style-adjacent, but the generated face must read as a new person, not the same face or a recognizable identity match to either reference.
+Input image 1 is allowed to guide rendering style, full-body framing, line weight, flat cel-shading, clean white background, and crisp anime readability. Input image 2 is allowed to guide width-first grounded body proportion, simplified muscle anatomy, stable stance, broad muscle mass, compact heavy silhouette, and a hard segmented abdominal read. Neither reference may override the approved character record, selected black-market stock, outfit, temperament, grooming, pose, expression, prompt content, or source-character separation. Broad face-shape direction and simplified facial proportions may be style-adjacent, but the generated face must read as a new person, not the same face or a recognizable identity match to either reference. If the torso projects forward, it must still read as ribcage pressure and stacked abdominal blocks, never as a soft pot belly, round smooth stomach, sagging abdomen, or unsegmented convex belly.
 
 When handing off to Image Gen, wrap `prompt_en` with:
 

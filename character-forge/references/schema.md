@@ -48,6 +48,17 @@ outfit:
   negative_clothing:
   styling_algorithm:
   base_garment_prototype:
+  outer_shell_prototype:
+  structural_event:
+    name:
+    body_part:
+    visible_mechanism:
+    body_purpose:
+  material_behavior:
+    name:
+    body_part:
+    behavior:
+  anti_shirt_jacket_default:
   designer_method_references:
     -
   designer_prompt_references:
@@ -181,6 +192,10 @@ banned_shape_check -> 禁用形态检查
 professional_keywords -> 专业关键词
 negative_clothing -> 服装反向约束
 base_garment_prototype -> 基础款原型
+outer_shell_prototype -> 外层原型
+structural_event -> 结构事件
+material_behavior -> 材质行为
+anti_shirt_jacket_default -> 衬衫夹克默认规避
 designer_method_references -> 匿名设计方法
 designer_prompt_references -> 设计师提示引用
 design_operators -> 设计操作符

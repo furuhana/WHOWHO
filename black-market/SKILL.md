@@ -61,6 +61,9 @@ black-market/inventory/styling/items/props.md
 ```text
 black-market/references/designer-methods.md
 black-market/references/design-operators.md
+black-market/references/base-garment-prototypes.md
+black-market/references/outer-shell-prototypes.md
+black-market/references/structural-events-and-material-behaviors.md
 black-market/references/pattern-and-cutting.md
 black-market/references/footwear-accessory-grammar.md
 ```
@@ -85,7 +88,9 @@ black-market/references/footwear-accessory-grammar.md
 - 可替换位: 记录哪些槽位可以换成同功能单品，例如基础层、外层体积、腰部系统、腿部系统、手臂系统、头颈系统、标记系统。
 - 反默认价值: 说明这套结构如何避免主视觉退回普通衬衫、T 恤、Polo、服务制服衬衫或“上衣+裤子”的低信息组合。
 - 变化矩阵标签: 用短标签标注适合的场景、情绪、身体需求、资源来源、识别强度和变化幅度。
-- 设计生成语法: 记录基础款原型、设计操作、裁片路径、图案策略、工艺边界、身体适配、复杂度配额和失败规避。服装、鞋履、饰品都要能回答“哪里被加工、路径怎么走、为什么服务身体或职业”。
+- 设计生成语法: 记录基础款原型、外层原型、结构事件、材质行为、设计操作、裁片路径、图案策略、工艺边界、身体适配、复杂度配额和失败规避。服装、鞋履、饰品都要能回答“哪里被加工、路径怎么走、为什么服务身体或职业”。
+- 外层原型: 当库存含外层时，不得只写夹克、外套、大衣、马甲、连帽衫；必须记录精确外壳，例如 `hooded rain smock`、`field coat`、`long sleeveless coat`、`protective vest`、`pullover anorak`、`offset-placket jacket`、`inside-out shell`、`sealed pocket shell`。
+- 结构事件与材质行为: 不得只写解构、透明、高级感。必须记录衣服发生的结构事件，以及材质如何改变衣服行为。
 
 这些字段只描述服装结构和可复用搭配逻辑，不得变成人设、职业改写、来源故事或角色身份。
 
@@ -154,11 +159,21 @@ black-market/references/footwear-accessory-grammar.md
   造型算法: "<警示机能型 / 职业异化型 / 仪式宽体型 / 自定义可复用算法>"
   轮廓重心: "<上重下稳 / 肩部最重 / 腰部收紧 / 下身压重等>"
   层次关系: "<外层、内层、护具、下装、鞋履、饰品的前后和覆盖关系>"
-  基础款原型: "<短夹克 / 衬衫 / 运动鞋 / 靴子 / 腰包等>"
+  基础款原型: "<hooded rain smock / shop coat / long sleeveless coat / panelled technical pants / segmented sole training shoe / leg pouch 等精确原型>"
+  外层原型: "<如 hooded rain smock / field coat / long sleeveless coat / protective vest / offset-placket jacket 等；无外层时写 无>"
+  结构事件:
+    名称: "<错入口 / 反穿内外互换 / 制服切开 / 材质封存 / 单片包覆等>"
+    部位: "<发生位置>"
+    可见机制: "<观众能看见的结构变化>"
+    身体作用: "<服务宽体、职业、动作或身份>"
+  材质行为:
+    名称: "<透明显露 / 封存 / 防水外壳 / 第二皮肤 / 半硬支撑 / 重量转移等>"
+    部位: "<作用位置>"
+    行为: "<材质如何改变服装>"
   设计来源方法: ["<平面到立体 / 解剖式戏剧裁剪 / 制作痕迹外露 / 鞋履建筑结构等>"]
   设计师提示引用: ["<可选: Issey Miyake / Alexander McQueen / Maison Margiela 等，仅用户明确允许时>"]
   设计操作:
-    - 操作: "<错位 / 膨胀 / 压缩 / 分段 / 外露 / 折叠 / 框架 / 开口 / 包覆 / 悬挂>"
+    - 操作: "<错位 / 膨胀 / 压缩 / 分段 / 外露 / 折叠 / 框架 / 开口 / 包覆 / 悬挂 / 错入口 / 反穿 / 封存 / 生长 / 错觉拼接 / 单片包覆>"
       部位: "<门襟 / 肩部 / 鞋底 / 腰部等>"
       作用: "<改变身体读法或职业识别>"
   裁片路径:
@@ -206,7 +221,7 @@ black-market/references/footwear-accessory-grammar.md
     - "<单品名>"
   可替换位:
     基础层: ["<背心 / 高领 / 紧身衣 / T恤 / 无袖上装 / 衬衫等同功能替换>"]
-    外层体积: ["<夹克 / 披挂 / 马甲 / 透明罩层 / 围裙 / 宽袖外披等>"]
+    外层体积: ["<精确外层原型，如 field coat / rain smock / protective vest / weather poncho / folded geometric shell / 宽袖外披等；不得用围裙>"]
     腰部系统: ["<腰带 / 工具带 / 腰封 / 警示带 / 挂件等>"]
     腿部系统: ["<宽裤 / 工装裤 / 袴裤 / 短裤+护腿 / 护膝等>"]
     手臂系统: ["<手套 / 护腕 / 前臂甲 / 臂章 / 束带等>"]
@@ -323,6 +338,7 @@ black-market/references/footwear-accessory-grammar.md
 - 表情只写表演状态，不写长相、妆容、服装。
 - 姿势只写身体动作、重心、手势和道具互动，不写脸和服装设计。
 - 姿势库存可以包含选择用结构字段: `姿势大类`, `身体朝向`, `重心高度`, `动势强度`, `手部策略`, `展示风险`。这些字段只用于阿佐特抽选、冷却和降权，不进入最终提示词正文。
+- 姿势洗货时不要因为 `叉腰`, `交叉腿`, `扭胯`, `顶胯`, `后仰`, `S 型曲线`, `走秀感`, `轻佻展示手势` 直接删货；必须把它们洗成硬朗稳定版本: 骨盆收正, 肩胯方正, 双脚踩稳或前后错开但不交叉, 手从叉腰改为压腰带/拇指勾腰带/低位侧持, 后仰改为直立或轻微后移, 展示动作改为克制指令/战利品报告/职业说明。
 
 姿势正式入库使用:
 

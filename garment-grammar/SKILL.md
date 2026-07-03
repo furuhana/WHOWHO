@@ -25,6 +25,9 @@ Read `references/no-skirt-garment-grammar.md` whenever San Zhai is designing, re
 
 - `../black-market/references/designer-methods.md`
 - `../black-market/references/design-operators.md`
+- `../black-market/references/base-garment-prototypes.md`
+- `../black-market/references/outer-shell-prototypes.md`
+- `../black-market/references/structural-events-and-material-behaviors.md`
 - `../black-market/references/pattern-and-cutting.md`
 - `../black-market/references/footwear-accessory-grammar.md`
 
@@ -60,6 +63,10 @@ garment_grammar:
   garment_line: quiet_tailoring | soft_deconstruction | utility_atelier | street_atelier | protective_tailoring
   banned_shape_check: "no skirt, no dress, no apron; apron functions replaced by <structure>"
   base_garment_prototype:
+  outer_shell_prototype:
+  structural_event:
+  material_behavior:
+  anti_shirt_jacket_default:
   primary_design_point:
   secondary_design_point:
   silhouette:
@@ -83,6 +90,9 @@ garment_grammar:
 Then map those fields into the existing Character Forge record:
 
 - `base_garment_prototype`
+- `outer_shell_prototype`
+- `structural_event`
+- `material_behavior`
 - `designer_method_references`
 - `design_operators`
 - `panel_paths`
@@ -94,6 +104,7 @@ Then map those fields into the existing Character Forge record:
 - `design_function_slots`
 - `replacement_slots_used`
 - `anti_default_decision`
+- `anti_shirt_jacket_default`
 
 ## Prompt Handoff
 
@@ -115,6 +126,12 @@ Always pass a compact negative clothing clause:
 
 ```text
 no skirt, no dress, no apron, no pinafore, no maid outfit, no school uniform skirt, no generic T-shirt and jeans, no plain casualwear
+```
+
+When an outfit contains a shirt-like garment, also pass a compact anti-default clause:
+
+```text
+shirt-like garments are base or middle layers only; the primary visual carrier is <precise outer shell / vest / waist system / leg system / footwear / accessory system>
 ```
 
 For piping, edge binding, welt seams, and narrow garment-edge trim, keep them as construction cues only: they must be tonal, same-color-family, or subtle shade-on-shade. Do not use contrasting colored piping, high-saturation edge trim, or cheap decorative outline accents. Show the edge through seam shadow, thickness, topstitching, or restrained material highlight instead of a separate color stripe.

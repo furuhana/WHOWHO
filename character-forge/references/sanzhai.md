@@ -12,6 +12,9 @@ Read:
 - `garment-grammar/SKILL.md` and `garment-grammar/references/no-skirt-garment-grammar.md` when they exist
 - `black-market/inventory/styling/sets.md` when it exists
 - `black-market/inventory/styling/items/*.md` when they exist
+- `black-market/references/base-garment-prototypes.md` when it exists
+- `black-market/references/outer-shell-prototypes.md` when it exists
+- `black-market/references/structural-events-and-material-behaviors.md` when it exists
 - `black-market/references/designer-methods.md` when it exists
 - `black-market/references/design-operators.md` when it exists
 - `black-market/references/pattern-and-cutting.md` when it exists
@@ -43,6 +46,10 @@ Fill:
 - negative_clothing
 - styling_algorithm
 - base_garment_prototype
+- outer_shell_prototype
+- structural_event
+- material_behavior
+- anti_shirt_jacket_default
 - designer_method_references
 - designer_prompt_references
 - design_operators
@@ -63,6 +70,9 @@ Fill:
 
 - Use the selected job as the anchor. Do not change, replace, or reinterpret `identity.job` to fit a better outfit.
 - Apply Garment Grammar when available. Treat no skirts, no dresses, no aprons, no pinafores, and no apron-like substitutes as a standing user preference unless the user explicitly overrides it.
+- Apply the shared prototype libraries when available. `shirt`, `jacket`, `pants`, `shoes`, and `bag` are category words only; never leave them as final prototypes.
+- When any outer layer is used, record a precise `outer_shell_prototype` from `outer-shell-prototypes.md` or an equivalent precise shell. Do not finish with generic `jacket`, `coat`, `vest`, `shirt jacket`, `outerwear`, or `hoodie`.
+- Every substantial outfit should select exactly one primary `structural_event` from `structural-events-and-material-behaviors.md`, and zero or one supporting `material_behavior`. More than one primary event needs explicit user direction.
 - If a job normally suggests an apron, replace the apron function with a utility vest, waist belt, chest harness, tool belt, structured overshirt, protective placket, trouser-mounted pouch, or crossbody tool bag.
 - If a job or stock suggests a skirt or dress silhouette, replace it with wide-leg trousers, pleated trousers, panelled technical pants, cropped tailored trousers, shorts, jumpsuit, or coverall.
 - Prioritize clean, readable, animation-friendly silhouettes.
@@ -77,6 +87,7 @@ Fill:
 - Every substantial outfit should have at least one structural transformation, one panel path, one craft boundary, and one memory point across clothing, footwear, or accessories.
 - Use the default complexity budget: large silhouette 60%, medium panels 25%, small craft details 10%, pattern/symbols 5%. Do not spread equal detail over the whole body.
 - Use shirts, button-ups, T-shirts, polos, undershirts, and service-uniform shirts as base layers only when justified by job or selected stock. They should not be the primary visual idea when viable outerwear, harness, armor, vest, structured overshirt, waist belt, trouser system, or accessory systems can carry the outfit.
+- If the outfit contains a shirt-like garment, fill `anti_shirt_jacket_default` with the visible non-shirt carrier that takes over the design: precise outer shell, vest/armor, waist system, leg system, shoes, head/neck frame, hand/arm gear, material behavior, or mounted accessory system.
 - Treat `world_context` as the outfit's street and material ecology. Translate it into visible clothing structure, not lore text.
 - Respect `visual_taboo` as a local design guard. If it bans ordinary shirt lock-in, dirty materials, heavy military drift, dock/cargo drift, or over-cyberpunk excess, San Zhai must avoid those directions unless the user explicitly overrides them.
 
@@ -85,27 +96,31 @@ Fill:
 Before filling garment fields, decide these design items:
 
 1. `styling_algorithm`: the reusable outfit method, such as `警示机能型`, `轻装装甲型`, `职业异化型`, `权力套装型`, `仪式宽体型`, `透明防护型`, `裸核束缚型`, `街头战术型`, `厨工匠人型`, `贵族改装型`, `荒野补丁型`, `冷感封闭型`, `松弛居家型`, `制服拆解型`, `机械维修型`, or another concrete algorithm inherited from black-market stock.
-2. `base_garment_prototype`: name the readable starting point: short jacket, work vest, button shirt, high-neck base layer, wide trousers, canvas sneaker, work boot, waist bag, gloves, or another clear prototype.
-2a. `garment_line`: choose one line from Garment Grammar, such as `quiet_tailoring`, `soft_deconstruction`, `utility_atelier`, `street_atelier`, or `protective_tailoring`.
-2b. `banned_shape_check`: explicitly state `no skirt, no dress, no apron, no pinafore; any apron function is replaced by <non-apron structure>`.
-2c. `professional_keywords`: list compact English garment keywords for Azoth, including silhouette, cut, construction, fabric zones, closure, panel path, trouser design, footwear structure, and accessory structure.
-2d. `negative_clothing`: include `no skirt, no dress, no apron, no pinafore, no maid outfit, no school uniform skirt, no wrap skirt, no apron-like front panel, no generic T-shirt and jeans, no plain casualwear`.
-3. `designer_method_references`: choose 1-3 anonymous methods from the designer-method library, such as `平面到立体`, `解剖式戏剧裁剪`, `制作痕迹外露`, `身体建筑与垂坠体块`, `熟悉原型加雕塑变形底`, `鞋履建筑结构`, or `性能叙事可视化`.
-4. `designer_prompt_references`: optional designer names only when the user explicitly asks to test designer references in prompts. Keep them out of normal prompt prose unless Azoth's prompt rules allow them.
-5. `design_operators`: choose 1-2 operators such as `错位`, `膨胀`, `压缩`, `分段`, `外露`, `折叠`, `框架`, `开口`, `包覆`, or `悬挂`; specify body part and visible purpose.
-6. `body_fit_strategy`: explain how the design reinforces the WHOWHO width-first body: shoulder width, chest/abdomen readability, giant arms, heavy hands, thick thighs, stable shoes, or lowered center of gravity.
-7. `panel_paths`: write at least one path with start, route, endpoint, and rule. The path should avoid random surface lines and should not break the chest/abdomen into tiny shapes.
-8. `pattern_strategy`: choose low-density pattern placement such as edge trim, local emblem, interrupted side stripe, controlled plaid, radiating ribs, or heat-pressed fold lines. State density and forbidden misuse.
-9. `craft_boundaries`: name visible craft boundaries such as piping, binding, topstitching, exposed seam, zipper teeth, flat buckle tabs, ribbed hem, drawcords, hard plate edge, or shoe sidewall. Piping, edge binding, welt seams, and narrow garment-edge trim must stay tonal or same-color-family; do not turn them into contrasting colored outlines, high-saturation trim, or cheap decorative edge accents.
-10. `footwear_accessory_structure`: ensure shoes answer prototype, sole structure, upper cutting, cuff/sock/trouser connection, and center-of-gravity role; ensure accessories answer body location, attachment, shape, body-reading role, and occupation cue.
-11. `complexity_budget`: state `large silhouette 60 / medium panels 25 / small craft 10 / pattern-symbol 5`, or justify a small deviation.
-12. `design_failure_avoidance`: name avoided fake-high-design traps: random lines, all-over tiny pattern, cyber glow, texture-map fabric, structureless thick sole, or accessories as loose decoration.
-13. `design_function_slots`: list the active functions: `身体暴露`, `体积扩张`, `收束`, `功能挂载`, `身份标记`, `材质冲突`, `遮蔽`, `动作释放`, `仪式装饰`, `生活磨损`. Use at least three when the job allows it.
-14. `replacement_slots_used`: state which replaceable slots carried the design: `基础层`, `外层体积`, `腰部系统`, `腿部系统`, `手臂系统`, `头颈系统`, `标记系统`.
-15. `variation_matrix`: state the current `场景`, `情绪`, `身体需求`, `资源来源`, `识别强度`, and `变化幅度`. Infer conservatively from the character record and selected job when the user does not specify a scene.
-16. `anti_default_decision`: explain why the outfit does or does not use a shirt-like default as the primary visual. If it does, name the compensating structure that keeps it from being generic.
+2. `base_garment_prototype`: name the readable starting point with precise prototypes, not category words: hooded rain smock, shop coat, protective vest, fitted high-neck base layer, panelled technical pants, canvas low-top, short utility boot, leg pouch, work gloves, or another clear prototype.
+3. `outer_shell_prototype`: if any outer layer exists, choose a precise outer shell family such as `pullover anorak`, `field coat`, `long sleeveless coat`, `rescue shell`, `offset-placket jacket`, `inside-out shell`, `sealed pocket shell`, or another equivalent precise shell. Generic `jacket`, `coat`, `vest`, `hoodie`, and `shirt jacket` fail.
+4. `garment_line`: choose one line from Garment Grammar, such as `quiet_tailoring`, `soft_deconstruction`, `utility_atelier`, `street_atelier`, or `protective_tailoring`.
+5. `banned_shape_check`: explicitly state `no skirt, no dress, no apron, no pinafore; any apron function is replaced by <non-apron structure>`.
+6. `professional_keywords`: list compact English garment keywords for Azoth, including silhouette, cut, construction, fabric zones, closure, panel path, trouser design, footwear structure, and accessory structure.
+7. `negative_clothing`: include `no skirt, no dress, no apron, no pinafore, no maid outfit, no school uniform skirt, no wrap skirt, no apron-like front panel, no generic T-shirt and jeans, no plain casualwear`.
+8. `structural_event`: choose exactly one primary event such as `错入口`, `反穿内外互换`, `错肢穿法`, `制服切开`, `制作痕迹外露`, `材质封存`, `单片包覆`, `普通原型故障`, `身体硬件命名`, or `热压折线成体积`; specify part, visible mechanism, and body/occupation purpose.
+9. `material_behavior`: choose zero or one supporting behavior such as `透明显露`, `封存`, `防水外壳`, `第二皮肤`, `半硬支撑`, `软硬冲突`, `重量转移`, `反光硬标`, or `压缩收束`; specify part and behavior. Do not use `透明` as the whole material idea.
+10. `anti_shirt_jacket_default`: state why this is not shirt/jacket print decoration. Name the non-shirt primary visual carrier and what it changes in silhouette, closure, material behavior, or body reading.
+11. `designer_method_references`: choose 1-3 anonymous methods from the designer-method library, such as `平面到立体`, `解剖式戏剧裁剪`, `制作痕迹外露`, `身体建筑与垂坠体块`, `熟悉原型加雕塑变形底`, `鞋履建筑结构`, or `性能叙事可视化`.
+12. `designer_prompt_references`: optional designer names only when the user explicitly asks to test designer references in prompts. Keep them out of normal prompt prose unless Azoth's prompt rules allow them.
+13. `design_operators`: choose 1-2 operators such as `错位`, `膨胀`, `压缩`, `分段`, `外露`, `折叠`, `框架`, `开口`, `包覆`, `悬挂`, `错入口`, `反穿`, `封存`, `生长`, `错觉拼接`, or `单片包覆`; specify body part and visible purpose.
+14. `body_fit_strategy`: explain how the design reinforces the WHOWHO width-first body: shoulder width, chest/abdomen readability, giant arms, heavy hands, thick thighs, stable shoes, or lowered center of gravity.
+15. `panel_paths`: write at least one path with start, route, endpoint, and rule. The path should avoid random surface lines and should not break the chest/abdomen into tiny shapes.
+16. `pattern_strategy`: choose low-density pattern placement such as edge trim, local emblem, interrupted side stripe, controlled plaid, radiating ribs, or heat-pressed fold lines. State density and forbidden misuse.
+17. `craft_boundaries`: name visible craft boundaries such as piping, binding, topstitching, exposed seam, zipper teeth, flat buckle tabs, ribbed hem, drawcords, hard plate edge, or shoe sidewall. Piping, edge binding, welt seams, and narrow garment-edge trim must stay tonal or same-color-family; do not turn them into contrasting colored outlines, high-saturation trim, or cheap decorative edge accents.
+18. `footwear_accessory_structure`: ensure shoes answer prototype, sole structure, upper cutting, cuff/sock/trouser connection, and center-of-gravity role; ensure accessories answer body location, attachment, shape, body-reading role, and occupation cue.
+19. `complexity_budget`: state `large silhouette 60 / medium panels 25 / small craft 10 / pattern-symbol 5`, or justify a small deviation.
+20. `design_failure_avoidance`: name avoided fake-high-design traps: random lines, all-over tiny pattern, cyber glow, texture-map fabric, structureless thick sole, or accessories as loose decoration.
+21. `design_function_slots`: list the active functions: `身体暴露`, `体积扩张`, `收束`, `功能挂载`, `身份标记`, `材质冲突`, `遮蔽`, `动作释放`, `仪式装饰`, `生活磨损`. Use at least three when the job allows it.
+22. `replacement_slots_used`: state which replaceable slots carried the design: `基础层`, `外层体积`, `腰部系统`, `腿部系统`, `手臂系统`, `头颈系统`, `标记系统`.
+23. `variation_matrix`: state the current `场景`, `情绪`, `身体需求`, `资源来源`, `识别强度`, and `变化幅度`. Infer conservatively from the character record and selected job when the user does not specify a scene.
+24. `anti_default_decision`: explain why the outfit does or does not use a shirt-like default as the primary visual. If it does, name the compensating structure that keeps it from being generic.
 
-If black-market stock provides `基础款原型`, `设计来源方法`, `设计师提示引用`, `设计操作`, `裁片路径`, `图案策略`, `工艺边界`, `身体适配`, `复杂度配额`, `失败规避`, `造型算法`, `设计功能位`, `可替换位`, `反默认价值`, or `变化矩阵标签`, prefer these fields when scoring stock fit. If older stock lacks these fields, infer only from formal fields already allowed to San Zhai, such as structure, silhouette, layering, accessories, material zones, and tags.
+If black-market stock provides `基础款原型`, `外层原型`, `结构事件`, `材质行为`, `设计来源方法`, `设计师提示引用`, `设计操作`, `裁片路径`, `图案策略`, `工艺边界`, `身体适配`, `复杂度配额`, `失败规避`, `造型算法`, `设计功能位`, `可替换位`, `反默认价值`, or `变化矩阵标签`, prefer these fields when scoring stock fit. If older stock lacks these fields, infer only from formal fields already allowed to San Zhai, such as structure, silhouette, layering, accessories, material zones, and tags.
 
 ### Designer Reference Handling
 

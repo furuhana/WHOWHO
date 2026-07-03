@@ -43,7 +43,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 1
   手部策略: "both_hands_low"
   展示风险: "low"
-  描述: "身体三分之二侧向站立，重心偏向一条支撑腿，骨盆轻微外斜，双臂自然下垂并握成松拳，像是在放松等待下一步行动。"
+  描述: "身体三分之二侧向站立，重心只轻微偏向一条支撑腿，骨盆与肩线保持方正，双臂自然下垂并握成松拳，像是在放松等待下一步行动。"
   标签:
     - "斜站"
     - "重心偏移"
@@ -108,7 +108,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 2
   手部策略: "side_gesture"
   展示风险: "medium"
-  描述: "身体略微侧向站立，一手插在腰侧或口袋位置稳定重心，另一手抬到肩旁张开手指，像是在轻松解释并把注意力引向自己。"
+  描述: "身体略微侧向站立，双脚分开踩稳，一手靠在腰带或口袋边缘稳定装备，另一手抬到肩旁张开手指，像是在克制说明并把注意力引向前方。"
   标签:
     - "侧站"
     - "抬手"
@@ -121,7 +121,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 2
   手部策略: "forward_display"
   展示风险: "high"
-  描述: "身体正面站立，双脚分开保持稳定，一手落在腰侧，另一手向前半伸并张开手掌，像是在邀请对方靠近或递出选择。"
+  描述: "身体正面站立，双脚分开保持稳定，骨盆与肩线方正，一手低位压在腰带附近，另一手向前半伸并张开手掌，像是在给出明确选择。"
   标签:
     - "稳站"
     - "邀请"
@@ -160,7 +160,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 2
   手部策略: "garment_display"
   展示风险: "high"
-  描述: "身体侧前方站立，重心落在一条腿上，一手拉开胸前外层，一手横在腰腹位置辅助固定，补完整体为稳站展示姿态，像是在把注意力引向身体前侧。"
+  描述: "身体侧前方站立，双脚分开形成稳定底盘，骨盆收正，一手拉开胸前外层，一手低位固定腰带或外层边缘，补完整体为稳站说明姿态，像是在清楚展示装备结构。"
   标签:
     - "补完整身"
     - "拉襟"
@@ -204,7 +204,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
     - "低坐"
     - "单膝支起"
     - "侧撑"
-- 名称: "后仰插袋松站"
+- 名称: "收正插袋松站"
   类别: "姿势"
   姿势大类: "leaning"
   身体朝向: "front"
@@ -212,9 +212,9 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 1
   手部策略: "hands_in_pockets"
   展示风险: "low"
-  描述: "身体站立时骨盆向前送出，上身略微后仰，重心压在一条腿上，双手插在身体两侧，像是在放松站定并保持不急于行动的姿态。"
+  描述: "身体站立时骨盆收正，上身只轻微后移且胯部保持内收，双脚错开稳住重心，双手插在身体两侧，像是在放松站定并保持不急于行动的姿态。"
   标签:
-    - "后仰"
+    - "收正"
     - "插手"
     - "松站"
 - 名称: "交叉步举拳"
@@ -225,9 +225,9 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 3
   手部策略: "raised_fist"
   展示风险: "medium"
-  描述: "身体侧向站立，双腿轻微交叉形成不对称重心，一手收在胸前，另一手高举成拳，像是在行进中做出鼓动或宣告动作。"
+  描述: "身体侧向站立，一脚侧前迈出但不交叉，双脚仍形成稳定支撑，一手收在胸前，另一手高举成拳，像是在行进中做出鼓动或宣告动作。"
   标签:
-    - "交叉步"
+    - "侧前步"
     - "举拳"
     - "宣告"
 - 名称: "半蹲横臂蓄势"
@@ -256,7 +256,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
     - "侧身"
     - "抓带"
     - "张手"
-- 名称: "倚物叉腰斜站"
+- 名称: "倚物压带斜站"
   类别: "姿势"
   姿势大类: "leaning"
   身体朝向: "three_quarter"
@@ -264,10 +264,10 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 1
   手部策略: "side_carry"
   展示风险: "low"
-  描述: "身体斜向站立，重心偏在一条腿上，一手叉在腰侧，另一手握住角色相关的长形道具靠近身体，像是在间隙中放松但仍保留行动准备。"
+  描述: "身体斜向站立，双脚一前一后稳住重心，骨盆与肩线收正，一手拇指勾住腰带或低位压住腰带，另一手握住角色相关的长形道具靠近身体，像是在间隙中放松但仍保留行动准备。"
   标签:
     - "斜站"
-    - "叉腰"
+    - "腰带压手"
     - "长形物握持"
 - 名称: "肩扛长柄稳站"
   类别: "姿势"
@@ -290,7 +290,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 2
   手部策略: "side_object_display"
   展示风险: "high"
-  描述: "身体以宽站姿向前打开，胸腔上提，一手托起小物到身侧展示，另一手向外松开辅助平衡，像是在庆祝或炫示手中目标。"
+  描述: "身体以宽站姿向前打开，胸腔保持平直，一手托起小物到身侧说明，另一手低位向外松开辅助平衡，像是在报告或确认手中目标。"
   标签:
     - "宽站"
     - "掌托"
@@ -394,7 +394,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 1
   手部策略: "object_display"
   展示风险: "high"
-  描述: "身体正面停步站立，重心偏向一侧，一手在上腹以下或身体侧前方握住角色相关小物，另一手放松垂在身旁，补完整体为随意驻足的单手展示动作，并保持胸腹轮廓清楚。"
+  描述: "身体正面停步站立，双脚分开让重心居中，一手在上腹以下或身体侧前方握住角色相关小物，另一手放松垂在身旁，补完整体为克制驻足的低位持物动作，并保持胸腹轮廓清楚。"
   标签:
     - "补完整身"
     - "停步"
@@ -433,7 +433,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 1
   手部策略: "hands_overhead"
   展示风险: "low"
-  描述: "身体直立并轻微后仰，双臂上举交叠放在头顶后方，双脚自然分开，像是在站立拉伸或放松身体张力。"
+  描述: "身体脊柱保持直立，双臂上举交叠放在头顶后方，双脚自然分开稳住下盘，像是在站立拉伸或放松身体张力。"
   标签:
     - "抱头"
     - "拉伸"
@@ -459,11 +459,11 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 2
   手部策略: "two_hand_gesture"
   展示风险: "medium"
-  描述: "身体侧向站立并略微后仰，双手抬到脸侧或胸前做轻巧的手指手势，双腿并拢或小步错开，像是在用夸张手势做轻快展示。"
+  描述: "身体侧向站立但骨盆收正，双脚分开或小步错开稳住下盘，双手抬到胸前做短促明确的手指指令，像是在用克制手势传达信息。"
   标签:
     - "侧身"
     - "双手手势"
-    - "后仰"
+    - "指令手势"
 - 名称: "正面负重松站"
   类别: "姿势"
   姿势大类: "standing"
@@ -550,7 +550,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 2
   手部策略: "side_gesture"
   展示风险: "medium"
-  描述: "身体斜向站立，重心压在一条腿上，一手放在腰后或腰侧，另一手向外摊开，像是在说明情况或把选择交给对方。"
+  描述: "身体斜向站立，双脚分开保持稳定，一手贴近腰带或自然垂落，另一手向外摊开，像是在说明情况或把选择交给对方。"
   标签:
     - "斜站"
     - "单手摊开"
@@ -594,7 +594,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
     - "踏前"
     - "双拳"
     - "近身"
-- 名称: "后仰双拳夸张站"
+- 名称: "直立双拳夸张站"
   类别: "姿势"
   姿势大类: "standing"
   身体朝向: "front"
@@ -602,9 +602,9 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 3
   手部策略: "both_hands_busy"
   展示风险: "medium"
-  描述: "身体正面站立并轻微后仰，双腿分开，双臂弯曲抬起形成夸张拳架，像是在用大幅度身体语言进行挑衅或登场。"
+  描述: "身体正面站立并保持直立，双腿分开踩稳，双臂弯曲抬起形成夸张拳架，像是在用大幅度身体语言进行挑衅或登场。"
   标签:
-    - "后仰"
+    - "直立"
     - "双拳"
     - "夸张站"
 - 名称: "行进肩带侧前"
@@ -615,7 +615,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 3
   手部策略: "strap_hold"
   展示风险: "low"
-  描述: "身体正面偏侧向前行进，一腿跨出，另一腿跟随交叉，单手勾住肩侧负重点，躯干轻微转向镜头，像是在边走边回应前方。"
+  描述: "身体正面偏侧向前行进，一腿跨出，另一腿从后方跟上但不交叉，单手勾住肩侧负重点，躯干轻微转向镜头，像是在边走边回应前方。"
   标签:
     - "行进"
     - "侧前"
@@ -693,10 +693,10 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 1
   手部策略: "arm_rest"
   展示风险: "low"
-  描述: "身体斜靠在椅中，双腿大幅交叠并向一侧伸展，单臂搭在扶手或腿上，另一手靠近身体中心，像是在占据座位并从容观察。"
+  描述: "身体斜靠在椅中，双脚分开落地，一腿略向侧前伸展但不交叠，单臂搭在扶手或腿上，另一手靠近身体中心，像是在占据座位并从容观察。"
   标签:
     - "椅坐"
-    - "交腿"
+    - "宽坐"
     - "倚靠"
 - 名称: "垂臂拎物站"
   类别: "姿势"
@@ -737,7 +737,7 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
     - "侧前"
     - "屈膝"
     - "反击"
-- 名称: "后仰举拳胜利"
+- 名称: "直立举拳胜利"
   类别: "姿势"
   姿势大类: "victory"
   身体朝向: "front"
@@ -745,12 +745,12 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 3
   手部策略: "raised_fist"
   展示风险: "medium"
-  描述: "身体正面站立并向后仰起，单拳高举到头侧上方，另一拳收在身体前侧，双腿分开支撑，像是在取得优势后做出庆祝动作。"
+  描述: "身体正面站立并保持上身直立，单拳高举到头侧上方，另一拳收在身体前侧，双腿分开支撑，像是在取得优势后做出庆祝动作。"
   标签:
-    - "后仰"
+    - "直立"
     - "举拳"
     - "庆祝"
-- 名称: "仰身双拳展示"
+- 名称: "直立双拳展示"
   类别: "姿势"
   姿势大类: "victory"
   身体朝向: "front"
@@ -758,9 +758,9 @@ Do not store expression, clothing, hair, accessories, props as styling objects, 
   动势强度: 3
   手部策略: "both_hands_busy"
   展示风险: "medium"
-  描述: "身体正面仰起，胸腔打开，双拳分别抬在身体两侧形成大幅度展示线，双脚分开承托身体，像是在用力量感姿态宣告胜出。"
+  描述: "身体正面直立，胸腔打开并保持稳定，双拳分别抬在身体两侧形成大幅度力量线，双脚分开承托身体，像是在用力量感姿态宣告胜出。"
   标签:
-    - "仰身"
+    - "直立"
     - "双拳"
     - "展示"
 - 名称: "重装垂臂稳站"

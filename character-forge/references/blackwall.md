@@ -43,6 +43,9 @@ Check:
 - Are there enough distinctive visual hooks for image generation?
 - Did San Zhai record a concrete `styling_algorithm`, active `design_function_slots`, `replacement_slots_used`, `variation_matrix`, and `anti_default_decision`?
 - If Garment Grammar is available, did San Zhai record `garment_line`, `banned_shape_check`, `professional_keywords`, and `negative_clothing`?
+- If the shared prototype libraries are available, did San Zhai record a precise `outer_shell_prototype` when any outer layer is present, rather than ending with generic jacket/coat/vest/hoodie/shirt-jacket wording?
+- Did San Zhai record exactly one primary `structural_event` and zero or one supporting `material_behavior`, with visible part, mechanism, and body/role purpose?
+- If a shirt-like garment is present, did San Zhai record `anti_shirt_jacket_default` naming the non-shirt carrier that prevents the design from collapsing into shirt/jacket print decoration?
 - Did San Zhai record a readable `base_garment_prototype`, anonymous `designer_method_references`, concrete `design_operators`, `panel_paths`, `pattern_strategy`, `craft_boundaries`, `body_fit_strategy`, `complexity_budget`, and `design_failure_avoidance` when advanced design grammar is available?
 - If the user allowed designer prompt references, are `designer_prompt_references` short, optional, and backed by visible construction rather than used as a substitute for garment detail?
 - Does at least one clothing, footwear, or accessory element have a clear panel/cutting path with start point, route, endpoint, and rule?
@@ -68,7 +71,7 @@ Check:
 - If the selected pose is not a presentation pose, does the prompt preserve that body language and include a compact negative constraint against forward hand presentation, pointing at the viewer, or a hand extended toward the camera?
 - If the selected pose angles the body sideways or away from the viewer, did Azoth add a head-and-gaze clause that keeps the face visible and keeps the eyes toward the viewer or just beside the camera?
 - If Azoth used black-market expression stock, preserve valid five-part expression descriptions as prompt-useful material when they contain mouth shape, eyebrow/eye state, gaze, facial tension, and reusable acting intention.
-- If `黑商商机` is present, is it clearly non-inventory and free of black-market forbidden source or appearance leakage?
+- If `设计思路` is present, does it explain concrete design moves without becoming inventory procurement, source provenance, or appearance leakage?
 
 ## Second Gate: Forbidden Directions
 
@@ -99,6 +102,11 @@ Reject or reroute if the result contains:
 - black-market inventory content outside `正式入库` being used as stock
 - black-market styling stock used as expression, expression stock used as styling or pose, pose stock used as styling or face design, hairstyle stock used for beard, eyebrows, face shape, facial features, makeup, complexion, or attractiveness, or eyebrow stock used for hairstyle, beard, eye shape, expression acting, face shape, facial features, makeup, complexion, or attractiveness
 - San Zhai output that lacks a styling algorithm, lacks functional-slot reasoning, or cannot explain why this outfit is not just another occupation-locked shirt formula
+- San Zhai output that uses `shirt`, `jacket`, `coat`, `vest`, `hoodie`, `pants`, `shoes`, or `bag` as final prototypes instead of precise base and outer-shell prototypes, unless the user explicitly requested plain clothing
+- San Zhai output with an outer layer but no precise `outer_shell_prototype`, or a final outer layer that remains a generic jacket/coat/vest/hoodie/shirt-jacket
+- San Zhai output that claims deconstruction, structural fashion, or material replacement but lacks a named `structural_event` and `material_behavior` with visible mechanism
+- San Zhai output that uses transparent material as the entire material idea without saying what the transparent layer reveals, seals, supports, protects, or changes
+- San Zhai output that stacks multiple primary structure events, such as offset entry plus inside-out plus sealed pockets plus single-sheet wrap plus body hardware focal point, until the outfit becomes unreadable
 - San Zhai output that uses an apron as the default solution for service, food, craft, vendor, or workshop jobs instead of replacing that function with a vest, belt, harness, structured overshirt, protective placket, trouser pouch, or crossbody tool bag
 - San Zhai output that uses designer names as the actual design instead of anonymous methods and visible construction, unless the user explicitly allowed short designer prompt references and the outfit still has full structural description
 - San Zhai output that records designer prompt references but lacks concrete design operators, panel paths, craft boundaries, footwear structure, or body-fit strategy
@@ -130,7 +138,7 @@ Reject or reroute if the result contains:
 - `黑商取货` reasoning that mentions source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from the source
 - 三宅 `黑商取货` reasoning that invents outfit strengths from source context instead of deriving them from formal stock fields such as `名称`, `类别`, `描述`, `标签`, and `包含单品`
 - Azoth expression and pose selection that visually contradict each other, unless the contradiction is explicit, useful, and still readable as one single-character performance
-- `黑商商机` being described as already入库, `正式入库`, or using source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from a source
+- `设计思路` being described as already入库, `正式入库`, future procurement leads, or using source images, filenames, paths, `现场验货`, `常规描述`, raw image analysis, facial features, complexion, makeup, attractiveness judgments, or identity/story inferred from a source
 
 Important distinction: muscular or strongly built body types are allowed and may be preferred. Reject only when the system turns muscularity into forbidden jobs, dirty labor aesthetics, or gym-coach identity.
 

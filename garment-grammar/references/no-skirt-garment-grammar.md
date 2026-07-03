@@ -8,6 +8,81 @@ This reference upgrades basic WHOWHO clothing into professional garment-construc
 
 Each outfit should stay wearable, readable, and animation-friendly, but it must show that someone designed the garment. Do not solve this by adding noise. Solve it through silhouette, cutting, construction, fabric zoning, closure, trouser architecture, footwear, and body-aware accessories.
 
+Use these shared prototype and event libraries when they exist:
+
+- `black-market/references/base-garment-prototypes.md`
+- `black-market/references/outer-shell-prototypes.md`
+- `black-market/references/structural-events-and-material-behaviors.md`
+
+`shirt`, `jacket`, `pants`, `shoes`, and `bag` are category words only. They are not precise final prototypes. Final garment language must choose a specific prototype such as `hooded rain smock`, `field coat`, `long sleeveless coat`, `pullover anorak`, `protective vest`, `panelled technical pants`, or `segmented sole training shoe`.
+
+## Outer Shell Requirement
+
+When an outfit has any outer layer, Garment Grammar must name a precise `outer_shell_prototype`. Do not leave the outer layer as `jacket`, `coat`, `vest`, `shirt jacket`, `outerwear`, or `hoodie`.
+
+Use one of these families or an equivalent precise prototype:
+
+```yaml
+short_outer_shells: ["cropped box jacket", "cropped utility jacket", "cropped riding jacket", "short track shell", "short field shell"]
+mid_outer_shells: ["shop coat", "chore coat", "field coat", "safari jacket", "utility smock", "rain smock", "mechanic coat"]
+long_outer_shells: ["straight overcoat", "long narrow coat", "trench coat", "hooded long shell", "greatcoat"]
+sleeveless_outer_shells: ["utility vest", "protective vest", "long sleeveless coat", "equipment vest shell"]
+drape_shells: ["short shoulder mantle", "weather poncho", "back-mounted cloak panel", "folded geometric outer shell"]
+pullover_shells: ["pullover anorak", "hooded smock", "technical half-zip shell"]
+occupational_shells: ["guard tunic", "service coat", "rescue shell", "maintenance coat"]
+structural_shells: ["offset-placket jacket", "inside-out shell", "multi-opening jacket", "single-sheet wrap shell", "sealed pocket shell"]
+```
+
+If a shirt-like garment is present, it is a base or middle layer unless the user explicitly requested a plain shirt outfit. The main visual carrier must be the precise outer shell, vest/armor, waist system, leg system, shoes, head/neck frame, or mounted accessory system.
+
+## Structural Event Grammar
+
+Each advanced outfit should include one primary `structural_event` and zero or one supporting `material_behavior`.
+
+Preferred structural events:
+
+```yaml
+structural_events:
+  - "错入口: side entry, inactive sleeve opening, offset placket, or secondary opening that stays wearable"
+  - "反穿内外互换: exposed facing, lining, reverse seam, or back-side construction used as the visible side"
+  - "错肢穿法: extra garment limb or displaced sleeve/neck logic that never changes the human body"
+  - "制服切开: uniform or tailoring cut away, shortened, shifted, or waist-suppressed while staying authoritative"
+  - "制作痕迹外露: clean exposed seams, seam allowance, zipper teeth, binding, temporary tabs, or unfinished clean edges"
+  - "材质封存: objects, marker plates, stitch lines, or small tools sealed inside translucent or semi-rigid panels"
+  - "单片包覆: one continuous sheet wraps around shoulder, back, chest, or waist with clear fixed points"
+  - "普通原型故障: familiar garment appears wrong through false sleeves, false layers, offset pockets, or trompe-l'oeil splicing"
+  - "身体硬件命名: one hardware focal point names chest, waist, hand, or back"
+  - "热压折线成体积: heat-pressed fold planes create volume and movement direction"
+```
+
+Preferred material behaviors:
+
+```yaml
+material_behaviors:
+  - "透明显露"
+  - "封存"
+  - "防水外壳"
+  - "第二皮肤"
+  - "半硬支撑"
+  - "人工皮革单片包覆"
+  - "软硬冲突"
+  - "重量转移"
+  - "反光硬标"
+  - "压缩收束"
+```
+
+Bad:
+
+```text
+stylish deconstructed jacket with transparent material
+```
+
+Good:
+
+```text
+hooded rain smock with an offset side entry, sealed translucent chest pocket blocks, broad back-yoke panel from rear collar base to outer shoulder seams, matte waterproof shell over a fitted compression base layer, and segmented sole training shoes grounding the body
+```
+
 ## Banned Shapes
 
 Never use these unless the user explicitly overrides the ban:
@@ -199,6 +274,10 @@ Before passing to Muse or Blackwall, verify:
 - A shirt or T-shirt is not the primary visual unless the occupation truly requires it and two other systems compensate.
 - The primary design point is clear in one sentence.
 - The outfit names one readable base prototype before modifications.
+- Any outer layer has a precise outer-shell prototype, not generic jacket/coat/vest/hoodie wording.
+- Any deconstruction has a named structural event with a visible mechanism.
+- Any material replacement has a material behavior, not only a material name or transparency.
+- If a shirt-like garment exists, another visible system carries the primary design idea.
 - At least one panel path has start, route, endpoint, and body rule.
 - Shoes include prototype, sole structure, upper cutting, cuff/sock/trouser connection, and grounding role.
 - Accessories attach to a body location and change body reading or role readability.

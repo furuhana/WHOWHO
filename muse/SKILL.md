@@ -76,6 +76,10 @@ Judge whether the outfit is a complete character design rather than a random out
 - 混搭控制
 - 设计信息密度
 - 基础款原型
+- 外层原型精度
+- 结构事件
+- 材质行为
+- 衬衫夹克默认规避
 - 匿名设计方法
 - 设计操作符
 - 裁片路径
@@ -107,6 +111,9 @@ Require:
 - A variation matrix reason: scene, emotional posture, body need, resource source, recognition strength, or variation幅度 should be visible enough to prevent the occupation from locking every outfit into one formula.
 - A visible translation of `world_context` when Character Forge provides it: era, culture, street texture, technology, order, material ecology, and visual taboo should affect construction, materials, accessories, or silhouette.
 - A readable base garment prototype that remains visible after modification.
+- A precise outer-shell prototype when an outer layer exists. `Jacket`, `coat`, `vest`, `hoodie`, and `shirt jacket` are not enough; require a specific shell such as hooded rain smock, field coat, long sleeveless coat, pullover anorak, protective vest, offset-placket jacket, inside-out shell, or sealed pocket shell.
+- One primary structural event with visible mechanism, such as offset entry, inside-out construction, displaced garment limb, cutaway uniform, exposed construction, sealed pocket blocks, single-sheet wrapping, familiar-prototype malfunction, body hardware focal point, or heat-pressed fold volume.
+- Zero or one supporting material behavior that changes how the garment acts, such as revealing, sealing, waterproofing, second-skin wrapping, semi-rigid support, soft/hard conflict, weight transfer, reflective marking, or compression.
 - At least one concrete design operator such as offset, expansion, compression, segmentation, exposed construction, folding, frame, opening, wrapping, or hanging.
 - At least one panel path with start point, route, endpoint, and body rule.
 - Controlled pattern placement and density; patterns should sit on edges, local emblems, side stripes, ribs, or fold lines rather than fill the whole body.
@@ -116,6 +123,12 @@ Require:
 - A complexity budget close to 大形体 60 / 中型裁片 25 / 小工艺 10 / 图案符号 5.
 
 Flag `衬衫默认复发` when a shirt-like garment becomes the primary visual and the rest of the outfit does not provide enough silhouette, waist, head/neck, hand/arm, leg, marker, accessory, material, or prop information.
+
+Flag `外层原型贫血` when the outfit says only jacket, coat, vest, hoodie, or shirt jacket, causing repeated shirt-and-jacket silhouettes instead of a precise outer shell.
+
+Flag `结构事件缺席` when the outfit says deconstructed, transparent, stylish, high-fashion, or experimental but cannot identify what event happened to the garment and where it happens.
+
+Flag `材质行为缺席` when material words such as transparent, leather, metal, nylon, rubber, or plastic do not change visibility, support, closure, protection, compression, weight, or body reading.
 
 Flag `算法缺席` when the outfit is only a list of garments and has no reusable structure, no functional slot logic, and no reason why this character would choose this arrangement today.
 

@@ -40,6 +40,25 @@ REQUIRED_WORLD_CONTEXT = [
     "material_ecology",
     "visual_taboo",
 ]
+REQUIRED_OUTFIT = [
+    "outerwear",
+    "base_layer",
+    "pants",
+    "socks",
+    "shoes",
+    "accessories",
+    "styling_algorithm",
+    "base_garment_prototype",
+    "outer_shell_prototype",
+    "structural_event",
+    "material_behavior",
+    "anti_shirt_jacket_default",
+    "design_operators",
+    "panel_paths",
+    "craft_boundaries",
+    "complexity_budget",
+    "design_failure_avoidance",
+]
 
 
 def fail(message: str) -> None:
@@ -65,6 +84,19 @@ def main() -> None:
     for key in REQUIRED_WORLD_CONTEXT:
         if key not in data["world_context"]:
             fail(f"missing world_context key: {key}")
+
+    for key in REQUIRED_OUTFIT:
+        if key not in data["outfit"]:
+            fail(f"missing outfit key: {key}")
+
+    if not isinstance(data["outfit"]["structural_event"], dict):
+        fail("outfit.structural_event must be an object")
+
+    if not isinstance(data["outfit"]["material_behavior"], dict):
+        fail("outfit.material_behavior must be an object")
+
+    if not data["outfit"]["outer_shell_prototype"]:
+        fail("outfit.outer_shell_prototype must name a precise outer shell")
 
     for key in ["wealth", "danger", "desire", "execution", "social"]:
         value = data["basic"][key]

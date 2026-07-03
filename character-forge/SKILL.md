@@ -32,6 +32,9 @@ Read these references before generating a character:
    - When the black-market design grammar exists, San Zhai and all downstream audit/prompt modules should also use:
      - `../black-market/references/designer-methods.md`
      - `../black-market/references/design-operators.md`
+     - `../black-market/references/base-garment-prototypes.md`
+     - `../black-market/references/outer-shell-prototypes.md`
+     - `../black-market/references/structural-events-and-material-behaviors.md`
      - `../black-market/references/pattern-and-cutting.md`
      - `../black-market/references/footwear-accessory-grammar.md`
 6. `references/tony.md` for hairstyle, beard, and face matching.
@@ -107,6 +110,9 @@ Do not let 缪斯 change the occupation chosen by Bo Le, selected black-market s
 When the design grammar files exist, 缪斯 should also audit whether San Zhai supplied:
 
 - a readable `base_garment_prototype`
+- a precise `outer_shell_prototype` when any outer layer exists
+- one primary `structural_event` and zero or one supporting `material_behavior`
+- `anti_shirt_jacket_default` when any shirt-like layer is present
 - a `banned_shape_check` or equivalent proof that no skirt, dress, apron, pinafore, or apron-like lower/front garment was used
 - anonymous `designer_method_references`, and optional `designer_prompt_references` only if the user allowed designer-name prompt testing
 - concrete `design_operators`
@@ -145,7 +151,7 @@ Use black-market stock only in modules that own the matching domain:
 
 Use expression and pose stock only during Azoth prompt synthesis. Keep expression stock separate from face shape, features, or grooming; keep pose stock separate from outfit, anatomy redesign, multiple poses, character sheets, or background action.
 
-Pose diversity is mandatory when pose stock exists. Azoth must use a mandatory two-stage lock before prompt writing: first lock exactly one broad `姿势大类`, then filter `black-market/inventory/pose.md` to concrete stock items inside that exact family, then lock exactly one concrete pose item by `名称`. A broad family alone is not a valid pose selection. Azoth must not invent an unstocked pose after choosing a family, must not choose a concrete item from a different family, and must not write `POSE_DYNAMIC` until the concrete stock item's `描述` is locked for translation. Apply recent-pose cooldown, and adapt outfit props to the selected body language. Do not let occupational readability collapse the character back into a repeated one-hand-forward presentation pose. Do not let `seated` become the default alternative to standing: seated poses require a believable support surface or rest/work beat, must never repeat back-to-back unless explicitly requested, and must be hard-excluded for the next 3 selections when the user complains that poses are always sitting.
+Pose diversity is mandatory when pose stock exists. Azoth must use a mandatory two-stage lock before prompt writing: first lock exactly one broad `姿势大类`, then filter `black-market/inventory/pose.md` to concrete stock items inside that exact family, then lock exactly one concrete pose item by `名称`. A broad family alone is not a valid pose selection. Azoth must not invent an unstocked pose after choosing a family, must not choose a concrete item from a different family, and must not write `POSE_DYNAMIC` until the concrete stock item's `描述` is locked for translation. Apply recent-pose cooldown, and adapt outfit props to the selected body language. Do not let occupational readability collapse the character back into a repeated one-hand-forward presentation pose. If a selected pose contains hand-on-hip, crossed legs, hip tilt, pelvis-forward lean, runway stance, S-curve body, arched-back fashion posture, or playful finger-flourish signals, keep the pose family but translate it into a grounded masculine version with squared hips, squared shoulders, planted feet, balanced weight, and belt-resting or low side-carry hand placement. Do not let `seated` become the default alternative to standing: seated poses require a believable support surface or rest/work beat, must never repeat back-to-back unless explicitly requested, and must be hard-excluded for the next 3 selections when the user complains that poses are always sitting.
 
 Black-market stock must not influence occupation selection. Bo Le chooses the occupation first from the jobs library using user constraints and balanced random selection. The random draw is authoritative when the user does not specify an occupation: stats may explain and flavor the selected job, but they must not reroll it toward a more compatible role such as wedding photographer. San Zhai may then adapt compatible styling stock to that chosen job, but it must not change the job to match a better-stocked outfit.
 
@@ -155,7 +161,7 @@ When black-market formal stock is available in the conversation, when the shelf 
 
 - 三宅：during work-outfit design, check formal styling stock for clothing, footwear, accessories, carried props, worn props, materials, color relationships, and layering. Default to scanning `套装货` first for complete structure; use `单品货` afterward for component-level adaptation and mix-and-match. Apply outfit cooldown before final scoring: hard-exclude the last 3 selected set stock names and main styling algorithms when alternatives exist, strongly downweight the last 10, and vary the primary visual carrier across outer volume, waist system, armor/protection, leg system, head/neck system, hand/arm system, marker system, footwear, and accessory system.
 - 托尼：during head styling, check formal hairstyle stock for `hairstyle` and formal eyebrow stock for `eyebrows` only. Do not use black-market stock for beard, face shape, eye shape, facial features, makeup, complexion, or attractiveness.
-- 阿佐特：during prompt synthesis, check formal pose stock for body angle, weight shift, hand placement, gesture, prop interaction, and action freeze-frame; then check formal expression stock for gaze, facial tension, mouth-corner state, emotional layer, and acting state. Pose must be selected and locked first, expression second. Pose selection must be two-stage: lock a broad `姿势大类`, filter to concrete items from that exact family, and lock one concrete `名称` plus `描述`; if the family has no viable concrete item, reject that family and reroll/reselect another family before writing the prompt. Apply pose cooldown: hard-exclude the last 3 used pose categories when alternatives exist, strongly downweight the last 10, and avoid repeated hand-forward presentation patterns unless explicitly required. Treat seated as a low-frequency family: only use it when the role naturally supports a seated/resting/workstation beat, never repeat it back-to-back unless requested, and hard-exclude it for the next 3 selections after a sitting-sameness complaint. Keep expression stock separate from face shape, grooming, and appearance judgments.
+- 阿佐特：during prompt synthesis, check formal pose stock for body angle, weight shift, hand placement, gesture, prop interaction, and action freeze-frame; then check formal expression stock for gaze, facial tension, mouth-corner state, emotional layer, and acting state. Pose must be selected and locked first, expression second. Pose selection must be two-stage: lock a broad `姿势大类`, filter to concrete items from that exact family, and lock one concrete `名称` plus `描述`; if the family has no viable concrete item, reject that family and reroll/reselect another family before writing the prompt. Apply pose cooldown: hard-exclude the last 3 used pose categories when alternatives exist, strongly downweight the last 10, avoid repeated hand-forward presentation patterns unless explicitly required, and convert seductive-fashion pose signals into grounded masculine body language instead of deleting the pose. Treat seated as a low-frequency family: only use it when the role naturally supports a seated/resting/workstation beat, never repeat it back-to-back unless requested, and hard-exclude it for the next 3 selections after a sitting-sameness complaint. Keep expression stock separate from face shape, grooming, and appearance judgments.
 - 黑墙：audit any selected black-market stock after integration. Reject or reroute if the stock introduces forbidden directions, face-centered appearance judgments, makeup, complexion, dirty materials, noisy fabric texture, or any conflict with the fixed body and single-character prompt rules.
 
 All modules must read only `正式入库`. `现场验货`, `常规描述`, source filenames, paths, and raw image analysis are never valid stock for the mother pipeline.
@@ -216,7 +222,7 @@ Return these sections for each completed character:
 4. 黑墙审核
 5. 英文提示词
 6. 中文提示词
-7. 黑商商机
+7. 设计思路
 8. 图像生成
 9. 成图审核
 10. 文件归档
@@ -232,7 +238,7 @@ Use these defaults:
 - `基础信息`: two-group table. Put identity fields on the left (`名字`, `性别`, `年龄`, `国籍`, `体型`, `性格`) and score fields on the right (`贫富值`, `危险值`, `欲望值`, `执行力`, `社交力`). Do not show the internal `temperament` field as a basic-info row; let Azoth translate it into the prompt instead.
 - `世界底盘`: two-group table. Left group: `时代背景`, `文化体系`, `文化阶段`, `市井特点`. Right group: `技术层级`, `秩序状态`, `材料生态`, `视觉禁忌`.
 - `社会身份 + 头脸造型`: two-group table when both are compact. Left group: `职业`, `帮派`, `匹配理由`. Right group: `发型`, `眉型`, `胡子`, `脸型`, `造型理由`.
-- `工作服`: use a one-group table or short grouped list because clothing fields can be long. Include `外套`, `打底`, `裤子`, `袜子`, `鞋子`, `饰品/道具`, `造型算法`, `服装线`, `禁用形态检查`, `专业关键词`, `基础款原型`, `匿名设计方法`, `设计师提示引用` when user allowed it, `设计操作符`, `裁片路径`, `图案策略`, `工艺边界`, `身体适配`, `鞋饰结构`, `复杂度配额`, `失败规避`, `可替换位`, `世界底盘继承`, `反默认判断`, and `服装理由` when available.
+- `工作服`: use a one-group table or short grouped list because clothing fields can be long. Include `外套`, `打底`, `裤子`, `袜子`, `鞋子`, `饰品/道具`, `造型算法`, `服装线`, `禁用形态检查`, `专业关键词`, `基础款原型`, `外层原型`, `结构事件`, `材质行为`, `衬衫夹克默认规避`, `匿名设计方法`, `设计师提示引用` when user allowed it, `设计操作符`, `裁片路径`, `图案策略`, `工艺边界`, `身体适配`, `鞋饰结构`, `复杂度配额`, `失败规避`, `可替换位`, `世界底盘继承`, `反默认判断`, and `服装理由` when available.
 - If any cell would become too long and make the table hard to read, switch only that section to a single two-column table (`字段 | 内容`) or a short list.
 - Do not put English prompt bodies, Chinese prompt bodies, or long audits into tables. Keep prompt bodies in fenced code blocks.
 
@@ -261,28 +267,28 @@ Before any `图像生成` step, enforce prompt visibility and language integrity
 - If either prompt body contains stock provenance, inventory names, module names, selection reasoning, or abstract mood-borrowing, stop before Mirage/Image Gen and ask Azoth to regenerate only `prompt_en`, `prompt_cn`, and `prompt_notes` from the approved character record. Forbidden prompt-body wording includes `black-market`, `inventory`, `based on the stock`, `uses the stock`, `from the stock`, `adapted from the stock`, `selected stock`, `stock name`, `库存`, `黑商`, `取货`, raw stock names, `only for its mood`, and phrases such as `not as a scarf`. Do not fail legitimate visual words such as `stocky`, `stockroom`, `livestock`, or `stock pot` unless they are being used as inventory provenance.
 - This check must not compress the prompt. Preserve the full dynamic slot detail, fixed body/rendering/lighting/negative blocks, selected pose and expression descriptions, Mirage paragraph when active, and all generation-critical constraints.
 
-## Black-Market Opportunities
+## Design Thinking
 
-After the final Chinese prompt, output `黑商商机` as a non-inventory procurement section.
+After the final Chinese prompt, output `设计思路` as a user-facing design explanation section.
 
 Rules:
 
-- Always provide exactly 10 numbered ideas when completing a character.
-- These are ideas only. Do not write them to any `black-market/inventory/*` file and do not call them `正式入库`.
-- Ideas should be inspired by the current character's occupation, gang, outfit, hairstyle, expression, stats, selected black-market stock, or gaps noticed during generation.
-- Ideas may propose future styling, hairstyle, eyebrow shape, pose, expression, accessory, prop, material, color, layering, or full outfit stock.
-- Each idea must name a suggested stock category such as `套装货`, `单品货`, `发型库存`, `眉型库存`, `姿势库存`, or `表情库存`.
-- Keep each idea concrete enough that the user could search references or ask `@黑商` to turn it into stock later.
+- Always provide 6-10 numbered design notes when completing a character.
+- These notes explain the current character design. Do not phrase them as future procurement leads, stock requests, or `正式入库`.
+- Focus on concrete styling thinking: cutting and pattern paths, material replacement, structural deconstruction, accessory pairing, silhouette tricks, layering method, color/value organization, craft boundaries, and how the outfit is meant to be used or worn.
+- Each note should connect a design move to a visible body or outfit result, such as widening the shoulder, freeing the arm, lowering the center of gravity, breaking up a plain torso, replacing a normal shirt, or turning an accessory into a structural anchor.
+- Prefer actionable design vocabulary such as `裁剪`, `裁片路径`, `材质替换`, `结构事件`, `解构`, `饰品搭配`, `层次关系`, `搭配方式`, `使用方式`, `巧思`, `身体适配`, `轮廓重心`, and `复杂度控制`.
+- Include at least one note about clothing structure, one about material behavior, one about accessories or props, and one about how the pieces are matched or used together.
+- Keep the notes grounded in the approved character record and final prompts. Do not invent new identity, story, source provenance, or hidden image-analysis details.
 - Never include source image names, file paths, `现场验货`, `常规描述`, raw image analysis, makeup, facial features, face shape, complexion, skin texture, attractiveness judgments, or identity/story copied from a source.
-- If an idea is based on a missing fit, phrase it as a procurement opportunity, not as a failed generation.
 
 Use this shape:
 
 ```text
-黑商商机
-1. <category>: <concrete procurement idea and why it fits this character or occupation>
+设计思路
+1. <design move>: <how it changes the outfit, body reading, material behavior, accessory role, or matching method>
 ...
-10. <category>: <concrete procurement idea and why it fits this character or occupation>
+6-10. <design move>: <same format>
 ```
 
 ## Image Generation Tail Step
@@ -309,7 +315,7 @@ Treat `Input image 1` as the style and rendering reference only, not as identity
 
 - clean Japanese TV anime cel-shading, crisp dark outer linework, tidy internal contour lines, smooth flat color blocks, soft but controlled shadow shapes, and minimal background noise
 - width-first grounded body proportion, around 6.2-6.6 heads tall, dramatically broad super-heavyweight fighting-game mass, compact head, short thick neck buried between huge traps, enormous deltoids, huge chest shelf, thick barrel ribcage, giant upper arms, huge forearms, oversized heavy hands, very thick thighs, strong calves, large heavy boots or feet, and stable full-body presentation. The first read must be extreme horizontal muscle mass rather than height.
-- torso anatomy expressed through large simplified muscle masses and clean stylized shape lines, with the pectoral shelf, center chest divide, stacked abdominal blocks, and side-ab planes visibly pressing through fitted tank tops, fitted T-shirts, or tucked undershirts; not realistic skin texture or painterly rendering
+- torso anatomy expressed through large simplified muscle masses and clean stylized shape lines, with the pectoral shelf, center chest divide, stacked abdominal blocks, firm upper-ab wall, and side-ab planes visibly pressing through fitted tank tops, fitted T-shirts, or tucked undershirts; even a slightly forward-projecting torso must read as ribcage pressure and abdominal muscle blocks, never as a soft pot belly, round smooth stomach, sagging abdomen, or unsegmented convex belly; not realistic skin texture or painterly rendering
 - single full-body character, centered on a flat pure white background, with no scene, props display, panels, turnarounds, gradient, vignette, aura, halo, glow, or extra characters
 - one single soft neutral key light from upper left, mostly clean white with only a faint warm daylight tendency; very narrow pale cream-white painted cel-shading lit-edge highlights only on the light-facing silhouette and surfaces; no second rim light, no colored dual rim light, and no glow around the character
 
@@ -336,7 +342,7 @@ Check these items:
 - `画风一致性`: clean Japanese TV anime cel-shading, crisp dark outer linework, flat color blocks, tidy shadow shapes, flat pure white background, and no painterly, semi-realistic, gritty, 3D, fashion-illustration, or noisy-texture drift.
 - `光源一致性`: one single soft neutral upper-left key light, natural and restrained; narrow pale cream-white lit-edge highlights should appear only on the light-facing silhouette and surfaces as painted cel-shading accents. Reject obvious dual-sided rim lights, blue-red colored rim lights, neon glow, aura, halo, visible light source, gray background gradient, or vignette.
 - `体型一致性`: male characters must remain width-first, grounded, very broad, thick, heavy, and powerful; reject if the result becomes slim, narrow-shouldered, lanky, long-legged, fashion-model-like, lightly athletic, small-armed, small-handed, normally 7-head heroic, merely tall and muscular, or has a shrunken/over-elongated body.
-- `体块一致性`: shoulders, chest, traps, neck, back width, arms, forearms, hands, waist, thighs, calves, and boots/feet must visibly carry super-heavyweight mass. The silhouette should read like a wall of muscle with shoulder span much wider than hips, short thick neck, giant arms, huge forearms, oversized hands, very thick thighs, and large heavy feet. The torso must show large simple pectoral and abdominal masses pressing through the fitted base layer when clothing allows it. For white tank tops, fitted T-shirts, or tucked undershirts, the pectoral shelf, center chest divide, stacked abdominal blocks, and side-ab planes must be clear; a smooth torso shirt fails.
+- `体块一致性`: shoulders, chest, traps, neck, back width, arms, forearms, hands, waist, thighs, calves, and boots/feet must visibly carry super-heavyweight mass. The silhouette should read like a wall of muscle with shoulder span much wider than hips, short thick neck, giant arms, huge forearms, oversized hands, very thick thighs, and large heavy feet. The torso must show large simple pectoral and abdominal masses pressing through the fitted base layer when clothing allows it. For white tank tops, fitted T-shirts, or tucked undershirts, the pectoral shelf, center chest divide, stacked abdominal blocks, and side-ab planes must be clear; a smooth torso shirt fails. Reject any soft pot belly, round smooth stomach, sagging abdomen, or unsegmented convex belly, even if the character is otherwise broad and heavy.
 - `角色一致性`: occupation, outfit, grooming, pose, expression, selected black-market stock, and single-character white-background framing must match the approved prompt.
 - `禁区复查`: reject multiple characters, character sheets, turnarounds, panels, callout boxes, background scenes, dirty or oily clothing, dense prints, micro-weave/noisy fabric detail, realistic skin texture, or forbidden occupation drift.
 
@@ -353,7 +359,7 @@ If the audit fails, do not claim the character is complete. Add:
 [成图审核] 未通过：<brief reason>
 ```
 
-Then run one corrective Image Gen attempt using the same approved character record, but strengthen only the failed constraints. For body failures, the corrective prompt must explicitly prioritize `width-first super-heavyweight fighting-game anime body`, `around 6.2-6.6 heads tall`, `dramatically wider and thicker than a normal tall hero`, `shoulder span much wider than hips`, `short thick neck buried between huge traps`, `enormous rounded deltoids`, `huge chest shelf`, `thick barrel ribcage`, `deep pectoral shelf`, `visible center chest valley`, `large stacked blocky abs pressing through the fitted shirt`, `thick oblique side planes`, `giant upper arms`, `huge forearms`, `oversized heavy hands`, `very thick thighs`, `strong calves`, `large heavy feet`, and `wall of muscle silhouette`, and must explicitly avoid `slim`, `narrow shoulders`, `long legs`, `7-head tall normal hero proportions`, `fashion-model proportions`, `smooth torso shirt`, `lightly athletic build`, and `merely tall and muscular`.
+Then run one corrective Image Gen attempt using the same approved character record, but strengthen only the failed constraints. For body failures, the corrective prompt must explicitly prioritize `width-first super-heavyweight fighting-game anime body`, `around 6.2-6.6 heads tall`, `dramatically wider and thicker than a normal tall hero`, `shoulder span much wider than hips`, `short thick neck buried between huge traps`, `enormous rounded deltoids`, `huge chest shelf`, `thick barrel ribcage`, `deep pectoral shelf`, `visible center chest valley`, `large stacked blocky abs pressing through the fitted shirt`, `firm upper-ab wall`, `thick oblique side planes`, `giant upper arms`, `huge forearms`, `oversized heavy hands`, `very thick thighs`, `strong calves`, `large heavy feet`, and `wall of muscle silhouette`, and must explicitly avoid `slim`, `narrow shoulders`, `long legs`, `7-head tall normal hero proportions`, `fashion-model proportions`, `smooth torso shirt`, `soft pot belly`, `round smooth stomach`, `sagging abdomen`, `unsegmented convex belly`, `lightly athletic build`, and `merely tall and muscular`.
 
 After the corrective attempt, audit again. If it still fails, show the best image but clearly write:
 
