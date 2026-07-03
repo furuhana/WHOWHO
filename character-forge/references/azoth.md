@@ -107,7 +107,7 @@ Use these target lengths for English dynamic slots. They are guidance for useful
 
 - `ROLE_VISUAL`: 15-30 words. Use occupation-readable visible cues only; do not include a personal name.
 - `OUTFIT_DYNAMIC`: 120-180 words. Cover outerwear/top, base layer, pants/shorts, socks, and shoes as separate imageable material.
-- `ACCESSORY_DYNAMIC`: 40-80 words. Cover belts, bags, ID cards, tools, jewelry, worn props, and carried props with position and attachment.
+- `ACCESSORY_DYNAMIC`: 40-80 words. Cover belts, bags, black-market-approved marker pieces, tools, jewelry, worn props, and carried props with position and attachment.
 - `GROOMING_DYNAMIC`: 35-70 words. Cover hairstyle, static eyebrow shape, beard, and broad stylized face shape without beauty, complexion, makeup, or realistic feature reconstruction.
 - `POSE_DYNAMIC`: 35-70 words. Cover body angle, weight shift, hand placement, prop interaction, and face readability.
 - `EXPRESSION_DYNAMIC`: 25-50 words. Cover gaze, brow/eye state, mouth state, facial tension, and acting intention; keep it separate from permanent face design.
@@ -149,6 +149,7 @@ When drafting accessories, always cover:
 - attachment method
 - shape and volume
 - body-reading role, such as widening shoulders, splitting waist, enlarging hands, weighting legs, framing head/neck, or adding occupation cue
+- avoid work badges, chest cards, ID cards, name tags, staff passes, access cards, conference badges, and lanyards unless the approved San Zhai record explicitly says they are required
 
 When consuming `world_context`, use it this way:
 
@@ -157,7 +158,7 @@ When consuming `world_context`, use it this way:
 - `culture_stage`: new issue, maintained remnant, self-modified, regulated, prosperous custom, or transitional mixed kit.
 - `street_texture`: small character-bound objects and accessories, not a background scene.
 - `technology_level`: amount and type of visible civilian hardware.
-- `order_level`: ID markers, concealment, patrol/service cues, or association badges.
+- `order_level`: concealment, patrol/service cues, association badges, number plates, color strips, or pocket markers.
 - `material_ecology`: broad clean material zones.
 - `visual_taboo`: negative and positive constraints that keep the prompt away from forbidden or overused directions.
 
@@ -291,19 +292,23 @@ Azoth is a selector and prompt synthesizer, not the original pose director or ex
 
 When black-market pose stock exists, Azoth must run pose selection before writing any prompt prose. Treat the selected pose as the locked full-body action skeleton for the current character. Outfit details, carried props, worn props, and expression must adapt to that locked pose; they must not pull the body language back to a generic front-facing presentation pose.
 
+Pose selection is a mandatory two-stage lock, not a one-step category choice. Azoth must first lock exactly one broad `姿势大类`, then filter the pose stock to items whose `姿势大类` exactly matches that locked family, then lock exactly one concrete stock item from that filtered list. The final pose prose must be translated from the locked item's `描述`. Azoth must not stop after selecting only a broad family, must not invent an unstocked pose inside the family, and must not choose a concrete item from a different family after the broad family is locked. If the locked family has no viable concrete item, Azoth must explicitly reject that family, return to broad-family selection, and lock a different family before prompt writing.
+
 Pose selection must follow this order:
 
 1. Read the stock's structure fields when present: `姿势大类`, `身体朝向`, `重心高度`, `动势强度`, `手部策略`, and `展示风险`. If an older stock item lacks them, infer these fields from `名称`, `描述`, and `标签`.
 2. Treat `姿势大类` as a broad silhouette family, not a micro-label. Valid broad families include `standing`, `walking`, `seated`, `crouching`, `kneeling`, `airborne`, `kick`, `fighting`, `lunge`, `leaning`, `shoulder_prop`, `turning_guard`, `victory`, `retreat`, and `tired`.
-3. Roll the broad pose family before scoring job fit. Draw across available `姿势大类` families, not across individual stock names. This keeps the first decision about silhouette, height, and motion instead of occupation convenience.
-4. Apply recent-pose cooldown to `姿势大类` before scoring job fit. Hard-exclude the last 3 used pose families when alternatives exist. Strongly downweight the last 10 used pose families.
-5. Downweight `standing` as a family unless the user explicitly asks for a plain standing pose, the job absolutely needs a neutral display, or all viable non-standing families are exhausted. If the user has complained about pose sameness, side-standing, or basic standing in the current request or recent context, hard-exclude `standing` for the next pose selection when any non-standing family is viable. Do not treat side-standing, hand-on-hip, strap-holding, object-display, and relaxed-standing as meaningful pose variety from each other.
-6. Downweight `展示风险: "high"` and overused hand-display strategies when alternatives exist: `forward_display`, `object_display`, `garment_display`, `pointing`, `forward_reach`, one hand extended forward, open palm presenting, pointing at the viewer, one hand holding a small object forward, or one hand gripping a chest strap while the other hand presents forward.
-7. Give priority to visibly different structures when the job allows it: `seated`, `crouching`, `kneeling`, `airborne`, `kick`, `fighting`, `lunge`, `turning_guard`, `retreat`, `walking`, `shoulder_prop`, `victory`, and `tired`. Prefer low, airborne, kicking, seated, crouched, turning-back, or full-body action silhouettes over another side-standing variant.
-8. Choose one concrete pose stock item inside the rolled or highest-weight viable `姿势大类`.
-9. After choosing a pose, normalize face visibility without changing the locked body action: add a head-and-gaze clause that keeps the face readable to the viewer. For side-body, angled, walking-away, turning-back, low, or action poses, require the head to turn toward the camera in a three-quarter view and the eyes to look toward the screen/camera area. Do not let profile, looking far off-frame, looking down, or looking fully away hide the face unless the user explicitly requests that mood.
-10. If the selected pose is not a presentation pose, keep occupational props on the belt, backpack, shoulder strap, leg side, chest badge, neck loop, or carried neutrally at the side instead of forcing a hand-forward display.
-11. If all viable pose stock is recently used, select the least-recently used non-standing family first; use `standing` only when every stronger silhouette is incompatible, and state the limitation in the pose reasoning log.
+3. Build a family index from the available pose stock: group every concrete stock item under its exact `姿势大类`. Broad-family selection may only choose from families that have at least one concrete stock item available after hard exclusions.
+4. Roll or choose the broad pose family before scoring job fit. Draw across available `姿势大类` families, not across individual stock names. This keeps the first decision about silhouette, height, and motion instead of occupation convenience.
+5. Apply recent-pose cooldown to `姿势大类` before scoring job fit. Hard-exclude the last 3 used pose families when alternatives exist. Strongly downweight the last 10 used pose families.
+6. Downweight `standing` as a family unless the user explicitly asks for a plain standing pose, the job absolutely needs a neutral display, or all viable non-standing families are exhausted. If the user has complained about pose sameness, side-standing, or basic standing in the current request or recent context, hard-exclude `standing` for the next pose selection when any non-standing family is viable. Do not treat side-standing, hand-on-hip, strap-holding, object-display, and relaxed-standing as meaningful pose variety from each other.
+7. Treat `seated` as a special low-frequency family, not the default cure for pose sameness. Only select `seated` when the job, mood, or scene naturally provides a believable support surface or rest/work beat. If the user has complained that poses are always sitting, hard-exclude `seated` for the next 3 pose selections when alternatives exist, and strongly downweight it for the next 10. Never choose two seated poses in a row unless the user explicitly asks for sitting.
+8. Downweight `展示风险: "high"` and overused hand-display strategies when alternatives exist: `forward_display`, `object_display`, `garment_display`, `pointing`, `forward_reach`, one hand extended forward, open palm presenting, pointing at the viewer, one hand holding a small object forward, or one hand gripping a chest strap while the other hand presents forward.
+9. Give priority to visibly different structures when the job allows it: `crouching`, `kneeling`, `airborne`, `kick`, `fighting`, `lunge`, `turning_guard`, `retreat`, `walking`, `shoulder_prop`, `victory`, `tired`, and only context-justified `seated`. Prefer low, airborne, kicking, crouched, turning-back, walking, or full-body action silhouettes over another side-standing or seated-rest variant.
+10. After the broad family is locked, list the concrete candidates inside only that family, score 1-3 best items for job fit, cooldown, hand strategy, support-surface needs, prop compatibility, and face readability, then lock exactly one concrete stock item by `名称`. If no item inside the locked family is viable, discard the family and repeat from broad-family selection; do not fill the gap with an invented pose.
+11. After choosing a concrete pose item, normalize face visibility without changing the locked body action: add a head-and-gaze clause that keeps the face readable to the viewer. For side-body, angled, walking-away, turning-back, low, or action poses, require the head to turn toward the camera in a three-quarter view and the eyes to look toward the screen/camera area. Do not let profile, looking far off-frame, looking down, or looking fully away hide the face unless the user explicitly requests that mood.
+12. If the selected pose is not a presentation pose, keep occupational props on the belt, backpack, shoulder strap, leg side, chest badge, neck loop, or carried neutrally at the side instead of forcing a hand-forward display.
+13. If all viable pose stock is recently used, select the least-recently used non-standing and non-seated family first; use `standing` only when every stronger silhouette is incompatible, and use `seated` only when a support surface or rest/work beat is genuinely appropriate. State the limitation in the pose reasoning log.
 
 The selected pose description must be visibly present in `prompt_en` and `prompt_cn`. If the character's job requires a prop, the prop placement must preserve the locked pose. Do not replace the selected pose with generic phrasing such as `standing naturally with one hand forward` unless that exact pose description was selected and is not under cooldown. Keep the pose stock name in reasoning or `prompt_notes`, not in the prompt body.
 
@@ -356,7 +361,8 @@ When black-market inventory is enabled, record the inventory-level reasoning log
 ```text
 [阿佐特] 黑商取货：
 货道：black-market/inventory/pose.md / 姿势库存
-候选：<1-3 pose stock names or 无可用库存>
+锁定大类：<selected broad pose category>
+大类内候选：<1-3 concrete pose stock names from the locked category only, or 无可用库存>
 使用：<selected pose stock name or 未使用>
 姿势大类：<selected broad pose category>
 结构抽选：<身体朝向 / 重心高度 / 动势强度 / 手部策略 / 展示风险>

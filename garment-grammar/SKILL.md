@@ -116,3 +116,5 @@ Always pass a compact negative clothing clause:
 ```text
 no skirt, no dress, no apron, no pinafore, no maid outfit, no school uniform skirt, no generic T-shirt and jeans, no plain casualwear
 ```
+
+For piping, edge binding, welt seams, and narrow garment-edge trim, keep them as construction cues only: they must be tonal, same-color-family, or subtle shade-on-shade. Do not use contrasting colored piping, high-saturation edge trim, or cheap decorative outline accents. Show the edge through seam shadow, thickness, topstitching, or restrained material highlight instead of a separate color stripe.

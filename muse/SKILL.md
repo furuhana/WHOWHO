@@ -110,7 +110,7 @@ Require:
 - At least one concrete design operator such as offset, expansion, compression, segmentation, exposed construction, folding, frame, opening, wrapping, or hanging.
 - At least one panel path with start point, route, endpoint, and body rule.
 - Controlled pattern placement and density; patterns should sit on edges, local emblems, side stripes, ribs, or fold lines rather than fill the whole body.
-- Visible craft boundaries such as piping, binding, topstitching, exposed seam, zipper teeth, buckle tabs, ribbed hems, drawcords, hard plate edges, or shoe sidewalls.
+- Visible craft boundaries such as tonal piping, same-color-family binding, topstitching, exposed seam, zipper teeth, buckle tabs, ribbed hems, drawcords, hard plate edges, or shoe sidewalls.
 - Footwear that has prototype, sole structure, upper cutting, cuff/sock/trouser connection, and center-of-gravity role.
 - Accessories that change body reading: shoulder width, waist split, hand size, leg weight, head/neck frame, or occupation cue.
 - A complexity budget close to 大形体 60 / 中型裁片 25 / 小工艺 10 / 图案符号 5.
@@ -121,7 +121,7 @@ Flag `算法缺席` when the outfit is only a list of garments and has no reusab
 
 Flag `世界底盘空转` when the record includes era/culture/street/material context but the outfit still reads as generic modern clothing with no visible material ecology, street object, order marker, cultural construction, or visual taboo response.
 
-Flag `假高级` when the outfit tries to look advanced through random lines, all-over tiny patterns, cyber glow, texture-map fabric, structureless thick soles, or loose decorative accessories that do not change silhouette, construction, body reading, or role readability.
+Flag `假高级` when the outfit tries to look advanced through random lines, contrasting colored piping, high-saturation garment-edge trim, cheap decorative outline accents, all-over tiny patterns, cyber glow, texture-map fabric, structureless thick soles, or loose decorative accessories that do not change silhouette, construction, body reading, or role readability.
 
 Flag `裁片缺席` when the outfit says complex cut, paneling, trimming, or patterning but cannot name a clear path such as shoulder-to-side-waist, sleeve-outside-to-forearm, hip-to-knee, or shoe-sidewall-to-heel.
 

@@ -2,6 +2,8 @@
 
 Use clean, recognizable workwear. Each entry supplies a starting point; adjust by wealth, danger, personality, and gang.
 
+`role_cues` are not an accessory source. They only explain job readability; San Zhai must translate any needed visible item through black-market accessory or prop rules before it appears in final outfit fields.
+
 ## convenience store owner
 
 - outerwear: neat green store vest
@@ -9,7 +11,7 @@ Use clean, recognizable workwear. Each entry supplies a starting point; adjust b
 - pants: straight black work pants
 - socks: black ankle socks
 - shoes: clean black slip-resistant sneakers
-- accessories_pool: plastic name badge, barcode scanner, key lanyard, small calculator, ballpoint pen behind ear
+- role_cues: barcode scanner, checkout calculator, pen habit, key control
 
 ## community security guard
 
@@ -18,7 +20,7 @@ Use clean, recognizable workwear. Each entry supplies a starting point; adjust b
 - pants: navy uniform trousers
 - socks: black mid-calf socks
 - shoes: polished black leather shoes
-- accessories_pool: walkie-talkie, plastic ID badge, key ring, black belt, simple wristwatch
+- role_cues: walkie-talkie, key ring, black belt, simple wristwatch
 
 ## taxi driver
 
@@ -27,7 +29,7 @@ Use clean, recognizable workwear. Each entry supplies a starting point; adjust b
 - pants: dark relaxed trousers
 - socks: gray cotton socks
 - shoes: clean driving loafers
-- accessories_pool: Bluetooth earpiece, taxi receipt pouch, thermos cup, phone mount, beaded bracelet
+- role_cues: Bluetooth earpiece, taxi receipt pouch, thermos cup, phone mount, beaded bracelet
 
 ## barber shop owner
 
@@ -36,7 +38,7 @@ Use clean, recognizable workwear. Each entry supplies a starting point; adjust b
 - pants: tapered black trousers
 - socks: black socks
 - shoes: polished black sneakers
-- accessories_pool: silver scissors, comb in chest pocket, wristwatch, small hoop earring, neck towel
+- role_cues: silver scissors, comb in chest pocket, wristwatch, small hoop earring, neck towel
 
 ## used car salesperson
 
@@ -45,7 +47,7 @@ Use clean, recognizable workwear. Each entry supplies a starting point; adjust b
 - pants: slim dark slacks
 - socks: dark dress socks
 - shoes: shiny loafers
-- accessories_pool: car key fob, gold-tone ring, phone headset, leather folder, tinted glasses
+- role_cues: car key fob, gold-tone ring, phone headset, leather folder, tinted glasses
 
 ## property manager
 
@@ -54,7 +56,7 @@ Use clean, recognizable workwear. Each entry supplies a starting point; adjust b
 - pants: navy chinos
 - socks: black socks
 - shoes: practical leather shoes
-- accessories_pool: clipboard, key bundle, laminated access card, pen set, phone holster
+- role_cues: clipboard, key bundle, pen set, phone holster, building access task cue
 
 ## hotpot restaurant manager
 
@@ -63,7 +65,7 @@ Use clean, recognizable workwear. Each entry supplies a starting point; adjust b
 - pants: black service trousers
 - socks: black socks
 - shoes: clean non-slip shoes
-- accessories_pool: order tablet, small towel, name tag, reservation book, headset
+- role_cues: order tablet, small towel, reservation book, headset
 
 ## wedding photographer
 
@@ -72,7 +74,7 @@ Use clean, recognizable workwear. Each entry supplies a starting point; adjust b
 - pants: flexible black trousers
 - socks: black socks
 - shoes: clean low hiking shoes
-- accessories_pool: camera strap, lens pouch, fingerless gloves, small earpiece, black cap
+- role_cues: camera strap, lens pouch, fingerless gloves, small earpiece, black cap
 
 ## tea house owner
 
@@ -81,4 +83,4 @@ Use clean, recognizable workwear. Each entry supplies a starting point; adjust b
 - pants: relaxed dark trousers
 - socks: white cotton socks
 - shoes: cloth slip-on shoes
-- accessories_pool: jade ring, tea towel, small notebook, bead bracelet, round glasses
+- role_cues: jade ring, tea towel, small notebook, bead bracelet, round glasses

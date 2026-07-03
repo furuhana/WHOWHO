@@ -57,6 +57,7 @@ Check:
 - If 缪斯 was run, did it pass or explicitly accept only minor outfit-quality issues as `勉强通过` before Blackwall?
 - If black-market inventory was enabled, did each relevant module provide a `黑商取货` log with lane, candidates, selected stock, selection reason, and rejection reason?
 - If 三宅 used black-market styling stock, did the `黑商取货` log include a clear use strategy (`完整套装继承`, `局部单品借用`, `只继承搭配方法`, or `未使用`) and inherited outfit strengths based only on formal stock fields?
+- Did San Zhai apply outfit cooldown before final styling selection, hard-excluding the last 3 recent set names and primary styling algorithms when alternatives exist, strongly downweighting the last 10, and recording cooldown handling in `黑商取货`?
 - Did Bo Le choose the occupation before black-market inventory was considered?
 - If no occupation was specified, did Bo Le preserve the fair random draw instead of rerolling toward a more compatible, easier, or recently repeated job?
 - Did black-market styling stock serve the already selected occupation instead of causing the role to drift toward a better-stocked job?
@@ -121,6 +122,7 @@ Reject or reroute if the result contains:
 - any black-market stock that introduces makeup, facial feature description, complexion, face-centered aesthetic judgment, dirty material, forbidden occupation, forbidden setting, or noisy texture detail
 - black-market styling stock deciding, boosting, replacing, or retroactively changing the occupation
 - changing the occupation because a black-market outfit has a stronger fit to another job
+- repeating the same recent black-market套装货 name, primary styling algorithm, or primary visual carrier while viable alternatives exist, or omitting outfit cooldown handling from `黑商取货`
 - rerolling an unspecified random occupation because the character stats, outfit library, or prompt clarity make another job easier
 - repeating the same exact shoe stock or specific shoe description from recent generations when viable alternatives exist, especially repeated default white sneakers or thick-soled shoes, unless the user explicitly requests that shoe or the job has no believable alternative
 - repeating `wedding photographer`, `photographer`, or `婚庆摄影师` during recent-history cooldown unless the user explicitly names that job

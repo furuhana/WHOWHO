@@ -2,7 +2,7 @@
 
 ## Role
 
-三宅负责把伯乐选定的职业转换成可生成、可读、动画友好的角色造型。三宅设计服装、鞋履、护具、饰品、小件和随身道具，但不改变职业、人设、体型、脸、发型或姿势。
+三宅负责把伯乐选定的职业转换成可生成、可读、动画友好的角色造型。三宅设计服装、鞋履和护具，并从黑商托管的饰品、小件和随身道具中选择、组合、改写可见结构；三宅不改变职业、人设、体型、脸、发型或姿势。
 
 ## Required Libraries
 
@@ -36,7 +36,7 @@ Fill:
 - pants
 - socks
 - shoes
-- exactly 3 accessories or props, selected from head, neck, shoulder, chest, hand, waist, leg, carried item
+- exactly 3 accessories or props, selected from black-market accessory/prop stock or black-market-approved accessory structures across head, neck, shoulder, chest, hand, waist, leg, and carried item
 - garment_line
 - banned_shape_check
 - professional_keywords
@@ -70,6 +70,7 @@ Fill:
 - The visible torso detail must support the fixed strong body standard. When a fitted inner layer is visible, it should show chest and abdominal masses through clean animation shape lines, not random fabric wrinkles.
 - Avoid hiding the torso completely with loose, boxy layers unless the selected outfit structure needs that silhouette and still has strong readable design information elsewhere.
 - Choose accessories and small items that help image generation understand the role and design, not just filler.
+- Black market owns accessory supply. Do not directly select accessories from the normal outfits library, occupational habit lists, or ad hoc job stereotypes; use those only as role cues, then translate them through black-market accessory categories and restrictions.
 - Treat the main outfit decision as a styling algorithm, not a garment-name lookup. Choose what carries the design first: silhouette, layer system, waist structure, head/neck structure, accessory system, material contrast, or functional mounting.
 - Treat high fashion references as methods, not costumes. If designer-method references are used, translate them into visible construction such as garment pleating, anatomical paneling, exposed construction, sculptural sole logic, architectural shoe framing, controlled drape, or low-density markings.
 - When the user explicitly allows designer names in prompts, San Zhai may record `designer_prompt_references`; otherwise use anonymous `designer_method_references` only.
@@ -95,7 +96,7 @@ Before filling garment fields, decide these design items:
 6. `body_fit_strategy`: explain how the design reinforces the WHOWHO width-first body: shoulder width, chest/abdomen readability, giant arms, heavy hands, thick thighs, stable shoes, or lowered center of gravity.
 7. `panel_paths`: write at least one path with start, route, endpoint, and rule. The path should avoid random surface lines and should not break the chest/abdomen into tiny shapes.
 8. `pattern_strategy`: choose low-density pattern placement such as edge trim, local emblem, interrupted side stripe, controlled plaid, radiating ribs, or heat-pressed fold lines. State density and forbidden misuse.
-9. `craft_boundaries`: name visible craft boundaries such as piping, binding, topstitching, exposed seam, zipper teeth, flat buckle tabs, ribbed hem, drawcords, hard plate edge, or shoe sidewall.
+9. `craft_boundaries`: name visible craft boundaries such as piping, binding, topstitching, exposed seam, zipper teeth, flat buckle tabs, ribbed hem, drawcords, hard plate edge, or shoe sidewall. Piping, edge binding, welt seams, and narrow garment-edge trim must stay tonal or same-color-family; do not turn them into contrasting colored outlines, high-saturation trim, or cheap decorative edge accents.
 10. `footwear_accessory_structure`: ensure shoes answer prototype, sole structure, upper cutting, cuff/sock/trouser connection, and center-of-gravity role; ensure accessories answer body location, attachment, shape, body-reading role, and occupation cue.
 11. `complexity_budget`: state `large silhouette 60 / medium panels 25 / small craft 10 / pattern-symbol 5`, or justify a small deviation.
 12. `design_failure_avoidance`: name avoided fake-high-design traps: random lines, all-over tiny pattern, cyber glow, texture-map fabric, structureless thick sole, or accessories as loose decoration.
@@ -121,11 +122,11 @@ If designer prompt references are recorded, keep them short and subordinate to c
 Before choosing final garments, convert `world_context` into outfit constraints:
 
 - `era_background`: choose era-readable silhouette, closure, layer rhythm, and accessory density. Keep it subtle; do not turn every character into a costume-history plate.
-- `culture_system`: choose culturally grounded construction hints such as wrap logic, waist panels, waist sash, municipal badges, market tags, temple-town cords, arcade service tabs, or guild-like tool placement.
+- `culture_system`: choose culturally grounded construction hints such as wrap logic, waist panels, waist sash, municipal badges, market tags, temple-town cords, arcade service tabs, or guild-like tool placement; any marker must follow black-market accessory restrictions.
 - `culture_stage`: decide whether clothing reads as new issue, carefully maintained old-system remnant, clean self-modified piece, strict regulated uniform, prosperous custom item, or transitional mixed kit.
-- `street_texture`: add everyday setting details through bags, pouches, tickets, rain covers, repair tools, vendor tags, kiosk IDs, service loops, route cards, or small clean carried objects.
-- `technology_level`: decide how much visible hardware is allowed: analog tags, mechanical buckles, simple civic devices, transparent plastic guards, compact scanners, or low-tech textile solutions.
-- `order_level`: decide the amount of concealment, identification, defensive layering, patrol-like markers, or self-governed street association symbols.
+- `street_texture`: add everyday setting details through black-market-approved bags, pouches, rain covers, repair tools, vendor tags, service loops, route cards, or small clean carried objects.
+- `technology_level`: decide how much visible hardware is allowed: analog markers, mechanical buckles, simple civic devices, transparent plastic guards, compact scanners, or low-tech textile solutions.
+- `order_level`: decide the amount of concealment, defensive layering, patrol-like markers, or self-governed street association symbols. Do not default to wearable ID cards, name tags, or lanyards.
 - `material_ecology`: choose broad clean material zones such as rainproof cloth, transparent plastic, matte synthetic panels, metal buckles, old uniform cloth, thick cotton blocks, traditional textile panels, or hard shell accents.
 - `visual_taboo`: hard-filter outfit directions that would violate the local world floor.
 
@@ -138,8 +139,8 @@ Use functional slots to diversify outfits without changing the job:
 - 身体暴露: chest opening, bare arms, shoulder cut, back opening, leg exposure, or no exposure.
 - 体积扩张: shoulder width, sleeve mass, back shell, wide pants, heavy sole, structured overshirt volume, or vest volume.
 - 收束: belt, cinch, harness, high collar, cuff, leg strap, waist wrap, or buckle tab.
-- 功能挂载: waist tools, leg bag, chest badge, back pack, forearm device, neck loop, or side carry.
-- 身份标记: armband, text tape, badge, color strip, number, emblem, or patterned panel.
+- 功能挂载: waist tools, leg bag, pocket marker, back pack, forearm device, tool loop, or side carry.
+- 身份标记: armband, text tape, badge, color strip, number plate, emblem, or patterned panel.
 - 材质冲突: soft cloth with hard shell, transparent layer over fitted base, traditional textile with buckles, matte fabric with metal hardware.
 - 遮蔽: mask, goggles, hood, high collar, gloves, scarf, or head wrap.
 - 动作释放: short outer layer, sleeveless top, wide pants, slit, stretch base layer, open-front layer.
@@ -201,7 +202,7 @@ black-market/inventory/styling/
    - replace a conflicting piece while preserving the set's structure;
    - add role readability when no full set fits.
 4. If no complete set fits, then build from单品货 and the normal outfits library.
-5. Fall back to `references/libraries/outfits.md` only when black-market structure cannot serve the selected job.
+5. Fall back to `references/libraries/outfits.md` only when black-market structure cannot serve the selected job. In fallback mode, normal-library accessory-like objects remain role cues, not direct final accessories.
 
 ### What To Inherit From 套装货
 
@@ -239,20 +240,26 @@ Do not turn a scarf into a jacket, a bag into a personality, or a color mood int
 
 ### 饰品系统
 
-饰品 and small items are required design information when available. 三宅 should consider:
+饰品 and small items are required design information when available, but black market is the only accessory shelf. 三宅 should first consult `black-market/inventory/styling/items/accessories.md`, then套装货 `饰品系统`, then black-market accessory grammar. The normal outfits library can suggest why a job needs a cue, but cannot provide the final accessory object.
 
 - bags: hand bag, clutch/抱包, waist bag, leg bag, crossbody bag, hard-shell pouch, backpack
 - straps: chest harness, cross strap, load-bearing strap, waist cinch, broad belt, leg strap
 - head/neck: hat, headband, mask, goggles, scarf, shawl, neck wrap, hood frame
 - hand/arm: gloves, wrist guards, boxing gloves, forearm plates
 - leg: knee pads, leg armor, bindings, sock covers, tabi-like pieces
-- markers: badges, ID cards, armbands, tags, emblem plates
+- markers: badges, armbands, number plates, color strips, emblem plates, pocket markers
 - hardware: drawstrings, zippers, buckles, metal rings, hooks, connector tabs
 
 At least one accessory or small item should be considered when it supports the selected job and does not overcrowd the design.
 
+Restricted marker rule: do not select work badges, chest cards, ID cards, name tags, staff passes, access cards, conference badges, or lanyards by default. If the user explicitly asks for one, or the selected job absolutely requires a visible pass, record why and keep it small; otherwise translate identity cues into black-market-approved badges, armbands, number plates, color strips, pocket markers, tool placement, or uniform panel markings.
+
 ## Anti-Repetition Rules
 
+- Apply outfit cooldown before scoring black-market套装货 or selecting the main outfit method. Never repeat the immediately previous selected套装货 or primary styling algorithm unless the user explicitly requests it or no viable alternative survives job fit, Blackwall safety, and body readability.
+- Hard-exclude套装货 names and primary styling algorithms used in the last 3 generated characters when alternatives exist. Strongly downweight套装货 names, primary styling algorithms, and primary visual carriers used in the last 10 generated characters.
+- Treat the primary visual carrier as a cooldown dimension. Vary what carries the outfit's memory point across `外层体积`, `腰部系统`, `护具/防护`, `腿部系统`, `头颈系统`, `手臂系统`, `标记系统`, `鞋履`, and `饰品系统` when the job allows it.
+- If a recently used套装货 is still the best fit, inherit only a limited method or component, then change at least three visible variables: primary visual carrier, layer rhythm, waist/strap structure, leg silhouette, footwear structure, accessory role, material block, value-map relation, or panel path.
 - Do not repeatedly make the main visual read as shirt, button-up shirt, T-shirt, polo, undershirt, or service uniform shirt when viable alternatives exist.
 - Do not use skirts, dresses, aprons, pinafores, apron-like front panels, wrap skirts, or skirt-over-pants structures as anti-repetition devices.
 - A fitted T-shirt or shirt may remain as base_layer, but it should not become the primary outfit idea unless the selected set or job requires it.
@@ -273,6 +280,7 @@ When black-market inventory is checked, include:
 候选: <1-3 stock names>
 使用: <selected stock name or 未使用>
 使用策略: 完整套装继承 / 套装结构继承并局部替换 / 单品补强 / 未使用
+冷却处理: <excluded or downweighted recent set names, styling algorithms, and primary visual carriers, or none>
 取货理由: <job/social-role fit>
 继承重点: <structure, silhouette, color-map, layering, accessories, material zones>
 造型算法: <selected or inferred reusable outfit algorithm>
@@ -310,6 +318,7 @@ Avoid:
 - using designer names as a substitute for visible construction
 - using designer names in prompt-facing fields unless the user explicitly allowed designer prompt references
 - treating advanced design as random lines, full-body tiny patterns, cyber glow, texture-map fabric, structureless thick soles, or loose decorative accessories
+- using work badges, chest cards, ID cards, name tags, staff passes, access cards, conference badges, or lanyards as default occupation shortcuts
 - drawing panel lines over joints without breaks or over the WHOWHO chest/abdomen as random surface graphics
 - copying `world_context` as prompt-like lore instead of turning it into visible garment decisions
 - using world context to drift into forbidden dock, cargo, heavy manual labor, dirty material, or heavy military aesthetics
