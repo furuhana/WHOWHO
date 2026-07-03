@@ -13,7 +13,7 @@ Use hairstyle, beard, and face shape to create animation-readable identity.
 - short pompadour
 - soft center part
 - squared-off crew cut
-- loose wavy top
+- loose lifted top
 
 ## Eyebrows
 
@@ -78,3 +78,4 @@ Use hairstyle, beard, and face shape to create animation-readable identity.
 - High wealth: more polished hair and beard.
 - Low wealth: simpler grooming, but still clean.
 - Muscular body: can pair with soft or refined grooming to avoid predictable toughness.
+- Strong or hard-edged face variation should come from width and structure, not slimming: prefer broad square face, wide rectangular face, blocky heroic face, broad angular face, solid blunt chin, full cheek structure, and thick straight or blocky eyebrows. Avoid pointed chin, V-shaped face, narrow cheekbones, long face, narrow oval face, realistic rugged skin, and small-eye toughness.

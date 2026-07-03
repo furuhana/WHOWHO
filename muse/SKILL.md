@@ -108,6 +108,7 @@ Require:
 - At least three active design function slots when the job allows it, such as volume, cinch, mounting, marker, concealment, material contrast, movement release, or ritual decoration.
 - At least two non-shirt replacement slots if the outfit contains a shirt-like base layer.
 - A clear primary visual carrier beyond a plain shirt/T-shirt/Polo/service uniform shirt, unless the job truly requires that garment and other slots compensate.
+- A concrete leg-system choice when black-market bottoms stock exists. If `pants` is generic, recently repeated, or disconnected from `black-market/inventory/styling/items/bottoms.md` without a fit reason, route to 三宅 for bottom-stock selection or mutation.
 - A variation matrix reason: scene, emotional posture, body need, resource source, recognition strength, or variation幅度 should be visible enough to prevent the occupation from locking every outfit into one formula.
 - A visible translation of `world_context` when Character Forge provides it: era, culture, street texture, technology, order, material ecology, and visual taboo should affect construction, materials, accessories, or silhouette.
 - A readable base garment prototype that remains visible after modification.
@@ -123,6 +124,8 @@ Require:
 - A complexity budget close to 大形体 60 / 中型裁片 25 / 小工艺 10 / 图案符号 5.
 
 Flag `衬衫默认复发` when a shirt-like garment becomes the primary visual and the rest of the outfit does not provide enough silhouette, waist, head/neck, hand/arm, leg, marker, accessory, material, or prop information.
+
+Flag `裤型重复` when the outfit keeps using generic straight pants, plain shorts, broad `裤装`, or the same recent bottom silhouette while `items/bottoms.md` provides viable alternatives. Ask 三宅 to select a formal bottom item or mutate the set leg system with bottom-stock structure.
 
 Flag `外层原型贫血` when the outfit says only jacket, coat, vest, hoodie, or shirt jacket, causing repeated shirt-and-jacket silhouettes instead of a precise outer shell.
 

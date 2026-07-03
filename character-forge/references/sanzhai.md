@@ -75,6 +75,7 @@ Fill:
 - Every substantial outfit should select exactly one primary `structural_event` from `structural-events-and-material-behaviors.md`, and zero or one supporting `material_behavior`. More than one primary event needs explicit user direction.
 - If a job normally suggests an apron, replace the apron function with a utility vest, waist belt, chest harness, tool belt, structured overshirt, protective placket, trouser-mounted pouch, or crossbody tool bag.
 - If a job or stock suggests a skirt or dress silhouette, replace it with wide-leg trousers, pleated trousers, panelled technical pants, cropped tailored trousers, shorts, jumpsuit, or coverall.
+- `black-market/inventory/styling/items/bottoms.md` is the mandatory black-market candidate pool for `pants`. Before finalizing the pants field, scan bottom stock for a compatible leg-system item. Use it to replace generic set wording such as 普通长裤, 普通短裤, 宽裤, 裤装, straight pants, or generic shorts; if no bottom fits, record the rejection reason in `黑商取货`.
 - Prioritize clean, readable, animation-friendly silhouettes.
 - Keep clothing believable enough for the job, but do not over-lock the result into ordinary modern urban servicewear unless the job truly requires it.
 - The visible torso detail must support the fixed strong body standard. When a fitted inner layer is visible, it should show chest and abdominal masses through clean animation shape lines, not random fabric wrinkles.
@@ -252,6 +253,16 @@ Single items must stay in their visible domain:
 - materials remain material guidance
 
 Do not turn a scarf into a jacket, a bag into a personality, or a color mood into a new garment.
+
+### Bottoms Sync Rule
+
+When `black-market/inventory/styling/items/bottoms.md` exists, it is not optional fallback stock. Use it as the leg-system menu for every character:
+
+- If a selected套装 already has a strong leg system, inherit it but enrich the `pants` field with the matching bottom-stock structure when one exists.
+- If a selected套装 has generic pants, select a compatible bottom item and replace the generic leg description.
+- If the primary visual carrier has recently been `腿部系统`, avoid repeating the same bottom item, bottom subtype, or silhouette unless the job requires it.
+- The `pants` field must name an imageable bottom structure, such as 技术分区九分裤, 多袋货裤, 高腰正式宽裤, 宽袴裤, 护具训练短裤, 侧条运动裤, or another selected formal bottom item. Do not finish with only `裤子`, `裤装`, `pants`, `trousers`, `shorts`, or `普通长裤`.
+- Add the selected bottom stock name to the `[三宅] 黑商取货` candidates or selected-use line when it affects the final pants design.
 
 ### 饰品系统
 

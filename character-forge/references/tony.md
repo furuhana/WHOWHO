@@ -54,9 +54,11 @@ Fill:
 - Use beard and broad face silhouette to strengthen personality, not to make the character generically tough.
 - Make the result visually distinct but still daily-life believable.
 - If the current result would share the same broad face read as the style or body reference, change at least two Tony-owned elements among `face_shape`, `hairstyle`, `eyebrows`, and `beard`, guided by `temperament`.
-- Apply hairstyle cooldown across repeated character generations. Never select the same hairstyle as the immediately previous generated character unless the user explicitly requests it. Hard-exclude hairstyles used in the last 3 generated characters when alternatives exist, and strongly downweight hairstyles used in the last 10 generated characters. If the inventory is too small to satisfy the full cooldown, prefer the least-recently used hairstyle and state the cooldown constraint in `grooming_reason`.
+- For strong, rugged, powerful, heavy, heroic, wild, or hard-edged temperament seeds, do not write toughness as narrowness. Prefer broad structural variation: wide lower face, broad square jaw, solid blunt chin, full cheek structure, high cheekbone support with visible width, balanced face length, broad nose-bridge impression, and firm mouth-line impression. Avoid slim jaw, pointed chin, V-shaped face, narrow cheekbones, long face, or narrow oval face unless the user explicitly asks for a lean character.
+- Preserve the WHOWHO anime face read by keeping face-shape language broad and simplified. Do not introduce realistic ruggedness, rough skin, aging, gritty texture, realistic facial reconstruction, or Western-comic facial rendering to make the character feel stronger.
+- Apply grooming cooldown across repeated character generations. Never select the same hairstyle, static eyebrow shape, beard state, or broad face shape as the immediately previous generated character unless the user explicitly requests it. Hard-exclude values used in the last 3 generated characters within each grooming domain when alternatives exist, and strongly downweight values used in the last 10 generated characters. If a domain's inventory is too small to satisfy the full cooldown, prefer the least-recently used viable option and state the cooldown constraint in `grooming_reason`.
 - Face shape may describe the broad head silhouette, jaw/chin mass, and simplified stylized facial proportions when useful for animation readability. These details must belong to the new character, not recreate a reference image's recognizable face, exact feature arrangement, same-face likeness, or realistic identity match.
-- Eyebrows may create character recognition, but must describe only static eyebrow shape: thickness, block shape, angle, arc, segmentation, and clean animation edges. Do not use eyebrow wording to specify eyebrow color, eye shape, gaze, eyelid state, expression, makeup, attractiveness, face shape, or detailed facial features.
+- Eyebrows may create character recognition, but must describe only static eyebrow shape: thickness, block shape, angle, arc, segmentation, and clean animation edges. To support a stronger face without shrinking the eyes, prefer thick straight, thick blocky, broad wedge, short blunt, segmented thick, or lightly downward-pressed eyebrow silhouettes. Do not use eyebrow wording to specify eyebrow color, eye shape, gaze, eyelid state, expression, makeup, attractiveness, face shape, or detailed facial features.
 
 ## Black-Market Stock
 
@@ -84,7 +86,7 @@ Use only stock fields such as `名称`, `类别`, `描述`, and `标签`. Never 
 
 Black-market hairstyle stock may influence `hairstyle` only. Black-market eyebrow stock may influence `eyebrows` only. `beard` and `face_shape` must still come from Tony's own role, the grooming library, and the current character record.
 
-Black-market hairstyle stock must still obey hairstyle cooldown. Candidate lists should avoid recently used hairstyle stock before scoring job fit. Do not pick a repeated hairstyle merely because its stock tags fit the current outfit.
+Black-market hairstyle and eyebrow stock must still obey grooming cooldown. Candidate lists should avoid recently used hairstyle and eyebrow stock before scoring job fit. Do not pick a repeated hairstyle or eyebrow shape merely because its stock tags fit the current outfit. Beard and face-shape choices must apply the same cooldown against the grooming library and current character history.
 
 When using black-market stock, include each selected `名称` in `grooming_reason`. If no hairstyle or eyebrow stock is used, write `黑商取货：未使用` for that lane and give the concrete reason.
 
@@ -95,6 +97,7 @@ When black-market inventory is enabled, record the inventory-level reasoning log
 货道：black-market/inventory/hairstyle.md / 发型库存
 候选：<1-3 stock names>
 使用：<selected stock name or 未使用>
+冷却处理：<excluded or downweighted recent hairstyle names, or none>
 取货理由：<age/job/personality fit based on 名称, 类别, 描述, 标签>
 未选理由：<why other candidates fit less well>
 
@@ -102,8 +105,13 @@ When black-market inventory is enabled, record the inventory-level reasoning log
 货道：black-market/inventory/eyebrow.md / 眉型库存
 候选：<1-3 stock names>
 使用：<selected stock name or 未使用>
+冷却处理：<excluded or downweighted recent eyebrow names, or none>
 取货理由：<static eyebrow-shape fit based on 名称, 类别, 描述, 标签>
 未选理由：<why other candidates fit less well>
+
+[托尼] 造型冷却：
+胡子：<excluded or downweighted recent beard states, or none>
+脸型：<excluded or downweighted recent broad face shapes, or none>
 ```
 
 ## Library Writes

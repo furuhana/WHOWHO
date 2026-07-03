@@ -30,6 +30,7 @@ Read `references/no-skirt-garment-grammar.md` whenever San Zhai is designing, re
 - `../black-market/references/structural-events-and-material-behaviors.md`
 - `../black-market/references/pattern-and-cutting.md`
 - `../black-market/references/footwear-accessory-grammar.md`
+- `../black-market/inventory/styling/items/bottoms.md` when San Zhai is choosing or auditing pants, shorts, jumpsuits, coveralls, or any leg-system replacement.
 
 ## Hard Clothing Ban
 
@@ -46,6 +47,8 @@ The user preference is global for WHOWHO character creation unless explicitly ov
 If a job would normally use an apron, replace the apron function with a non-apron structure: utility vest, waist belt, chest harness, tool belt, short overshirt, protective front placket, side pouch, crossbody tool bag, or modular pocket panel attached to trousers.
 
 If a silhouette would normally use a skirt, replace it with pants or shorts: wide-leg trousers, pleated trousers, straight cropped trousers, panelled technical pants, tailored shorts, jumpsuit, coverall, or layered trouser panels that remain clearly pants.
+
+When black-market bottom stock exists, treat it as the preferred concrete leg-system vocabulary. Do not stop at generic pants examples; use or adapt formal bottom items from `items/bottoms.md` so repeated character creation can vary trousers, shorts, overalls, hakama-like pants, technical pants, cargo pants, track pants, protective pants, and winter/travel bottoms.
 
 ## Division Of Labor
 

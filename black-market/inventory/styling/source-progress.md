@@ -29,7 +29,11 @@
 - 服装、护具、背包、手提包、武器、火箭背包、帽子、斗笠、手套、靴子、工具件等可见饰品/道具，已在对应套装的 `饰品系统`、`可拆单品` 或结构描述中接收。
 - 正式库存不保留源文件名、路径、脸型、肤质、妆容、身份故事；这里只保留进度和审计口径。
 
+## 第二轮同步状态
+
+- 下装同步: 已从套装货中拆出裤装/下装结构并补充到 `items/bottoms.md`，当前下装单品 46 件。
+
 ## 下一阶段建议
 
-- 第二轮拆货: 从 162 条套装货中继续拆出更多单品货，补充到 `items/outerwear.md`、`items/tops.md`、`items/bottoms.md`、`items/footwear.md`、`items/armor.md`、`items/accessories.md`、`items/props.md`、`items/materials.md`。
+- 第二轮拆货: 继续从套装货中拆出更多非下装单品，补充到 `items/outerwear.md`、`items/tops.md`、`items/footwear.md`、`items/armor.md`、`items/accessories.md`、`items/props.md`、`items/materials.md`。
 - 第二轮校货: 对套装名称和标签做统一归类，减少重复词，增强检索稳定性。

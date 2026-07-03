@@ -190,6 +190,8 @@ top:
 
 Prefer pants, trousers, shorts, jumpsuits, and coveralls. Keep WHOWHO leg mass stable.
 
+If `black-market/inventory/styling/items/bottoms.md` exists, use it as the preferred concrete bottom-stock vocabulary before falling back to the examples below. The examples are grammar templates; the black-market bottom items are the current character-generation candidate pool for reducing repeated generic pants.
+
 ```yaml
 trousers:
   - "high-waisted 9-length wide-leg trousers with pressed front crease and reinforced side panels"

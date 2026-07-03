@@ -67,6 +67,9 @@ Use black-market formal expression and pose stock by default when the shelf exis
 - Include clean high-quality Japanese TV anime cel shading, crisp linework, fresh colors, tidy shadows, and clean stylized animation character design.
 - Include Tony's `eyebrows` as static eyebrow-shape language when it is useful for character recognition. Keep it separate from expression acting.
 - The final prompt may include broad stylized face-shape direction and simplified facial-proportion language when it comes from the approved character record or the target anime rendering style. This is allowed as design guidance. It must not become a copied reference-face identity, exact feature arrangement, recognizable likeness, celebrity/source-character match, or realistic face reconstruction.
+- Preserve the WHOWHO anime eye read whenever face variation, high danger, strength, wildness, heroic weight, hard-edged temperament, heavy eyebrows, or broad jaw language appears. Add a compact eye-preservation clause in `GROOMING_DYNAMIC` or `EXPRESSION_DYNAMIC`: `large expressive eyes, same eye size, same anime eye style, wide eye opening, straight upper eyelids, firm lower eyelids, focused pupils, direct gaze, controlled highlights`. Use `angular almond-shaped eyes` only when it helps, and pair it with `wide eye opening` and `same eye size` so it does not become narrow.
+- Do not use abstract toughness labels in the final prompt body when they risk changing style. Avoid `tough guy`, `rugged man`, `hard-boiled man`, `masculine face`, `realistic rugged face`, `rough skin`, `weathered face`, and similar wording. Translate that intention into visible stylized structure: broad square jaw, wide lower face, solid blunt chin, full cheek structure, thick straight eyebrows, low-set brow pressure, firm mouth line, controlled eye highlights, squared posture, and grounded clothing mass.
+- When face-shape wording is needed for a stronger male character, prefer broad and heavy terms over lean terms: `broad jaw`, `square jawline`, `wide lower face`, `solid blunt chin`, `full cheek structure`, `wide cheekbone support`, `balanced face length`, `broad nose bridge impression`, and `firm mouth line`. Avoid `pointed chin`, `V-shaped face`, `narrow face`, `narrow cheekbones`, `long face`, or `slender oval face` unless the user explicitly asks for a lean face.
 - When reference images are used, include a character-owned face-diversity clause derived from `temperament` if needed, preferably as a compact simile-like phrase rather than a raw label. Keep this clause short and tied to visible grooming or expression; do not turn it into a detailed realistic feature list.
 - Avoid overly specific realistic feature lists unless the user explicitly requests them. If facial wording is needed, keep it stylized and character-owned rather than source-owned.
 - Use expression, gaze direction, brow tension, mouth state, and facial tension only when needed; these may describe the current performance, not permanent eye shape, permanent eyebrow shape, or facial structure.
@@ -109,9 +112,9 @@ Use these target lengths for English dynamic slots. They are guidance for useful
 - `ROLE_VISUAL`: 15-30 words. Use occupation-readable visible cues only; do not include a personal name.
 - `OUTFIT_DYNAMIC`: 120-180 words. Cover outerwear/top, base layer, pants/shorts, socks, and shoes as separate imageable material.
 - `ACCESSORY_DYNAMIC`: 40-80 words. Cover belts, bags, black-market-approved marker pieces, tools, jewelry, worn props, and carried props with position and attachment.
-- `GROOMING_DYNAMIC`: 35-70 words. Cover hairstyle, static eyebrow shape, beard, and broad stylized face shape without beauty, complexion, makeup, or realistic feature reconstruction.
+- `GROOMING_DYNAMIC`: 45-85 words. Cover hairstyle, static eyebrow shape, beard, broad stylized face shape, and the eye-preservation clause when needed, without beauty, complexion, makeup, or realistic feature reconstruction.
 - `POSE_DYNAMIC`: 35-70 words. Cover body angle, weight shift, hand placement, prop interaction, and face readability.
-- `EXPRESSION_DYNAMIC`: 25-50 words. Cover gaze, brow/eye state, mouth state, facial tension, and acting intention; keep it separate from permanent face design.
+- `EXPRESSION_DYNAMIC`: 30-60 words. Cover gaze, brow/eye state, mouth state, facial tension, controlled highlights when relevant, and acting intention; keep it separate from permanent face design.
 - `PLATFORM_DYNAMIC_DECISIONS`: 25-50 words. Provide scene theme, solid ground material, and exactly 2-3 rooted props for Mirage to place into its fixed template.
 
 Dynamic slots may be written in `prompt_notes` for inspection when useful, but the final user-facing `英文提示词` must be the completed prompt, not a list of raw slots.
@@ -360,6 +363,8 @@ Pose stock should appear as full-body performance language, not as clothing, ana
 
 When both pose and expression stock are available, choose pose first, then choose an expression that supports the pose. The final combination should feel like one coherent performance beat. If they conflict, prefer the pose and select a quieter or more compatible expression.
 
+Expression selection must apply recent-expression cooldown after the pose is locked. Never repeat the immediately previous expression stock name or near-duplicate performance beat unless the user explicitly requests it. Hard-exclude expression stock names used in the last 3 generated characters when alternatives exist, and strongly downweight expression stock names used in the last 10 generated characters. Treat strongly overlapping mouth shape, gaze direction, facial tension, and acting intention as the same performance family for downweighting, even when the stock names differ.
+
 The pose reasoning log must name the selected pose category, note any cooldown exclusion or downweighting, and explain how occupational props were placed without overriding the locked pose. If Azoth chooses a hand-forward presentation pose, it must explicitly justify why no non-presentation candidate fit the character better.
 
 When using black-market stock, include each selected `名称` in `提示词说明`. If no matching pose or expression stock is used, write `黑商取货：未使用` for that lane and give the concrete reason.
@@ -383,6 +388,7 @@ When black-market inventory is enabled, record the inventory-level reasoning log
 货道：black-market/inventory/expression.md / 表情库存
 候选：<1-3 expression stock names or 无可用库存>
 使用：<selected expression stock name or 未使用>
+冷却处理：<excluded or downweighted recent expression names or performance families, or none>
 取货理由：<expression-performance fit based on 名称, 描述, 标签 and selected pose>
 未选理由：<why other candidates fit less well>
 
