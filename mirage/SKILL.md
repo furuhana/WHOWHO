@@ -1,6 +1,6 @@
 ---
 name: mirage
-description: Floating scene-slice prompt post-processor for character generation. Use when Codex needs to convert an approved character prompt into a gacha-card style miniature platform: one coherent floating cross-section scene, solid themed ground, 2-3 rooted environmental props, pure white isolation, and negative constraints against complete backgrounds, rooms, walls, ceilings, scattered props, floating asset packs, or separated set dressing.
+description: "Floating scene-slice prompt post-processor for character generation. Use when Codex needs to convert an approved character prompt into a gacha-card style miniature platform: one coherent floating cross-section scene, solid themed ground, 2-3 rooted environmental props, pure white isolation, and negative constraints against complete backgrounds, rooms, walls, ceilings, scattered props, floating asset packs, or separated set dressing."
 ---
 
 # 蜃楼 / Mirage
@@ -80,7 +80,7 @@ No complete background, no full room, no walls, no ceiling, no complete landscap
 When the approved outfit or user preference includes the recurring outfit anchor, preserve these items in the final prompt:
 
 ```text
-a clear black belt, visible long white socks, and a fitted inner white T-shirt
+a clear black belt, visible long white socks, and a clean white fitted tank top or clean white fitted inner T-shirt
 ```
 
 If the approved outfit naturally includes shorts, strengthen the sock visibility once:
@@ -89,7 +89,7 @@ If the approved outfit naturally includes shorts, strengthen the sock visibility
 The shorts end above the knee, leaving the long white socks clearly visible between the shorts and shoes.
 ```
 
-Use this as a sock-visibility and silhouette guard. Do not force shorts, and do not turn the anchor into a new costume if the approved character explicitly requires different clothing.
+Use this as a sock-visibility and torso-readability guard. Do not force shorts, and do not turn the anchor into a new costume if the approved character explicitly requires different clothing. Preserve the white fitted torso base layer unless the approved character explicitly overrides it, has a bare torso, or uses fully covering armor or heavy outerwear.
 
 ## Output
 

@@ -178,13 +178,13 @@ When no explicit scene exists, default to `work / medium识别 / 50%换场景` a
 
 ## Recurring Anchor
 
-Unless the user explicitly overrides it, preserve the recurring outfit anchor only when compatible with the selected job and selected black-market structure:
+Unless the user explicitly overrides it, preserve the recurring outfit anchor by default. The torso base layer is a fixed identity/body-readability anchor, while the belt and socks remain compatible outfit guards:
 
 - a clear black belt
 - plain visible white socks
-- a fitted inner white T-shirt
+- a clean white fitted tank top or clean white fitted inner T-shirt
 
-This anchor is subordinate to strong black-market套装结构. Do not force the anchor if it collapses a distinctive outfit into generic shirt styling.
+The torso base layer must remain visible enough to show chest and abdominal muscle contour unless the user requests a bare torso, fully covering armor, or heavy outerwear that deliberately hides the torso. Keep it as an underlayer, never the whole outfit concept. Strong black-market套装结构 should frame, expose, open over, or layer around this base rather than deleting it.
 
 If non-short pants are selected, use a 9-length trouser break: the hem stops just above or rests lightly around the shoe collar, with a small clean glimpse of plain white sock. Do not use full-length trousers, capri length, jogger cuffs, tight tapered hems, pants tucked into socks, or striped/ribbed socks unless the user asks.
 
@@ -292,8 +292,8 @@ Restricted marker rule: do not select work badges, chest cards, ID cards, name t
 - Prefer outerwear, armor, harnesses, jackets, vests, structured overshirts, waist systems, trouser systems, footwear, or accessory systems as the primary visual structure when compatible.
 - If the previous or obvious job default is a shirt, choose at least two non-shirt carriers from `外层体积`, `腰部系统`, `头颈系统`, `手臂系统`, `腿部系统`, or `标记系统`.
 - If a shirt-like base is required, mutate at least three visible variables: collar/neckline, sleeve state, layer over it, waist structure, material block, fastening, accessory load, or pants/footwear silhouette.
-- Do not let `fitted inner white T-shirt` from the recurring anchor become the whole concept. It exists to support body readability; another garment system must carry identity unless the job truly requires plainness.
-- If `world_context.visual_taboo` includes avoiding ordinary white-shirt lock-in or service-uniform default, treat that as stronger than the recurring anchor and use the fitted white T-shirt only as a visible body-readable underlayer.
+- Do not let `clean white fitted tank top or clean white fitted inner T-shirt` from the recurring anchor become the whole concept. It exists to support body readability; another garment system must carry identity unless the job truly requires plainness.
+- If `world_context.visual_taboo` includes avoiding ordinary white-shirt lock-in or service-uniform default, keep the white fitted base layer only as a body-readable underlayer and make a non-shirt system carry the outfit identity.
 - Apply footwear cooldown across repeated character generations when alternatives exist. Vary shoe height, sole weight, closure structure, toe shape, color-block position, or material block.
 
 ## Black-Market Log
